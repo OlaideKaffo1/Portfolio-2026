@@ -1,9 +1,12 @@
-import AskOlaide from "@/components/AskOlaide";
 import ArticleCard, { type Article } from "@/components/ArticleCard";
+import ContactLinks from "@/components/ContactLinks";
+import Hero from "@/components/Hero";
 import ProjectCard, { type Project } from "@/components/ProjectCard";
 import SectionHeading from "@/components/SectionHeading";
-import SiteNav from "@/components/SiteNav";
-import { ExternalIcon, MailIcon, PlayCircleIcon } from "@/components/icons";
+import { SiteFooter, SiteHeader } from "@/components/SiteNav";
+import Reveal from "@/components/motion/Reveal";
+import SplitLines from "@/components/motion/SplitLines";
+import VideoFrame from "@/components/motion/VideoFrame";
 
 // Project and article pages are built later; links are placeholders for now.
 const PROJECTS: Project[] = [
@@ -62,38 +65,24 @@ const ARTICLES: Article[] = [
   },
 ];
 
-const EMAIL = "olaidearikekaffo@gmail.com";
-
 export default function Home() {
   return (
-    <div className="mx-auto w-full max-w-[1512px] px-4 sm:px-6 lg:px-9">
+    <div className="mx-auto w-full max-w-[1512px] px-4 pb-7 sm:px-6 lg:px-9">
       <div className="pt-6 lg:pt-7">
-        <SiteNav />
+        <SiteHeader />
       </div>
 
       <main>
-        {/* Hero */}
-        <section className="mt-24 sm:mt-32 lg:mt-[181px]">
-          <h1 className="max-w-[446px] text-[24px] leading-[28px] sm:text-[28px] sm:leading-[30px]">
-            Hi! I’m Olaide, a product designer who engineers
-          </h1>
-          <p className="mt-3 max-w-[454px] text-[16px] leading-6 text-muted sm:text-[18px]">
-            I have spent the past six years delivering value, shipping products that drive revenue
-            and transforming orgs.
-          </p>
-          <div className="mt-6">
-            <AskOlaide />
-          </div>
-        </section>
+        <Hero />
 
         {/* Selected Work */}
-        <section className="mt-14 lg:mt-[46px]" aria-labelledby="selected-work">
-          <h2 id="selected-work" className="text-[14px] leading-6 text-muted">
-            Selected Work
-          </h2>
+        <section className="mt-14 lg:mt-[46px]">
+          <Reveal>
+            <SplitLines as="h2" text="Selected Work" className="text-[14px] leading-6 text-muted" />
+          </Reveal>
           <div className="mt-3 grid grid-cols-1 gap-x-[30px] gap-y-12 md:grid-cols-2 lg:gap-y-10">
             {PROJECTS.map((project, i) => (
-              <ProjectCard key={project.title} project={project} priority={i < 2} />
+              <ProjectCard key={project.title} project={project} priority={i < 2} column={i % 2} />
             ))}
           </div>
         </section>
@@ -105,23 +94,16 @@ export default function Home() {
             subtitle="Documenting my learnings, process and Impact on recent transformative projects I executed."
           />
           <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-[30px]">
-            {ARTICLES.map((article) => (
-              <ArticleCard key={article.title} article={article} />
+            {ARTICLES.map((article, i) => (
+              <ArticleCard key={article.title} article={article} column={i % 2} />
             ))}
           </div>
         </section>
 
-        {/* Who am I? */}
+        {/* Who am I? (video placeholder until the intro video is recorded) */}
         <section id="about" className="mt-16 scroll-mt-6 lg:mt-[76px]">
           <SectionHeading title="Who am I?" subtitle="A summary of all i have done, In two minutes." />
-          {/* Video placeholder until the intro video is recorded */}
-          <button
-            type="button"
-            aria-label="Play intro video (coming soon)"
-            className="group relative mt-5 flex aspect-video w-full items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-[#2b2b2b] via-[#4a4a4a] to-[#1c1c1c] lg:aspect-[1440/536]"
-          >
-            <PlayCircleIcon className="size-12 text-white transition-transform duration-300 group-hover:scale-110 sm:size-[60px]" />
-          </button>
+          <VideoFrame />
         </section>
 
         {/* Contact */}
@@ -130,23 +112,11 @@ export default function Home() {
             title="Let’s get things done"
             subtitle="Whatever it is you’re building, I want to hear about it. Let’s start here."
           />
-          <div className="mt-4 flex flex-wrap items-center gap-x-[46px] gap-y-3 text-[14px] leading-4">
-            <a href={`mailto:${EMAIL}`} className="flex items-center gap-[5px] transition-opacity hover:opacity-60">
-              <MailIcon className="size-3.5" />
-              {EMAIL}
-            </a>
-            {/* Placeholder until the LinkedIn URL is ready */}
-            <a href="#" className="flex items-center gap-[5px] transition-opacity hover:opacity-60">
-              Connect on Linkedin
-              <ExternalIcon className="size-4" />
-            </a>
-          </div>
+          <ContactLinks />
         </section>
       </main>
 
-      <div className="mt-8 border-t border-divider pt-6 pb-7">
-        <SiteNav as="footer" />
-      </div>
+      <SiteFooter />
     </div>
   );
 }

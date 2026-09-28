@@ -12,8 +12,30 @@
   --color-divider: #e5e7e8;
 }
 
+:root {
+  /* Motion tokens: one curve, a few durations, one stagger */
+  --expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --t-text: 750ms;
+  --t-media: 1300ms;
+  --stagger: 70ms;
+  /* Right-hand column starts a beat later on two-column layouts */
+  --c: 0ms;
+}
+
 html {
   scroll-behavior: smooth;
+}
+
+/* Lenis smooth scrolling */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+html.intro-lock {
+  overflow: hidden;
 }
 
 body {
@@ -52,6 +74,257 @@ body {
   animation: ask-caret-blink 1s step-end infinite;
 }
 
+/* ---------------------------------------------------------------------------
+   Motion. Hidden states only apply once JavaScript is running (html.js), so the
+   page is fully readable without it. A unit gains .is-in when it plays.
+   --------------------------------------------------------------------------- */
+
+/* Line rise: each line slides up from behind its own mask. No fade, no blur. */
+.split .line {
+  display: block;
+  overflow: clip;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+.split .li {
+  display: block;
+}
+html.js .split .li {
+  transform: translateY(105%);
+}
+html.js .is-in .li {
+  transform: none;
+  transition: transform var(--t-text) var(--expo) calc(var(--d, 0ms) + var(--i, 0) * var(--stagger));
+}
+
+/* Project cards: image wipes up while settling from a slight zoom */
+@media (min-width: 768px) {
+  .col-1 {
+    --c: 120ms;
+  }
+}
+html.js .project .media {
+  clip-path: inset(100% 0 0 0 round 12px);
+}
+html.js .project .media img {
+  transform: scale(1.08);
+}
+html.js .project.is-in .media {
+  clip-path: inset(0 0 0 0 round 12px);
+  transition: clip-path var(--t-media) var(--expo) var(--c);
+}
+html.js .project.is-in .media img {
+  transform: none;
+  transition: transform 1800ms var(--expo) var(--c);
+}
+@media (hover: hover) {
+  html.js .project.is-in:hover .media img {
+    transform: scale(1.035);
+    transition: transform 900ms var(--expo);
+  }
+}
+/* Project title underline draws in on hover */
+.project .title-line {
+  display: inline-block;
+  background: linear-gradient(currentColor, currentColor) 0 calc(100% - 4px) / 0 1px no-repeat;
+}
+html.js .project.is-in .title-line {
+  transition:
+    transform var(--t-text) var(--expo) calc(var(--d, 0ms) + var(--i, 0) * var(--stagger)),
+    background-size 500ms var(--expo);
+}
+@media (hover: hover) {
+  .project:hover .title-line {
+    background-size: 100% 1px;
+  }
+}
+
+/* Article cards: grey background sweeps down, then the content rises */
+.article-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 8px;
+  background: var(--color-surface);
+  transform-origin: top center;
+  transition: background-color 300ms ease;
+}
+@media (hover: hover) {
+  .article:hover .article-bg {
+    background: #f1f2f3;
+  }
+}
+html.js .article .article-bg {
+  transform: scaleY(0);
+}
+html.js .article.is-in .article-bg {
+  transform: none;
+  transition:
+    transform 900ms var(--expo) var(--c),
+    background-color 300ms ease;
+}
+
+/* Ask bar opens left to right */
+html.js .ask-reveal {
+  clip-path: inset(0 100% 0 0 round 8px);
+}
+html.js .ask-reveal.is-in {
+  clip-path: inset(0 0 0 0 round 8px);
+  transition: clip-path 1000ms var(--expo);
+}
+
+/* Footer divider draws across */
+.rule {
+  height: 1px;
+  background: var(--color-divider);
+  transform-origin: left center;
+}
+html.js .rule {
+  transform: scaleX(0);
+}
+html.js .is-in > .rule {
+  transform: none;
+  transition: transform 1000ms var(--expo);
+}
+
+/* Video frame starts inset; VideoFrame opens it with scroll */
+html.js .video-frame {
+  clip-path: inset(0 8% 0 8% round 24px);
+}
+
+/* Copy-email confirmation */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  z-index: 40;
+  translate: -50% 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #000;
+  color: #fff;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 200ms ease,
+    translate 300ms var(--expo);
+}
+.toast.is-on {
+  opacity: 1;
+  translate: -50% 0;
+}
+
+/* ---------- Departure-board intro ---------- */
+/* Black cover before the intro mounts, so the page never flashes first */
+html.intro-pending body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: #000;
+}
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+}
+.intro-half {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: #000;
+}
+.intro-top {
+  top: 0;
+}
+.intro-bottom {
+  bottom: 0;
+}
+.intro-board {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  translate: 0 -50%;
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  font-family: var(--font-doto), ui-monospace, monospace;
+  font-weight: 900;
+  font-size: clamp(22px, 5.2vw, 64px);
+  line-height: 1;
+  letter-spacing: 0;
+}
+.intro-reel {
+  position: relative;
+  display: inline-block;
+  height: 1.15em;
+  overflow: hidden;
+  text-align: center;
+}
+.intro-strip {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+}
+.intro-strip b {
+  display: block;
+  height: 1.15em;
+  line-height: 1.15em;
+  font-weight: inherit;
+}
+.intro-seam {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 50%;
+  height: 1px;
+  background: #fff;
+  opacity: 0.35;
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+.intro-count {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 72px;
+  text-align: center;
+  font:
+    900 13px/1 var(--font-doto),
+    ui-monospace,
+    monospace;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.5);
+}
+.intro-meta {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  font:
+    900 12px/1 var(--font-doto),
+    ui-monospace,
+    monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+.intro-skip {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -59,5 +332,20 @@ body {
 
   .ask-caret-blink {
     animation: none;
+  }
+
+  /* Everything in its final state, no movement */
+  html.js .split .li,
+  html.js .project .media img,
+  html.js .article .article-bg,
+  html.js .rule {
+    transform: none !important;
+    transition: none !important;
+  }
+  html.js .project .media,
+  html.js .ask-reveal,
+  html.js .video-frame {
+    clip-path: none !important;
+    transition: none !important;
   }
 }

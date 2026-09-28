@@ -22,8 +22,9 @@ const GAP_MS = 400; // pause on the empty input before the next phrase
 type Phase = "typing" | "holding" | "deleting";
 
 // Entry point for the AI version of Olaide. The chat itself is built later;
-// for now this is the input with a typewriter placeholder.
-export default function AskOlaide() {
+// for now this is the input with a typewriter placeholder, which starts once
+// the page has finished composing (`started`).
+export default function AskOlaide({ started = true }: { started?: boolean }) {
   const [value, setValue] = useState("");
   const [focused, setFocused] = useState(false);
   const [index, setIndex] = useState(0);
@@ -43,6 +44,7 @@ export default function AskOlaide() {
   }, []);
 
   useEffect(() => {
+    if (!started) return;
     if (paused) {
       // Finish the current phrase so it can be read, then hold it on resume.
       setLength(phrase.length);
@@ -73,9 +75,9 @@ export default function AskOlaide() {
       }, GAP_MS);
     }
     return () => clearTimeout(id);
-  }, [paused, reducedMotion, phase, length, phrase]);
+  }, [started, paused, reducedMotion, phase, length, phrase]);
 
-  const shown = reducedMotion ? phrase : phrase.slice(0, length);
+  const shown = !started ? "" : reducedMotion ? phrase : phrase.slice(0, length);
 
   return (
     <form
@@ -100,7 +102,7 @@ export default function AskOlaide() {
             className="pointer-events-none absolute inset-0 truncate text-[12px] leading-5 text-subtle"
           >
             {shown}
-            {!focused && !reducedMotion && (
+            {started && !focused && !reducedMotion && (
               <span className={phase === "holding" ? "ask-caret ask-caret-blink" : "ask-caret"} />
             )}
           </span>
