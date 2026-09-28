@@ -18,7 +18,7 @@ export type Article = {
 export default function ArticleCard({ article, column }: { article: Article; column: number }) {
   const ref = useReveal<HTMLAnchorElement>();
   return (
-    <Link ref={ref} href={article.href} className={`article group relative isolate flex min-h-[159px] flex-col p-4 ${column ? "col-1" : ""}`}>
+    <Link ref={ref} href={article.href} className={`article group relative isolate flex min-h-[159px] flex-col p-4 ${column ? "col-right" : ""}`}>
       <span className="article-bg" aria-hidden="true" />
       <div className="flex items-center justify-between gap-4">
         <span className="split" style={{ "--d": "calc(var(--c) + 250ms)" } as CSSProperties}>

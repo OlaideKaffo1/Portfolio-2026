@@ -15,11 +15,11 @@ export type Project = {
 };
 
 // The image wipes open from the bottom while settling from a slight zoom, then the
-// company, title and description rise. `col-1` starts a beat later on two-column layouts.
+// company, title and description rise. `col-right` starts a beat later on two-column layouts.
 export default function ProjectCard({ project, priority, column }: { project: Project; priority?: boolean; column: number }) {
   const ref = useReveal<HTMLAnchorElement>();
   return (
-    <Link ref={ref} href={project.href} className={`project group block ${column ? "col-1" : ""}`}>
+    <Link ref={ref} href={project.href} className={`project group block ${column ? "col-right" : ""}`}>
       <div className="media relative aspect-[705/601] overflow-hidden rounded-xl bg-surface">
         <Image src={project.image} alt={project.imageAlt} fill priority={priority} sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
       </div>

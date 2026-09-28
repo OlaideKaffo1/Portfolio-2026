@@ -30,7 +30,8 @@ export default function SplitLines({ text, as: Tag = "p", className = "", delay,
       }
       out[out.length - 1].push(w.textContent ?? "");
     });
-    setLines(out.map((l) => l.join("").trimEnd()));
+    // Keep each line's trailing space so the text still reads correctly (screen readers, copy-paste).
+    setLines(out.map((l) => l.join("")));
   }, [lines]);
 
   useEffect(() => {

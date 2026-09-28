@@ -99,7 +99,7 @@ html.js .is-in .li {
 
 /* Project cards: image wipes up while settling from a slight zoom */
 @media (min-width: 768px) {
-  .col-1 {
+  .col-right {
     --c: 120ms;
   }
 }
