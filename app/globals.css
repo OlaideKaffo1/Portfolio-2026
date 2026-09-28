@@ -26,20 +26,30 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Rotating placeholder in the "Ask Olaide" input */
-@keyframes ask-placeholder-in {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
+/* Typing cursor in the "Ask Olaide" placeholder */
+@keyframes ask-caret-blink {
+  0%,
+  49% {
     opacity: 1;
-    transform: translateY(0);
+  }
+  50%,
+  100% {
+    opacity: 0;
   }
 }
 
-.ask-placeholder {
-  animation: ask-placeholder-in 350ms ease-out both;
+.ask-caret {
+  display: inline-block;
+  width: 1px;
+  height: 12px;
+  margin-left: 2px;
+  vertical-align: -1px;
+  background: currentColor;
+}
+
+/* Solid while typing, blinks while a phrase is held */
+.ask-caret-blink {
+  animation: ask-caret-blink 1s step-end infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -47,7 +57,7 @@ body {
     scroll-behavior: auto;
   }
 
-  .ask-placeholder {
+  .ask-caret-blink {
     animation: none;
   }
 }
