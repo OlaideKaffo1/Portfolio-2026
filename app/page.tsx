@@ -93,7 +93,7 @@ export default function Home() {
             title="My recent thoughts"
             subtitle="Documenting my learnings, process and Impact on recent transformative projects I executed."
           />
-          <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-[30px]">
+          <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-[30px]">
             {ARTICLES.map((article, i) => (
               <ArticleCard key={article.title} article={article} column={i % 2} />
             ))}

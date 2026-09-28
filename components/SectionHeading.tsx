@@ -8,8 +8,8 @@ export default function SectionHeading({ title, subtitle }: { title: string; sub
   const ref = useReveal<HTMLDivElement>();
   return (
     <div ref={ref}>
-      <SplitLines as="h2" text={title} className="text-[20px] leading-[30px]" />
-      <SplitLines text={subtitle} delay="80ms" className="mt-1 text-[16px] leading-[22px] text-muted" />
+      <SplitLines as="h2" text={title} className="text-[18px] leading-[26px]" />
+      <SplitLines text={subtitle} delay="80ms" className="mt-1 text-[14px] leading-[22px] text-muted" />
     </div>
   );
 }

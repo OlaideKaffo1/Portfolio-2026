@@ -33,7 +33,7 @@ export default function VideoFrame() {
       ref={ref}
       type="button"
       aria-label="Play intro video (coming soon)"
-      className="video-frame group relative mt-5 flex aspect-video w-full items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-[#2b2b2b] via-[#4a4a4a] to-[#1c1c1c] lg:aspect-[1440/536]"
+      className="video-frame group relative mt-4 flex aspect-video w-full items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-[#2b2b2b] via-[#4a4a4a] to-[#1c1c1c] lg:aspect-[1440/536]"
     >
       <PlayCircleIcon className="size-12 text-white transition-transform duration-500 ease-[var(--expo)] group-hover:scale-110 sm:size-[60px]" />
     </button>
