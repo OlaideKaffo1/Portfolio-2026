@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #000000;
+  --color-muted: #676767;
+  --color-subtle: #77838e;
+  --color-tag: #333333;
+  --color-surface: #f9f9f9;
+  --color-tag-bg: #eceef0;
+  --color-divider: #e5e7e8;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #ffffff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  /* Geist at -1% letter spacing, as in the Figma file */
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Rotating placeholder in the "Ask Olaide" input */
+@keyframes ask-placeholder-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ask-placeholder {
+  animation: ask-placeholder-in 350ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ask-placeholder {
+    animation: none;
+  }
+}
