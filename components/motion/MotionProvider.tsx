@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { armReveals } from "./reveal";
 
 // Stages of the page composition that follows the intro (or page load):
@@ -18,6 +18,14 @@ export default function MotionProvider({ children }: { children: React.ReactNode
   const [stage, setStage] = useState(0);
   const started = useRef(false);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+
+  // The boot script marks <html> with "js" before first paint so hidden starting states
+  // apply. If React ever re-renders the document root (for example after a hydration
+  // mismatch when the page is embedded somewhere), it resets <html>'s classes; put the
+  // marker back before the browser paints so no reveal is lost.
+  useLayoutEffect(() => {
+    document.documentElement.classList.add("js");
+  });
 
   const startCompose = useCallback(() => {
     if (started.current) return;
