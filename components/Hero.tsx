@@ -19,7 +19,7 @@ export default function Hero() {
         delay="160ms"
         className={`mt-3 max-w-[454px] text-[16px] leading-6 text-muted sm:text-[18px] ${stage >= 2 ? "is-in" : ""}`}
       />
-      <div className={`ask-reveal mt-6 ${stage >= 3 ? "is-in" : ""}`}>
+      <div className={`ask-reveal mt-6 w-full max-w-[331px] ${stage >= 3 ? "is-in" : ""}`}>
         <AskOlaide started={stage >= 4} />
       </div>
     </section>

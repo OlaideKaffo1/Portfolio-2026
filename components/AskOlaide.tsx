@@ -83,7 +83,7 @@ export default function AskOlaide({ started = true }: { started?: boolean }) {
     <form
       role="search"
       onSubmit={(e) => e.preventDefault()}
-      className="relative flex h-11 w-full max-w-[331px] items-center rounded-lg bg-black pl-3 pr-1"
+      className="relative flex h-11 w-full max-w-[331px] items-center rounded-lg bg-black pl-3 pr-1 transition-shadow duration-[250ms] focus-within:shadow-[0_0_0_4px_rgba(119,131,142,0.25)]"
     >
       <SparkleIcon className="size-3.5 shrink-0 text-subtle" />
       <div className="relative ml-[7px] h-5 min-w-0 flex-1">
@@ -111,7 +111,7 @@ export default function AskOlaide({ started = true }: { started?: boolean }) {
       <button
         type="submit"
         aria-label="Send"
-        className="ml-2 flex size-9 shrink-0 items-center justify-center rounded-md bg-white text-black transition-opacity hover:opacity-90"
+        className="ml-2 flex size-9 shrink-0 items-center justify-center rounded-md bg-white text-black transition-[opacity,transform] duration-150 hover:opacity-90 active:scale-[0.92]"
       >
         <ArrowUpIcon className="size-4" />
       </button>

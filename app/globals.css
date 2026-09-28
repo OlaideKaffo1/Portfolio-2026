@@ -169,7 +169,8 @@ html.js .ask-reveal {
   clip-path: inset(0 100% 0 0 round 8px);
 }
 html.js .ask-reveal.is-in {
-  clip-path: inset(0 0 0 0 round 8px);
+  /* Ends just outside the bar so its focus glow isn't clipped */
+  clip-path: inset(-6px -6px -6px -6px round 14px);
   transition: clip-path 1000ms var(--expo);
 }
 

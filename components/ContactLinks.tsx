@@ -36,7 +36,7 @@ export default function ContactLinks() {
 
   return (
     <>
-      <div ref={ref} className="split mt-4 flex flex-wrap items-center gap-x-[46px] gap-y-3 text-[14px] leading-4" style={{ "--d": "80ms" } as CSSProperties}>
+      <div ref={ref} className="split mt-4 flex flex-wrap items-center gap-x-[46px] gap-y-3 text-[14px] leading-4" style={{ "--d": "200ms" } as CSSProperties}>
         <span className="line">
           <span className="li" style={{ "--i": 0 } as CSSProperties}>
             <button type="button" onClick={copy} className="flex cursor-pointer items-center gap-[5px] transition-opacity hover:opacity-60">
