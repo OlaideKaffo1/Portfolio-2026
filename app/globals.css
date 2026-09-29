@@ -42,10 +42,18 @@ body {
   background: #ffffff;
   color: var(--color-ink);
   font-family: var(--font-sans);
-  /* Geist at -1% letter spacing, as in the Figma file */
-  letter-spacing: -0.01em;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Geist at -1% letter spacing, as in the Figma file. Set on every element so each one
+   tracks at 1% of its own size (on body alone, the em value would resolve once and be
+   inherited as a fixed px amount). Any class that sets its own letter-spacing wins. */
+*,
+::before,
+::after {
+  letter-spacing: -0.01em;
 }
 
 /* Typing cursor in the "Ask Olaide" placeholder */
@@ -232,6 +240,10 @@ html.intro-pending body::after {
   inset: 0;
   z-index: 60;
   background: #000;
+}
+/* Everything inside the intro keeps the spacing its own styles set (not the page's -1%) */
+.intro * {
+  letter-spacing: inherit;
 }
 .intro {
   position: fixed;
