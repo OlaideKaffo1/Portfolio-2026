@@ -15,8 +15,8 @@ const PROJECTS: Project[] = [
     title: "Solving the first-step problem",
     description:
       "How Strategyzer's AI assistant went from a full conversational companion to a three-question playbook finder, and why cutting it was the right call.",
-    image: "/images/projects/strategyzer-ai.webp",
-    imageAlt: "Strattie, Strategyzer's AI assistant, recommending a customer interview playbook",
+    image: "/images/projects/strategyzer-finder.webp",
+    imageAlt: "The Playbook Recommender open on the Projects page, asking what you want to work on",
     href: "#",
   },
   {
