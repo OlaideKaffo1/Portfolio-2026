@@ -17,7 +17,10 @@ export default function VideoFrame() {
       const r = el.getBoundingClientRect();
       const vh = window.innerHeight;
       if (r.bottom > -50 && r.top < vh + 50) {
-        const p = Math.max(0, Math.min(1, (vh - r.top) / (vh * 0.75)));
+        // Fully open by the time the whole frame is on screen (with a little room below),
+        // so it always completes, even on short pages or tall screens.
+        const distance = Math.min(vh * 0.75, r.height + vh * 0.08);
+        const p = Math.max(0, Math.min(1, (vh - r.top) / distance));
         const e = 1 - (1 - p) * (1 - p);
         const side = (8 * (1 - e)).toFixed(3);
         el.style.clipPath = `inset(0 ${side}% 0 ${side}% round ${(24 - 16 * e).toFixed(1)}px)`;

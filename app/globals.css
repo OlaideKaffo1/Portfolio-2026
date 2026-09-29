@@ -82,12 +82,20 @@ body {
 /* Line rise: each line slides up from behind its own mask. No fade, no blur. */
 .split .line {
   display: block;
-  overflow: clip;
+  /* Mask vertically for the rise; never cut text off sideways */
+  overflow-x: visible;
+  overflow-y: clip;
   padding-bottom: 0.12em;
   margin-bottom: -0.12em;
 }
 .split .li {
   display: block;
+}
+/* Lines break only between words: a hyphenated word ("three-question") is measured
+   and kept as one unit, so each measured line renders exactly as measured. */
+.split [data-w],
+.split .li.measured {
+  white-space: nowrap;
 }
 html.js .split .li {
   transform: translateY(105%);

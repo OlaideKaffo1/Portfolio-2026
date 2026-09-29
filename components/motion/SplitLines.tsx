@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ElementType } from "react";
+import { Fragment, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ElementType } from "react";
 
 type Props = {
   text: string;
@@ -30,9 +30,19 @@ export default function SplitLines({ text, as: Tag = "p", className = "", delay,
       }
       out[out.length - 1].push(w.textContent ?? "");
     });
-    // Keep each line's trailing space so the text still reads correctly (screen readers, copy-paste).
-    setLines(out.map((l) => l.join("")));
+    // Keep a trailing space on every line but the last so the text still reads correctly
+    // (screen readers, copy-paste).
+    setLines(out.map((l, i) => l.join(" ") + (i < out.length - 1 ? " " : "")));
   }, [lines]);
+
+  // Re-measure once web fonts have loaded, in case lines were measured with the fallback font.
+  useEffect(() => {
+    let alive = true;
+    document.fonts?.ready.then(() => alive && setLines(null));
+    return () => {
+      alive = false;
+    };
+  }, []);
 
   useEffect(() => {
     let width = window.innerWidth;
@@ -61,17 +71,18 @@ export default function SplitLines({ text, as: Tag = "p", className = "", delay,
         <span className="line">
           <span className={`li ${lineClassName}`}>
             {words.map((w, i) => (
-              <span key={i} data-w="">
-                {w}
+              // The space sits between word spans so lines can break only at spaces.
+              <Fragment key={i}>
+                <span data-w="">{w}</span>
                 {i < words.length - 1 ? " " : ""}
-              </span>
+              </Fragment>
             ))}
           </span>
         </span>
       ) : (
         lines.map((l, i) => (
           <span key={i} className="line">
-            <span className={`li ${lineClassName}`} style={{ "--i": i } as CSSProperties}>
+            <span className={`li measured ${lineClassName}`} style={{ "--i": i } as CSSProperties}>
               {l}
             </span>
           </span>
