@@ -17,7 +17,7 @@ export default function Hero() {
       <SplitLines
         text="I have spent the past six years delivering value, shipping products that drive revenue and transforming orgs."
         delay="160ms"
-        className={`mt-3 max-w-[454px] text-[16px] leading-6 text-muted sm:text-[18px] ${stage >= 2 ? "is-in" : ""}`}
+        className={`mt-3 max-w-[454px] text-[16px] leading-6 text-body sm:text-[18px] ${stage >= 2 ? "is-in" : ""}`}
       />
       <div className={`ask-reveal mt-6 w-full max-w-[331px] ${stage >= 3 ? "is-in" : ""}`}>
         <AskOlaide started={stage >= 4} />

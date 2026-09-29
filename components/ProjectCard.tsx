@@ -25,7 +25,7 @@ export default function ProjectCard({ project, priority, column }: { project: Pr
       </div>
       <SplitLines text={project.company} delay="calc(var(--c) + 350ms)" className="mt-5 text-[13px] leading-6 text-muted" />
       <SplitLines as="h3" text={project.title} delay="calc(var(--c) + 440ms)" lineClassName="title-line" className="mt-1 text-[16px] leading-[30px]" />
-      <SplitLines text={project.description} delay="calc(var(--c) + 500ms)" className="mt-0.5 max-w-[521px] text-[14px] leading-[22px] text-muted" />
+      <SplitLines text={project.description} delay="calc(var(--c) + 500ms)" className="mt-0.5 max-w-[521px] text-[14px] leading-[22px] text-body" />
     </Link>
   );
 }

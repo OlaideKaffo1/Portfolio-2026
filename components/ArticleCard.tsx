@@ -28,11 +28,11 @@ export default function ArticleCard({ article, column }: { article: Article; col
             </span>
           </span>
         </span>
-        <SplitLines as="span" text={article.readTime} delay="calc(var(--c) + 250ms)" className="text-[13px] font-light leading-5 text-muted" />
+        <SplitLines as="span" text={article.readTime} delay="calc(var(--c) + 250ms)" className="text-[13px] leading-5 text-muted" />
       </div>
       <SplitLines as="h3" text={article.title} delay="calc(var(--c) + 320ms)" className="mt-4 max-w-[381px] text-[16px] leading-[1.2]" />
       <div className="mt-auto flex items-end justify-between gap-4 pt-6">
-        <SplitLines as="span" text={article.date} delay="calc(var(--c) + 420ms)" className="text-[13px] font-light leading-5 text-muted" />
+        <SplitLines as="span" text={article.date} delay="calc(var(--c) + 420ms)" className="text-[13px] leading-5 text-muted" />
         <span className="split" style={{ "--d": "calc(var(--c) + 460ms)" } as CSSProperties}>
           <span className="line">
             <span className="li">
