@@ -776,6 +776,14 @@
   .fig-head { margin-bottom: 12px; }
   .fig-head b { display: block; font-size: 16px; line-height: 24px; font-weight: 500; color: var(--ink); }
   .fig-head span { display: block; margin-top: 2px; font-size: 14px; line-height: 21px; color: var(--muted); letter-spacing: 0; }
+  /* Before and after for each feature: old screens first, then the new design with its decisions */
+  .sec > .ba { max-width: var(--media) !important; }
+  .ba-k { font-size: 12px; line-height: 16px; color: var(--muted); letter-spacing: 0; margin-bottom: 8px; }
+  .ba-before + .ba-k { margin-top: 20px; }
+  .ba-before { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  @container (min-width: 700px) { .ba-before.n2 { grid-template-columns: 1fr 1fr; } }
+  .ba-before .slot { background: #f6efe6; }
+  .ba-before.n1 .slot { aspect-ratio: 16 / 7; }
 
   /* Diagram type follows the page scale */
   .tree-labels b { font-size: 20px; line-height: 26px; }
@@ -1054,28 +1062,48 @@
           <div class="vx-side weak"><div class="vx-k">Before</div><p>Every template change was carried into each cohort by hand, by editing its settings in code. A new workspace stayed invisible to the timeline until someone typed its exact name.</p></div>
           <div class="vx-side"><div class="vx-k">Now</div><p>Cohorts are told when their template changes. Program designers review each update and choose to apply or ignore it, and any new workspace they accept appears in the cohort's timeline, ready to link.</p></div>
         </div>
-        <figure><div class="slot m"><b>05</b><span>The update notification, then review and apply, then the new workspace in the timeline</span><i>Screen recording</i></div></figure>
+        <figure class="ba m">
+          <div class="ba-k">Before</div>
+          <div class="ba-before n2"><div class="slot"><b>05a</b><span>The old way: editing the cohort’s settings in code (JSON) in the admin</span><i>Before</i></div><div class="slot"><b>05b</b><span>A cohort timeline that can’t see a workspace added to the template</span><i>Before</i></div></div>
+          <div class="ba-k">After, with the design decisions</div>
+          <div class="slot"><b>05c</b><span>The update notice, reviewing and applying it, then the new workspace appearing in the cohort’s timeline</span><i>Screen recording with decision notes</i></div>
+        </figure>
 
         <h3 class="sl">2. Send workspaces to many teams at once</h3>
         <div class="vx-cmp vxb rv">
           <div class="vx-side weak"><div class="vx-k">Before</div><p>One change, repeated for every team.</p></div>
           <div class="vx-side"><div class="vx-k">Now</div><p>Pick the workspaces, search and pick the teams, and send them all in one action.</p></div>
         </div>
-        <figure><div class="slot m"><b>06</b><span>Select workspaces, pick teams, done</span><i>Screen recording</i></div></figure>
+        <figure class="ba m">
+          <div class="ba-k">Before</div>
+          <div class="ba-before n1"><div class="slot"><b>06a</b><span>Copying a workspace into one project at a time</span><i>Before</i></div></div>
+          <div class="ba-k">After, with the design decisions</div>
+          <div class="slot"><b>06b</b><span>Selecting workspaces, searching and picking teams, and sending them all at once</span><i>Screen recording with decision notes</i></div>
+        </figure>
 
         <h3 class="sl">3. Hide and show timeline events</h3>
         <div class="vx-cmp vxb rv">
           <div class="vx-side weak"><div class="vx-k">Before</div><p>Releasing content in stages meant deleting it.</p></div>
           <div class="vx-side"><div class="vx-k">Now</div><p>Program designers build the whole program up front and reveal each part when teams are ready.</p></div>
         </div>
-        <figure><div class="slot m"><b>07</b><span>The timeline with hidden and visible events</span><i>Before and after pair</i></div></figure>
+        <figure class="ba m">
+          <div class="ba-k">Before</div>
+          <div class="ba-before n1"><div class="slot"><b>07a</b><span>A timeline where later events had to be deleted to keep them hidden</span><i>Before</i></div></div>
+          <div class="ba-k">After, with the design decisions</div>
+          <div class="slot"><b>07b</b><span>The timeline with hidden and visible events, and the control to switch each one</span><i>Explorable image, decisions behind the toggle</i></div>
+        </figure>
 
         <h3 class="sl">4. Breadcrumbs inside workspaces</h3>
         <div class="vx-cmp vxb rv">
           <div class="vx-side weak"><div class="vx-k">Before</div><p>Even our CEO got lost inside custom playbooks.</p></div>
           <div class="vx-side"><div class="vx-k">Now</div><p>Breadcrumbs show where you are and how to get back. I designed these with our engineer.</p></div>
         </div>
-        <figure><div class="slot m"><b>08</b><span>Breadcrumbs inside a workspace</span><i>Explorable image</i></div></figure>
+        <figure class="ba m">
+          <div class="ba-k">Before</div>
+          <div class="ba-before n1"><div class="slot"><b>08a</b><span>Deep inside a custom playbook, with no way to tell where you are</span><i>Before</i></div></div>
+          <div class="ba-k">After, with the design decisions</div>
+          <div class="slot"><b>08b</b><span>Breadcrumbs inside a workspace, showing where you are and how to get back</span><i>Explorable image, decisions behind the toggle</i></div>
+        </figure>
 
         <p><strong>The four worked as one job:</strong> send the workspaces, bring the updated timeline into the cohort, then choose when teams see it. Kurt called the result "a MASSIVE game changer".</p>
 

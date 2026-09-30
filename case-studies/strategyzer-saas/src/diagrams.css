@@ -163,3 +163,11 @@
   .fig-head { margin-bottom: 12px; }
   .fig-head b { display: block; font-size: 16px; line-height: 24px; font-weight: 500; color: var(--ink); }
   .fig-head span { display: block; margin-top: 2px; font-size: 14px; line-height: 21px; color: var(--muted); letter-spacing: 0; }
+  /* Before and after for each feature: old screens first, then the new design with its decisions */
+  .sec > .ba { max-width: var(--media) !important; }
+  .ba-k { font-size: 12px; line-height: 16px; color: var(--muted); letter-spacing: 0; margin-bottom: 8px; }
+  .ba-before + .ba-k { margin-top: 20px; }
+  .ba-before { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  @container (min-width: 700px) { .ba-before.n2 { grid-template-columns: 1fr 1fr; } }
+  .ba-before .slot { background: #f6efe6; }
+  .ba-before.n1 .slot { aspect-ratio: 16 / 7; }
