@@ -14,7 +14,7 @@ const PROJECTS: Project[] = [
     company: "STRATEGYZER . AI",
     title: "Solving the first-step problem",
     description:
-      "How Strategyzer's AI assistant went from a full conversational companion to a three-question playbook finder, and why cutting it was the right call.",
+      "How Strategyzer's AI assistant went from a full conversational companion to a three-question Playbook Recommender, and why cutting it was the right call.",
     image: "/images/projects/strategyzer-finder.webp",
     imageAlt: "The Playbook Recommender open on the Projects page, asking what you want to work on",
     href: "#",
