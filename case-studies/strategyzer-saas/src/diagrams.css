@@ -182,3 +182,5 @@
   .layers .slot, .layers .step-panel > .slot { aspect-ratio: 16 / 7; }
   @container (max-width: 699px) { .layers .slot, .layers .step-panel > .slot { aspect-ratio: 4 / 3; } }
   .tested.one { grid-template-columns: minmax(0, 1fr) !important; max-width: 420px !important; }
+  /* Five or more notes: wrap to three columns so each note has room to read */
+  @container (min-width: 700px) { .vnotes:has(> li:nth-child(5)) { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
