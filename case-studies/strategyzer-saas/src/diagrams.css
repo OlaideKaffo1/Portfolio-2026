@@ -104,33 +104,22 @@
   .vx-cmp .vx-side p:first-of-type { margin-top: 8px !important; }
   .chain .link::after { content: none !important; }
 
-  /* Feedback wall: Slack messages rebuilt as readable cards (real text, real names) */
-  .wall { border-radius: 16px; background: var(--panel); padding: 20px; }
-  @container (min-width: 700px) { .wall { padding: 28px; } }
+  /* Feedback wall: real Slack screenshots, stacked like a channel */
+  .wall { max-width: var(--media) !important; }
   .wall-k { font-size: 12px; line-height: 16px; color: var(--muted); letter-spacing: 0; }
-  .wall-k + .wall-grid { margin-top: 12px; }
-  .wall-grid + .wall-k { margin-top: 28px; }
-  .wall-grid { columns: 1; column-gap: 12px; }
-  @container (min-width: 700px) { .wall-grid { columns: 2; } }
-  .sm { break-inside: avoid; margin: 0 0 12px; border-radius: 12px; background: #fff; padding: 16px 18px 18px; box-shadow: 0 1px 2px rgba(0, 0, 0, .04), 0 6px 20px rgba(0, 0, 0, .04); }
-  .sm header { display: flex; align-items: center; gap: 12px; }
-  .sm .av { flex: none; width: 40px; height: 40px; border-radius: 10px; object-fit: cover; background: #e9eaec; }
-  .sm .av.ini { display: grid; place-items: center; font-size: 16px; font-weight: 500; color: var(--ink); }
-  .sm header b { display: block; font-size: 15px; line-height: 20px; font-weight: 500; color: var(--ink); }
-  .sm header span { display: block; font-size: 13px; line-height: 18px; color: var(--muted); letter-spacing: 0; }
-  .sm p { margin-top: 12px !important; font-size: 15px !important; line-height: 24px !important; color: var(--body) !important; }
-  .sm p strong { font-weight: 500; color: var(--ink); }
-  .sm .mn { border-radius: 4px; padding: 0 3px; background: #e8f0fb; color: #1d5fa8; }
-  .sm .rx { margin-top: 12px; font-size: 12px; line-height: 16px; color: var(--muted); letter-spacing: 0; }
-  /* Real Slack screenshots: matched dark frames, role caption, click to zoom */
-  .ss { break-inside: avoid; margin: 0 0 14px; }
-  .ss .shot { border-radius: 12px; background: #1c1d21; box-shadow: 0 1px 2px rgba(0, 0, 0, .06), 0 8px 24px rgba(0, 0, 0, .08); }
-  .ss figcaption { margin-top: 8px; padding-left: 2px; font-size: 13px; line-height: 18px; color: var(--muted); letter-spacing: 0; }
-  .ss figcaption b { font-weight: 500; color: var(--ink); }
-  /* Temporary: messages waiting for their screenshot files */
-  .sm.dk { margin-bottom: 0; background: #1c1d21; box-shadow: 0 1px 2px rgba(0, 0, 0, .06), 0 8px 24px rgba(0, 0, 0, .08); }
-  .sm.dk header b { color: #fff; font-weight: 600; }
-  .sm.dk .av.ini { background: #3a3c42; color: #fff; }
-  .sm.dk p { color: #d1d2d3 !important; }
-  .sm.dk .mn { background: rgba(29, 155, 209, .18); color: #4fa9e6; }
-  .sm.dk .rx { color: #9a9b9e; }
+  .wall-k + .feed { margin-top: 10px; }
+  .feed + .wall-k { margin-top: 28px; }
+  .feed { border-radius: 14px; background: #1c1d21; padding: 6px 0; box-shadow: 0 1px 3px rgba(0, 0, 0, .06), 0 12px 32px rgba(0, 0, 0, .08); overflow: hidden; }
+  .msg { margin: 0; }
+  .msg + .msg { border-top: 1px solid rgba(255, 255, 255, .07); }
+  .msg .shot { border-radius: 0; background: none; }
+  .msg .shot img { display: block; width: 100%; height: auto; }
+  .msg figcaption { margin-top: 0; padding: 0 16px 16px 5.1%; font-size: 12px; line-height: 16px; color: #8e9096; letter-spacing: 0; }
+  .msg figcaption b { font-weight: 500; color: #c9cacd; }
+  .msg .tx { display: none; }
+  html.motion .msg .shot { clip-path: none; }
+  /* Phones: the screenshot stays as proof, the words become readable text */
+  @container (max-width: 699px) {
+    .msg .tx { display: block; margin: 0 !important; padding: 0 16px 16px; font-size: 15px !important; line-height: 23px !important; color: #e3e4e6 !important; }
+    .msg figcaption { margin-top: 0; padding: 10px 16px 6px; }
+  }
