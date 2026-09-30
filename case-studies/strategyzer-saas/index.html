@@ -772,6 +772,10 @@
   .ost-foot .orig { flex: none; width: 132px; border-radius: 6px; box-shadow: 0 0 0 1px var(--line); }
   .ost-foot .orig::after { display: none; }
   .ost-foot .caption { margin-top: 2px !important; font-size: 13px !important; line-height: 20px !important; color: var(--muted) !important; }
+  /* Label above a tabbed figure, so readers know what they're looking at */
+  .fig-head { margin-bottom: 12px; }
+  .fig-head b { display: block; font-size: 16px; line-height: 24px; font-weight: 500; color: var(--ink); }
+  .fig-head span { display: block; margin-top: 2px; font-size: 14px; line-height: 21px; color: var(--muted); letter-spacing: 0; }
 
   /* Diagram type follows the page scale */
   .tree-labels b { font-size: 20px; line-height: 26px; }
@@ -1002,7 +1006,7 @@
         </div>
 
         <h3 class="sl">Choosing what not to build</h3>
-        <p>With one engineer and three months, I ranked every opportunity by three questions: How often does it happen? Would a failure be visible to clients? Can we build it well in the time we have? Changing live programs came out on top on all three.</p>
+        <p>With one engineer and three months, I ranked every opportunity by three questions: How often does it happen? Would a failure be visible to clients? Can we build it well in the time we have? Changing live programs came out on top on all three. I mapped it all on an opportunity solution tree, shown below the trade-offs.</p>
         <div class="vx-ledger vxb rv">
           <div class="col gain">
             <div class="vx-lh">Built in this release</div>
@@ -1027,6 +1031,7 @@
           <div class="foot">Making the trade-offs visible kept the release focused, <b>and nobody felt their problem had been ignored.</b></div>
         </div>
         <figure class="steps ost-steps" data-steps>
+          <div class="fig-head"><b>The opportunity solution tree</b><span>From the outcome we wanted, to the opportunities, to possible solutions. It’s in two parts: switch between them with the tabs.</span></div>
           <div class="step-tabs" role="tablist" aria-label="Opportunity solution tree">
             <button type="button" role="tab" id="ot-1" aria-controls="op-1" aria-selected="true">Changing live programs</button>
             <button type="button" role="tab" id="ot-2" aria-controls="op-2" aria-selected="false" tabindex="-1">Finding your way</button>
