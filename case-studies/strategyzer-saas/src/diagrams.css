@@ -103,3 +103,22 @@
   .todo { color: var(--draft) !important; }
   .vx-cmp .vx-side p:first-of-type { margin-top: 8px !important; }
   .chain .link::after { content: none !important; }
+
+  /* Feedback wall: Slack messages rebuilt as readable cards (real text, real names) */
+  .wall { border-radius: 16px; background: var(--panel); padding: 20px; }
+  @container (min-width: 700px) { .wall { padding: 28px; } }
+  .wall-k { font-size: 12px; line-height: 16px; color: var(--muted); letter-spacing: 0; }
+  .wall-k + .wall-grid { margin-top: 12px; }
+  .wall-grid + .wall-k { margin-top: 28px; }
+  .wall-grid { columns: 1; column-gap: 12px; }
+  @container (min-width: 700px) { .wall-grid { columns: 2; } }
+  .sm { break-inside: avoid; margin: 0 0 12px; border-radius: 12px; background: #fff; padding: 16px 18px 18px; box-shadow: 0 1px 2px rgba(0, 0, 0, .04), 0 6px 20px rgba(0, 0, 0, .04); }
+  .sm header { display: flex; align-items: center; gap: 12px; }
+  .sm .av { flex: none; width: 40px; height: 40px; border-radius: 10px; object-fit: cover; background: #e9eaec; }
+  .sm .av.ini { display: grid; place-items: center; font-size: 16px; font-weight: 500; color: var(--ink); }
+  .sm header b { display: block; font-size: 15px; line-height: 20px; font-weight: 500; color: var(--ink); }
+  .sm header span { display: block; font-size: 13px; line-height: 18px; color: var(--muted); letter-spacing: 0; }
+  .sm p { margin-top: 12px !important; font-size: 15px !important; line-height: 24px !important; color: var(--body) !important; }
+  .sm p strong { font-weight: 500; color: var(--ink); }
+  .sm .mn { border-radius: 4px; padding: 0 3px; background: #e8f0fb; color: #1d5fa8; }
+  .sm .rx { margin-top: 12px; font-size: 12px; line-height: 16px; color: var(--muted); letter-spacing: 0; }
