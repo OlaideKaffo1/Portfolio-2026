@@ -1,0 +1,105 @@
+  /* Drawn diagrams (kept for now, replaceable later) */
+  .panel { border-radius: 12px; background: var(--panel); overflow: hidden; }
+  .funnel { padding: 24px 20px; }
+  @container (min-width: 700px) { .funnel { padding: 32px; } }
+  .funnel .row { display: grid; grid-template-columns: 1fr; gap: 6px; }
+  @container (min-width: 700px) { .funnel .row { grid-template-columns: 150px minmax(0, 1fr); gap: 16px; align-items: center; } }
+  .funnel .row + .row { margin-top: 14px; }
+  .funnel .lab { font-size: 13px; line-height: 18px; color: var(--muted); }
+  .funnel .track { position: relative; height: 32px; border-radius: 6px; background: #fff; overflow: hidden; }
+  .funnel .fill { position: absolute; inset: 0 auto 0 0; border-radius: 6px; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; font-size: 13px; font-variant-numeric: tabular-nums; transform-origin: left; transition: transform 1.3s var(--expo); background: #d9dde1; }
+  .funnel .fill.after { background: #000; color: #fff; }
+  .funnel .gap { position: absolute; inset: 0 0 0 auto; display: flex; align-items: center; padding-left: 10px; font-size: 12px; color: #b3261e; background: repeating-linear-gradient(-45deg, #fbeceb 0 6px, #fff 6px 12px); white-space: nowrap; }
+  .funnel:not(.in) .fill { transform: scaleX(0); }
+  .forms { padding: 14px; display: grid; grid-template-columns: 1fr; gap: 14px; }
+  @container (min-width: 700px) { .forms { grid-template-columns: repeat(3, 1fr); } }
+  .mock { position: relative; aspect-ratio: 4 / 3; border-radius: 8px; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.06); overflow: hidden; padding: 10%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 7%; align-content: start; }
+  .mock i { aspect-ratio: 4 / 3; border-radius: 4px; background: #eef0f2; }
+  .mock .ov { position: absolute; inset: 0; background: rgba(0,0,0,.28); }
+  .mock .modal { position: absolute; left: 25%; right: 25%; top: 18%; bottom: 18%; border-radius: 6px; background: #fff; box-shadow: 0 8px 24px rgba(0,0,0,.2); }
+  .mock .rail { position: absolute; top: 0; right: 0; bottom: 0; width: 36%; background: #fff; box-shadow: -1px 0 0 #e5e7e8, -8px 0 24px rgba(0,0,0,.06); }
+  .mock .dock { position: absolute; right: 5%; bottom: 6%; width: 32%; height: 48%; border-radius: 6px; background: #fff; box-shadow: 0 0 0 1.5px #000, 0 8px 24px rgba(0,0,0,.12); }
+  .mock .modal::before, .mock .rail::before, .mock .dock::before { content: ""; position: absolute; left: 12%; right: 30%; top: 12%; height: 5px; border-radius: 3px; background: #cfd3d7; box-shadow: 0 10px 0 #e8e9eb, 0 20px 0 #e8e9eb; }
+  .forms h3 { margin: 12px 0 0; font-size: 14px; line-height: 20px; display: flex; justify-content: space-between; gap: 8px; }
+  .forms h3 span { font-size: 12px; font-weight: 400; color: var(--muted); }
+  .forms h3 span.ok { color: var(--good); }
+  .forms p { margin: 4px 0 0; font-size: 13px; line-height: 19px; color: var(--muted); }
+  .tree { padding: 24px 20px 20px; }
+  @container (min-width: 700px) { .tree { padding: 28px 32px 24px; } }
+  .tree svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .tree-labels { display: grid; grid-template-columns: repeat(4, 1fr); margin-bottom: 14px; font-size: 12px; line-height: 16px; color: var(--muted); }
+  .tree-labels div:nth-child(2) { text-align: center; translate: -16% 0; }
+  .tree-labels div:nth-child(3) { text-align: center; translate: 16% 0; }
+  .tree-labels div:last-child { text-align: right; }
+  .tree-labels b { display: block; font-weight: 400; font-size: 24px; letter-spacing: -0.02em; color: var(--ink); line-height: 1.1; }
+  .tree path { fill: none; stroke: #d3d6da; stroke-width: 1; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.4s var(--expo); }
+  .tree path.hot { stroke: #000; stroke-width: 1.5; }
+  .tree circle { fill: #b9bec3; opacity: 0; transition: opacity .5s ease; }
+  .tree circle.hot { fill: #000; }
+  .tree.drawn path { stroke-dashoffset: 0; }
+  .tree.drawn circle { opacity: 1; }
+  .path { padding: 28px 16px 22px; }
+  .path ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); position: relative; }
+  .path ol::before { content: ""; position: absolute; left: 10%; right: 10%; top: 7px; height: 1px; background: #c5c9cd; }
+  .path li { position: relative; text-align: center; font-size: 12px; line-height: 16px; color: var(--muted); }
+  .path li::before { content: ""; position: relative; display: block; width: 15px; height: 15px; margin: 0 auto 10px; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 1.5px #c5c9cd; }
+  .path li:last-child { color: var(--ink); }
+  .path li:last-child::before { background: #000; box-shadow: none; }
+  .path .time { display: flex; justify-content: space-between; margin-top: 18px; padding-top: 12px; border-top: 1px dashed #d3d6da; font-size: 12px; color: var(--muted); }
+  .path .time b { font-weight: 500; color: var(--ink); }
+  .road { padding: 20px; display: grid; grid-template-columns: 1fr; gap: 8px; }
+  @container (min-width: 700px) { .road { grid-template-columns: 1fr auto 1fr auto 1fr; padding: 28px; } }
+  .road .step { background: #fff; border-radius: 10px; padding: 16px; box-shadow: 0 1px 2px rgba(0,0,0,.05); }
+  .road .step.now { box-shadow: 0 0 0 1.5px #000; }
+  .road .step .eyebrow { margin-bottom: 6px; }
+  .road .step p { margin: 0; font-size: 13px; line-height: 20px; color: var(--body); }
+  .road .arr { align-self: center; justify-self: center; color: var(--subtle); }
+  @container (max-width: 699px) { .road .arr { rotate: 90deg; } }
+
+
+  /* ---------- Strategyzer SaaS additions ---------- */
+  .sec ol { margin-bottom: 0; padding-left: 22px; }
+  .sec ol li + li { margin-top: 8px; }
+
+  /* Quotes with a named source */
+  .sec blockquote.qt { font-size: 17px; line-height: 26px; }
+  .qt p { margin: 0 !important; font-size: inherit !important; line-height: inherit !important; color: var(--ink) !important; }
+  .qt cite { display: block; margin-top: 8px; font-style: normal; font-size: 13px; line-height: 18px; color: var(--muted); letter-spacing: 0; }
+  .quotes { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  @container (min-width: 900px) { .quotes { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .quotes .qt { margin: 0 !important; border-left: 0; border-radius: 16px; background: var(--panel); padding: 20px 22px; font-size: 15px; line-height: 24px; }
+
+  /* Four layers of a program, with the broken link between template and cohort */
+  .vx-layers { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; border-radius: 12px; background: var(--panel); padding: 20px; }
+  @container (min-width: 900px) { .vx-layers { grid-template-columns: minmax(0, 1fr) 104px minmax(0, 1fr) 36px minmax(0, 1fr) 36px minmax(0, 1fr); align-items: stretch; padding: 28px; } }
+  .vx-layers .ly { position: relative; border-radius: 12px; background: #fff; padding: 14px 16px 16px; box-shadow: 0 1px 2px rgba(0, 0, 0, .04); }
+  .vx-layers .ly b { display: block; margin-top: 4px; font-size: 15px; line-height: 22px; font-weight: 500; }
+  .vx-layers .ly span { display: block; margin-top: 2px; font-size: 13px; line-height: 19px; color: var(--muted); letter-spacing: 0; }
+  .vx-layers .ly.stack { box-shadow: 0 1px 2px rgba(0, 0, 0, .04), 5px 5px 0 -1px #fff, 5px 5px 0 0 #e3e4e6, 10px 10px 0 -1px #fff, 10px 10px 0 0 #e3e4e6; margin-right: 10px; margin-bottom: 10px; }
+  .vx-layers .lk { position: relative; display: grid; place-items: center; min-height: 40px; }
+  .vx-layers .lk i { display: block; width: 1px; height: 100%; min-height: 28px; background: #b9bec4; }
+  .vx-layers .lk.broken i { background: repeating-linear-gradient(180deg, var(--draft) 0 4px, transparent 4px 8px); }
+  .vx-layers .lk em { position: absolute; left: calc(50% + 12px); top: 50%; translate: 0 -50%; right: 0; font-style: normal; font-size: 12px; line-height: 16px; color: var(--draft); letter-spacing: 0; }
+  @container (min-width: 900px) {
+    .vx-layers .lk i { width: 100%; height: 1px; min-height: 0; }
+    .vx-layers .lk.broken i { background: repeating-linear-gradient(90deg, var(--draft) 0 4px, transparent 4px 8px); }
+    .vx-layers .lk em { left: 50%; right: auto; top: calc(50% + 8px); translate: -50% 0; white-space: normal; width: 96px; text-align: center; }
+  }
+
+  /* Four causes merging into the one underlying problem */
+  @container (min-width: 700px) { .vx-causes .vx-people { grid-template-columns: 1fr 1fr; } }
+  .vx-shared p.big { margin-top: 8px !important; font-size: 17px !important; line-height: 26px !important; color: #fff !important; }
+
+  /* Three cards in a row */
+  .vx-three { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  @container (min-width: 900px) { .vx-three { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .vx-three .card { border-radius: 16px; background: var(--panel); padding: 20px 22px; }
+  .vx-three .card b { display: block; margin-top: 4px; font-size: 17px; line-height: 25px; font-weight: 500; letter-spacing: -0.01em; text-wrap: balance; }
+  .vx-three .card p { margin-top: 8px !important; font-size: 14px !important; line-height: 22px !important; }
+  .vx-three .card.ink { background: var(--ink); color: #fff; }
+  .vx-three .card.ink .vx-k, .vx-three .card.ink p { color: rgba(255, 255, 255, .72) !important; }
+
+  /* Copy still to come */
+  .todo { color: var(--draft) !important; }
+  .vx-cmp .vx-side p:first-of-type { margin-top: 8px !important; }
+  .chain .link::after { content: none !important; }

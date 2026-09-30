@@ -1,0 +1,194 @@
+      <section class="sec" id="problem" data-title="The problem">
+        <h2 class="sl">The problem</h2>
+        <p><strong>Building a program was manageable. Changing one after teams had started was not.</strong></p>
+        <p>Strategyzer runs strategy programs for large companies. A small team of program designers builds each one from playbooks, which mix learning content, exercises and shared workspaces where teams do the work. A single program can have 10 to 20 client teams working through it at once.</p>
+        <p>Every program has four layers, and the moment a cohort was created, they stopped talking to each other.</p>
+        <figure><div class="vx-layers vxb rv" role="img" aria-label="The four layers of a program: a template, a cohort created from it for one client delivery, a copy for each of up to 20 teams, and the workspaces inside each team's copy. The link between the template and the cohort breaks as soon as the cohort is created.">
+          <div class="ly"><div class="vx-k">1 · Template</div><b>The reusable program</b><span>Timeline and workspaces</span></div>
+          <div class="lk broken" aria-hidden="true"><i></i><em>Link lost once the cohort exists</em></div>
+          <div class="ly"><div class="vx-k">2 · Cohort</div><b>One client delivery</b><span>Created when a client books it</span></div>
+          <div class="lk" aria-hidden="true"><i></i></div>
+          <div class="ly stack"><div class="vx-k">3 · Teams</div><b>A copy per team</b><span>Up to 20 at once</span></div>
+          <div class="lk" aria-hidden="true"><i></i></div>
+          <div class="ly"><div class="vx-k">4 · Workspaces</div><b>Where teams work</b><span>Linked by exact name</span></div>
+        </div></figure>
+        <p>Programs change during every delivery. An exercise doesn't land, a presentation gets reworked overnight, or a client asks for something new on day two. So a coach's two-minute decision turned into four jobs:</p>
+        <ol>
+          <li><strong>Update the template,</strong> so it stays clean for the next client.</li>
+          <li><strong>Edit the cohort's settings by hand, in code,</strong> because the admin couldn't see anything added after the cohort was created.</li>
+          <li><strong>Repeat that edit for every team,</strong> all 10, 15 or 20 of them.</li>
+          <li><strong>Open every team's workspaces</strong> to hunt for broken links.</li>
+        </ol>
+        <blockquote class="qt"><p>"If there's a 12-team cohort and there's changes, it ends up being 2 to 3 days sometimes."</p><cite>Kurt Bostelaar, Program Designer</cite></blockquote>
+        <p>And only two people in the company knew how to do it.</p>
+      </section>
+
+      <section class="sec" id="research" data-title="Research">
+        <h2 class="sl">Research and what we learned</h2>
+        <h3 class="sl">The workarounds nobody mentioned</h3>
+        <p>I didn't ask people what they wanted. I asked the program designers who ran deliveries most often, especially Kurt and Latif, to share their screens and walk me through a real program from start to finish. At every step I asked what it was for, and why it happened there.</p>
+        <blockquote class="qt"><p>"I literally sometimes spend 2 to 3 days just copying stuff around."</p><cite>Kurt Bostelaar, Program Designer</cite></blockquote>
+        <p>Watching the work showed habits so routine that nobody thought to mention them:</p>
+        <div class="vx-how vxb rv">
+          <div class="card"><b>Deleting to hide</b><p>Later timeline events were deleted so teams couldn't see them yet, then pasted back from the template when it was time.</p></div>
+          <div class="card"><b>Doing everything twice</b><p>Every change was made in the template and in the cohort, because copying it back later could drag client data into the template.</p></div>
+          <div class="card"><b>Building around the system</b><p>A whole separate program was built just so teams could share one workspace.</p></div>
+          <div class="card"><b>Checking every link by hand</b><p>Before each session, every workspace for every team was opened, because at least one link was almost always broken.</p></div>
+        </div>
+        <figure><div class="slot m"><b>03</b><span>The discovery synthesis board</span><i>Framed image</i></div></figure>
+        <blockquote class="qt"><p>"I'm super impressed with the diligence and structure you have applied to synthesising and analysing the product discovery work you have been doing on our editor and admin features."</p><cite>Ashley Underwood, Head of Product</cite></blockquote>
+
+        <h3 class="sl">Many symptoms, four causes</h3>
+        <div class="vx-conv vx-causes vxb rv">
+          <div class="vx-people">
+            <div class="vx-p"><div class="vx-k">Cause 1</div><b>The template and the cohort lost touch</b><p>Once a cohort was created, it had no link to its template, so every improvement was carried across by hand.</p></div>
+            <div class="vx-p"><div class="vx-k">Cause 2</div><b>Effort grew with every team</b><p>One decision became 20 edits, and each edit was another chance for a mistake.</p></div>
+            <div class="vx-p"><div class="vx-k">Cause 3</div><b>Staying safe meant deleting things</b><p>The only way to release content in stages was to remove it.</p></div>
+            <div class="vx-p"><div class="vx-k">Cause 4</div><b>Everything depended on a name</b><p>Timeline events found their workspaces by exact name, so one stray space or a leftover "Copy" sent a team to a dead end. That one detail explained the broken links, the code edits and the fear of renaming anything.</p></div>
+          </div>
+          <svg class="vx-merge" viewBox="0 0 100 28" preserveAspectRatio="none" aria-hidden="true"><path d="M25 0 V10 Q25 14 29 14 H71 Q75 14 75 10 V0 M50 14 V28" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/></svg>
+          <div class="vx-shared">
+            <div class="vx-k">Underneath it all</div>
+            <p class="big">Program designers had two jobs at once: keep the live delivery moving, and keep a clean program ready for the next client. The platform made them do both by hand.</p>
+          </div>
+        </div>
+        <p>Together, this made a process only experts could run, while the business wanted coaches, partners and eventually clients to run programs themselves.</p>
+      </section>
+
+      <section class="sec" id="idea" data-title="The idea">
+        <h2 class="sl">One idea to hold it together</h2>
+        <p>The platform didn't need more controls. It needed a model people could understand at a glance:</p>
+        <blockquote>The template is the single source of truth, and every live delivery chooses what to take from it.</blockquote>
+        <p>Four principles followed from that:</p>
+        <div class="vx-how vxb rv">
+          <div class="card"><b>Change it once</b><p>Effort should never grow with the number of teams.</p></div>
+          <div class="card"><b>Stay in control</b><p>Nothing is forced onto a live delivery.</p></div>
+          <div class="card"><b>Nothing is destructive</b><p>Hiding replaces deleting, and every action can be undone.</p></div>
+          <div class="card"><b>Always know where you are</b><p>In a platform this deep, knowing where you are is a feature.</p></div>
+        </div>
+
+        <h3 class="sl">Choosing what not to build</h3>
+        <p>With one engineer and three months, I ranked every opportunity by three questions: How often does it happen? Would a failure be visible to clients? Can we build it well in the time we have? Changing live programs came out on top on all three.</p>
+        <div class="vx-ledger vxb rv">
+          <div class="col gain">
+            <div class="vx-lh">Built in this release</div>
+            <div class="sub">Changing live programs</div>
+            <ul>
+              <li><b>Template updates</b>, reviewed and applied</li>
+              <li><b>Sending workspaces</b> to many teams at once</li>
+              <li><b>Hiding and showing</b> timeline events</li>
+              <li><b>Breadcrumbs</b> inside workspaces</li>
+            </ul>
+          </div>
+          <div class="col cost">
+            <div class="vx-lh">Agreed for later phases</div>
+            <div class="sub">Mapped, prioritised and shared</div>
+            <ul>
+              <li><b>The e-learning course system</b></li>
+              <li><b>Exercise tracking</b></li>
+              <li><b>A library of reusable exercises</b></li>
+              <li><b>How playbooks and projects are organised</b></li>
+            </ul>
+          </div>
+          <div class="foot">Making the trade-offs visible kept the release focused, <b>and nobody felt their problem had been ignored.</b></div>
+        </div>
+        <figure><div class="slot m"><b>04</b><span>The opportunity solution tree, with the shipped scope highlighted and later phases visible</span><i>Framed image</i></div></figure>
+      </section>
+
+      <section class="sec" id="design" data-title="Four features, one model">
+        <h2 class="sl">Four features, one model</h2>
+        <p>Each feature puts one of the principles into the product. Together they turn a two-day job into one clear workflow.</p>
+
+        <h3 class="sl">1. Template updates, reviewed and applied</h3>
+        <p><strong>The heart of the redesign.</strong> It reconnects the template and the cohort, ends the double work and takes code out of the job.</p>
+        <div class="vx-cmp vxb rv">
+          <div class="vx-side weak"><div class="vx-k">Before</div><p>Every template change was carried into each cohort by hand, by editing its settings in code. A new workspace stayed invisible to the timeline until someone typed its exact name.</p></div>
+          <div class="vx-side"><div class="vx-k">Now</div><p>Cohorts are told when their template changes. Program designers review each update and choose to apply or ignore it, and any new workspace they accept appears in the cohort's timeline, ready to link.</p></div>
+        </div>
+        <figure><div class="slot m"><b>05</b><span>The update notification, then review and apply, then the new workspace in the timeline</span><i>Screen recording</i></div></figure>
+
+        <h3 class="sl">2. Send workspaces to many teams at once</h3>
+        <div class="vx-cmp vxb rv">
+          <div class="vx-side weak"><div class="vx-k">Before</div><p>One change, repeated for every team.</p></div>
+          <div class="vx-side"><div class="vx-k">Now</div><p>Pick the workspaces, search and pick the teams, and send them all in one action.</p></div>
+        </div>
+        <figure><div class="slot m"><b>06</b><span>Select workspaces, pick teams, done</span><i>Screen recording</i></div></figure>
+
+        <h3 class="sl">3. Hide and show timeline events</h3>
+        <div class="vx-cmp vxb rv">
+          <div class="vx-side weak"><div class="vx-k">Before</div><p>Releasing content in stages meant deleting it.</p></div>
+          <div class="vx-side"><div class="vx-k">Now</div><p>Program designers build the whole program up front and reveal each part when teams are ready.</p></div>
+        </div>
+        <figure><div class="slot m"><b>07</b><span>The timeline with hidden and visible events</span><i>Before and after pair</i></div></figure>
+
+        <h3 class="sl">4. Breadcrumbs inside workspaces</h3>
+        <div class="vx-cmp vxb rv">
+          <div class="vx-side weak"><div class="vx-k">Before</div><p>Even our CEO got lost inside custom playbooks.</p></div>
+          <div class="vx-side"><div class="vx-k">Now</div><p>Breadcrumbs show where you are and how to get back. I designed these with our engineer.</p></div>
+        </div>
+        <figure><div class="slot m"><b>08</b><span>Breadcrumbs inside a workspace</span><i>Explorable image</i></div></figure>
+        <blockquote class="qt"><p>"It's solved my biggest orientation challenge navigating the custom playbooks we've designed… I ALWAYS got lost in the nav and now it's seamless."</p><cite>Alex, CEO</cite></blockquote>
+
+        <p><strong>The four worked as one job:</strong> send the workspaces, bring the updated timeline into the cohort, then choose when teams see it. Kurt called the result "a MASSIVE game changer".</p>
+
+        <h3 class="sl">Tested with the people who do the work</h3>
+        <p>I tested with six of the people who deliver programs most often, a mix of program designers and coaches, using scenarios from real deliveries. I stayed with the work through the build and kept gathering feedback for months after launch.</p>
+        <div class="tested">
+          <div><div class="v">9.5/10</div><div class="what">average satisfaction across six program designers and coaches</div></div>
+          <div><div class="k">What changed in testing</div><div class="what change-t todo">To add: one design that changed during testing, what testing showed, and what we changed.</div></div>
+        </div>
+        <figure><div class="slot m"><b>09</b><span>The design that changed during testing: early version and final version</span><i>Explored vs shipped pair</i></div></figure>
+      </section>
+
+      <section class="sec" id="results" data-title="Results">
+        <h2 class="sl">Results</h2>
+        <p>Program designers got days back on every delivery, and the business could promise more.</p>
+        <figure>
+          <div class="chain" role="list" aria-label="Results">
+            <div class="link" role="listitem" style="--k:0"><div class="k">Changing a live cohort</div><div class="v">2 days → 30 min</div><div class="what">for a full round of changes</div><div class="ctx">As reported by program designers</div></div>
+            <div class="link" role="listitem" style="--k:1"><div class="k">One distribution task</div><div class="v"><span data-count="83" data-start="0">83</span>% <small>less time</small></div><div class="what">from about an hour to 10 minutes</div><div class="ctx">As reported by program designers</div></div>
+            <div class="link" role="listitem" style="--k:2"><div class="k">Satisfaction</div><div class="v"><span data-count="9.5" data-start="0">9.5</span>/10</div><div class="what">average score</div><div class="ctx">Six of our most frequent users</div></div>
+            <div class="link impact" role="listitem" style="--k:3"><div class="k">Business</div><div class="v">6 figures</div><div class="what">enterprise deals supported by faster, more reliable delivery</div><div class="ctx">Per enterprise program</div></div>
+          </div>
+          <figcaption class="caption">How we measured: the times are what program designers reported for their own workflows. Satisfaction comes from a small internal test on a 10-point scale.</figcaption>
+        </figure>
+        <div class="quotes vxb rv">
+          <blockquote class="qt"><p>"This makes it possible to do in 5 minutes what took me like 10 hours with [an enterprise client]'s last growth symposium."</p><cite>Kurt Bostelaar, Program Designer</cite></blockquote>
+          <blockquote class="qt"><p>"Being able to pivot during delivery gives us so much more independence and flexibility!!"</p><cite>Jonás Mosse, Strategyzer Coach</cite></blockquote>
+          <blockquote class="qt"><p>"It's been one of our biggest pains… this makes us so much more productive!!!"</p><cite>Alex, CEO</cite></blockquote>
+        </div>
+        <p>People also reported fewer mistakes and more confidence in what they sent to clients.</p>
+
+        <h3 class="sl">Beyond the numbers</h3>
+        <p>Program designers are Strategyzer's scarcest resource, so giving them back days changed what the business could take on. These were shared results. My part was removing the product friction that limited how much the team could build and deliver.</p>
+        <div class="vx-three vxb rv">
+          <div class="card"><div class="vx-k">Enterprise</div><b>More programs, with confidence</b><p>Faster program building and more reliable delivery gave the team confidence to commit to and close more enterprise programs, each worth six figures.</p></div>
+          <div class="card"><div class="vx-k">Individual subscribers</div><b>A richer library</b><p>Faster turnaround put more playbooks into the library, which strengthened the subscription for individual users.</p></div>
+          <div class="card ink"><div class="vx-k">Scale</div><b>Coaches can change programs themselves</b><p>Coaches can now change a program mid-delivery without waiting for a program designer. It's the first real step toward clients running their own programs.</p></div>
+        </div>
+        <blockquote class="qt"><p>"We'll be able to transfer the value you are creating to all of us down to our customers and future playbook makers!!"</p><cite>Augustin Solioz, Strategyzer Coach</cite></blockquote>
+        <figure><div class="slot m"><b>10</b><span>Slack feedback from the team</span><i>Quote cards or collage</i></div></figure>
+      </section>
+
+      <section class="sec" id="how" data-title="How I work">
+        <h2 class="sl">What this project shows about how I work</h2>
+        <div class="vx-how vxb rv">
+          <div class="card"><b>I look for causes, not symptoms.</b><p>A long list of complaints came down to four causes, and those pointed to one idea. That's how one designer and one engineer made a change this big.</p><a class="proof" href="#research">Four causes</a></div>
+          <div class="card"><b>I simplify the model before the screens.</b><p>Better screens alone wouldn't have fixed this. A clear relationship between a template and its deliveries did, and then the screens could stay simple.</p><a class="proof" href="#idea">The one idea</a></div>
+          <div class="card"><b>I treat scope as a design decision.</b><p>With little capacity, what we left out mattered as much as what we built. Clear criteria made the trade-offs easy to explain and agree on.</p><a class="proof" href="#idea">What we didn't build</a></div>
+          <div class="card"><b>I stay close to the people doing the work.</b><p>From the first screen share to feedback months after launch.</p><a class="proof" href="#results">What they said</a></div>
+        </div>
+      </section>
+
+      <section class="sec" id="next" data-title="What's next">
+        <h2 class="sl">What's next</h2>
+        <p>The rest of the opportunity tree points to the next phases:</p>
+        <ul>
+          <li><strong>Search</strong> across the product.</li>
+          <li><strong>Linking workspaces by a fixed ID</strong> instead of by name, so renaming a workspace never breaks a link.</li>
+          <li><strong>Reliable links</strong> between workspaces.</li>
+          <li><strong>A simpler structure</strong> for playbooks and projects.</li>
+        </ul>
+        <p class="closing">The goal behind all of it: someone who first heard the word "playbook" last week should be able to run one with confidence.</p>
+      </section>
+
