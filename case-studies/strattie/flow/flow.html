@@ -1,0 +1,190 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  @font-face { font-family: "Geist"; src: url("geist.woff2") format("woff2"); }
+  html, body { margin: 0; background: #faf8fa; }
+  /* The stage is the frame at half size: 1 css px = 2 image px, rendered at 2x device pixels */
+  #stage { position: relative; width: 1000px; height: 652.5px; overflow: hidden; background: #faf8fa; }
+  .img { position: absolute; background-repeat: no-repeat; background-size: 1000px auto; }
+  #chat, #canvas { position: absolute; inset: 0; transform-origin: 50% 50%; }
+  #base { left: 0; top: 0; width: 1000px; height: 652.5px; background-image: url(f5.png); }
+  #clip { position: absolute; left: 238px; top: 46px; width: 754px; height: 510px; overflow: hidden; background: #faf8fa; }
+  .part { position: absolute; left: 0; width: 754px; will-change: transform, opacity; }
+  #typed-cover { position: absolute; left: 376px; top: 564px; width: 300px; height: 22px; background: #fffdff; opacity: 0; }
+  #typed { position: absolute; left: 380px; top: 567px; font: 10.95px/16px "Geist", sans-serif; color: #1f1f1f; white-space: nowrap; letter-spacing: .01em; }
+  #typed .caret { display: inline-block; width: 1px; height: 12px; margin-left: 1px; vertical-align: -2px; background: #3947d6; }
+  #active { left: 368px; top: 518px; width: 472px; height: 122px; background-image: url(fa.png); background-position: -368px -518px; opacity: 0; }
+  #active .cov { position: absolute; background: #fffdff; }
+  #chipcov { left: 8px; top: 8px; width: 384px; height: 39px; }
+  #acaret { position: absolute; width: 1px; background: #3947d6; }
+  #yborder { position: absolute; left: 370.5px; top: 560.5px; width: 464.5px; height: 73.5px; box-sizing: border-box; border: 1.5px solid #6a7ad7; border-radius: 10px; opacity: 0; }
+  #ysend { left: 807px; top: 606px; width: 24.5px; height: 24.5px; background-image: url(fa.png); background-position: -807px -609px; opacity: 0; border-radius: 8px; }
+  .sel { position: absolute; opacity: 0; }
+  #sel1 { left: 132px; top: 340.5px; width: 213.5px; height: 29px; background: url(f1b.png) no-repeat; background-size: 1000px auto; background-position: -370px -457.5px; }
+  #sel2 { left: 146.5px; top: 132.5px; width: 120.5px; height: 27.5px; box-sizing: border-box; border: 0.75px solid #b6c1e9; border-radius: 5px; background: #f0f1ff;
+          font: 9.75px/26px "Geist", sans-serif; letter-spacing: .012em; color: #3744b8; padding-left: 10.6px; }
+  #sel2 svg { position: absolute; right: 13px; top: 9.8px; width: 7px; height: 7px; }
+  #canvas { opacity: 0; }
+  #cv { position: absolute; left: 0; top: 0; width: 1000px; height: 652.5px; transform-origin: 465px 240px; }
+  /* the workspace frame is wider than the chat frame: show all of it and continue the canvas above it */
+  #band { position: absolute; left: 0; top: 0; width: 1000px; height: 83.5px; background-color: #f7fafb;
+          background-image: radial-gradient(circle, #9fa3a5 0.75px, transparent 1.15px); background-size: 17.75px 18.1px; background-position: -0.375px 0.7px; }
+  #band::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 34px; background: linear-gradient(90deg, #e7edef 0 32px, #e9ecED 32px 33px, #eff2f3 33px 34px); }
+  #cvimg { position: absolute; left: 0; top: 0; width: 1000px; height: 652.5px; }
+  #band { display: none; }
+  #cv7 { left: 0; top: 0; width: 1000px; height: 652.5px; background-image: url(f7.png); opacity: 0; }
+  #cv6 { left: 0; top: 0; width: 1000px; height: 652.5px; background-image: url(f6.png); }
+  #spark { background-image: url(f7.png); }
+  #menu { background-image: url(f7.png); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06); }
+  #menu-fix { position: absolute; left: 43.5px; top: 15.5px; height: 12px; padding-right: 6px; background: #fff; font: 9.4px/12px "Geist", sans-serif; color: #111; letter-spacing: .01em; }
+  #cursor { position: absolute; left: 0; top: 0; width: 18px; height: 18px; z-index: 5; opacity: 0; transform-origin: 2px 2px; }
+  #ripple { position: absolute; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%; border: 1.5px solid #3947d6; opacity: 0; z-index: 4; }
+  #fade { position: absolute; inset: 0; background: #faf8fa; opacity: 0; pointer-events: none; }
+</style></head>
+<body>
+<div id="stage">
+  <div id="chat">
+    <div class="img" id="base"></div>
+    <div id="clip"></div>
+    <div id="typed-cover"></div>
+    <div id="typed"></div>
+    <div id="yborder"></div><div class="img" id="ysend"></div>
+    <div class="img" id="active"><div class="cov" id="chipcov"></div><div class="cov" id="l1"></div><div class="cov" id="l2"></div><div class="cov" id="l3"></div><span id="acaret"></span></div>
+  </div>
+  <div id="canvas"><div id="cv">
+    <div id="band"></div>
+    <div id="cvimg"><div class="img" id="cv6"></div><div class="img" id="cv7"></div>
+    <div class="img" id="spark"></div>
+    <div class="img" id="menu"></div></div>
+  </div></div>
+  <div id="ripple"></div>
+  <svg id="cursor" viewBox="0 0 18 18"><path d="M2 1.5 L2 14.5 L5.3 11.4 L7.6 16.6 L10 15.5 L7.8 10.4 L12.4 10.4 Z" fill="#111" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/></svg>
+</div>
+<script>
+// ---------- geometry (image px of the 2000-wide frames) ----------
+const CLIP = { x: 476, y: 92 };               // top-left of the conversation area
+const parts = [                               // [frame, y0, y1, kind]
+  ["u1", 1, 100, 232, "user"], ["s1", 1, 232, 1000, "ai"],
+  ["u2", 2, 100, 205, "user"], ["s2", 2, 205, 925, "ai"],
+  ["u3", 3, 100, 420, "user"], ["s3", 3, 420, 870, "ai"],
+  ["s4", 4, 100, 812, "ai"],   ["u4", 4, 812, 915, "user"],
+  ["s5", 5, 100, 440, "ai"],
+];
+const el = {};
+const clip = document.getElementById("clip");
+for (const [id, f, y0, y1] of parts) {
+  const d = document.createElement("div");
+  d.className = "part img"; d.id = id;
+  d.style.top = (y0 - CLIP.y) / 2 + "px"; d.style.height = (y1 - y0) / 2 + "px";
+  d.style.backgroundImage = `url(f${f}.png)`;
+  d.style.backgroundPosition = `${-CLIP.x / 2}px ${-y0 / 2}px`;
+  clip.appendChild(d); el[id] = d;
+}
+// selected state of Strattie's suggestions, shown on the button as it is clicked
+el.s1.insertAdjacentHTML("beforeend", '<div class="sel" id="sel1"></div>');
+el.s5.insertAdjacentHTML("beforeend", '<div class="sel" id="sel2">Go to workspace<svg viewBox="0 0 8 8"><path d="M1.5 6.5 6.5 1.5M2.5 1.5h4v4" fill="none" stroke="#3744b8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg></div>');
+const crop = (node, x0, y0, x1, y1) => { Object.assign(node.style, { left: x0 / 2 + "px", top: y0 / 2 + "px", width: (x1 - x0) / 2 + "px", height: (y1 - y0) / 2 + "px", backgroundPosition: `${-x0 / 2}px ${-y0 / 2}px` }); };
+{ const sp = document.getElementById("spark"); Object.assign(sp.style, { left: 967 / 2 + "px", top: 392 / 2 + "px", width: 50 / 2 + "px", height: 50 / 2 + "px", backgroundPosition: `${-1112 / 2}px ${-353 / 2}px` }); }
+crop(document.getElementById("menu"), 1210, 133, 1878, 610);
+
+// ---------- easing ----------
+const clamp = (v) => Math.max(0, Math.min(1, v));
+const P = (t, t0, d) => clamp((t - t0) / d);
+const out = (p) => 1 - Math.pow(1 - p, 3);                       // settle
+const io = (p) => (p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2); // move
+const lerp = (a, b, p) => a + (b - a) * p;
+
+// ---------- the story (seconds) ----------
+const T = 28.0;
+const life = {                    // in, fully-shown (ai: wipe end), out
+  u1: [0.5, null, 4.9], s1: [1.2, 3.2, 4.9],
+  u2: [5.3, null, 11.3], s2: [5.85, 7.6, 11.3],
+  u3: [11.65, null, 14.9], s3: [12.2, 13.8, 14.9],
+  s4: [15.3, 17.5, 19.6], u4: [18.8, null, 19.6],
+  s5: [19.95, 20.7, 99],
+};
+const typing = [ { t0: 18.0, t1: 18.4, clear: 18.75, text: "Yes please" } ];
+// composing the synthesis request in the active message box
+const lines = [ { top: 51, h: 14, x0: 9, x1: 394 }, { top: 64.5, h: 13.5, x0: 9, x1: 397 }, { top: 78, h: 13.5, x0: 9, x1: 168 } ];
+const COMPOSE = { open: 8.4, chips: 8.9, t0: 9.3, t1: 10.9, close: 11.25 };
+// cursor keyframes: [time, x, y] in image px of the chat frame (c) or canvas frame (v)
+const chatPath = [ [3.6, 1480, 1260], [4.4, 960, 948], [4.95, 980, 990],
+                   [10.3, 1500, 1190], [11.0, 1638, 1242], [11.45, 1600, 1210],
+                   [18.0, 1560, 1180], [18.6, 1640, 1240], [18.95, 1600, 1210],
+                   [20.7, 1300, 700], [21.35, 890, 395], [21.8, 890, 395] ];
+const canvasPath = [ [23.0, 640, 900], [24.0, 992, 420], [24.9, 994, 422], [27.0, 700, 760] ];
+const cursorOn = [ [3.6, 4.95], [10.3, 11.45], [18.0, 18.95], [20.7, 21.8], [23.0, 27.1] ];
+const clicks = [ { t: 4.6 }, { t: 11.15 }, { t: 18.7 }, { t: 21.5 }, { t: 24.2 } ];
+
+function pathAt(path, t) {
+  if (t <= path[0][0]) return [path[0][1], path[0][2]];
+  for (let i = 1; i < path.length; i++) if (t <= path[i][0]) { const [a, b] = [path[i - 1], path[i]]; const p = io((t - a[0]) / (b[0] - a[0])); return [lerp(a[1], b[1], p), lerp(a[2], b[2], p)]; }
+  const l = path[path.length - 1]; return [l[1], l[2]];
+}
+
+function render(t) {
+  // conversation parts
+  for (const [id, , y0, y1, kind] of parts) {
+    const [tin, tfull, tout] = life[id], d = el[id], h = (y1 - y0) / 2;
+    if (t < tin) { d.style.opacity = 0; continue; }
+    const q = out(P(t, tout, 0.38));
+    let o = 1 - q, y = -q * 70;
+    if (kind === "user") { const p = out(P(t, tin, 0.45)); o *= p; y += (1 - p) * 14; d.style.webkitMaskImage = d.style.maskImage = "none"; }
+    else { const p = P(t, tin, tfull - tin), edge = 26, r = p * (h + edge); const m = `linear-gradient(180deg, #000 ${r - edge}px, transparent ${r}px)`; d.style.webkitMaskImage = d.style.maskImage = m; }
+    d.style.opacity = o; d.style.transform = `translateY(${y}px)`;
+  }
+  // typing in the message box
+  const tp = document.getElementById("typed"), tc = document.getElementById("typed-cover");
+  let shown = ""; let active = false;
+  for (const k of typing) if (t >= k.t0 && t < k.clear) { active = true; shown = k.text.slice(0, Math.round(k.text.length * P(t, k.t0, k.t1 - k.t0))); }
+  tc.style.opacity = active ? 1 : 0;
+  tp.innerHTML = active ? shown.replace(/&/g, "&amp;") + '<span class="caret"></span>' : "";
+
+  // active message box: grows up, chips attach, the message types, then it settles back once sent
+  const act = document.getElementById("active");
+  const grow = out(P(t, COMPOSE.open, 0.35)), shrink = io(P(t, COMPOSE.close, 0.22));
+  act.style.opacity = t < COMPOSE.open ? 0 : 1 - shrink;
+  act.style.clipPath = `inset(${(1 - grow) * 41.5}px 0 0 0 round 12px)`;
+  const ch = out(P(t, COMPOSE.chips, 0.3)); document.getElementById("chipcov").style.opacity = 1 - ch;
+  const total = lines.reduce((n, l) => n + (l.x1 - l.x0), 0);
+  let typedPx = P(t, COMPOSE.t0, COMPOSE.t1 - COMPOSE.t0) * total, car = null;
+  lines.forEach((l, i) => {
+    const w = l.x1 - l.x0, r = Math.max(0, Math.min(w, typedPx)); typedPx -= w;
+    const c = document.getElementById("l" + (i + 1)); Object.assign(c.style, { left: l.x0 + r + "px", top: l.top - 1 + "px", width: w - r + 8 + "px", height: l.h + 2 + "px" });
+    if (r > 0 && (r < w || i === lines.length - 1)) car = { x: l.x0 + r, top: l.top, h: l.h };
+  });
+  const ac = document.getElementById("acaret");
+  if (car && t < COMPOSE.close) Object.assign(ac.style, { left: car.x + 1 + "px", top: car.top + "px", height: car.h + "px", opacity: 1 }); else ac.style.opacity = 0;
+  const yf = active ? 1 : 0; document.getElementById("yborder").style.opacity = yf; document.getElementById("ysend").style.opacity = yf;
+
+  document.getElementById("sel1").style.opacity = out(P(t, 4.3, 0.2));
+  document.getElementById("sel2").style.opacity = out(P(t, 21.2, 0.2));
+  // chat -> canvas, and the loop back
+  const toCanvas = io(P(t, 21.8, 0.8)), back = io(P(t, 27.2, 0.7));
+  const chat = document.getElementById("chat"), canvas = document.getElementById("canvas");
+  chat.style.opacity = 1 - toCanvas + back; chat.style.transform = `scale(${1 + 0.04 * toCanvas * (1 - back)})`;
+  canvas.style.opacity = toCanvas * (1 - back);
+  const s = lerp(1.04, 1.0, out(P(t, 21.8, 0.9))) + 0.03 * io(P(t, 22.6, 4.6));
+  const cv = document.getElementById("cv"); cv.style.transform = `scale(${s})`;
+  // on the canvas: hover shows the sparkle, the click opens Strattie's menu
+  document.getElementById("spark").style.opacity = out(P(t, 23.85, 0.25));
+  const mp = out(P(t, 24.3, 0.4)), menu = document.getElementById("menu");
+  menu.style.opacity = mp; menu.style.transform = `translateY(${(1 - mp) * 6}px) scale(${0.985 + 0.015 * mp})`; menu.style.transformOrigin = "0 60%";
+  // at the loop point, clear the conversation so it starts empty again
+  if (t > 27.2) for (const id in el) el[id].style.opacity = 0;
+
+  // cursor
+  const cur = document.getElementById("cursor"), rip = document.getElementById("ripple");
+  let vis = 0; for (const [a, b] of cursorOn) vis = Math.max(vis, Math.min(out(P(t, a, 0.25)), 1 - out(P(t, b - 0.25, 0.25))));
+  let x, y;
+  if (t < 22.5) { [x, y] = pathAt(chatPath, t); x /= 2; y /= 2; }
+  else { const [ix, iy] = pathAt(canvasPath, t); x = 465 + (ix / 2 - 465) * s; y = 240 + (iy / 2 - 240) * s; }
+  let press = 1, rp = 0;
+  for (const c of clicks) { const d = t - c.t; if (d > -0.08 && d < 0.14) press = 0.86; if (d >= 0 && d < 0.5) rp = d / 0.5; }
+  cur.style.opacity = vis; cur.style.transform = `translate(${x - 2}px, ${y - 2}px) scale(${press})`;
+  rip.style.left = x + "px"; rip.style.top = y + "px"; rip.style.opacity = rp ? (1 - rp) * 0.5 * vis : 0; rip.style.transform = `scale(${0.3 + rp})`;
+}
+window.render = render; window.T = T;
+render(0);
+</script>
+</body></html>
