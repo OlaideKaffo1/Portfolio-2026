@@ -171,3 +171,13 @@
   @container (min-width: 700px) { .ba-before.n2 { grid-template-columns: 1fr 1fr; } }
   .ba-before .slot { background: #f6efe6; }
   .ba-before.n1 .slot { aspect-ratio: 16 / 7; }
+  /* Three layers per feature: before, after, then the designs in tabs */
+  .sec > .layers { max-width: var(--media) !important; }
+  .layers { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; margin-top: 28px !important; }
+  .layers .layer { margin: 0 !important; }
+  .layer-k { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; font-size: 14px; line-height: 20px; font-weight: 500; color: var(--ink); }
+  .layer-k span { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: #fff; font-size: 12px; line-height: 1; }
+  .layer-k em { flex-basis: 100%; margin-left: 30px; font-style: normal; font-weight: 400; font-size: 13px; line-height: 18px; color: var(--muted); }
+  .layer .slot.before { background: #f6efe6; }
+  .layers .slot, .layers .step-panel > .slot { aspect-ratio: 16 / 7; }
+  @container (max-width: 699px) { .layers .slot, .layers .step-panel > .slot { aspect-ratio: 4 / 3; } }

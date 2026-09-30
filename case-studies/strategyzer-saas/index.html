@@ -784,6 +784,16 @@
   @container (min-width: 700px) { .ba-before.n2 { grid-template-columns: 1fr 1fr; } }
   .ba-before .slot { background: #f6efe6; }
   .ba-before.n1 .slot { aspect-ratio: 16 / 7; }
+  /* Three layers per feature: before, after, then the designs in tabs */
+  .sec > .layers { max-width: var(--media) !important; }
+  .layers { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; margin-top: 28px !important; }
+  .layers .layer { margin: 0 !important; }
+  .layer-k { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; font-size: 14px; line-height: 20px; font-weight: 500; color: var(--ink); }
+  .layer-k span { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: #fff; font-size: 12px; line-height: 1; }
+  .layer-k em { flex-basis: 100%; margin-left: 30px; font-style: normal; font-weight: 400; font-size: 13px; line-height: 18px; color: var(--muted); }
+  .layer .slot.before { background: #f6efe6; }
+  .layers .slot, .layers .step-panel > .slot { aspect-ratio: 16 / 7; }
+  @container (max-width: 699px) { .layers .slot, .layers .step-panel > .slot { aspect-ratio: 4 / 3; } }
 
   /* Diagram type follows the page scale */
   .tree-labels b { font-size: 20px; line-height: 26px; }
@@ -1062,48 +1072,78 @@
           <div class="vx-side weak"><div class="vx-k">Before</div><p>Every template change was carried into each cohort by hand, by editing its settings in code. A new workspace stayed invisible to the timeline until someone typed its exact name.</p></div>
           <div class="vx-side"><div class="vx-k">Now</div><p>Cohorts are told when their template changes. Program designers review each update and choose to apply or ignore it, and any new workspace they accept appears in the cohort's timeline, ready to link.</p></div>
         </div>
-        <figure class="ba m">
-          <div class="ba-k">Before</div>
-          <div class="ba-before n2"><div class="slot"><b>05a</b><span>The old way: editing the cohort’s settings in code (JSON) in the admin</span><i>Before</i></div><div class="slot"><b>05b</b><span>A cohort timeline that can’t see a workspace added to the template</span><i>Before</i></div></div>
-          <div class="ba-k">After, with the design decisions</div>
-          <div class="slot"><b>05c</b><span>The update notice, reviewing and applying it, then the new workspace appearing in the cohort’s timeline</span><i>Screen recording with decision notes</i></div>
-        </figure>
+        <div class="layers">
+          <figure class="layer m"><div class="layer-k"><span>1</span>Before</div><div class="slot before"><b>05a</b><span>The old way: editing the cohort’s settings in code, and a timeline that can’t see new workspaces</span><i>Screen recording or image</i></div></figure>
+          <figure class="layer m"><div class="layer-k"><span>2</span>After</div><div class="slot"><b>05b</b><span>Getting the update notice, reviewing it and applying it, then the new workspace appearing in the timeline</span><i>Screen recording</i></div></figure>
+          <figure class="layer steps" data-steps>
+            <div class="layer-k"><span>3</span>The designs<em>Click a tab to see each screen and the decisions behind it</em></div>
+            <div class="step-tabs" role="tablist" aria-label="The designs"><button type="button" role="tab" id="f1-t1" aria-controls="f1-p1" aria-selected="true">Update notice</button><button type="button" role="tab" id="f1-t2" aria-controls="f1-p2" aria-selected="false" tabindex="-1">Review</button><button type="button" role="tab" id="f1-t3" aria-controls="f1-p3" aria-selected="false" tabindex="-1">Applied</button></div>
+            <div class="step-stage">
+            <div class="step-panel on" role="tabpanel" id="f1-p1" aria-labelledby="f1-t1" data-caption="Update notice: The notice that the template has changed"><div class="slot"><b>05c</b><span>The notice that the template has changed · design decisions sit behind the toggle</span><i>Design screen</i></div></div>
+            <div class="step-panel" role="tabpanel" id="f1-p2" aria-labelledby="f1-t2" data-caption="Review: Reviewing what changed, with apply or ignore"><div class="slot"><b>05d</b><span>Reviewing what changed, with apply or ignore · design decisions sit behind the toggle</span><i>Design screen</i></div></div>
+            <div class="step-panel" role="tabpanel" id="f1-p3" aria-labelledby="f1-t3" data-caption="Applied: The new workspace in the cohort’s timeline"><div class="slot"><b>05e</b><span>The new workspace in the cohort’s timeline · design decisions sit behind the toggle</span><i>Design screen</i></div></div>
+            </div>
+            <figcaption class="caption" aria-live="polite">Update notice: The notice that the template has changed</figcaption>
+          </figure>
+        </div>
 
         <h3 class="sl">2. Send workspaces to many teams at once</h3>
         <div class="vx-cmp vxb rv">
           <div class="vx-side weak"><div class="vx-k">Before</div><p>One change, repeated for every team.</p></div>
           <div class="vx-side"><div class="vx-k">Now</div><p>Pick the workspaces, search and pick the teams, and send them all in one action.</p></div>
         </div>
-        <figure class="ba m">
-          <div class="ba-k">Before</div>
-          <div class="ba-before n1"><div class="slot"><b>06a</b><span>Copying a workspace into one project at a time</span><i>Before</i></div></div>
-          <div class="ba-k">After, with the design decisions</div>
-          <div class="slot"><b>06b</b><span>Selecting workspaces, searching and picking teams, and sending them all at once</span><i>Screen recording with decision notes</i></div>
-        </figure>
+        <div class="layers">
+          <figure class="layer m"><div class="layer-k"><span>1</span>Before</div><div class="slot before"><b>06a</b><span>Copying a workspace into one project at a time</span><i>Screen recording or image</i></div></figure>
+          <figure class="layer m"><div class="layer-k"><span>2</span>After</div><div class="slot"><b>06b</b><span>Selecting workspaces, searching and picking teams, and sending them all at once</span><i>Screen recording</i></div></figure>
+          <figure class="layer steps" data-steps>
+            <div class="layer-k"><span>3</span>The designs<em>Click a tab to see each screen and the decisions behind it</em></div>
+            <div class="step-tabs" role="tablist" aria-label="The designs"><button type="button" role="tab" id="f2-t1" aria-controls="f2-p1" aria-selected="true">Select workspaces</button><button type="button" role="tab" id="f2-t2" aria-controls="f2-p2" aria-selected="false" tabindex="-1">Pick teams</button><button type="button" role="tab" id="f2-t3" aria-controls="f2-p3" aria-selected="false" tabindex="-1">Sent</button></div>
+            <div class="step-stage">
+            <div class="step-panel on" role="tabpanel" id="f2-p1" aria-labelledby="f2-t1" data-caption="Select workspaces: Choosing the workspaces to send"><div class="slot"><b>06c</b><span>Choosing the workspaces to send · design decisions sit behind the toggle</span><i>Design screen</i></div></div>
+            <div class="step-panel" role="tabpanel" id="f2-p2" aria-labelledby="f2-t2" data-caption="Pick teams: Searching and multi-selecting the teams"><div class="slot"><b>06d</b><span>Searching and multi-selecting the teams · design decisions sit behind the toggle</span><i>Design screen</i></div></div>
+            <div class="step-panel" role="tabpanel" id="f2-p3" aria-labelledby="f2-t3" data-caption="Sent: Confirmation, with every team updated"><div class="slot"><b>06e</b><span>Confirmation, with every team updated · design decisions sit behind the toggle</span><i>Design screen</i></div></div>
+            </div>
+            <figcaption class="caption" aria-live="polite">Select workspaces: Choosing the workspaces to send</figcaption>
+          </figure>
+        </div>
 
         <h3 class="sl">3. Hide and show timeline events</h3>
         <div class="vx-cmp vxb rv">
           <div class="vx-side weak"><div class="vx-k">Before</div><p>Releasing content in stages meant deleting it.</p></div>
           <div class="vx-side"><div class="vx-k">Now</div><p>Program designers build the whole program up front and reveal each part when teams are ready.</p></div>
         </div>
-        <figure class="ba m">
-          <div class="ba-k">Before</div>
-          <div class="ba-before n1"><div class="slot"><b>07a</b><span>A timeline where later events had to be deleted to keep them hidden</span><i>Before</i></div></div>
-          <div class="ba-k">After, with the design decisions</div>
-          <div class="slot"><b>07b</b><span>The timeline with hidden and visible events, and the control to switch each one</span><i>Explorable image, decisions behind the toggle</i></div>
-        </figure>
+        <div class="layers">
+          <figure class="layer m"><div class="layer-k"><span>1</span>Before</div><div class="slot before"><b>07a</b><span>Deleting later timeline events to keep them hidden, then pasting them back</span><i>Screen recording or image</i></div></figure>
+          <figure class="layer m"><div class="layer-k"><span>2</span>After</div><div class="slot"><b>07b</b><span>Hiding events, then revealing them when teams are ready</span><i>Screen recording</i></div></figure>
+          <figure class="layer steps" data-steps>
+            <div class="layer-k"><span>3</span>The designs<em>Click a tab to see each screen and the decisions behind it</em></div>
+            <div class="step-tabs" role="tablist" aria-label="The designs"><button type="button" role="tab" id="f3-t1" aria-controls="f3-p1" aria-selected="true">Hidden events</button><button type="button" role="tab" id="f3-t2" aria-controls="f3-p2" aria-selected="false" tabindex="-1">Event control</button></div>
+            <div class="step-stage">
+            <div class="step-panel on" role="tabpanel" id="f3-p1" aria-labelledby="f3-t1" data-caption="Hidden events: The timeline with hidden and visible events"><div class="slot"><b>07c</b><span>The timeline with hidden and visible events · design decisions sit behind the toggle</span><i>Design screen</i></div></div>
+            <div class="step-panel" role="tabpanel" id="f3-p2" aria-labelledby="f3-t2" data-caption="Event control: The control to hide or show each event"><div class="slot"><b>07d</b><span>The control to hide or show each event · design decisions sit behind the toggle</span><i>Design screen</i></div></div>
+            </div>
+            <figcaption class="caption" aria-live="polite">Hidden events: The timeline with hidden and visible events</figcaption>
+          </figure>
+        </div>
 
         <h3 class="sl">4. Breadcrumbs inside workspaces</h3>
         <div class="vx-cmp vxb rv">
           <div class="vx-side weak"><div class="vx-k">Before</div><p>Even our CEO got lost inside custom playbooks.</p></div>
           <div class="vx-side"><div class="vx-k">Now</div><p>Breadcrumbs show where you are and how to get back. I designed these with our engineer.</p></div>
         </div>
-        <figure class="ba m">
-          <div class="ba-k">Before</div>
-          <div class="ba-before n1"><div class="slot"><b>08a</b><span>Deep inside a custom playbook, with no way to tell where you are</span><i>Before</i></div></div>
-          <div class="ba-k">After, with the design decisions</div>
-          <div class="slot"><b>08b</b><span>Breadcrumbs inside a workspace, showing where you are and how to get back</span><i>Explorable image, decisions behind the toggle</i></div>
-        </figure>
+        <div class="layers">
+          <figure class="layer m"><div class="layer-k"><span>1</span>Before</div><div class="slot before"><b>08a</b><span>Getting lost deep inside a custom playbook</span><i>Screen recording or image</i></div></figure>
+          <figure class="layer m"><div class="layer-k"><span>2</span>After</div><div class="slot"><b>08b</b><span>Moving through a workspace with breadcrumbs, and jumping back up</span><i>Screen recording</i></div></figure>
+          <figure class="layer steps" data-steps>
+            <div class="layer-k"><span>3</span>The designs<em>Click a tab to see each screen and the decisions behind it</em></div>
+            <div class="step-tabs" role="tablist" aria-label="The designs"><button type="button" role="tab" id="f4-t1" aria-controls="f4-p1" aria-selected="true">Breadcrumbs</button><button type="button" role="tab" id="f4-t2" aria-controls="f4-p2" aria-selected="false" tabindex="-1">Deeper levels</button></div>
+            <div class="step-stage">
+            <div class="step-panel on" role="tabpanel" id="f4-p1" aria-labelledby="f4-t1" data-caption="Breadcrumbs: Breadcrumbs inside a workspace"><div class="slot"><b>08c</b><span>Breadcrumbs inside a workspace · design decisions sit behind the toggle</span><i>Design screen</i></div></div>
+            <div class="step-panel" role="tabpanel" id="f4-p2" aria-labelledby="f4-t2" data-caption="Deeper levels: How breadcrumbs behave several levels down"><div class="slot"><b>08d</b><span>How breadcrumbs behave several levels down · design decisions sit behind the toggle</span><i>Design screen</i></div></div>
+            </div>
+            <figcaption class="caption" aria-live="polite">Breadcrumbs: Breadcrumbs inside a workspace</figcaption>
+          </figure>
+        </div>
 
         <p><strong>The four worked as one job:</strong> send the workspaces, bring the updated timeline into the cohort, then choose when teams see it. Kurt called the result "a MASSIVE game changer".</p>
 
