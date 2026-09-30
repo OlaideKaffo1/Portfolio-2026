@@ -744,6 +744,34 @@
   .feature .pull-src { margin: 10px 0 0 !important; max-width: 620px; font-size: 15px !important; line-height: 24px !important; color: var(--body) !important; }
   .feature .feed { margin-top: 24px; }
   .feature + .wall-k { margin-top: 32px; }
+  /* Opportunity solution tree, redrawn with real text; shipped branches in ink */
+  .sec > .ost-fig { max-width: var(--media) !important; }
+  .ost { border-radius: 12px; background: var(--panel); padding: 20px; }
+  @container (min-width: 900px) { .ost { padding: 28px; } }
+  .ost .oo { max-width: 360px; margin: 0 auto; border-radius: 12px; background: var(--ink); color: #fff; padding: 14px 16px; text-align: center; }
+  .ost .oo .vx-k { color: rgba(255, 255, 255, .6); }
+  .ost .oo b { display: block; margin-top: 4px; font-size: 15px; line-height: 22px; font-weight: 500; text-wrap: balance; }
+  .ost .ocs { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; margin-top: 20px; }
+  @container (min-width: 600px) { .ost .ocs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @container (min-width: 900px) {
+    .ost .ocs { grid-template-columns: repeat(6, minmax(0, 1fr)); margin-top: 40px; }
+    .ost .ocs::before { content: ""; position: absolute; top: -20px; left: calc(100% / 12); right: calc(100% / 12); border-top: 1px solid #b9bec4; }
+    .ost .ocs::after { content: ""; position: absolute; top: -40px; left: 50%; height: 20px; border-left: 1px solid #b9bec4; }
+    .ost .oc::before { content: ""; position: absolute; top: -20px; left: 50%; height: 20px; border-left: 1px solid #b9bec4; }
+  }
+  .ost .oc { position: relative; display: flex; flex-direction: column; border-radius: 12px; background: #fff; border: 1px dashed #cfd3d6; padding: 12px; }
+  .ost .oc.on { border: 1px solid #fff; box-shadow: 0 1px 2px rgba(0, 0, 0, .05); }
+  .ost .op b { display: block; margin-top: 4px; font-size: 14px; line-height: 20px; font-weight: 500; color: var(--ink); text-wrap: balance; }
+  .ost .oc ul { flex: 1; list-style: none; margin: 10px 0 0; padding: 10px 0 0; border-top: 1px solid var(--line); }
+  .ost .oc li { margin: 0 !important; padding-left: 12px; position: relative; font-size: 12px !important; line-height: 17px !important; color: var(--body); letter-spacing: 0; }
+  .ost .oc li + li { margin-top: 6px !important; }
+  .ost .oc li::before { content: ""; position: absolute; left: 0; top: 7px; width: 5px; height: 1px; background: var(--muted); }
+  .ost .ot { align-self: flex-start; margin-top: 12px; border-radius: 999px; padding: 2px 8px; font-size: 11px; line-height: 16px; letter-spacing: 0; color: var(--muted); border: 1px dashed #cfd3d6; }
+  .ost .ot.on { border: 0; background: var(--ink); color: #fff; }
+  .ost-foot { display: flex; align-items: flex-start; gap: 14px; margin-top: 12px; }
+  .ost-foot .orig { flex: none; width: 132px; border-radius: 6px; box-shadow: 0 0 0 1px var(--line); }
+  .ost-foot .orig::after { display: none; }
+  .ost-foot .caption { margin-top: 2px !important; font-size: 13px !important; line-height: 20px !important; color: var(--muted) !important; }
 
   /* Diagram type follows the page scale */
   .tree-labels b { font-size: 20px; line-height: 26px; }
@@ -998,7 +1026,18 @@
           </div>
           <div class="foot">Making the trade-offs visible kept the release focused, <b>and nobody felt their problem had been ignored.</b></div>
         </div>
-        <figure><div class="slot m"><b>04</b><span>The opportunity solution tree, with the shipped scope highlighted and later phases visible</span><i>Framed image</i></div></figure>
+        <figure class="ost-fig"><div class="ost m" role="img" aria-label="Opportunity solution tree. Desired outcome: create, run and manage programs in less time, with little to no friction. Six opportunities, each with possible solutions. Shipped in this release: releasing timeline events in stages, adding workspaces to many projects at once, bringing template updates into live cohorts, and always knowing where you are. Next phases: search and filter across the product, and linking workspaces across cohorts.">
+          <div class="oo"><div class="vx-k">Desired outcome</div><b>Create, run and manage programs in less time, with little to no friction</b></div>
+          <div class="ocs">
+            <div class="oc on" style="--k:0"><div class="op"><div class="vx-k">Opportunity</div><b>Release timeline events in stages</b></div><ul><li>A hide and show icon on each event</li><li>An on/off toggle for each event</li></ul><span class="ot on">Shipped</span></div>
+            <div class="oc on" style="--k:1"><div class="op"><div class="vx-k">Opportunity</div><b>Add new workspaces to many projects at once</b></div><ul><li>Search in the project dropdown</li><li>Multi-select, to update every project at once</li></ul><span class="ot on">Shipped</span></div>
+            <div class="oc on" style="--k:2"><div class="op"><div class="vx-k">Opportunity</div><b>Bring template updates into live cohorts</b></div><ul><li>A notice when the template changes</li><li>A button to apply the updates to the cohort’s timeline</li></ul><span class="ot on">Shipped</span></div>
+            <div class="oc on" style="--k:3"><div class="op"><div class="vx-k">Opportunity</div><b>Always know where you are</b></div><ul><li>Clean up the navigation and naming, which became breadcrumbs</li></ul><span class="ot on">Shipped</span></div>
+            <div class="oc" style="--k:4"><div class="op"><div class="vx-k">Opportunity</div><b>Search and filter across the product</b></div><ul><li>Search and filters everywhere</li><li>Switch between card and list views</li></ul><span class="ot">Next phase</span></div>
+            <div class="oc" style="--k:5"><div class="op"><div class="vx-k">Opportunity</div><b>Link workspaces and their assets across cohorts</b></div><ul><li>Still to be explored</li></ul><span class="ot">Next phase</span></div>
+          </div>
+        </div>
+        <div class="ost-foot"><div class="shot orig" data-zoom aria-label="View the original board"><img src="images/ost-original.webp" width="2000" height="724" loading="lazy" alt="The original opportunity solution tree from the discovery board in FigJam."></div><p class="caption"><strong>The opportunity solution tree,</strong> redrawn from my working board. Four of the six opportunities shipped in this release, and the other two lead the next phases. Click the thumbnail to see the original.</p></div></figure>
       </section>
 
       <section class="sec" id="design" data-title="Four features, one model">

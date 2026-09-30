@@ -131,3 +131,31 @@
   .feature .pull-src { margin: 10px 0 0 !important; max-width: 620px; font-size: 15px !important; line-height: 24px !important; color: var(--body) !important; }
   .feature .feed { margin-top: 24px; }
   .feature + .wall-k { margin-top: 32px; }
+  /* Opportunity solution tree, redrawn with real text; shipped branches in ink */
+  .sec > .ost-fig { max-width: var(--media) !important; }
+  .ost { border-radius: 12px; background: var(--panel); padding: 20px; }
+  @container (min-width: 900px) { .ost { padding: 28px; } }
+  .ost .oo { max-width: 360px; margin: 0 auto; border-radius: 12px; background: var(--ink); color: #fff; padding: 14px 16px; text-align: center; }
+  .ost .oo .vx-k { color: rgba(255, 255, 255, .6); }
+  .ost .oo b { display: block; margin-top: 4px; font-size: 15px; line-height: 22px; font-weight: 500; text-wrap: balance; }
+  .ost .ocs { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; margin-top: 20px; }
+  @container (min-width: 600px) { .ost .ocs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @container (min-width: 900px) {
+    .ost .ocs { grid-template-columns: repeat(6, minmax(0, 1fr)); margin-top: 40px; }
+    .ost .ocs::before { content: ""; position: absolute; top: -20px; left: calc(100% / 12); right: calc(100% / 12); border-top: 1px solid #b9bec4; }
+    .ost .ocs::after { content: ""; position: absolute; top: -40px; left: 50%; height: 20px; border-left: 1px solid #b9bec4; }
+    .ost .oc::before { content: ""; position: absolute; top: -20px; left: 50%; height: 20px; border-left: 1px solid #b9bec4; }
+  }
+  .ost .oc { position: relative; display: flex; flex-direction: column; border-radius: 12px; background: #fff; border: 1px dashed #cfd3d6; padding: 12px; }
+  .ost .oc.on { border: 1px solid #fff; box-shadow: 0 1px 2px rgba(0, 0, 0, .05); }
+  .ost .op b { display: block; margin-top: 4px; font-size: 14px; line-height: 20px; font-weight: 500; color: var(--ink); text-wrap: balance; }
+  .ost .oc ul { flex: 1; list-style: none; margin: 10px 0 0; padding: 10px 0 0; border-top: 1px solid var(--line); }
+  .ost .oc li { margin: 0 !important; padding-left: 12px; position: relative; font-size: 12px !important; line-height: 17px !important; color: var(--body); letter-spacing: 0; }
+  .ost .oc li + li { margin-top: 6px !important; }
+  .ost .oc li::before { content: ""; position: absolute; left: 0; top: 7px; width: 5px; height: 1px; background: var(--muted); }
+  .ost .ot { align-self: flex-start; margin-top: 12px; border-radius: 999px; padding: 2px 8px; font-size: 11px; line-height: 16px; letter-spacing: 0; color: var(--muted); border: 1px dashed #cfd3d6; }
+  .ost .ot.on { border: 0; background: var(--ink); color: #fff; }
+  .ost-foot { display: flex; align-items: flex-start; gap: 14px; margin-top: 12px; }
+  .ost-foot .orig { flex: none; width: 132px; border-radius: 6px; box-shadow: 0 0 0 1px var(--line); }
+  .ost-foot .orig::after { display: none; }
+  .ost-foot .caption { margin-top: 2px !important; font-size: 13px !important; line-height: 20px !important; color: var(--muted) !important; }
