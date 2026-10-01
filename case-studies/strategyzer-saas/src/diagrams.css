@@ -186,3 +186,5 @@
   @container (min-width: 700px) { .vnotes:has(> li:nth-child(5)) { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   .xp-media.framed.before { background: #f6efe6; }
   .flowv.before { background: #f6efe6; }
+  .sec p.fprin, .fprin { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 18px; padding: 4px 12px 4px 4px; border-radius: 999px; background: var(--panel); color: #333; font-size: 13px; line-height: 18px; letter-spacing: 0; }
+  .sec p.fprin span, .fprin span { padding: 2px 8px; border-radius: 999px; background: #fff; color: var(--muted); font-size: 12px; }
