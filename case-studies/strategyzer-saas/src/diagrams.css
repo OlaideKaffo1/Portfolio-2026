@@ -188,12 +188,6 @@
   .flowv.before { background: #f6efe6; }
   .sec p.fprin, .fprin { display: inline-flex; align-items: center; gap: 8px; margin: 14px 0 0; padding: 4px 12px 4px 4px; border-radius: 999px; background: var(--panel); color: #333; font-size: 13px; line-height: 18px; letter-spacing: 0; }
   .sec p.fprin span, .fprin span { padding: 2px 8px; border-radius: 999px; background: #fff; color: var(--muted); font-size: 12px; }
-  /* Chapters under an after recording: always visible, one row of short steps to jump between */
-  .vnotes.vchap { height: auto; opacity: 1; visibility: visible; margin-top: 14px !important; }
-  @container (min-width: 700px) { .vnotes.vchap:has(> li) { grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); } }
-  .vnotes.vchap button { align-items: center; padding: 10px 12px; }
-  .vnotes.vchap .ts { align-self: center; }
-  @container (max-width: 699px) { .vnotes.vchap { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   .hardcall { margin-top: 16px; border: 1px solid var(--line); border-left: 3px solid var(--ink); border-radius: 12px; background: #fff; padding: 18px 22px; }
   .sec .hardcall p { margin: 6px 0 0; color: var(--body); }
   .hardcall p b { color: var(--ink); font-weight: 500; }

@@ -908,7 +908,7 @@ __TREE__
   });
   // Design decisions: hidden by default so the craft leads; one toggle per figure reveals them
   const dzFigs = new Set();
-  document.querySelectorAll("[data-xp], [data-vnotes]:not(.vchap)").forEach((el) => { const f = el.closest("figure"); if (f) dzFigs.add(f); });
+  document.querySelectorAll("[data-xp], [data-vnotes]").forEach((el) => { const f = el.closest("figure"); if (f) dzFigs.add(f); });
   dzFigs.forEach((fig) => {
     const t = document.createElement("button");
     t.type = "button"; t.className = "dz-toggle"; t.setAttribute("aria-pressed", "false");
