@@ -54,6 +54,6 @@ There are no screen recordings. Olaide only has images for this case study and f
 
 ## Open items
 
-- The "Next project" card still has placeholders for the developer tooling case study: its company name, title and thumbnail (13).
+- The "Next project" card points to Macrometa, using its welcome screen as the thumbnail.
 - A before-and-after pair showing how one design changed through testing would strengthen the page. The AI testing page mentions "Dashboard Redesign V1 – Old", if an export of it exists.
 - "24 contextual interviews" is Olaide's wording from her write-up. Check it still fits, since the interviews were over Zoom.
