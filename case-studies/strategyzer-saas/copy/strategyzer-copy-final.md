@@ -323,4 +323,4 @@ The rest of the opportunity tree points to the next phases:
 - A simpler structure for playbooks and projects.
 The goal behind all of it: someone who first heard the word "playbook" last week should be able to run one with confidence.
 
-## From 12 weeks of spreadsheets to 2 weeks of action
+## Making speaking up at work worth it
