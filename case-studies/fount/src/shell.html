@@ -749,7 +749,7 @@ __DIAGRAMS__
 
       <header class="top" id="overview" data-title="Overview">
         <h1 class="sl">From 12 weeks of spreadsheets to 2 weeks of action</h1>
-        <p class="intro rv" style="--d:180ms">Employees kept giving feedback, and nothing changed. I designed Fount, a platform that turns employee feedback into a map of the employee journey, so managers and HR can see which moments to fix first. A year later, I designed Fount AI, which took HR from a problem to a fix in about two weeks instead of twelve.</p>
+        <p class="intro rv" style="--d:180ms">Employees kept giving feedback, and nothing changed. I designed Fount, a platform that turns employee feedback into a map of the employee journey, so managers and HR can see which moments to fix first. A year later, I designed Fount AI, which cut the time from spotting an issue to resolving it from 6.2 weeks to 1.4.</p>
         <dl class="facts rv" style="--d:260ms">
           <div><dt>Role</dt><dd>Senior product designer<span class="sub">The only designer. I led both products end to end.</span></dd></div>
           <div><dt>Team</dt><dd>Head of Product, product team and engineers<span class="sub">Across both products</span></dd></div>
@@ -854,7 +854,15 @@ __TREE__
     const tabs = [...fig.querySelectorAll('[role="tab"]')], panels = [...fig.querySelectorAll(".step-panel")], cap = fig.querySelector("figcaption");
     const select = (i, focus) => {
       tabs.forEach((t, k) => { t.setAttribute("aria-selected", String(k === i)); t.tabIndex = k === i ? 0 : -1; });
+      const stage = fig.querySelector(".step-stage"), h0 = stage.offsetHeight;
       panels.forEach((p, k) => p.classList.toggle("on", k === i));
+      // Tabs of different heights: ease the box to its new height instead of jumping
+      const h1 = stage.offsetHeight;
+      if (h0 !== h1 && document.documentElement.classList.contains("motion")) {
+        stage.style.height = h0 + "px"; stage.style.overflow = "hidden"; stage.offsetHeight;
+        stage.style.transition = "height .45s var(--expo)"; stage.style.height = h1 + "px";
+        clearTimeout(stage._t); stage._t = setTimeout(() => { stage.style.height = stage.style.overflow = stage.style.transition = ""; }, 480);
+      }
       cap.textContent = panels[i].dataset.caption;
       panels[i].querySelectorAll(".m, .shot").forEach((el) => reveal(el, true));
       if (focus) tabs[i].focus();
