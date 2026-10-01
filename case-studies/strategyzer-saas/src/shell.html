@@ -594,6 +594,7 @@
   .steps .step-tabs button:hover { color: var(--ink); }
   .steps .step-tabs button[aria-selected="true"] { background: #fff; color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.08); }
   .steps .step-tabs button:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
+  @container (max-width: 599px) { .steps .step-tabs { flex-wrap: wrap; overflow-x: visible; } }
   /* All panels share one grid cell, so the frame never jumps in height between steps */
   .steps .step-stage { display: grid; grid-template-columns: minmax(0, 1fr); }
   .steps .step-panel { min-width: 0; grid-area: 1 / 1; opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility 0s linear .35s; }
