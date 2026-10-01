@@ -1,0 +1,222 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Helvetica Neue", Arial, sans-serif; background: #fff; color: #222; }
+  .frame { width: 1000px; height: 575px; overflow: hidden; position: relative; background: #f1f3f4; }
+  .win { position: absolute; background: #fff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,.12), 0 12px 32px rgba(0,0,0,.10); overflow: hidden; }
+  .bar { height: 28px; background: #e8eaed; display: flex; align-items: center; gap: 6px; padding: 0 10px; font-size: 11px; color: #5f6368; }
+  .dots i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; background: #d0d3d7; }
+  .tab { background: #fff; border-radius: 6px 6px 0 0; padding: 5px 12px; margin-top: 4px; font-size: 11px; color: #3c4043; max-width: 170px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .tab.dim { background: transparent; color: #80868b; }
+
+  /* 04a long survey */
+  .survey { position: absolute; inset: 0; background: #eceff1; display: flex; justify-content: center; padding-top: 22px; }
+  .s-card { width: 640px; background: #fff; border-radius: 8px; border-top: 8px solid #6b7c93; box-shadow: 0 1px 3px rgba(0,0,0,.12); padding: 20px 26px; }
+  .s-card h1 { font-size: 20px; font-weight: 500; color: #202124; }
+  .s-card .meta { font-size: 11.5px; color: #5f6368; margin-top: 6px; line-height: 17px; }
+  .prog { margin-top: 12px; display: flex; align-items: center; gap: 10px; font-size: 11px; color: #5f6368; }
+  .prog .t { flex: 1; height: 6px; background: #e0e0e0; border-radius: 3px; overflow: hidden; }
+  .prog .t b { display: block; width: 19%; height: 100%; background: #6b7c93; }
+  .q { margin-top: 14px; padding: 12px 14px; border: 1px solid #e0e0e0; border-radius: 6px; }
+  .q .qt { font-size: 13px; color: #202124; }
+  .q .qt span { color: #d93025; }
+  table.lik { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 10.5px; color: #3c4043; }
+  table.lik th { font-weight: 400; color: #5f6368; padding: 3px 2px; text-align: center; }
+  table.lik td { padding: 5px 2px; text-align: center; border-top: 1px solid #f1f3f4; }
+  table.lik td:first-child { text-align: left; width: 34%; }
+  .r { display: inline-block; width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid #9aa0a6; }
+  .r.on { border-color: #6b7c93; background: radial-gradient(#6b7c93 45%, transparent 50%); }
+  .s-foot { display: flex; justify-content: space-between; margin-top: 14px; font-size: 11px; color: #5f6368; align-items: center; }
+  .btn { background: #6b7c93; color: #fff; border-radius: 4px; padding: 7px 18px; font-size: 12px; }
+  .warn { font-size: 10.5px; color: #b06000; margin-top: 4px; }
+
+  /* 05a spreadsheet */
+  .sheet { position: absolute; inset: 0; background: #fff; }
+  .menu { height: 34px; display: flex; align-items: center; gap: 14px; padding: 0 12px; font-size: 12px; color: #3c4043; border-bottom: 1px solid #e0e0e0; }
+  .menu b { font-weight: 500; font-size: 13.5px; color: #202124; margin-right: 10px; }
+  .fx { height: 26px; display: flex; align-items: center; padding: 0 10px; font-size: 11px; color: #5f6368; border-bottom: 1px solid #e0e0e0; gap: 10px; }
+  .fx span { color: #202124; }
+  table.grid { border-collapse: collapse; font-size: 10.5px; table-layout: fixed; width: 1000px; }
+  table.grid th { background: #f8f9fa; color: #5f6368; font-weight: 400; border: 1px solid #e2e3e5; height: 20px; }
+  table.grid td { border: 1px solid #e2e3e5; height: 25px; padding: 0 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #202124; }
+  table.grid td.rn { background: #f8f9fa; color: #5f6368; text-align: center; }
+  table.grid tr.h td { font-weight: 600; background: #f3f3f3; }
+  .y { background: #fff2cc !important; } .rd { background: #f4cccc !important; } .gr { background: #d9ead3 !important; } .bl { background: #cfe2f3 !important; }
+  .empty { color: #b0b4b8 !important; font-style: italic; }
+  .tabs { position: absolute; left: 0; right: 0; bottom: 0; height: 30px; background: #f8f9fa; border-top: 1px solid #e0e0e0; display: flex; align-items: center; gap: 2px; padding-left: 40px; font-size: 11px; color: #5f6368; }
+  .tabs span { padding: 6px 12px; } .tabs span.on { background: #fff; color: #1a73e8; border-bottom: 2px solid #1a73e8; }
+
+  /* 06a doc */
+  .doc { position: absolute; inset: 0; background: #f8f9fa; }
+  .page { position: absolute; left: 150px; top: 54px; width: 560px; height: 560px; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.15); padding: 40px 56px; }
+  .page h1 { font-size: 21px; font-weight: 600; color: #202124; }
+  .page .sub { font-size: 11px; color: #80868b; margin-top: 4px; }
+  .page h2 { font-size: 13px; font-weight: 600; margin-top: 16px; color: #202124; }
+  .page p, .page li { font-size: 11.5px; line-height: 18px; color: #3c4043; }
+  .page ul { margin: 6px 0 0 16px; }
+  .strike { text-decoration: line-through; color: #9aa0a6 !important; }
+  .hl { background: #fce8b2; }
+  .cmts { position: absolute; left: 730px; top: 70px; width: 240px; }
+  .cmt { background: #fff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.15); padding: 10px 12px; margin-bottom: 10px; font-size: 11px; line-height: 16px; color: #3c4043; }
+  .cmt b { display: block; font-size: 11px; color: #202124; } .cmt i { font-style: normal; color: #80868b; font-size: 10px; }
+  .doc .top { height: 44px; background: #fff; border-bottom: 1px solid #e0e0e0; display: flex; align-items: center; padding: 0 14px; gap: 12px; font-size: 12px; color: #3c4043; }
+  .doc .top b { font-weight: 500; color: #202124; } .doc .top .ed { margin-left: auto; color: #80868b; font-size: 11px; }
+
+  /* 07a slides */
+  .slides { position: absolute; inset: 0; background: #e8eaed; }
+  .slides .top { height: 40px; background: #fff; display: flex; align-items: center; gap: 14px; padding: 0 14px; font-size: 12px; color: #3c4043; border-bottom: 1px solid #dadce0; }
+  .rail { position: absolute; left: 0; top: 40px; bottom: 0; width: 150px; background: #fff; border-right: 1px solid #dadce0; padding: 10px 12px; }
+  .th { height: 62px; border: 1px solid #dadce0; border-radius: 3px; margin-bottom: 10px; background: #fff; position: relative; font-size: 7px; color: #5f6368; padding: 5px; }
+  .th.on { border: 2px solid #f29900; }
+  .th .bars { position: absolute; left: 8px; right: 8px; bottom: 6px; height: 28px; display: flex; align-items: flex-end; gap: 3px; }
+  .th .bars i { flex: 1; background: #c4c9cf; }
+  .stage { position: absolute; left: 190px; top: 70px; width: 620px; height: 350px; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.2); padding: 26px 32px; }
+  .stage h1 { font-size: 22px; font-weight: 600; color: #202124; }
+  .stage .s { font-size: 11px; color: #80868b; margin-top: 4px; }
+  .chart { position: absolute; left: 32px; right: 230px; bottom: 34px; top: 92px; display: flex; align-items: flex-end; gap: 12px; border-left: 1px solid #dadce0; border-bottom: 1px solid #dadce0; padding: 0 10px; }
+  .chart div { flex: 1; background: #9aa5b1; position: relative; }
+  .chart div span { position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); font-size: 9px; color: #5f6368; white-space: nowrap; }
+  .side { position: absolute; right: 32px; top: 100px; width: 180px; font-size: 11px; line-height: 17px; color: #3c4043; }
+  .side b { color: #202124; }
+  .notes { position: absolute; left: 190px; top: 436px; width: 620px; background: #fff; border: 1px solid #dadce0; padding: 10px 14px; font-size: 11px; line-height: 17px; color: #5f6368; }
+  .notes b { color: #3c4043; font-weight: 500; }
+
+  /* 09a dashboards */
+  .dash { position: absolute; background: #fff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,.14), 0 14px 30px rgba(0,0,0,.10); overflow: hidden; }
+  .dash .bar { font-size: 10.5px; }
+  .dash .body { padding: 12px; }
+  .kpi { display: inline-block; margin-right: 18px; } .kpi b { display: block; font-size: 20px; font-weight: 500; color: #202124; } .kpi span { font-size: 10px; color: #5f6368; }
+  .line { height: 70px; margin-top: 10px; background: linear-gradient(transparent 0 0); position: relative; }
+  .mini-bars { display: flex; align-items: flex-end; gap: 6px; height: 60px; margin-top: 10px; } .mini-bars i { flex: 1; background: #b9c2cc; }
+  .label { font-size: 11px; color: #5f6368; margin-bottom: 6px; }
+  .pie { width: 70px; height: 70px; border-radius: 50%; background: conic-gradient(#8a99aa 0 38%, #b9c2cc 38% 66%, #dfe3e7 66% 100%); }
+  .tag { display: inline-block; font-size: 10px; padding: 2px 6px; border-radius: 4px; background: #eef1f4; color: #5f6368; margin: 0 4px 4px 0; }
+</style></head>
+<body>
+
+<!-- 04a: a long annual engagement survey -->
+<div class="frame" id="s04a"><div class="survey"><div class="s-card">
+  <h1>Annual Employee Engagement Survey 2023</h1>
+  <div class="meta">Please complete by Friday. All questions marked * are required. Estimated time: 35–45 minutes. Your responses are confidential and will be reported in aggregate.</div>
+  <div class="prog"><span>Section 3 of 9 · Your manager</span><div class="t"><b></b></div><span>Question 12 of 64</span></div>
+  <div class="q"><div class="qt">12. How much do you agree with the following statements about your manager? <span>*</span></div>
+    <table class="lik"><tr><th></th><th>Strongly disagree</th><th>Disagree</th><th>Neutral</th><th>Agree</th><th>Strongly agree</th></tr>
+      <tr><td>My manager gives me regular feedback</td><td><i class="r"></i></td><td><i class="r"></i></td><td><i class="r on"></i></td><td><i class="r"></i></td><td><i class="r"></i></td></tr>
+      <tr><td>My manager acts on team feedback</td><td><i class="r"></i></td><td><i class="r"></i></td><td><i class="r on"></i></td><td><i class="r"></i></td><td><i class="r"></i></td></tr>
+      <tr><td>I feel comfortable raising concerns</td><td><i class="r"></i></td><td><i class="r"></i></td><td><i class="r on"></i></td><td><i class="r"></i></td><td><i class="r"></i></td></tr>
+      <tr><td>My manager supports my growth</td><td><i class="r"></i></td><td><i class="r"></i></td><td><i class="r"></i></td><td><i class="r"></i></td><td><i class="r"></i></td></tr>
+      <tr><td>Decisions in my team are explained well</td><td><i class="r"></i></td><td><i class="r"></i></td><td><i class="r"></i></td><td><i class="r"></i></td><td><i class="r"></i></td></tr>
+    </table>
+    <div class="warn">2 required rows are missing an answer</div>
+  </div>
+  <div class="q"><div class="qt">13. Is there anything else you would like to share about your manager? (optional)</div><div style="height:34px;border-bottom:1px solid #dadce0;margin-top:8px"></div></div>
+  <div class="s-foot"><span>Results will be shared in Q3.</span><span class="btn">Next section</span></div>
+</div></div></div>
+
+<!-- 05a: feedback copied into a spreadsheet -->
+<div class="frame" id="s05a"><div class="sheet">
+  <div class="menu"><b>Team feedback tracker – Customer Success (FINAL v3)</b><span>File</span><span>Edit</span><span>View</span><span>Insert</span><span>Format</span><span>Data</span></div>
+  <div class="fx"><b style="font-weight:500;color:#5f6368">E14</b><span>=IF(D14="","Needs theme",VLOOKUP(D14,Themes!A:B,2,FALSE))</span></div>
+  <table class="grid">
+    <colgroup><col style="width:34px"><col style="width:76px"><col style="width:104px"><col style="width:330px"><col style="width:120px"><col style="width:96px"><col style="width:96px"><col style="width:144px"></colgroup>
+    <tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th></tr>
+    <tr class="h"><td class="rn">1</td><td>Date</td><td>Source</td><td>Feedback (copied from survey + 1:1 notes)</td><td>Theme (manual)</td><td>Priority?</td><td>Owner</td><td>Status</td></tr>
+    <tr><td class="rn">2</td><td>03/02</td><td>Pulse Q1</td><td>Too many handoffs between tier 1 and tier 2</td><td class="y">Process</td><td>High?</td><td class="empty">–</td><td>Discussed</td></tr>
+    <tr><td class="rn">3</td><td>03/02</td><td>Pulse Q1</td><td>Not enough time for training on the new tools</td><td class="y">Training</td><td></td><td class="empty">–</td><td></td></tr>
+    <tr><td class="rn">4</td><td>05/02</td><td>1:1 notes</td><td>Feels like nobody reads our survey answers</td><td class="rd">Trust??</td><td>High</td><td class="empty">TBC</td><td class="rd">Not started</td></tr>
+    <tr><td class="rn">5</td><td>11/02</td><td>Email</td><td>Weekend rota is unfair, same people every time</td><td></td><td></td><td class="empty">–</td><td></td></tr>
+    <tr><td class="rn">6</td><td>14/02</td><td>Pulse Q1</td><td>Handoffs again – tickets bounce between teams</td><td class="y">Process (dup of row 2?)</td><td></td><td class="empty">–</td><td></td></tr>
+    <tr><td class="rn">7</td><td>20/02</td><td>Exit interview</td><td>Left because concerns raised in 2022 were never addressed</td><td class="rd">Retention</td><td>High</td><td class="empty">HR?</td><td></td></tr>
+    <tr><td class="rn">8</td><td>02/03</td><td>Slack</td><td>Tooling is slow, CRM crashes during calls</td><td class="bl">Tools</td><td>Med</td><td>IT</td><td class="gr">Sent to IT</td></tr>
+    <tr><td class="rn">9</td><td>02/03</td><td>Pulse Q1</td><td>Want clearer career path</td><td></td><td></td><td class="empty">–</td><td></td></tr>
+    <tr><td class="rn">10</td><td>09/03</td><td>1:1 notes</td><td>Manager changes priorities every week</td><td class="y">Process</td><td></td><td class="empty">–</td><td></td></tr>
+    <tr><td class="rn">11</td><td>15/03</td><td>Pulse Q1</td><td>Onboarding docs are out of date</td><td class="bl">Training</td><td>Low</td><td class="empty">–</td><td></td></tr>
+    <tr><td class="rn">12</td><td>15/03</td><td>Email</td><td>Same as row 4 – survey answers go nowhere</td><td class="rd">Trust</td><td></td><td class="empty">–</td><td></td></tr>
+    <tr><td class="rn">13</td><td>22/03</td><td>Pulse Q1</td><td>Handoffs between tiers (3rd time this quarter)</td><td></td><td></td><td class="empty">–</td><td></td></tr>
+    <tr><td class="rn">14</td><td>28/03</td><td>1:1 notes</td><td>Too many meetings, no time for customers</td><td>#N/A</td><td></td><td class="empty">–</td><td></td></tr>
+    <tr><td class="rn">15</td><td>…</td><td></td><td>… 214 more rows</td><td></td><td></td><td></td><td></td></tr>
+  </table>
+  <div class="tabs"><span>Q1 export</span><span>Q2 export (copy)</span><span class="on">FINAL v3</span><span>Themes</span><span>Old – don't use</span></div>
+</div></div>
+
+<!-- 06a: an improvement plan in a document nobody tracked -->
+<div class="frame" id="s06a"><div class="doc">
+  <div class="top"><b>Customer Success – improvement plan (draft)</b><span>File</span><span>Edit</span><span>View</span><span class="ed">Last edit was 4 months ago</span></div>
+  <div class="page">
+    <h1>Improvement plan – Customer Success</h1>
+    <div class="sub">Based on the annual engagement survey · Owner: <span class="hl">TBC</span> · Review date: <span class="hl">TBC</span></div>
+    <h2>Themes from the survey</h2>
+    <ul><li>Handoffs between tier 1 and tier 2</li><li>Workload and weekend rota</li><li>Career progression is unclear</li><li>“Nobody reads our feedback”</li></ul>
+    <h2>Proposed actions</h2>
+    <ul><li>Run a workshop on handoffs <span class="hl">(who?)</span></li><li class="strike">Review the weekend rota by end of Q2</li><li>Draft a career framework for CS – <span class="hl">need HR input</span></li><li>Share survey results with the team <span class="hl">(when?)</span></li></ul>
+    <h2>How we’ll measure success</h2>
+    <p class="hl">TBD – can we get data from HR?</p>
+    <h2>Budget needed</h2>
+    <p>Need to make the case to leadership. No numbers yet.</p>
+  </div>
+  <div class="cmts">
+    <div class="cmt"><b>Team lead</b><i>Mar 14</i><br>Who owns the handoff workshop? It’s been on here since the last survey.</div>
+    <div class="cmt"><b>HR partner</b><i>Mar 21</i><br>Leadership will ask for impact numbers before approving any of this.</div>
+    <div class="cmt"><b>Team lead</b><i>Apr 2</i><br>Moving the rota item to next year. Not enough capacity.</div>
+  </div>
+</div></div>
+
+<!-- 07a: survey results pasted into a slide deck -->
+<div class="frame" id="s07a"><div class="slides">
+  <div class="top"><b style="font-weight:500;color:#202124">Engagement results – leadership review (v7)</b><span>File</span><span>Edit</span><span>Insert</span><span style="margin-left:auto;color:#80868b;font-size:11px">Exported from survey tool · 3 weeks ago</span></div>
+  <div class="rail">
+    <div class="th">Engagement 2023</div>
+    <div class="th on">Scores by department<div class="bars"><i style="height:60%"></i><i style="height:80%"></i><i style="height:45%"></i><i style="height:70%"></i></div></div>
+    <div class="th">Top themes</div>
+    <div class="th">Comments (selected)</div>
+    <div class="th">Next steps?</div>
+  </div>
+  <div class="stage">
+    <h1>Engagement score by department</h1>
+    <div class="s">Annual survey, 1,240 responses · % favourable</div>
+    <div class="chart">
+      <div style="height:62%"><span>Sales 62%</span></div><div style="height:74%"><span>Eng 74%</span></div><div style="height:48%"><span>CS 48%</span></div><div style="height:66%"><span>Ops 66%</span></div><div style="height:57%"><span>Finance 57%</span></div>
+    </div>
+    <div class="side"><b>Key takeaways</b><br>• Customer Success lowest again<br>• Scores down 4 pts on last year<br>• Workload is the top theme<br><br><b>Recommendation</b><br>Further investigation needed</div>
+  </div>
+  <div class="notes"><b>Speaker notes:</b> They’ll ask what this cost us and what we’re doing about it. We don’t have the turnover numbers by department yet. Check with finance before Thursday?</div>
+</div></div>
+
+<!-- 09a: six dashboards and a spreadsheet -->
+<div class="frame" id="s09a" style="background:#dfe3e8">
+  <div class="dash" style="left:24px;top:22px;width:300px;height:190px"><div class="bar"><span class="dots"><i></i><i></i><i></i></span>Pulse survey tool</div><div class="body"><div class="kpi"><b>+12</b><span>eNPS</span></div><div class="kpi"><b>61%</b><span>response rate</span></div><div class="mini-bars"><i style="height:50%"></i><i style="height:62%"></i><i style="height:58%"></i><i style="height:40%"></i><i style="height:35%"></i><i style="height:30%"></i></div></div></div>
+  <div class="dash" style="left:344px;top:16px;width:300px;height:190px"><div class="bar"><span class="dots"><i></i><i></i><i></i></span>HR system – attrition report</div><div class="body"><div class="kpi"><b>18.4%</b><span>voluntary turnover</span></div><div class="kpi"><b>23</b><span>leavers this quarter</span></div><div class="mini-bars"><i style="height:30%"></i><i style="height:34%"></i><i style="height:42%"></i><i style="height:48%"></i><i style="height:55%"></i><i style="height:61%"></i></div></div></div>
+  <div class="dash" style="left:664px;top:26px;width:310px;height:190px"><div class="bar"><span class="dots"><i></i><i></i><i></i></span>Exit interview notes</div><div class="body"><div class="label">Top reasons for leaving (tagged by hand)</div><span class="tag">Workload 31</span><span class="tag">Manager 22</span><span class="tag">Career 19</span><span class="tag">Pay 14</span><span class="tag">Other 9</span><div class="pie" style="margin-top:8px"></div></div></div>
+  <div class="dash" style="left:40px;top:232px;width:280px;height:170px"><div class="bar"><span class="dots"><i></i><i></i><i></i></span>Performance reviews</div><div class="body"><div class="kpi"><b>3.6</b><span>avg rating</span></div><div class="kpi"><b>12%</b><span>overdue</span></div><div class="mini-bars"><i style="height:70%"></i><i style="height:66%"></i><i style="height:64%"></i><i style="height:60%"></i></div></div></div>
+  <div class="dash" style="left:676px;top:238px;width:300px;height:170px"><div class="bar"><span class="dots"><i></i><i></i><i></i></span>Learning platform</div><div class="body"><div class="kpi"><b>42%</b><span>course completion</span></div><div class="mini-bars"><i style="height:44%"></i><i style="height:40%"></i><i style="height:38%"></i><i style="height:42%"></i><i style="height:36%"></i></div></div></div>
+  <div class="dash" style="left:24px;top:420px;width:260px;height:140px"><div class="bar"><span class="dots"><i></i><i></i><i></i></span>Helpdesk tickets – HR</div><div class="body"><div class="kpi"><b>318</b><span>open tickets</span></div><div class="kpi"><b>6.1 d</b><span>avg response</span></div></div></div>
+  <div class="win" style="left:300px;top:196px;width:420px;height:360px"><div class="bar"><span class="dots"><i></i><i></i><i></i></span>people_data_MERGED_v4.xlsx</div>
+    <table class="grid" style="width:420px"><colgroup><col style="width:26px"><col style="width:84px"><col style="width:90px"><col style="width:74px"><col style="width:74px"><col style="width:72px"></colgroup>
+      <tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr>
+      <tr class="h"><td class="rn">1</td><td>Dept</td><td>eNPS (pulse)</td><td>Turnover</td><td>Exit theme</td><td>Match?</td></tr>
+      <tr><td class="rn">2</td><td>Sales</td><td>+18</td><td>14%</td><td>Pay</td><td class="y">check</td></tr>
+      <tr><td class="rn">3</td><td>Cust. Success</td><td>-6</td><td>27%</td><td>Workload</td><td class="rd">#REF!</td></tr>
+      <tr><td class="rn">4</td><td>Engineering</td><td>+22</td><td>11%</td><td>Career</td><td></td></tr>
+      <tr><td class="rn">5</td><td>Ops</td><td>+9</td><td>17%</td><td class="empty">missing</td><td class="y">check</td></tr>
+      <tr><td class="rn">6</td><td>Finance</td><td>+4</td><td>9%</td><td>Manager</td><td></td></tr>
+      <tr><td class="rn">7</td><td>CS (EMEA)</td><td class="empty">n/a</td><td>31%</td><td>Workload</td><td class="rd">#N/A</td></tr>
+      <tr><td class="rn">8</td><td>CS (US)</td><td>-11</td><td>24%</td><td>Workload</td><td class="y">dup?</td></tr>
+      <tr><td class="rn">9</td><td colspan="5" style="color:#80868b">Note: department names differ between systems</td></tr>
+    </table></div>
+</div>
+
+<!-- 10a: charts with no next step -->
+<div class="frame" id="s10a"><div class="sheet" style="background:#f6f7f9">
+  <div class="menu" style="background:#fff"><b>People analytics – Q3 overview</b><span style="margin-left:auto;color:#80868b;font-size:11px">Updated weekly · Filters: All departments</span></div>
+  <div class="dash" style="left:20px;top:52px;width:470px;height:240px"><div class="body"><div class="label">Engagement trend (% favourable)</div>
+    <svg width="440" height="180" viewBox="0 0 440 180"><g stroke="#e3e6ea"><line x1="30" y1="20" x2="430" y2="20"/><line x1="30" y1="70" x2="430" y2="70"/><line x1="30" y1="120" x2="430" y2="120"/><line x1="30" y1="165" x2="430" y2="165"/></g><polyline fill="none" stroke="#7d8b9c" stroke-width="2.5" points="30,40 95,46 160,52 225,64 290,78 355,88 420,104"/><g font-size="10" fill="#80868b"><text x="30" y="178">Jan</text><text x="155" y="178">Apr</text><text x="285" y="178">Jul</text><text x="400" y="178">Sep</text><text x="0" y="24">80%</text><text x="0" y="124">60%</text></g></svg></div></div>
+  <div class="dash" style="left:510px;top:52px;width:470px;height:240px"><div class="body"><div class="label">Sentiment by department</div>
+    <div style="display:grid;grid-template-columns:110px 1fr;gap:9px 10px;font-size:11px;color:#3c4043;align-items:center;margin-top:8px">
+      <span>Sales</span><span style="height:12px;width:62%;background:#9aa5b1"></span><span>Engineering</span><span style="height:12px;width:74%;background:#9aa5b1"></span><span>Customer Success</span><span style="height:12px;width:41%;background:#9aa5b1"></span><span>Operations</span><span style="height:12px;width:66%;background:#9aa5b1"></span><span>Finance</span><span style="height:12px;width:57%;background:#9aa5b1"></span><span>Marketing</span><span style="height:12px;width:69%;background:#9aa5b1"></span></div></div></div>
+  <div class="dash" style="left:20px;top:310px;width:300px;height:240px"><div class="body"><div class="label">Top themes this quarter</div><span class="tag">Workload</span><span class="tag">Handoffs</span><span class="tag">Career growth</span><span class="tag">Tools</span><span class="tag">Recognition</span><span class="tag">Meetings</span><div class="pie" style="margin:16px 0 0 4px;width:100px;height:100px"></div></div></div>
+  <div class="dash" style="left:340px;top:310px;width:310px;height:240px"><div class="body"><div class="label">Response rate</div><div class="kpi" style="margin-top:6px"><b style="font-size:34px">58%</b><span>down from 71%</span></div><div class="mini-bars" style="height:80px"><i style="height:90%"></i><i style="height:84%"></i><i style="height:76%"></i><i style="height:70%"></i><i style="height:64%"></i><i style="height:58%"></i></div></div></div>
+  <div class="dash" style="left:670px;top:310px;width:310px;height:240px"><div class="body"><div class="label">Turnover risk (model score)</div><div class="kpi" style="margin-top:6px"><b style="font-size:34px">High</b><span>Customer Success, Ops</span></div><div style="font-size:11px;color:#5f6368;line-height:17px;margin-top:14px">142 employees flagged<br>Last calculated: 2 days ago</div></div></div>
+</div></div>
+
+</body></html>
