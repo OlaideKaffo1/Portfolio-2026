@@ -210,3 +210,5 @@
   .vote .vl li.vn { background: #000; color: #fff; box-shadow: none; }
   .sec .vote .note { margin: 14px 0 0; font-size: 13px; line-height: 19px; color: var(--muted); }
   .vote .note b { font-weight: 500; color: var(--ink); }
+  .vote li.vs { box-shadow: inset 0 0 0 1.5px #000; }
+  .vote .vk { display: inline-block; width: 22px; height: 12px; margin-right: 8px; vertical-align: -1px; border-radius: 999px; box-shadow: inset 0 0 0 1.5px #000; background: var(--panel); }

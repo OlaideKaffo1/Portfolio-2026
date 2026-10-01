@@ -912,7 +912,7 @@ __TREE__
   dzFigs.forEach((fig) => {
     const t = document.createElement("button");
     t.type = "button"; t.className = "dz-toggle"; t.setAttribute("aria-pressed", "false");
-    const what = fig.querySelector(".before") ? "problems" : "design decisions";
+    const what = fig.dataset.dz || (fig.querySelector(".before") ? "problems" : "design decisions");
     t.innerHTML = '<span class="dot" aria-hidden="true"></span><span class="lbl">Show the ' + what + '</span><span class="sw" aria-hidden="true"></span>';
     const cap = [...fig.children].find((x) => x.tagName === "FIGCAPTION");
     const notes = fig.querySelector(":scope > .vnotes");
