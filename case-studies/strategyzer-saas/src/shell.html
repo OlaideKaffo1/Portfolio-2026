@@ -912,7 +912,8 @@ __TREE__
   dzFigs.forEach((fig) => {
     const t = document.createElement("button");
     t.type = "button"; t.className = "dz-toggle"; t.setAttribute("aria-pressed", "false");
-    t.innerHTML = '<span class="dot" aria-hidden="true"></span><span class="lbl">Show the design decisions</span><span class="sw" aria-hidden="true"></span>';
+    const what = fig.querySelector(".before") ? "problems" : "design decisions";
+    t.innerHTML = '<span class="dot" aria-hidden="true"></span><span class="lbl">Show the ' + what + '</span><span class="sw" aria-hidden="true"></span>';
     const cap = [...fig.children].find((x) => x.tagName === "FIGCAPTION");
     const notes = fig.querySelector(":scope > .vnotes");
     fig.insertBefore(t, notes || cap || null);
@@ -920,7 +921,7 @@ __TREE__
       const open = !fig.classList.contains("dz-open");
       fig.classList.toggle("dz-open", open); t.classList.add("used");
       t.setAttribute("aria-pressed", String(open));
-      t.querySelector(".lbl").textContent = open ? "Hide the design decisions" : "Show the design decisions";
+      t.querySelector(".lbl").textContent = (open ? "Hide the " : "Show the ") + what;
       if (!open) fig.querySelectorAll(".xp-reset:not([hidden])").forEach((r) => r.click());
       const vn = fig.querySelector(":scope > .vnotes");
       if (vn) {
