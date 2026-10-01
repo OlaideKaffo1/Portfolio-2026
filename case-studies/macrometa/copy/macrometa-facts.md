@@ -60,3 +60,10 @@ Real messages from customers to the Macrometa team. The customers aren't named. 
   - Creating a new collection offers sample data sets as templates to start from.
 - **The UI refresh:** a major part of the work, and the page should highlight it as much as the onboarding. The split between the two isn't even, and the exact balance will follow from the screens.
 - **Next step:** Olaide is sending all her images first. Wait until she says she's sent them all, then propose where each goes and how the page is arranged.
+
+## New UI, batch 1 (source/new-*.webp)
+- **new-collections-empty:** the empty state for someone with no collections yet. "Get Started with Collections", a one-line explanation, a "Create a Collection" button, and three cards: Intro to Collections, Developer Tools and Sample Apps. A Playground banner offers an upgrade to the Scale tier. The new sidebar groups items under Data, Compute, Access and Network, with fabric and region pickers at the top. There's a docs icon at the top right.
+- **new-collection-type:** the New Collection modal. Five cards (Key-Value, Document, Redis Mode, Dynamo Mode, Graph Edge), each with a one-line description in plain words, and a "Learn about collection types and data models" link.
+- **new-sample-datasets:** New Document Collection, then Sample Datasets. "Learn more about document collections with a sample dataset": Transactions (e-commerce) and Users, each with its own Create button, plus a "Learn about document collections" link.
+- **new-kv-form:** New Key-Value Collection. One required field with its naming rules shown underneath, four options as checkboxes with info icons, and a "Learn about key-value collections" link.
+- **new-collection-data:** a collection's Data tab (test_doc1). A breadcrumb, tabs for Data, Indexes, Stream and Settings, a "PostgreSQL Connector activated" banner, counts for documents (12,123) and storage (124.8 MB), document search and filter, New Document with Import and Export, and a menu on each row to move or delete.
