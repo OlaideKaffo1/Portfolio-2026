@@ -596,12 +596,14 @@
   .steps .step-tabs button:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
   @container (max-width: 599px) { .steps .step-tabs { flex-wrap: wrap; overflow-x: visible; } }
   /* All panels share one grid cell, so the frame never jumps in height between steps */
-  .steps .step-stage { display: grid; grid-template-columns: minmax(0, 1fr); }
-  .steps .step-panel { min-width: 0; grid-area: 1 / 1; opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility 0s linear .35s; }
+  /* Only the open tab sets the height, so a tall screen in one tab never leaves a gap under the others */
+  .steps .step-stage { position: relative; }
+  .steps .step-panel:not(.on) { position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; }
+  .steps .step-panel { min-width: 0; opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility 0s linear .35s; }
   .steps .step-panel.on { opacity: 1; visibility: visible; transition: opacity .35s ease; }
   /* Hidden tabs stay hidden even when the design decisions are on, so they never catch clicks meant for the open tab */
   .steps .step-panel:not(.on), .steps .step-panel:not(.on) .xp-side { visibility: hidden !important; pointer-events: none; }
-  .steps .step-panel > * { height: 100%; min-width: 0; }
+  .steps .step-panel > * { min-width: 0; }
   .steps .step-panel > .slot { aspect-ratio: auto; }
   .steps .step-panel .shot { display: flex; align-items: center; background: #f4f4f5; }
   .steps .step-panel .shot img { width: 100%; height: auto; }
