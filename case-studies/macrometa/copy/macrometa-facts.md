@@ -74,3 +74,9 @@ Real messages from customers to the Macrometa team. The customers aren't named. 
 - **new-function-detail:** the Function Detail modal for an Akamai edge function. Name, description, resource URL with copy buttons, dates, and Test Execution and Versions tabs. Versions shows Active and Inactive badges, and each version has a menu to activate it, download its source bundle or delete it.
 - **new-invite:** "You have been invited to Macrometa". A teammate invite with one "Create an account" button, a fallback link, and "Need help?" pointing to support. A Learn More link sits at the top right for people new to Macrometa.
 - **new-managed-keys:** the Managed Keys table under Access (Users, API Keys, Managed Keys, Secrets, Connections). Filters for service, tenant and fabric, coloured badges for service and status, and a row menu.
+
+## New UI, batch 3
+- **new-collection-type-gradient:** the same New Collection modal as new-collection-type, on a gradient background instead of the dimmed app.
+- **new-welcome-a:** "Welcome to Macrometa!" A one-line intro to the Global Data Network, a 3:32 intro video, and three cards: Create your first collection, Start with a blueprint (ready-made implementations for common use cases) and Get in touch (to discuss capacity while evaluating). Also "Need support? We're here to help" and a Close button.
+- **new-welcome-b:** the same welcome with different cards: Quickstart Guide, Developer Tools (CLI, SDKs, libraries) and Tutorials (start-to-finish exercises). It's unclear whether this is a second state or an iteration, so ask.
+- **new-signup:** "Create a free developer account". A split screen with the value on the left ("Build real-time, globally distributed apps and APIs in minutes – not months", no credit card, instant playground access, sample apps, SOC 2) and the form on the right: domain, email and password, plus GitHub and Google sign-up.
