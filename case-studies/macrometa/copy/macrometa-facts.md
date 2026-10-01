@@ -13,11 +13,12 @@ The source of truth for case study 4. Everything on the page has to trace back t
 
 ## Results (measured with product analytics, after 6 months of use)
 - **Customer retention:** up 54%. This is the headline number.
-- **Support tickets:** down 72% in the write-up, and "seventy" in conversation, so the exact figure needs confirming. Customer success confirmed the drop.
+- **Support tickets:** down 70% (Olaide's final answer, replacing the write-up's 72%). Customer success confirmed the drop.
 - **Onboarding:** 73% faster, measured as sign-up completion in product analytics.
 - **User satisfaction:** up 50%. This replaces the write-up's conflicting 80% and 40%.
 - **Revenue:** $2.3M in annual recurring revenue. Keep it. Olaide links it to better onboarding, which marketing also promoted. Describe it as a result the work contributed to, not one it caused alone.
-- **Templates:** many users started projects from templates. The write-up says 85% adoption, which needs confirming.
+- **Templates:** 85% adoption, confirmed. Olaide's reason: it was easy to click a template and add it to whatever you were creating.
+- **Sales leads:** up 55%. This replaces the write-up's 87%.
 
 ## Dropped
 - Customer acquisition cost ($47K) and lifetime value ($220K). They're business numbers, not design results.
@@ -25,9 +26,6 @@ The source of truth for case study 4. Everything on the page has to trace back t
 - The 82% retention figure. 54% is the one to use.
 
 ## Still to confirm
-- Support tickets: 72% or 70%?
-- 87% more sales leads: keep or drop?
-- 85% template adoption: is that the right figure?
 - "84% preferred the command line, 91% were frustrated": where did these come from?
 - The three quotes in the write-up: are they real, and from whom? The latency one is about platform speed, not the design.
 - The write-up promises four key insights but lists three.
@@ -78,5 +76,22 @@ Real messages from customers to the Macrometa team. The customers aren't named. 
 ## New UI, batch 3
 - **new-collection-type-gradient:** the same New Collection modal as new-collection-type, on a gradient background instead of the dimmed app.
 - **new-welcome-a:** "Welcome to Macrometa!" A one-line intro to the Global Data Network, a 3:32 intro video, and three cards: Create your first collection, Start with a blueprint (ready-made implementations for common use cases) and Get in touch (to discuss capacity while evaluating). Also "Need support? We're here to help" and a Close button.
-- **new-welcome-b:** the same welcome with different cards: Quickstart Guide, Developer Tools (CLI, SDKs, libraries) and Tutorials (start-to-finish exercises). It's unclear whether this is a second state or an iteration, so ask.
+- **new-welcome-b:** the same welcome with different cards: Quickstart Guide, Developer Tools (CLI, SDKs, libraries) and Tutorials (start-to-finish exercises). Olaide confirmed the two welcomes are two iterations of how to tell users about blueprints and starting points. Which came first still needs confirming.
 - **new-signup:** "Create a free developer account". A split screen with the value on the left ("Build real-time, globally distributed apps and APIs in minutes – not months", no credit card, instant playground access, sample apps, SOC 2) and the form on the right: domain, email and password, plus GitHub and Google sign-up.
+
+## Ordering and balance (Olaide)
+- The newest sidebar is the one with the "Activity" group (on new-dashboard and new-query-worker).
+- The UI refresh is probably the bigger share of the project. The page should still show that both the UI refresh and the onboarding were prioritised.
+
+## More material, batch 4
+- **new-query-worker:** a query editor (Queries, then queryworker_1). Code with line numbers, a C8QL/SQL switch, parameters as JSON or a table, a batch size, and Update, Run Query and Clear Results buttons. It uses the newest sidebar (Activity, Data, and Compute with Containers, Functions, Query Workers and Stream Workers).
+- **research-survey:** a Google Forms summary with 12 responses. The respondent emails at the top are Macrometa staff, so blur or crop them before showing.
+  - Finding out about new tech: web search 66.7%, word of mouth 50%, blogs 41.7%.
+  - Continuous onboarding after the first run: 58.3% said yes, they want ongoing pointers. 41.7% said the first pointers are enough.
+  - Information people will give at sign-up: email 91.7%, name 83.3%, role 66.7%, preferred programming language 58.3%, experience level 50%, organisation name and size 25% each.
+  - Docs in the console or on a separate site: 66.7% don't mind either, 25% want a separate site, 8.3% want them in the console.
+  - Open answers: GCP's onboarding was disliked as "very confusing, no pointers". AWS was liked for its learning links on the dashboard. One person suggested "a brief video of key capabilities", and the welcome screen now has an intro video.
+- **research-competitive:** a competitive analysis spreadsheet comparing Macrometa with Fauna, Hasura and Confluent across 12 features.
+  - Macrometa had: a get-started guide, helpful documentation and tutorials.
+  - Macrometa lacked: a directional landing page, a product walkthrough, onboarding pointers, 24/7 support, clear copy, easy-to-navigate features, continuous onboarding, templates or blueprints, and inclusive copy.
+  - Confluent had all twelve.
