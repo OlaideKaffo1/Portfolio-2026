@@ -191,3 +191,8 @@
   .hardcall { margin-top: 16px; border: 1px solid var(--line); border-left: 3px solid var(--ink); border-radius: 12px; background: #fff; padding: 18px 22px; }
   .sec .hardcall p { margin: 6px 0 0; color: var(--body); }
   .hardcall p b { color: var(--ink); font-weight: 500; }
+  /* The note for the moment that is playing */
+  .vnotes button { transition: border-color .35s ease, background-color .35s ease; }
+  .vnotes button.now { border-color: #3947d6; background: #f3f4ff; }
+  .vnotes button .n { transition: background-color .35s ease; }
+  .vnotes button.now .n { background: #3947d6; }

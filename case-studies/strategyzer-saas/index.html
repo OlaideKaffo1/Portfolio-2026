@@ -808,6 +808,11 @@
   .hardcall { margin-top: 16px; border: 1px solid var(--line); border-left: 3px solid var(--ink); border-radius: 12px; background: #fff; padding: 18px 22px; }
   .sec .hardcall p { margin: 6px 0 0; color: var(--body); }
   .hardcall p b { color: var(--ink); font-weight: 500; }
+  /* The note for the moment that is playing */
+  .vnotes button { transition: border-color .35s ease, background-color .35s ease; }
+  .vnotes button.now { border-color: #3947d6; background: #f3f4ff; }
+  .vnotes button .n { transition: background-color .35s ease; }
+  .vnotes button.now .n { background: #3947d6; }
 
   /* Diagram type follows the page scale */
   .tree-labels b { font-size: 20px; line-height: 26px; }
@@ -940,7 +945,7 @@
 
       <header class="top" id="overview" data-title="Overview">
         <h1 class="sl">Two days to thirty minutes</h1>
-        <p class="intro rv" style="--d:180ms">One change to a live enterprise program could take two days, and only two people knew how to make it. I redesigned how program templates and live cohort deliveries fit together, and a full round of changes now takes about thirty minutes.</p>
+        <p class="intro rv" style="--d:180ms">One change to a live enterprise program could take two days, and only two people knew how to make it. I redesigned how Strategyzer’s program templates and live cohort deliveries stay in sync, and a full round of changes now takes about thirty minutes.</p>
         <dl class="facts rv" style="--d:260ms">
           <div><dt>Role</dt><dd>Senior product designer<span class="sub">The only designer. I led the work end to end, from discovery to delivery.</span></dd></div>
           <div><dt>Team</dt><dd>Me and one engineer<span class="sub">With our Head of Product advising</span></dd></div>
@@ -970,7 +975,7 @@
       </section>
 
       <section class="sec" id="problem" data-title="The problem">
-        <h2 class="sl">The problem</h2>
+        <h2 class="sl">One change, twenty copies, two days</h2>
         <p><strong>Building a program was manageable. Changing one after teams had started was not.</strong></p>
         <p>Strategyzer runs strategy programs for large companies. A small team of program designers builds each one from playbooks, which mix learning content, exercises and shared workspaces where teams do the work. A single program can have 10 to 20 client teams working through it at once.</p>
         <p>Every program has four layers, and the moment a cohort delivery was created, they stopped talking to each other.</p>
@@ -991,11 +996,10 @@
           <li><strong>Open every team's workspaces</strong> to hunt for broken links.</li>
         </ol>
         <blockquote class="qt"><p>"If there's a 12-team cohort and there's changes, it ends up being 2 to 3 days sometimes."</p><cite>Kurt Bostelaar, Program Designer</cite></blockquote>
-        <p>And only two people in the company knew how to do it.</p>
       </section>
 
       <section class="sec" id="research" data-title="Research">
-        <h2 class="sl">Research and what we learned</h2>
+        <h2 class="sl">What watching the work revealed</h2>
         <h3 class="sl">The workarounds nobody mentioned</h3>
         <p>I didn't ask people what they wanted. I asked the program designers who ran deliveries most often, especially Kurt and Latif, to share their screens and walk me through a real program from start to finish. At every step I asked what it was for, and why it happened there. I also spoke with Dora in customer success, who heard clients’ complaints first, and with Alex, our CEO, who runs live deliveries with clients.</p>
         <blockquote class="qt"><p>"I literally sometimes spend 2 to 3 days just copying stuff around."</p><cite>Kurt Bostelaar, Program Designer</cite></blockquote>
@@ -1203,7 +1207,7 @@
       </section>
 
       <section class="sec" id="results" data-title="Results">
-        <h2 class="sl">Results</h2>
+        <h2 class="sl">Days back on every delivery</h2>
         <p>Program designers got days back on every delivery, and the business could promise more.</p>
         <figure>
           <div class="chain" role="list" aria-label="Results">
@@ -1264,7 +1268,7 @@
       </section>
 
       <section class="sec" id="next" data-title="What's next">
-        <h2 class="sl">What's next</h2>
+        <h2 class="sl">Where the work goes next</h2>
         <p>The rest of the opportunity tree points to the next phases:</p>
         <ul>
           <li><strong>Search</strong> across the product.</li>
@@ -1433,7 +1437,12 @@
   });
   document.querySelectorAll("[data-vnotes]").forEach((ol) => {
     const v = ol.closest("figure").querySelector("video");
-    ol.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => { v.currentTime = +b.dataset.t; v.play().catch(() => {}); }));
+    const bs = [...ol.querySelectorAll("button")];
+    bs.forEach((b) => b.addEventListener("click", () => { v.currentTime = +b.dataset.t; v.play().catch(() => {}); }));
+    // The note for the moment that is playing stays highlighted, so the notes move along with the video
+    let cur = null;
+    const mark = () => { let n = null; bs.forEach((b) => { if (v.currentTime + 0.05 >= +b.dataset.t) n = b; }); if (n !== cur) { if (cur) cur.classList.remove("now"); if (n) n.classList.add("now"); cur = n; } };
+    v.addEventListener("timeupdate", mark); v.addEventListener("seeked", mark);
   });
   // Videos: each file is fetched whole and played from memory, so playback never depends on the host
   // supporting partial (range) requests, which Safari needs for streamed video. They are muted, looping

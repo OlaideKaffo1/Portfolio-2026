@@ -747,7 +747,7 @@ __DIAGRAMS__
 
       <header class="top" id="overview" data-title="Overview">
         <h1 class="sl">Two days to thirty minutes</h1>
-        <p class="intro rv" style="--d:180ms">One change to a live enterprise program could take two days, and only two people knew how to make it. I redesigned how program templates and live cohort deliveries fit together, and a full round of changes now takes about thirty minutes.</p>
+        <p class="intro rv" style="--d:180ms">One change to a live enterprise program could take two days, and only two people knew how to make it. I redesigned how Strategyzer’s program templates and live cohort deliveries stay in sync, and a full round of changes now takes about thirty minutes.</p>
         <dl class="facts rv" style="--d:260ms">
           <div><dt>Role</dt><dd>Senior product designer<span class="sub">The only designer. I led the work end to end, from discovery to delivery.</span></dd></div>
           <div><dt>Team</dt><dd>Me and one engineer<span class="sub">With our Head of Product advising</span></dd></div>
@@ -933,7 +933,12 @@ __TREE__
   });
   document.querySelectorAll("[data-vnotes]").forEach((ol) => {
     const v = ol.closest("figure").querySelector("video");
-    ol.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => { v.currentTime = +b.dataset.t; v.play().catch(() => {}); }));
+    const bs = [...ol.querySelectorAll("button")];
+    bs.forEach((b) => b.addEventListener("click", () => { v.currentTime = +b.dataset.t; v.play().catch(() => {}); }));
+    // The note for the moment that is playing stays highlighted, so the notes move along with the video
+    let cur = null;
+    const mark = () => { let n = null; bs.forEach((b) => { if (v.currentTime + 0.05 >= +b.dataset.t) n = b; }); if (n !== cur) { if (cur) cur.classList.remove("now"); if (n) n.classList.add("now"); cur = n; } };
+    v.addEventListener("timeupdate", mark); v.addEventListener("seeked", mark);
   });
   // Videos: each file is fetched whole and played from memory, so playback never depends on the host
   // supporting partial (range) requests, which Safari needs for streamed video. They are muted, looping
