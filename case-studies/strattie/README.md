@@ -17,6 +17,10 @@ python3 -m http.server 3201          # then open http://localhost:3201/index.htm
 - `flow/`: source for the Strattie assistant animation (`flow.html` renders the timeline, and `rec.js` records it at 30fps through ffmpeg).
 - `images/`: only the media the page uses. Videos are H.264 MP4 plus VP9 WebM with a WebP poster.
 
+## Preview-only controls (leave out of the site)
+
+The floating bar at the bottom (Motion on/off, Desktop/Phone) is only for reviewing these prototypes. Don't build it into the Next.js site. There, motion follows the visitor's system "reduce motion" setting (`prefers-reduced-motion`), which the shell already respects. Animations such as the decisions toggle pulse run by default and stop only for visitors who have that setting turned on.
+
 ## Reusing it for the next case studies
 
 The structure, type, hierarchy and components are settled. New case studies reuse `shell.html` as is and only write a new `sections.html`.
