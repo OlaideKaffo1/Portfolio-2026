@@ -302,7 +302,7 @@
   .dz-toggle:focus-visible { outline: 2px solid #3947d6; outline-offset: 2px; }
   .dz-toggle .dot { position: relative; flex: none; width: 8px; height: 8px; border-radius: 50%; background: #3947d6; }
   .dz-toggle .dot::after { content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 1.5px solid #3947d6; opacity: 0; }
-  html.motion .dz-toggle:not(.used) .dot::after { animation: xp-ping 1.8s var(--expo) infinite; }
+  html.motion .dz-toggle[aria-pressed="false"] .dot::after { animation: xp-ping 1.8s var(--expo) infinite; }
   .dz-toggle .sw { position: relative; flex: none; width: 26px; height: 16px; margin-left: 2px; border-radius: 999px; background: #c3c9fa; transition: background-color .25s; }
   .dz-toggle .sw::after { content: ""; position: absolute; top: 2px; left: 2px; width: 12px; height: 12px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.2); transition: transform .3s var(--expo); }
   .dz-toggle[aria-pressed="true"] .sw { background: #3947d6; }
