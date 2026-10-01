@@ -45,3 +45,11 @@ Real messages from customers to the Macrometa team. The customers aren't named. 
 - **feedback-permissions:** "your user interface for this is very confusing and unhelpful." The customer wanted to give a non-technical third party access to one collection only. Top-level access didn't carry down to individual collections, and the person could still see the rest of the system, such as queries and API keys.
 - **feedback-docs:** "I remain frustrated I'm not able to find some of these solutions for myself using your documentation." With "so many ways of achieving things", the customer couldn't tell the options apart on cost or speed (search index vs fulltext index vs search worker).
 - **feedback-changes:** the customer found out by chance, through a support ticket, that the result limit had gone from 500 to 1,000. "I would love to be in the loop on what MM is doing and changing, like the way Cloudflare continually keeps me feeling like I'm part of the dev process."
+
+## Old UI screens (source/old-*.webp)
+- **old-login:** a plain login card with email, password and "Remember me". Sign-up is a small link underneath.
+- **old-dashboard:** the first screen after logging in. A world map of regions, a throughput chart, and tenant metrics (regions, geo fabrics, streams, collections, query workers, storage, latency). Nothing tells a new user what to do first.
+- **old-collections:** a table of collections with filters for Key-Value, Document, Dynamo and Edge. Documentation is a grey button next to "New Collection".
+- **old-graphs:** a list of graphs with Edit links.
+- **old-new-graph:** the New Graph modal. It asks for required fields in database terms (edge definitions, from collections, to collections, vertex collections), with only small info icons for help. An "Examples" tab is tucked in the corner.
+- **Navigation:** 12 all-caps items in the sidebar (Dashboard, Collections, Queries, Streams, Stream Workers, Search, Graphs, Geo Fabrics, Account, API Reference, Support).
