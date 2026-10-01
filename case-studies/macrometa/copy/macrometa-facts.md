@@ -39,3 +39,9 @@ The source of truth for case study 4. Everything on the page has to trace back t
 - Ran a competitive analysis of onboarding in cloud and database products.
 - Ran usability tests with 15 developers across experience levels.
 - Personas: Alex, an engineering manager at a mid-sized company, and Tom, a junior engineer at a new startup.
+
+## Customer feedback on the old product (source/feedback-*.png)
+Real messages from customers to the Macrometa team. The customers aren't named. The staff they wrote to are named (James, Shannon).
+- **feedback-permissions:** "your user interface for this is very confusing and unhelpful." The customer wanted to give a non-technical third party access to one collection only. Top-level access didn't carry down to individual collections, and the person could still see the rest of the system, such as queries and API keys.
+- **feedback-docs:** "I remain frustrated I'm not able to find some of these solutions for myself using your documentation." With "so many ways of achieving things", the customer couldn't tell the options apart on cost or speed (search index vs fulltext index vs search worker).
+- **feedback-changes:** the customer found out by chance, through a support ticket, that the result limit had gone from 500 to 1,000. "I would love to be in the loop on what MM is doing and changing, like the way Cloudflare continually keeps me feeling like I'm part of the dev process."
