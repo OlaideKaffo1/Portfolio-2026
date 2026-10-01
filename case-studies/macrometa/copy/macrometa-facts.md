@@ -52,4 +52,4 @@ Real messages from customers to the Macrometa team. The customers aren't named. 
 - **old-collections:** a table of collections with filters for Key-Value, Document, Dynamo and Edge. Documentation is a grey button next to "New Collection".
 - **old-graphs:** a list of graphs with Edit links.
 - **old-new-graph:** the New Graph modal. It asks for required fields in database terms (edge definitions, from collections, to collections, vertex collections), with only small info icons for help. An "Examples" tab is tucked in the corner.
-- **Navigation:** 12 all-caps items in the sidebar (Dashboard, Collections, Queries, Streams, Stream Workers, Search, Graphs, Geo Fabrics, Account, API Reference, Support).
+- **Navigation:** 11 all-caps items in the sidebar (Dashboard, Collections, Queries, Streams, Stream Workers, Search, Graphs, Geo Fabrics, Account, API Reference, Support).
