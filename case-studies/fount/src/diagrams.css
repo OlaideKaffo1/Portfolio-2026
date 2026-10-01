@@ -198,3 +198,15 @@
   .vnotes button.now .n { background: #3947d6; }
   .ost-steps .step-panel > .slot { aspect-ratio: 16 / 7; }
   @container (max-width: 699px) { .ost-steps .step-panel > .slot { aspect-ratio: 4 / 3; } }
+  .vote { padding: 20px; display: grid; grid-template-columns: 1fr; gap: 12px; }
+  @container (min-width: 700px) { .vote { grid-template-columns: 3fr 2fr; gap: 16px; padding: 28px; } }
+  .vote .vg { border-radius: 16px; padding: 18px; background: #fff; box-shadow: 0 0 0 1.5px #000; }
+  .vote .vg.vl { background: transparent; box-shadow: none; border: 1.5px dashed #b9bec3; }
+  .vote .eyebrow { margin-bottom: 12px; font-size: 12px; line-height: 16px; color: var(--muted); }
+  .vote ul { list-style: none; margin: 0 !important; padding: 0 !important; display: flex; flex-wrap: wrap; gap: 8px; }
+  .sec .vote li, .sec .vote ul li + li { margin: 0; }
+  .vote li { border-radius: 999px; padding: 6px 12px; font-size: 13px; line-height: 18px; background: var(--panel); color: var(--ink); }
+  .vote .vl li { background: #fff; color: var(--muted); box-shadow: 0 0 0 1px var(--line); }
+  .vote .vl li.vn { background: #000; color: #fff; box-shadow: none; }
+  .sec .vote .note { margin: 14px 0 0; font-size: 13px; line-height: 19px; color: var(--muted); }
+  .vote .note b { font-weight: 500; color: var(--ink); }
