@@ -1,0 +1,41 @@
+# Macrometa: confirmed facts
+
+The source of truth for case study 4. Everything on the page has to trace back to this file, Olaide's write-up (the Macrometa PDF) or her screens. Anything else gets a "[?]" and a question to Olaide.
+
+## Context
+- **Company:** Macrometa, a cloud development platform. Spelled with an "e", as in the write-up.
+- **When:** 2022 to 2023. Olaide was there about a year, and this project took about 3 months.
+- **Role:** Product designer. Worked with the Head of Design (both hired around the same time), the Head of Product and engineers.
+- **Ownership:**
+  - **Olaide's own work:** onboarding and activation.
+  - **Shared with the Head of Design:** the platform-wide UI refresh, which Olaide contributed to significantly.
+- **Focus of the page:** orientation, meaning how new users found their way and how the product carried them along. The developer tools updates stay in the background.
+
+## Results (measured with product analytics, after 6 months of use)
+- **Customer retention:** up 54%. This is the headline number.
+- **Support tickets:** down 72% in the write-up, and "seventy" in conversation, so the exact figure needs confirming. Customer success confirmed the drop.
+- **Onboarding:** 73% faster, measured as sign-up completion in product analytics.
+- **User satisfaction:** up 50%. This replaces the write-up's conflicting 80% and 40%.
+- **Revenue:** $2.3M in annual recurring revenue. Keep it. Olaide links it to better onboarding, which marketing also promoted. Describe it as a result the work contributed to, not one it caused alone.
+- **Templates:** many users started projects from templates. The write-up says 85% adoption, which needs confirming.
+
+## Dropped
+- Customer acquisition cost ($47K) and lifetime value ($220K). They're business numbers, not design results.
+- "After 12 months of platform use". The correct period is 6 months.
+- The 82% retention figure. 54% is the one to use.
+
+## Still to confirm
+- Support tickets: 72% or 70%?
+- 87% more sales leads: keep or drop?
+- 85% template adoption: is that the right figure?
+- "84% preferred the command line, 91% were frustrated": where did these come from?
+- The three quotes in the write-up: are they real, and from whom? The latency one is about platform speed, not the design.
+- The write-up promises four key insights but lists three.
+
+## Research (from the write-up)
+- Analysed support feedback with the customer success team.
+- Walked through the product as a first-time user.
+- Ran user interviews and quantitative surveys with developers. 70% of Macrometa's own staff were developers, and they were a resource too.
+- Ran a competitive analysis of onboarding in cloud and database products.
+- Ran usability tests with 15 developers across experience levels.
+- Personas: Alex, an engineering manager at a mid-sized company, and Tom, a junior engineer at a new startup.
