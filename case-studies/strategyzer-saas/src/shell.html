@@ -363,6 +363,7 @@
   @container (max-width: 599px) { .xp-pin { width: 18px; height: 18px; font-size: 10px; box-shadow: 0 0 0 2px rgba(255, 255, 255, .92), 0 2px 8px rgba(0, 0, 0, .2); } .xp-full { right: 6px; bottom: 6px; padding: 3px 8px; font-size: 11px; } }
   .xp-tag { position: absolute; z-index: 1; right: calc(100% - var(--hx) - var(--hw)); top: var(--hy); translate: 0 calc(-100% - 10px); max-width: 80%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border-radius: 999px; padding: 4px 10px; background: #fff; color: var(--ink); font: 500 12px/16px var(--font); letter-spacing: 0; box-shadow: 0 4px 14px rgba(0, 0, 0, .18); opacity: 0; transition: opacity .3s ease, right .55s var(--expo), top .55s var(--expo); }
   .xp[data-below] .xp-tag { top: calc(var(--hy) + var(--hh)); translate: 0 10px; }
+  .xp[data-left] .xp-tag { right: auto; left: var(--hx); }
   .xp.on .xp-tag { opacity: 1; transition-delay: .15s, 0s, 0s; }
   @container (max-width: 599px) { .xp-tag { font-size: 11px; padding: 3px 8px; } }
 
@@ -885,6 +886,7 @@ __TREE__
       const [x, y, w, h] = items[i].dataset.r.split(",");
       tag.textContent = items[i].querySelector("b").textContent.replace(/[.]$/, "");
       xp.toggleAttribute("data-below", +y < 12);
+      xp.toggleAttribute("data-left", +x + +w < 25);
       xp.style.setProperty("--hx", x + "%"); xp.style.setProperty("--hy", y + "%"); xp.style.setProperty("--hw", w + "%"); xp.style.setProperty("--hh", h + "%");
     };
     const lock = (i) => {
