@@ -5,6 +5,44 @@ import re
 from html import escape
 from PIL import Image
 
+from PIL import ImageFilter
+import os, shutil
+
+# Image prep from source/: crop browser frames and grey backdrops, hide personal details. Crop boxes are in source pixels.
+CROP = {
+    "new-collection-data": (43, 152, 1957, 1530), "new-managed-keys": (43, 152, 1957, 1530),
+    "new-collections-empty": (43, 152, 1957, 1292), "new-dashboard": (40, 138, 1781, 1218),
+    "research-survey": (0, 152, 1164, 1806), "research-competitive": (58, 150, 1262, 605),
+    "new-collection-type": (540, 207, 1460, 1026), "new-sample-datasets": (540, 207, 1460, 810),
+    "new-kv-samples": (540, 207, 1460, 1032), "new-kv-form": (540, 207, 1460, 860),
+    "new-function-detail": (473, 52, 1527, 1368), "old-graphs": (0, 0, 2000, 640),
+}
+BLUR = {"new-query-worker": [(60, 955, 320, 1010)]}  # a staff email in the account menu
+USED = ["feedback-permissions", "feedback-docs", "feedback-changes", "old-dashboard", "old-collections", "old-graphs", "old-login", "old-new-graph",
+        "research-competitive", "research-survey", "new-dashboard", "new-collection-data", "new-query-worker", "new-managed-keys", "new-function-detail",
+        "new-signup", "new-invite", "new-welcome-a", "new-welcome-b", "new-collections-empty", "new-collection-type", "new-sample-datasets", "new-kv-samples", "new-kv-form"]
+os.makedirs("images", exist_ok=True)
+for name in USED:
+    src = next(f"source/{name}.{e}" for e in ("webp", "png") if os.path.exists(f"source/{name}.{e}"))
+    if name in CROP or name in BLUR or src.endswith(".png"):
+        im = Image.open(src).convert("RGB")
+        for box in BLUR.get(name, []):
+            im.paste(im.crop(box).filter(ImageFilter.GaussianBlur(9)), box[:2])
+        if name in CROP: im = im.crop(CROP[name])
+        im.save(f"images/{name}.webp", lossless=True)
+    else:
+        shutil.copyfile(src, f"images/{name}.webp")
+
+# Pins on these were measured on the full source image; convert them into the crop
+SRCSIZE = {n: Image.open(next(f"source/{n}.{e}" for e in ("webp", "png") if os.path.exists(f"source/{n}.{e}"))).size
+           for n in ("new-collection-type", "new-sample-datasets", "new-kv-samples", "new-kv-form", "new-function-detail")}
+def conv(img, r):
+    if img not in SRCSIZE: return r
+    W, H = SRCSIZE[img]; x0, y0, x1, y1 = CROP[img]; cw, ch = x1 - x0, y1 - y0
+    x, y, w, h = [float(v) for v in r.split(",")]
+    nx = (x * W / 100 - x0) / cw * 100; ny = (y * H / 100 - y0) / ch * 100
+    return f"{nx:.1f},{ny:.1f},{w * W / cw:.1f},{h * H / ch:.1f}"
+
 def size(img):
     return Image.open(f"images/{img}.webp").size
 
@@ -16,6 +54,7 @@ def shot(img, alt):
 def xp(img, alt, items):
     pins, lis = [], []
     for n, (b, x, r) in enumerate(items):
+        r = conv(img, r)
         rx, ry, rw, rh = [float(v) for v in r.split(",")]
         px = min(rx + rw, 95.5); py = max(ry, 3.0)
         pins.append(f'<button type="button" class="xp-pin" data-i="{n}" style="--px:{px:.1f}%;--py:{py:.1f}%;--k:{n}" aria-label="{n+1}: {escape(b)}" tabindex="-1">{n+1}</button>')
@@ -162,19 +201,19 @@ S.append(tabs("ui", 1, "The system at work", "Click a tab to see each screen and
         "A query editor: code with line numbers and syntax colours, a switch between C8QL and SQL, parameters as JSON or a table, a batch size, and Update, Run Query and Clear Results buttons.",
         [("Code that reads like code.", "Line numbers and syntax colours make queries easy to scan.", "21.2,13.7,52,41.3"),
          ("Two languages, one switch.", "Switch between C8QL and SQL without leaving the editor.", "66.8,14.2,6.2,11.4"),
-         ("Parameters your way.", "Edit parameters as JSON or as a table.", "74.5,14.2,22.5,17.1"),
-         ("Clear next steps.", "Update, Run Query and Clear Results sit in one row under the editor.", "21.2,57.3,28.6,5.5")])),
+         ("Parameters your way.", "Edit parameters as JSON or as a table.", "74.5,14.2,24.5,17.1"),
+         ("Clear next steps.", "Update, Run Query and Clear Results sit in one row under the editor.", "21.2,57.3,30,5.5")])),
     ("Managed keys", "a long, technical list made easy to scan", xp("new-managed-keys",
         "The Managed Keys table: an Access group in the sidebar, search with service, tenant and fabric filters, coloured badges for service and status, and a menu on each row.",
         [("Security in one group.", "Users, API keys, managed keys, secrets and connections sit together under Access.", "0.5,30,17.1,23.6"),
          ("Filter, don’t scroll.", "Search plus service, tenant and fabric filters narrow a long list fast.", "21.1,9.3,50.5,3.5"),
-         ("Badges you can scan.", "Each service has its own badge colour.", "42.7,21.3,5.1,67.8"),
-         ("Status at a glance.", "Enabled, disabled and deleting each have a distinct badge.", "84.6,21.3,5.4,67.8")])),
+         ("Badges you can scan.", "Each service has its own badge colour.", "42.2,21.3,6.6,67.8"),
+         ("Status at a glance.", "Enabled, disabled and deleting each have a distinct badge.", "84.2,21.3,6.9,67.8")])),
     ("Function detail", "an edge function and its versions", xp("new-function-detail",
         "The Function Detail window: name, description, resource URL with copy buttons, type and dates, then Test Execution and Versions tabs, with active and inactive badges and a menu to activate, download or delete a version.",
-        [("Copy in one click.", "The name and resource URL each have a copy button.", "68.8,14.4,2.7,12.5"),
-         ("Test before you ship.", "Test Execution sits next to Versions.", "28.4,41.5,12.2,3.2"),
-         ("Which version is live.", "Active and inactive versions are labelled, so the live one is obvious.", "42.8,57.4,5.1,20.7"),
+        [("Copy in one click.", "The name and resource URL each have a copy button.", "68.4,14.2,3.4,12.9"),
+         ("Test before you ship.", "Test Execution sits next to Versions.", "28.2,41.3,13.5,3.6"),
+         ("Which version is live.", "Active and inactive versions are labelled, so the live one is obvious.", "42.4,57.2,6.2,21.1"),
          ("Every version within reach.", "Activate, download or delete any version from its menu.", "54.3,65.3,16.2,11.2")])),
 ]))
 S.append("        </div>\n      </section>\n")
@@ -193,16 +232,16 @@ S.append(head(3, "A clear way in", "Show the way",
 S.append(tabs("su", 1, "Getting in", "Click a tab to see each way in, and the decisions behind it", [
     ("Sign up", "a free developer account", xp("new-signup",
         "Create a free developer account: on the left, the developer platform for the edge, build apps and APIs in minutes not months, no credit card required, apps everywhere, and SOC 2 security. On the right, domain, email and password, and sign-up with GitHub or Google.",
-        [("Why it’s worth it, first.", "The left side says what you can build, and how fast, before asking for anything.", "10,22.5,34.5,52"),
-         ("Only what’s needed.", "Domain, email and password. Our survey showed most developers will share an email, but few their organisation.", "63.4,30.3,28.3,23.2"),
+        [("Why it’s worth it, first.", "The left side says what you can build, and how fast, before asking for anything.", "9.6,22.2,35.4,52.6"),
+         ("Only what’s needed.", "Domain, email and password. Our survey showed most developers will share an email, but few their organisation.", "63.2,30,28.7,23.6"),
          ("Sign up with what you use.", "GitHub and Google skip the form.", "63.4,73.4,28.3,10.2"),
-         ("No card needed.", "Instant access to the playground, with no credit card.", "10,45.7,31.5,7.8")])),
+         ("No card needed.", "Instant access to the playground, with no credit card.", "9.8,45.5,33,8.2")])),
     ("Invited", "joining a teammate’s account", xp("new-invite",
         "You have been invited to Macrometa: the inviting account, a Create an account button, a fallback link, and a Need help line pointing to support. A Learn More button sits at the top for people new to Macrometa.",
-        [("Who invited you.", "The invite names the account you’re joining.", "29.2,14.8,40,9.5"),
-         ("One button.", "A single Create an account button, with a plain link as a fallback.", "29.2,27.3,12.5,4.7"),
-         ("Help is one reply away.", "Reply to the email or contact support.", "29.2,41.5,34.3,2.6"),
-         ("New here?", "People who’ve never heard of Macrometa can learn more first.", "74.4,2.3,19.9,3.5")])),
+        [("Who invited you.", "The invite names the account you’re joining.", "28.6,14.4,41,10"),
+         ("One button.", "A single Create an account button, with a plain link as a fallback.", "28.9,27,13.6,5.2"),
+         ("Help is one reply away.", "Reply to the email or contact support.", "28.6,41.2,35.6,3.2"),
+         ("New here?", "People who’ve never heard of Macrometa can learn more first.", "73.9,2.1,20.9,3.9")])),
 ]))
 S.append("        </div>\n")
 
@@ -213,10 +252,10 @@ S.append(head(4, "A first visit with a next step", "Show the way",
 S.append(tabs("wl", 1, "The welcome, in two iterations", "Click a tab to compare the first and second iteration", [
     ("First iteration", "build, use a blueprint, or talk to us", xp("new-welcome-a",
         "Welcome to Macrometa: a short intro to the Global Data Network, a 3:32 intro video, and three cards: Create your first collection, Start with a blueprint, and Get in touch.",
-        [("The platform in one line.", "A short intro says what Macrometa’s network does.", "18.9,29.9,28,15"),
+        [("The platform in one line.", "A short intro says what Macrometa’s network does.", "18.4,29.2,29.6,16.4"),
          ("A video for the curious.", "A three-and-a-half-minute intro, as a survey answer asked for.", "51.7,35.5,30,11.3"),
          ("Three ways to start.", "Create a collection, start from a blueprint, or get in touch.", "18.4,54.7,63.3,11.3"),
-         ("Help, always visible.", "Support is one link away.", "18.4,69.6,16.4,2.1")])),
+         ("Help, always visible.", "Support is one link away.", "18.2,69.2,18.6,2.9")])),
     ("Second iteration", "learn by doing", xp("new-welcome-b",
         "The same welcome with three different cards: Quickstart Guide, Developer Tools, and Tutorials.",
         [("Three ways to learn.", "The cards became Quickstart Guide, Developer Tools and Tutorials.", "18.4,54.7,63.3,11.3"),
@@ -233,14 +272,14 @@ S.append(head(5, "Never a blank page", "Start from something",
 S.append(tabs("bp", 1, "Creating a collection", "Click a tab to follow the flow, and see the decisions behind each step", [
     ("Empty state", "what you see before your first collection", xp("new-collections-empty",
         "Get Started with Collections: a one-line explanation, a Create a Collection button, and three cards below: Intro to Collections, Developer Tools and Sample Apps.",
-        [("An empty screen that teaches.", "A one-line explanation and one clear action, instead of an empty table.", "42.4,41.5,33.5,20.6"),
+        [("An empty screen that teaches.", "A one-line explanation and one clear action, instead of an empty table.", "41.6,40.4,35.2,22.6"),
          ("Learn without leaving.", "Intro to Collections, Developer Tools and Sample Apps sit right below.", "20,90.8,78.3,7.3"),
          ("Docs in the same corner.", "The docs button sits in the same place on every page.", "95.7,6,2.6,4.4")])),
     ("Choose a type", "five collection types in plain words", xp("new-collection-type",
         "New Collection: five cards, Key-Value, Document, Redis Mode, Dynamo Mode and Graph Edge, each with a one-line description, and a link to learn about collection types.",
         [("Choose by what it does.", "Each type has a one-line description in plain words.", "31.7,26.5,36.6,35.4"),
          ("Bring the tools you know.", "Redis and Dynamo modes say they work with the SDKs developers already use.", "31.7,38.8,36.6,10.9"),
-         ("Not sure? Learn first.", "A link explains the types and data models.", "31.7,65.8,24.1,2.2")])),
+         ("Not sure? Learn first.", "A link explains the types and data models.", "31.5,65.5,25,2.8")])),
     ("Sample data", "a document collection from a sample", xp("new-sample-datasets",
         "New Document Collection, Sample Datasets: Transactions and Users, each with a Create button, and a link to learn about document collections.",
         [("A step, not a dead end.", "The breadcrumb shows where you are, and the way back.", "31.7,21.7,30.9,2.5"),
