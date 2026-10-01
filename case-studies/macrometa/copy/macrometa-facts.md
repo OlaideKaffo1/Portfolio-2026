@@ -53,3 +53,10 @@ Real messages from customers to the Macrometa team. The customers aren't named. 
 - **old-graphs:** a list of graphs with Edit links.
 - **old-new-graph:** the New Graph modal. It asks for required fields in database terms (edge definitions, from collections, to collections, vertex collections), with only small info icons for help. An "Examples" tab is tucked in the corner.
 - **Navigation:** 11 all-caps items in the sidebar (Dashboard, Collections, Queries, Streams, Stream Workers, Search, Graphs, Geo Fabrics, Account, API Reference, Support).
+
+## What the redesign covered (Olaide, in conversation)
+- **Onboarding and activation:** templates, tutorials and guidance to start from.
+  - If a user has never created a collection, the empty state points them to a tutorial.
+  - Creating a new collection offers sample data sets as templates to start from.
+- **The UI refresh:** a major part of the work, and the page should highlight it as much as the onboarding. The split between the two isn't even, and the exact balance will follow from the screens.
+- **Next step:** Olaide is sending all her images first. Wait until she says she's sent them all, then propose where each goes and how the page is arranged.
