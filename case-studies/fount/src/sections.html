@@ -1,0 +1,264 @@
+      <section class="sec" id="problem" data-title="The problem">
+        <h2 class="sl">Feedback that went nowhere</h2>
+        <p><strong>Every company collected feedback. Almost none of it turned into change.</strong></p>
+        <p>Average employee turnover had risen 28% in two years <span class="todo">[? source]</span>, and 65% of exit interviews named “unaddressed workplace frustrations” as a reason for leaving <span class="todo">[? source]</span>. The feedback was there. It just never led anywhere.</p>
+        <p>The problem looked different depending on who you asked:</p>
+        <div class="quotes vxb rv">
+          <blockquote class="qt"><p>“I feel like my voice isn’t really heard, as I don’t see any changes in my department, even though I’ve given feedback and suggestions several times.”</p><cite>Software Engineer, mid-sized company</cite></blockquote>
+          <blockquote class="qt"><p>“My team is struggling, and I don’t feel like I’m doing my best as a manager. I can’t turn their feedback into action plans, because I don’t know what’s causing the friction.”</p><cite>Team Lead, customer success</cite></blockquote>
+          <blockquote class="qt"><p>“I’ve spent three months trying to get executive buy-in for our improvement plan, because I can’t show data on its impact.”</p><cite>HR Leader, manufacturing company</cite></blockquote>
+        </div>
+        <p><strong>Three people, one broken loop.</strong> Employees spoke up, managers couldn’t tell what to fix first, and HR couldn’t prove the value of fixing it. So nothing moved.</p>
+      </section>
+
+      <section class="sec" id="research" data-title="Research">
+        <h2 class="sl">What the research showed</h2>
+        <h3 class="sl">Listening across companies, roles and levels</h3>
+        <p>I led the research myself, starting at INGKA <span class="todo">[? can we name INGKA?]</span> and then widening it to other industries:</p>
+        <ul>
+          <li><strong>24 contextual interviews at INGKA</strong> across departments and seniority levels. I ran 14 of them.</li>
+          <li><strong>8 interviews at other organisations</strong> in tech, healthcare, finance and manufacturing.</li>
+          <li><strong>16 sessions with HR and leadership stakeholders</strong>, all facilitated by me.</li>
+          <li><strong>A review of existing survey data and exit interviews</strong>, and a competitive analysis of the feedback tools on the market.</li>
+        </ul>
+        <figure class="sheet-fig"><div class="slot"><b>02</b><span>Research board or competitive analysis matrix: where existing feedback tools fell short</span><i>Research artefact</i></div><figcaption class="caption"><span class="todo">[? caption once the image is in]</span></figcaption></figure>
+
+        <h3 class="sl">Many complaints, four causes</h3>
+        <div class="vx-conv vx-causes vxb rv">
+          <div class="vx-people">
+            <div class="vx-p"><div class="vx-k">Cause 1</div><b>A trust gap</b><p>People didn’t believe honest feedback would lead to change, so they stopped giving it.</p></div>
+            <div class="vx-p"><div class="vx-k">Cause 2</div><b>Feedback fatigue</b><p>Long surveys, with nothing visible coming out of them.</p></div>
+            <div class="vx-p"><div class="vx-k">Cause 3</div><b>Problems seen too late</b><p>Managers only found out about issues once they were already critical.</p></div>
+            <div class="vx-p"><div class="vx-k">Cause 4</div><b>Data, but no decisions</b><p>HR had plenty of data but couldn’t turn it into clear priorities.</p></div>
+          </div>
+          <svg class="vx-merge" viewBox="0 0 100 28" preserveAspectRatio="none" aria-hidden="true"><path d="M25 0 V10 Q25 14 29 14 H71 Q75 14 75 10 V0 M50 14 V28" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/></svg>
+          <div class="vx-shared">
+            <div class="vx-k">Underneath it all</div>
+            <p class="big">Feedback was treated as a survey to run, not a loop to close. Nobody could see what happened after they spoke up.</p>
+          </div>
+        </div>
+        <p>Three groups needed different things from the same loop. <strong>Employees</strong> wanted to be heard without extra work. <strong>Managers</strong> wanted to know what to fix first. <strong>HR partners</strong> wanted a clear story that drives decisions and proves impact.</p>
+      </section>
+
+      <section class="sec" id="idea" data-title="The idea">
+        <h2 class="sl">One loop to close</h2>
+        <p>Another survey tool wouldn’t fix this. The product had to make the whole loop visible, from the moment someone speaks up to the moment something changes:</p>
+        <blockquote>Every piece of feedback should lead to an action people can see. <span class="todo">[? confirm this is the core idea]</span></blockquote>
+        <p>Four principles followed from that:</p>
+        <div class="vx-how vxb rv">
+          <div class="card"><b>Quick to give</b><p>Feedback takes a minute, not a morning.</p></div>
+          <div class="card"><b>Clear what to fix first</b><p>Managers see priorities, not raw data.</p></div>
+          <div class="card"><b>Visible follow-through</b><p>Employees see what changed because they spoke up.</p></div>
+          <div class="card"><b>Impact you can prove</b><p>HR can show leadership the return.</p></div>
+        </div>
+
+        <h3 class="sl">Choosing what to build first</h3>
+        <p>With Fount’s decision makers, I ran a prioritisation vote on what was most feasible, most valuable and most likely to bring in revenue at our stage. Then I ran an ideation workshop with stakeholders on the journey and flow for each group. <span class="todo">[? what made V1, and what was left for later?]</span></p>
+        <figure class="sheet-fig"><div class="slot"><b>03</b><span>Prioritisation vote or ideation workshop board (Miro)</span><i>Process artefact</i></div><figcaption class="caption"><span class="todo">[? caption once the image is in]</span></figcaption></figure>
+      </section>
+
+      <section class="sec" id="act1" data-title="Act 1: Fount">
+        <h2 class="sl">Act 1 · Fount: closing the loop</h2>
+        <p>Fount gave each group its part of the loop: employees give quick feedback, managers see what to fix first, everyone can follow the action plans, and HR can prove the impact. <span class="todo">[? confirm the four features below; they’re my best reading of your write-up]</span></p>
+
+        <h3 class="sl">1. Micro-surveys</h3>
+        <p class="fprin"><span>Principle</span>Quick to give</p>
+        <div class="vx-cmp vxb rv">
+          <div class="vx-side weak"><div class="vx-k">Before</div><p>Long, infrequent surveys that people rushed through and never heard back from.</p></div>
+          <div class="vx-side"><div class="vx-k">Now</div><p>Short, frequent questions that take a minute and fit into the working day.</p></div>
+        </div>
+        <div class="layers">
+          <figure class="layer m"><div class="layer-k"><span>1</span>Before</div><div class="slot before"><b>04a</b><span>The old way: a long survey or annual engagement form</span><i>Screenshot or recording</i></div></figure>
+          <figure class="layer m"><div class="layer-k"><span>2</span>After</div><div class="slot"><b>04b</b><span>Answering a micro-survey</span><i>Screen recording</i></div></figure>
+          <figure class="layer steps" data-steps>
+            <div class="layer-k"><span>3</span>The designs<em>Click a tab to see each screen and the decisions behind it</em></div>
+            <div class="step-tabs" role="tablist" aria-label="The designs"><button type="button" role="tab" id="a1-t1" aria-controls="a1-p1" aria-selected="true">Survey</button><button type="button" role="tab" id="a1-t2" aria-controls="a1-p2" aria-selected="false" tabindex="-1">Done</button></div>
+            <div class="step-stage">
+            <div class="step-panel on" role="tabpanel" id="a1-p1" aria-labelledby="a1-t1" data-caption="Survey: A micro-survey as an employee sees it"><div class="slot"><b>04c</b><span>A micro-survey as an employee sees it · design decisions sit behind the toggle</span><i>Design screen</i></div></div>
+            <div class="step-panel" role="tabpanel" id="a1-p2" aria-labelledby="a1-t2" data-caption="Done: What employees see after answering"><div class="slot"><b>04d</b><span>What employees see after answering · design decisions sit behind the toggle</span><i>Design screen</i></div></div>
+            </div>
+            <figcaption class="caption" aria-live="polite">Survey: A micro-survey as an employee sees it</figcaption>
+          </figure>
+        </div>
+
+        <h3 class="sl">2. Friction points, ranked for managers</h3>
+        <p class="fprin"><span>Principle</span>Clear what to fix first</p>
+        <div class="vx-cmp vxb rv">
+          <div class="vx-side weak"><div class="vx-k">Before</div><p>Managers pieced feedback together from spreadsheets and one-to-ones, and guessed what to fix first.</p></div>
+          <div class="vx-side"><div class="vx-k">Now</div><p>A dashboard ranks the friction points in each team, so managers know where to start.</p></div>
+        </div>
+        <div class="layers">
+          <figure class="layer m"><div class="layer-k"><span>1</span>Before</div><div class="slot before"><b>05a</b><span>The old way: feedback in spreadsheets</span><i>Screenshot or recording</i></div></figure>
+          <figure class="layer m"><div class="layer-k"><span>2</span>After</div><div class="slot"><b>05b</b><span>A manager reviewing their team’s friction points</span><i>Screen recording</i></div></figure>
+          <figure class="layer steps" data-steps>
+            <div class="layer-k"><span>3</span>The designs<em>Click a tab to see each screen and the decisions behind it</em></div>
+            <div class="step-tabs" role="tablist" aria-label="The designs"><button type="button" role="tab" id="a2-t1" aria-controls="a2-p1" aria-selected="true">Dashboard</button><button type="button" role="tab" id="a2-t2" aria-controls="a2-p2" aria-selected="false" tabindex="-1">Friction point</button></div>
+            <div class="step-stage">
+            <div class="step-panel on" role="tabpanel" id="a2-p1" aria-labelledby="a2-t1" data-caption="Dashboard: The manager dashboard"><div class="slot"><b>05c</b><span>The manager dashboard · design decisions sit behind the toggle</span><i>Design screen</i></div></div>
+            <div class="step-panel" role="tabpanel" id="a2-p2" aria-labelledby="a2-t2" data-caption="Friction point: One friction point, opened"><div class="slot"><b>05d</b><span>One friction point, opened · design decisions sit behind the toggle</span><i>Design screen</i></div></div>
+            </div>
+            <figcaption class="caption" aria-live="polite">Dashboard: The manager dashboard</figcaption>
+          </figure>
+        </div>
+
+        <h3 class="sl">3. Action plans everyone can follow</h3>
+        <p class="fprin"><span>Principle</span>Visible follow-through</p>
+        <div class="vx-cmp vxb rv">
+          <div class="vx-side weak"><div class="vx-k">Before</div><p>Feedback ended in a report. Nobody owned the follow-up, and employees never saw anything change.</p></div>
+          <div class="vx-side"><div class="vx-k">Now</div><p>Any friction point can become an action plan with an owner and a date, and employees can follow its progress.</p></div>
+        </div>
+        <div class="layers">
+          <figure class="layer m"><div class="layer-k"><span>1</span>Before</div><div class="slot before"><b>06a</b><span>The old way: improvement plans in documents nobody tracked</span><i>Screenshot or recording</i></div></figure>
+          <figure class="layer m"><div class="layer-k"><span>2</span>After</div><div class="slot"><b>06b</b><span>Turning a friction point into an action plan</span><i>Screen recording</i></div></figure>
+          <figure class="layer steps" data-steps>
+            <div class="layer-k"><span>3</span>The designs<em>Click a tab to see each screen and the decisions behind it</em></div>
+            <div class="step-tabs" role="tablist" aria-label="The designs"><button type="button" role="tab" id="a3-t1" aria-controls="a3-p1" aria-selected="true">Create a plan</button><button type="button" role="tab" id="a3-t2" aria-controls="a3-p2" aria-selected="false" tabindex="-1">Progress</button></div>
+            <div class="step-stage">
+            <div class="step-panel on" role="tabpanel" id="a3-p1" aria-labelledby="a3-t1" data-caption="Create a plan: Creating an action plan from a friction point"><div class="slot"><b>06c</b><span>Creating an action plan from a friction point · design decisions sit behind the toggle</span><i>Design screen</i></div></div>
+            <div class="step-panel" role="tabpanel" id="a3-p2" aria-labelledby="a3-t2" data-caption="Progress: How employees see progress"><div class="slot"><b>06d</b><span>How employees see progress · design decisions sit behind the toggle</span><i>Design screen</i></div></div>
+            </div>
+            <figcaption class="caption" aria-live="polite">Create a plan: Creating an action plan from a friction point</figcaption>
+          </figure>
+        </div>
+
+        <h3 class="sl">4. Insights HR can take to leadership</h3>
+        <p class="fprin"><span>Principle</span>Impact you can prove</p>
+        <div class="vx-cmp vxb rv">
+          <div class="vx-side weak"><div class="vx-k">Before</div><p>HR had data, but no clear story for leadership and no way to show a return.</p></div>
+          <div class="vx-side"><div class="vx-k">Now</div><p>Patterns across departments and the impact of each action, ready to share with leadership.</p></div>
+        </div>
+        <div class="layers">
+          <figure class="layer m"><div class="layer-k"><span>1</span>Before</div><div class="slot before"><b>07a</b><span>The old way: exporting survey data into slides</span><i>Screenshot or recording</i></div></figure>
+          <figure class="layer m"><div class="layer-k"><span>2</span>After</div><div class="slot"><b>07b</b><span>HR exploring insights across departments</span><i>Screen recording</i></div></figure>
+          <figure class="layer steps" data-steps>
+            <div class="layer-k"><span>3</span>The designs<em>Click a tab to see each screen and the decisions behind it</em></div>
+            <div class="step-tabs" role="tablist" aria-label="The designs"><button type="button" role="tab" id="a4-t1" aria-controls="a4-p1" aria-selected="true">Insights</button><button type="button" role="tab" id="a4-t2" aria-controls="a4-p2" aria-selected="false" tabindex="-1">Impact</button></div>
+            <div class="step-stage">
+            <div class="step-panel on" role="tabpanel" id="a4-p1" aria-labelledby="a4-t1" data-caption="Insights: Patterns across departments"><div class="slot"><b>07c</b><span>Patterns across departments · design decisions sit behind the toggle</span><i>Design screen</i></div></div>
+            <div class="step-panel" role="tabpanel" id="a4-p2" aria-labelledby="a4-t2" data-caption="Impact: The impact report for leadership"><div class="slot"><b>07d</b><span>The impact report for leadership · design decisions sit behind the toggle</span><i>Design screen</i></div></div>
+            </div>
+            <figcaption class="caption" aria-live="polite">Insights: Patterns across departments</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="sec" id="turn" data-title="The turn">
+        <h2 class="sl">A year later: what was still slow</h2>
+        <p>Fount worked, and people used it. A year of real use also showed where the work was still slow. The feedback was coming in, but HR teams were drowning in it:</p>
+        <div class="vx-three vxb rv">
+          <div class="card"><div class="vx-k">Scattered</div><b>5 to 8 platforms</b><p>Employee feedback was spread across five to eight different tools.</p></div>
+          <div class="card"><div class="vx-k">Stuck in analysis</div><b>73% of HR leaders</b><p>spent more time analysing data than acting on it.</p></div>
+          <div class="card ink"><div class="vx-k">Too late</div><b>6 weeks</b><p>On average, that’s how long it took to spot an issue after it started.</p></div>
+        </div>
+        <p>So I ran a second round of research over three weeks: 18 HR directors and VPs, 12 People Operations managers, 9 team leads and 4 C-suite executives.</p>
+        <blockquote class="qt"><p>“I feel like I’m always putting out fires instead of preventing them. By the time we see patterns in our data, the damage is already done.”</p><cite>People Leader, manufacturing company</cite></blockquote>
+        <p>That was a real need, and a business opportunity, so we built Fount AI.</p>
+        <figure class="steps ost-steps" data-steps>
+          <div class="fig-head"><b>The journey, before and after Fount AI</b><span>From spotting a problem to solving it. Switch between them with the tabs.</span></div>
+          <div class="step-tabs" role="tablist" aria-label="Journey map">
+            <button type="button" role="tab" id="jt-1" aria-controls="jp-1" aria-selected="true">Before Fount AI</button>
+            <button type="button" role="tab" id="jt-2" aria-controls="jp-2" aria-selected="false" tabindex="-1">After Fount AI</button>
+          </div>
+          <div class="step-stage">
+            <div class="step-panel on" role="tabpanel" id="jp-1" aria-labelledby="jt-1" data-caption="Before Fount AI: the current-state journey map"><div class="slot"><b>08a</b><span>Journey map: current state, before Fount AI</span><i>Research artefact</i></div></div>
+            <div class="step-panel" role="tabpanel" id="jp-2" aria-labelledby="jt-2" data-caption="After Fount AI: the future-state journey map"><div class="slot"><b>08b</b><span>Journey map: future state, after Fount AI</span><i>Research artefact</i></div></div>
+          </div>
+          <figcaption class="caption" aria-live="polite">Before Fount AI: the current-state journey map</figcaption>
+        </figure>
+      </section>
+
+      <section class="sec" id="act2" data-title="Act 2: Fount AI">
+        <h2 class="sl">Act 2 · Fount AI: a business partner for HR</h2>
+        <p>Fount AI finds friction early across every source of feedback and recommends what to do next, backed by employee data and proven practice. Three strategic calls shaped it:</p>
+        <div class="vx-three vxb rv">
+          <div class="card"><div class="vx-k">Strategic call 1</div><b>Help people decide, don’t decide for them.</b><p>HR is accountable for its decisions, so full automation was the wrong tool. Every recommendation shows a confidence level, the reasoning behind it, and a way to override it.</p></div>
+          <div class="card"><div class="vx-k">Strategic call 2</div><b>Answer “what should I do next?”</b><p>People kept asking for next steps, not more charts. So recommendations come in three tiers: immediate actions, short-term strategies and long-term initiatives.</p></div>
+          <div class="card"><div class="vx-k">Strategic call 3</div><b>A conversation, not another dashboard.</b><p>HR already juggled six dashboards a day. Fount AI had to be a place to ask questions, not a seventh screen to read. <span class="todo">[? confirm the real reason]</span></p></div>
+        </div>
+
+        <h3 class="sl">5. Ask Fount AI</h3>
+        <p class="fprin"><span>Principle</span>A conversation, not another dashboard</p>
+        <div class="vx-cmp vxb rv">
+          <div class="vx-side weak"><div class="vx-k">Before</div><p>HR checked six dashboards a day and pulled data into Excel to find patterns.</p></div>
+          <div class="vx-side"><div class="vx-k">Now</div><p>Ask a question in plain words and get an answer drawn from every source of feedback.</p></div>
+        </div>
+        <div class="layers">
+          <figure class="layer m"><div class="layer-k"><span>1</span>Before</div><div class="slot before"><b>09a</b><span>The old way: six dashboards and an Excel sheet</span><i>Screenshot or recording</i></div></figure>
+          <figure class="layer m"><div class="layer-k"><span>2</span>After</div><div class="slot"><b>09b</b><span>Asking Fount AI a question</span><i>Screen recording</i></div></figure>
+          <figure class="layer steps" data-steps>
+            <div class="layer-k"><span>3</span>The designs<em>Click a tab to see each screen and the decisions behind it</em></div>
+            <div class="step-tabs" role="tablist" aria-label="The designs"><button type="button" role="tab" id="b1-t1" aria-controls="b1-p1" aria-selected="true">Conversation</button><button type="button" role="tab" id="b1-t2" aria-controls="b1-p2" aria-selected="false" tabindex="-1">Answer</button></div>
+            <div class="step-stage">
+            <div class="step-panel on" role="tabpanel" id="b1-p1" aria-labelledby="b1-t1" data-caption="Conversation: Asking a question in plain words"><div class="slot"><b>09c</b><span>Asking a question in plain words · design decisions sit behind the toggle</span><i>Design screen</i></div></div>
+            <div class="step-panel" role="tabpanel" id="b1-p2" aria-labelledby="b1-t2" data-caption="Answer: An answer with its sources"><div class="slot"><b>09d</b><span>An answer with its sources · design decisions sit behind the toggle</span><i>Design screen</i></div></div>
+            </div>
+            <figcaption class="caption" aria-live="polite">Conversation: Asking a question in plain words</figcaption>
+          </figure>
+        </div>
+
+        <h3 class="sl">6. Recommendations you can check</h3>
+        <p class="fprin"><span>Principle</span>Help people decide</p>
+        <div class="vx-cmp vxb rv">
+          <div class="vx-side weak"><div class="vx-k">Before</div><p>Dashboards showed what was happening, but not what to do about it.</p></div>
+          <div class="vx-side"><div class="vx-k">Now</div><p>Recommendations in three tiers, each with a confidence level, the reasoning behind it, and a way to override it.</p></div>
+        </div>
+        <div class="layers">
+          <figure class="layer m"><div class="layer-k"><span>1</span>Before</div><div class="slot before"><b>10a</b><span>The old way: charts with no next step</span><i>Screenshot or recording</i></div></figure>
+          <figure class="layer m"><div class="layer-k"><span>2</span>After</div><div class="slot"><b>10b</b><span>Reviewing and acting on a recommendation</span><i>Screen recording</i></div></figure>
+          <figure class="layer steps" data-steps>
+            <div class="layer-k"><span>3</span>The designs<em>Click a tab to see each screen and the decisions behind it</em></div>
+            <div class="step-tabs" role="tablist" aria-label="The designs"><button type="button" role="tab" id="b2-t1" aria-controls="b2-p1" aria-selected="true">Recommendations</button><button type="button" role="tab" id="b2-t2" aria-controls="b2-p2" aria-selected="false" tabindex="-1">Reasoning</button></div>
+            <div class="step-stage">
+            <div class="step-panel on" role="tabpanel" id="b2-p1" aria-labelledby="b2-t1" data-caption="Recommendations: Immediate, short-term and long-term recommendations"><div class="slot"><b>10c</b><span>Immediate, short-term and long-term recommendations · design decisions sit behind the toggle</span><i>Design screen</i></div></div>
+            <div class="step-panel" role="tabpanel" id="b2-p2" aria-labelledby="b2-t2" data-caption="Reasoning: Confidence, reasoning and override on one recommendation"><div class="slot"><b>10d</b><span>Confidence, reasoning and override on one recommendation · design decisions sit behind the toggle</span><i>Design screen</i></div></div>
+            </div>
+            <figcaption class="caption" aria-live="polite">Recommendations: Immediate, short-term and long-term recommendations</figcaption>
+          </figure>
+        </div>
+
+        <h3 class="sl">Tested with the people who’d use it</h3>
+        <p>I tested both products with the people they were for, at INGKA and beyond. <span class="todo">[? one thing testing changed in each act]</span></p>
+        <div class="tested">
+          <div><div class="k">Fount</div><div class="v">18 + 9</div><div class="what">employees at INGKA, plus 9 participants from other organisations and our internal stakeholders</div></div>
+          <div><div class="k">Fount AI</div><div class="v">24 + 23</div><div class="what">people at INGKA, plus 23 participants from other organisations</div></div>
+        </div>
+        <figure class="sheet-fig"><div class="slot"><b>11</b><span>Assumption matrix or testing findings (optional)</span><i>Research artefact</i></div></figure>
+      </section>
+
+      <section class="sec" id="results" data-title="Results">
+        <h2 class="sl">Feedback that finally led somewhere</h2>
+        <p>People used it every week, and feedback turned into action. These were shared results. My part was designing a loop people trusted enough to use.</p>
+        <figure>
+          <div class="chain" role="list" aria-label="Results">
+            <div class="link" role="listitem" style="--k:0"><div class="k">Participation</div><div class="v"><span data-count="81" data-start="0">81</span>%</div><div class="what">average weekly participation in micro-surveys</div><div class="ctx">Fount, after 12 months</div></div>
+            <div class="link" role="listitem" style="--k:1"><div class="k">Follow-through</div><div class="v"><span data-count="63" data-start="0">63</span>%</div><div class="what">of friction points had an action plan within 30 days</div><div class="ctx">Fount, after 12 months</div></div>
+            <div class="link" role="listitem" style="--k:2"><div class="k">Fount AI</div><div class="v">6.2 → 1.4 wks</div><div class="what">from spotting an issue to resolving it</div><div class="ctx">After 3 months</div></div>
+            <div class="link impact" role="listitem" style="--k:3"><div class="k">Business</div><div class="v">$3M+</div><div class="what">revenue in year one</div><div class="ctx"><span class="todo">[? Fount only, or both?]</span></div></div>
+          </div>
+          <figcaption class="caption">How we measured: <span class="todo">[? one line on where these numbers come from]</span></figcaption>
+        </figure>
+        <p>Use stayed high across every group: 91% of employees used Fount at least once a month, and 74% of managers checked their dashboard every week. With Fount AI, HR’s time spent analysing data fell from 14 hours a week to 3.</p>
+        <h3 class="sl" id="said">What people said</h3>
+        <figure class="sheet-fig"><div class="slot"><b>12</b><span>Feedback from clients or the team: messages, quotes or emails (optional)</span><i>Evidence</i></div></figure>
+      </section>
+
+      <section class="sec" id="how" data-title="How I work">
+        <h2 class="sl">What this project shows about how I work</h2>
+        <div class="vx-how vxb rv">
+          <div class="card"><b>I design the loop, not the survey.</b><p>Four causes pointed to one idea: feedback has to visibly lead somewhere. Every feature closed part of that loop.</p><a class="proof" href="#research">Four causes</a></div>
+          <div class="card"><b>I add AI where the data shows a need.</b><p>A year of real use showed where the work was still slow. Fount AI was built for that, not for the hype.</p><a class="proof" href="#turn">The turn</a></div>
+          <div class="card"><b>I keep people accountable for decisions.</b><p>The AI recommends and explains itself. People decide, and can always override it.</p><a class="proof" href="#act2">Strategic calls</a></div>
+          <div class="card"><b>I research at scale, and in person.</b><p>More than 90 interviews and sessions across two rounds, most of them run by me.</p><a class="proof" href="#research">The research</a></div>
+        </div>
+      </section>
+
+      <section class="sec" id="next" data-title="What's next">
+        <h2 class="sl">Where the work goes next</h2>
+        <p>From the roadmap I proposed, based on ongoing feedback and usage data: <span class="todo">[? what actually happened next?]</span></p>
+        <ul>
+          <li><strong>Industry modules</strong> for industries with high friction, such as manufacturing.</li>
+          <li><strong>Integrations</strong> with performance management and learning platforms.</li>
+          <li><strong>Enterprise single sign-on</strong> for complex security requirements.</li>
+        </ul>
+        <p class="closing">The goal behind all of it: nobody should ever wonder whether speaking up was worth it.</p>
+      </section>
