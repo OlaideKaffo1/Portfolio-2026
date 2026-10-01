@@ -185,3 +185,4 @@
   /* Five or more notes: wrap to three columns so each note has room to read */
   @container (min-width: 700px) { .vnotes:has(> li:nth-child(5)) { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   .xp-media.framed.before { background: #f6efe6; }
+  .flowv.before { background: #f6efe6; }

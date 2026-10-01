@@ -801,6 +801,7 @@
   /* Five or more notes: wrap to three columns so each note has room to read */
   @container (min-width: 700px) { .vnotes:has(> li:nth-child(5)) { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   .xp-media.framed.before { background: #f6efe6; }
+  .flowv.before { background: #f6efe6; }
 
   /* Diagram type follows the page scale */
   .tree-labels b { font-size: 20px; line-height: 26px; }
@@ -1080,7 +1081,11 @@
           <div class="vx-side"><div class="vx-k">Now</div><p>Cohorts are told when their template changes. Program designers review each update and choose to apply or ignore it, and any new workspace they accept appears in the cohort's timeline, ready to link.</p></div>
         </div>
         <div class="layers">
-          <figure class="layer m"><div class="layer-k"><span>1</span>Before</div><div class="slot before"><b>05a</b><span>The old way: editing the cohort’s settings in code, and a timeline that can’t see new workspaces</span><i>Screen recording or image</i></div></figure>
+          <figure class="layer m"><div class="layer-k"><span>1</span>Before</div><div class="flowv wclip before">
+            <video autoplay muted loop playsinline preload="auto" poster="images/json-before-poster.webp" width="2000" height="908" style="aspect-ratio: 2000 / 908" aria-label="Screen recording of the old way. On a program’s timeline, the program designer turns on Show JSON Editor. The page becomes a long block of JSON code for the whole program, with every week and event written out. They scroll through it, then drag to select a large part of the code so it can be copied and pasted into the cohort’s own JSON."><source src="images/json-before.webm" type="video/webm"><source src="images/json-before.mp4" type="video/mp4"></video>
+            <button type="button" class="clip-btn" aria-label="Pause video">Pause</button>
+          </div>
+          <ol class="vnotes" data-vnotes><li><button type="button" data-t="1"><span class="n">1</span><span class="tx"><b>Hidden behind a switch.</b> The way into a live cohort was a Show JSON Editor switch, built for engineers, not program designers.</span><span class="ts">0:01</span></button></li><li><button type="button" data-t="2.4"><span class="n">2</span><span class="tx"><b>Code, not a page.</b> The whole program, every week and every event, opened as one long block of JSON.</span><span class="ts">0:02</span></button></li><li><button type="button" data-t="4"><span class="n">3</span><span class="tx"><b>Found by scrolling.</b> There was no search or outline. Finding the right event meant scrolling through hundreds of lines.</span><span class="ts">0:04</span></button></li><li><button type="button" data-t="14"><span class="n">4</span><span class="tx"><b>Copied by hand.</b> The code was selected by dragging, then pasted into the cohort’s own JSON. One missing bracket and the timeline broke.</span><span class="ts">0:14</span></button></li><li><button type="button" data-t="22"><span class="n">5</span><span class="tx"><b>Linked by exact name.</b> Each event found its workspace with matchBy name, so one stray space sent a team to a dead end.</span><span class="ts">0:22</span></button></li></ol></figure>
           <figure class="layer m"><div class="layer-k"><span>2</span>After</div><div class="flowv wclip">
             <video autoplay muted loop playsinline preload="auto" poster="images/template-update-poster.webp" width="2000" height="1362" style="aspect-ratio: 2000 / 1362" aria-label="Screen recording: on a cohort's playbook instance, a banner says a new update is available from the program template. Review changes opens a panel listing three updates: a new workspace added to Week One, a new activity added and a workspace updated. The program designer expands the first to see what's new, selects it and applies it, and a message confirms the instance has been updated."><source src="images/template-update.webm" type="video/webm"><source src="images/template-update.mp4" type="video/mp4"></video>
             <button type="button" class="clip-btn" aria-label="Pause video">Pause</button>
