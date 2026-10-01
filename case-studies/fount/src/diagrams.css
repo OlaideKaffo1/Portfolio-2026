@@ -212,3 +212,5 @@
   .vote .note b { font-weight: 500; color: var(--ink); }
   .vote li.vs { box-shadow: inset 0 0 0 1.5px #000; }
   .vote .vk { display: inline-block; width: 22px; height: 12px; margin-right: 8px; vertical-align: -1px; border-radius: 999px; box-shadow: inset 0 0 0 1.5px #000; background: var(--panel); }
+  .duo { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  @container (min-width: 600px) { .duo { grid-template-columns: 1fr 1fr; gap: 16px; } }
