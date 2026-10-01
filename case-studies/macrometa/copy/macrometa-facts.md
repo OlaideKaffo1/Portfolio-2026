@@ -26,9 +26,6 @@ The source of truth for case study 4. Everything on the page has to trace back t
 - The 82% retention figure. 54% is the one to use.
 
 ## Still to confirm
-- "84% preferred the command line, 91% were frustrated": where did these come from?
-- The three quotes in the write-up: are they real, and from whom? The latency one is about platform speed, not the design.
-- The write-up promises four key insights but lists three.
 
 ## Research (from the write-up)
 - Analysed support feedback with the customer success team.
@@ -76,7 +73,7 @@ Real messages from customers to the Macrometa team. The customers aren't named. 
 ## New UI, batch 3
 - **new-collection-type-gradient:** the same New Collection modal as new-collection-type, on a gradient background instead of the dimmed app.
 - **new-welcome-a:** "Welcome to Macrometa!" A one-line intro to the Global Data Network, a 3:32 intro video, and three cards: Create your first collection, Start with a blueprint (ready-made implementations for common use cases) and Get in touch (to discuss capacity while evaluating). Also "Need support? We're here to help" and a Close button.
-- **new-welcome-b:** the same welcome with different cards: Quickstart Guide, Developer Tools (CLI, SDKs, libraries) and Tutorials (start-to-finish exercises). Olaide confirmed the two welcomes are two iterations of how to tell users about blueprints and starting points. Which came first still needs confirming.
+- **new-welcome-b:** the same welcome with different cards: Quickstart Guide, Developer Tools (CLI, SDKs, libraries) and Tutorials (start-to-finish exercises). Olaide confirmed the two welcomes are two iterations of how to tell users about blueprints and starting points. The first iteration was version A (Create your first collection, Start with a blueprint, Get in touch). Version B (Quickstart Guide, Developer Tools, Tutorials) came second.
 - **new-signup:** "Create a free developer account". A split screen with the value on the left ("Build real-time, globally distributed apps and APIs in minutes – not months", no credit card, instant playground access, sample apps, SOC 2) and the form on the right: domain, email and password, plus GitHub and Google sign-up.
 
 ## Ordering and balance (Olaide)
@@ -95,3 +92,9 @@ Real messages from customers to the Macrometa team. The customers aren't named. 
   - Macrometa had: a get-started guide, helpful documentation and tutorials.
   - Macrometa lacked: a directional landing page, a product walkthrough, onboarding pointers, 24/7 support, clear copy, easy-to-navigate features, continuous onboarding, templates or blueprints, and inclusive copy.
   - Confluent had all twelve.
+
+## Decisions (Olaide)
+- Drop the "84% preferred the command line, 91% were frustrated" figures.
+- Drop the write-up's three quotes (fintech, e-commerce, gaming). Use the real customer messages instead.
+- There are three key insights, not four.
+- Welcome screen order: A first, then B.
