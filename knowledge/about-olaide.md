@@ -29,8 +29,6 @@ The chat follows the voice rules in the Ask Olaide spec: short first, one exampl
 
 January 2020 to now is nearly seven years in product design. **[?]** Should the chat say "nearly seven years", or "six years" as your earlier homepage line did?
 
-**[?] One date to check:** Strategyzer says "October last year", which is October 2025. That's about a year, which is shorter than the Strategyzer work suggests. Is that right, or did it start earlier?
-
 ## Education
 
 - BSc in Computer Science
