@@ -65,7 +65,7 @@ The bigger share of the project. Everything in Part 2 is built on it.
 ## Part 2 · A guided start (led by me)
 
 3. **A clear way in.** Sign-up leads with what you can build, asks only for what's needed, and lets developers sign up with GitHub or Google, with no credit card. Invited teammates get one clear button.
-4. **A first visit with a next step.** New users land on a welcome with a one-line intro, a short video and three places to start. We went through two iterations of how to point people to blueprints and starting points.
+4. **A first visit with a next step.** New users land on a welcome with a one-line intro, a short video and three places to start. We went through two iterations, each testing the quickest way to a developer's first win. The first offered three paths: build a collection, start from a blueprint, or talk to us. The second, which we landed on, points to a quickstart guide, developer tools and tutorials.
 5. **Never a blank page.** Creating a collection became a guided path: an empty state that teaches, plain-language choices, and sample datasets that create a working collection in one click.
 
 ## Testing
@@ -104,5 +104,5 @@ Measured with product analytics and the customer success team, **after six month
 - The **$2M** is Macrometa's revenue that year, which the work contributed to. Never call it ARR, never say $2.3M, and never say the design caused it.
 - **Never use** these dropped figures: 82% retention, 70% or 72% fewer tickets, 87% or 55% more leads, 80% or 40% satisfaction, $2.3M ARR, $47K customer acquisition cost, $220K lifetime value, and the "84% preferred the command line / 91% were frustrated" figures.
 - Don't quote the old write-up's fintech, e-commerce and gaming testimonials. Use the real customer messages above.
-- Don't explain what changed between the two welcome iterations, or why. That isn't confirmed yet.
+- On the two welcome iterations, say only what's above: both aimed at the quickest first win, and the second is the one we landed on. Don't invent test results for them.
 - Macrometa is spelled with an "e".

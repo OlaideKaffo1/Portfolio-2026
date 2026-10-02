@@ -97,4 +97,4 @@ Real messages from customers to the Macrometa team. The customers aren't named. 
 - Drop the "84% preferred the command line, 91% were frustrated" figures.
 - Drop the write-up's three quotes (fintech, e-commerce, gaming). Use the real customer messages instead.
 - There are three key insights, not four.
-- Welcome screen order: A first, then B.
+- Welcome screen order: A first, then B. What changed: both iterations were about finding the quickest way to the first value moment, and B is where we landed.

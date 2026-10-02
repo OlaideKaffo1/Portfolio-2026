@@ -259,7 +259,7 @@ S.append(tabs("su", 1, "Getting in", "Click a tab to see each way in, and the de
 S.append("        </div>\n")
 
 S.append(head(4, "A first visit with a next step", "Show the way",
-    'New users now land on a welcome with a short intro, a video, and three places to start. A survey answer asked for “a brief video of key capabilities”, and the welcome has one. We went through two iterations of how to point people to blueprints and starting points. <span class="todo">[? what changed between the two, and why]</span>',
+    'New users now land on a welcome with a short intro, a video, and three places to start. A survey answer asked for “a brief video of key capabilities”, and the welcome has one. We went through two iterations, each testing the quickest way to a developer’s first win. The first offered three paths: build a collection, start from a blueprint, or talk to us. The second, which we landed on, points to a quickstart guide, developer tools and tutorials.',
     "Straight into a dashboard of maps and metrics, with nothing to do.",
     "A welcome that explains the platform in one line and offers three clear ways to begin."))
 S.append(tabs("wl", 1, "The welcome, in two iterations", "Click a tab to compare the first and second iteration", [
