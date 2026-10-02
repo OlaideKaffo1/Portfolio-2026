@@ -707,6 +707,10 @@ __DIAGRAMS__
   .zoom { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 56px 16px 24px; background: rgba(255, 255, 255, .97); cursor: zoom-out; }
   @media (min-width: 640px) { .zoom { padding: 64px 40px 40px; } }
   .zoom[hidden] { display: none; }
+  /* A long image (like a full survey) opens at reading size and scrolls, instead of shrinking to fit */
+  .zoom.tall { overflow-y: auto; place-items: start center; }
+  .zoom.tall .stage { max-height: none; }
+  .zoom.tall .stage > * { max-height: none; width: min(100%, 800px); }
   .zoom .stage { width: min(100%, 1400px); max-height: 100%; display: grid; place-items: center; }
   .zoom .stage > * { width: 100%; max-height: calc(100vh - 120px); border-radius: 12px; overflow: hidden; }
   .zoom .stage img { display: block; width: auto; max-width: 100%; height: auto; margin: 0 auto; object-fit: contain; }
@@ -1071,7 +1075,7 @@ __TREE__
   const vt = (fn) => (document.startViewTransition && motion ? document.startViewTransition(fn).finished.catch(() => {}) : Promise.resolve(fn()));
   async function openZoom(el) {
     zoomSource = el;
-    if (el.matches(".hero-img, .shot")) { zoomClone = new Image(); zoomClone.src = el.querySelector("img").src; zoomClone.alt = el.querySelector("img").alt; zoomClone.style.borderRadius = "12px"; }
+    if (el.matches(".hero-img, .shot")) { zoomClone = new Image(); const zi = el.querySelector("img"); zoomClone.src = zi.dataset.full || zi.src; zoom.classList.toggle("tall", !!zi.dataset.full); zoomClone.alt = el.querySelector("img").alt; zoomClone.style.borderRadius = "12px"; }
     else { zoomClone = el.cloneNode(true); zoomClone.classList.remove("m", "in", "instant"); ["data-zoom", "tabindex", "role", "aria-label"].forEach((x) => zoomClone.removeAttribute(x)); }
     stage.replaceChildren(zoomClone);
     el.style.viewTransitionName = "zoom";

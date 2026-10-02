@@ -14,11 +14,11 @@ CROP = {
     "new-collection-data": (43, 152, 1957, 1530), "new-managed-keys": (43, 152, 1957, 1530),
     "new-collections-empty": (43, 152, 1957, 1292), "new-dashboard": (40, 138, 1781, 1218),
     "old-graphs": (0, 0, 2000, 640),
-    "research-survey": (0, 152, 1164, 1806), "research-competitive": (58, 150, 1262, 605),
+    "research-competitive": (58, 150, 1262, 605),
 }
 BLUR = {"new-query-worker": [(60, 955, 320, 1010)]}  # a staff email in the account menu
 USED = ["feedback-permissions", "feedback-docs", "feedback-changes", "old-dashboard", "old-collections", "old-graphs", "old-login", "old-new-graph",
-        "research-competitive", "research-survey", "new-dashboard", "new-collection-data", "new-query-worker", "new-managed-keys", "new-function-detail",
+        "research-competitive", "new-dashboard", "new-collection-data", "new-query-worker", "new-managed-keys", "new-function-detail",
         "new-signup", "new-invite", "new-welcome-a", "new-welcome-b", "new-collections-empty", "new-collection-type", "new-sample-datasets", "new-kv-samples", "new-kv-form"]
 os.makedirs("images", exist_ok=True)
 for name in USED:
@@ -31,6 +31,13 @@ for name in USED:
         im.save(f"images/{name}.webp", lossless=True)
     else:
         shutil.copyfile(src, f"images/{name}.webp")
+
+# The survey: the full summary opens on Full size; the page shows the charts. Respondent emails are blurred in both.
+_sv = Image.open("source/research-survey-full.webp").convert("RGB")
+_box = (188, 245, 605, 465)
+_sv.paste(_sv.crop(_box).filter(ImageFilter.GaussianBlur(7)), _box[:2])
+_sv.save("images/research-survey-full.webp", lossless=True)
+_sv.crop((160, 480, 640, 1650)).save("images/research-survey.webp", lossless=True)
 
 # Pins were measured against these boxes (source pixels); map them onto whatever crop is used now
 PINBASE = {
@@ -143,11 +150,11 @@ S.append('''
 ''')
 S.append('        <figure class="sheet-fig" data-dz="findings">' + xp("research-survey",
     "Survey results from 12 developers: how they find out about new technology, whether they want onboarding after the first visit, what they’ll share at sign-up, where they want documentation, and examples of onboarding they liked or disliked.",
-    [("Keep guiding after day one.", "58% wanted pointers beyond the first visit, not a one-time tour.", "21.9,19.2,56.3,16.2"),
-     ("Ask for less at sign-up.", "92% would share an email, but only 25% their organisation’s name or size.", "21.9,36.3,56.3,19.4"),
-     ("Docs in either place.", "Two thirds didn’t mind whether docs lived in the console or on a separate site, so the console links to docs where questions come up.", "21.9,56.6,56.3,17.3"),
-     ("What good looks like.", "AWS was praised for learning links on its dashboard, Google Cloud criticised for having none, and one person asked for a short video of key capabilities.", "21.9,74.8,56.3,24.5")])
-    + '<figcaption class="caption">My survey of 12 developers. Respondents’ details are cropped out.</figcaption></figure>\n')
+    [("Keep guiding after day one.", "58% wanted pointers beyond the first visit, not a one-time tour.", "3.1,19.1,93.8,15.8"),
+     ("Ask for less at sign-up.", "92% would share an email, but only 25% their organisation’s name or size.", "3.1,35.6,93.8,19"),
+     ("Docs in either place.", "Two thirds didn’t mind whether docs lived in the console or on a separate site, so the console links to docs where questions come up.", "3.1,55.3,93.8,17"),
+     ("What good looks like.", "AWS was praised for learning links on its dashboard, Google Cloud criticised for having none, and one person asked for a short video of key capabilities.", "3.1,73.1,93.8,26.4")])
+    + '<figcaption class="caption">My survey of 12 developers. Open it full size for every question and answer. Respondents’ emails are blurred.</figcaption></figure>\n')
 S.append('''        <h3 class="sl">Three insights</h3>
         <div class="vx-three vxb rv">
           <div class="card"><div class="vx-k">Insight 1</div><b>No real first experience</b><p>There was no onboarding flow, so a new user’s first visit didn’t lead anywhere productive.</p></div>
@@ -331,7 +338,8 @@ S.append('''
         <p class="closing">The goal behind all of it: no developer should have to figure it out alone.</p>
       </section>
 ''')
-open("src/sections.html", "w").write("".join(S))
+_html = "".join(S).replace('<img src="images/research-survey.webp"', '<img src="images/research-survey.webp" data-full="images/research-survey-full.webp"')
+open("src/sections.html", "w").write(_html)
 
 # ---------------- Shell: title, hero, At a glance, next card
 t = open("src/shell.html").read()
