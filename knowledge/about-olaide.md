@@ -8,7 +8,7 @@ The chat follows the voice rules in the Ask Olaide spec: short first, one exampl
 
 ## The basics
 
-- **Name:** Olaide Arike Kaffo **[?]** (taken from your LinkedIn address; confirm how you'd like it written)
+- **Name:** Olaide Arike Kaffo. The chat always uses her first name, Olaide.
 - **Role:** Senior product designer
 - **Based in:** Lagos, Nigeria
 - **Time zone:** UTC+1 (West Africa Time)
@@ -27,11 +27,11 @@ The chat follows the voice rules in the Ask Olaide spec: short first, one exampl
 | July 2021 to December 2021 | Emtech | Product designer on a fintech MVP, from concept to launch. See below. |
 | January 2020 to July 2021 | Freelance | A B2B payments product in Africa, and an ethical real estate financing product. See below. |
 
-January 2020 to now is nearly seven years in product design. **[?]** Should the chat say "nearly seven years", or "six years" as your earlier homepage line did?
+January 2020 to now is six-plus years in product design. The chat says "six-plus years" (or "nearly seven" in conversation).
 
 ## Emtech, in more detail
 
-Emtech is a fintech company working on central bank digital currency: helping businesses move from traditional money to digital currency. **[?]** Confirm this one-line description is accurate.
+Emtech is a fintech company that helps countries' central banks adopt digital currencies for their citizens.
 
 > I designed Emtech's MVP from concept to launch. It was fast startup work: rapid iterations, close feedback from stakeholders, and a lot of time talking directly with our users.
 >
@@ -56,7 +56,6 @@ Emtech is a fintech company working on central bank digital currency: helping bu
 ## Education
 
 - BSc in Computer Science
-- Several certifications in UX design. **[?]** Name any you'd like the chat to mention.
 
 ## How I got into design
 
