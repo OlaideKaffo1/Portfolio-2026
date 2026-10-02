@@ -25,7 +25,7 @@ The chat follows the voice rules in the Ask Olaide spec: short first, one exampl
 | January 2023 to September 2025 | Fount | Designed Fount end to end, and a year later Fount AI. |
 | January 2022 to December 2022 | Macrometa | Product designer. Owned onboarding and activation, and contributed significantly to the UI refresh. |
 | July 2021 to December 2021 | Emtech | Product designer on a fintech MVP, from concept to launch. See below. |
-| January 2020 to July 2021 | Freelance | A B2B payments product in Africa, and an ethical real estate financing product. See below. |
+| January 2020 to July 2021 | Freelance | A B2B payments product in Africa, and a non-interest real estate financing product. See below. |
 
 January 2020 to now is six-plus years in product design. The chat says "six-plus years" (or "nearly seven" in conversation).
 
@@ -47,11 +47,9 @@ Emtech is a fintech company that helps countries' central banks adopt digital cu
 >
 > The first was a B2B enterprise payment solution in Africa. It helped over 800 merchants and business owners take payments online smoothly, so they could grow without worrying about how they'd get paid.
 >
-> The second was an ethical real estate financing product. I designed tools to help the team manage its leads and win more clients, with a way for people to book and talk to the team directly.
+> The second was a non-interest real estate financing product. I designed tools to help the team manage its leads and win more clients, with a way for people to book and talk to the team directly.
 >
 > I was more junior then. That work built my foundations in product design, strategy, user research, iterative design and prototyping, and taught me how to collaborate and deliver good results.
-
-**[?]** Does "ethical real estate financing" mean ethical or Islamic (non-interest) financing? The chat should describe it the way you would.
 
 ## Education
 
