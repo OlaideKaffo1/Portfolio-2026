@@ -8,14 +8,13 @@ from PIL import Image
 from PIL import ImageFilter
 import os, shutil
 
-# Image prep from source/: crop browser frames and grey backdrops, hide personal details. Crop boxes are in source pixels.
+# Image prep from source/. Crops are loose on purpose: the browser frame or the dimmed app behind a modal stays as context.
+# Tight crops only where needed: the survey (respondent emails), the spreadsheet (app chrome), and empty space. Boxes are source pixels.
 CROP = {
-    "new-collection-data": (43, 152, 1957, 1530), "new-managed-keys": (43, 152, 1957, 1530),
-    "new-collections-empty": (43, 152, 1957, 1292), "new-dashboard": (40, 138, 1781, 1218),
+    "new-dashboard": (0, 0, 1820, 1400), "old-graphs": (0, 0, 2000, 900),
     "research-survey": (0, 152, 1164, 1806), "research-competitive": (58, 150, 1262, 605),
-    "new-collection-type": (540, 207, 1460, 1026), "new-sample-datasets": (540, 207, 1460, 810),
-    "new-kv-samples": (540, 207, 1460, 1032), "new-kv-form": (540, 207, 1460, 860),
-    "new-function-detail": (473, 52, 1527, 1368), "old-graphs": (0, 0, 2000, 640),
+    "new-collection-type": (300, 110, 1700, 1250), "new-sample-datasets": (300, 110, 1700, 910),
+    "new-kv-samples": (300, 110, 1700, 1130), "new-kv-form": (300, 110, 1700, 960),
 }
 BLUR = {"new-query-worker": [(60, 955, 320, 1010)]}  # a staff email in the account menu
 USED = ["feedback-permissions", "feedback-docs", "feedback-changes", "old-dashboard", "old-collections", "old-graphs", "old-login", "old-new-graph",
@@ -33,15 +32,24 @@ for name in USED:
     else:
         shutil.copyfile(src, f"images/{name}.webp")
 
-# Pins on these were measured on the full source image; convert them into the crop
-SRCSIZE = {n: Image.open(next(f"source/{n}.{e}" for e in ("webp", "png") if os.path.exists(f"source/{n}.{e}"))).size
-           for n in ("new-collection-type", "new-sample-datasets", "new-kv-samples", "new-kv-form", "new-function-detail")}
+# Pins were measured against these boxes (source pixels); map them onto whatever crop is used now
+PINBASE = {
+    "new-collection-data": (43, 152, 1957, 1530), "new-managed-keys": (43, 152, 1957, 1530),
+    "new-collections-empty": (43, 152, 1957, 1292), "new-dashboard": (40, 138, 1781, 1218),
+    "new-collection-type": "full", "new-sample-datasets": "full", "new-kv-samples": "full", "new-kv-form": "full", "new-function-detail": "full",
+}
+def _src_size(n):
+    return Image.open(next(f"source/{n}.{e}" for e in ("webp", "png") if os.path.exists(f"source/{n}.{e}"))).size
 def conv(img, r):
-    if img not in SRCSIZE: return r
-    W, H = SRCSIZE[img]; x0, y0, x1, y1 = CROP[img]; cw, ch = x1 - x0, y1 - y0
+    if img not in PINBASE: return r
+    W, H = _src_size(img)
+    bx0, by0, bx1, by1 = (0, 0, W, H) if PINBASE[img] == "full" else PINBASE[img]
+    cx0, cy0, cx1, cy1 = CROP.get(img, (0, 0, W, H))
     x, y, w, h = [float(v) for v in r.split(",")]
-    nx = (x * W / 100 - x0) / cw * 100; ny = (y * H / 100 - y0) / ch * 100
-    return f"{nx:.1f},{ny:.1f},{w * W / cw:.1f},{h * H / ch:.1f}"
+    sx = bx0 + x / 100 * (bx1 - bx0); sy = by0 + y / 100 * (by1 - by0)
+    sw = w / 100 * (bx1 - bx0); sh = h / 100 * (by1 - by0)
+    cw, ch = cx1 - cx0, cy1 - cy0
+    return f"{(sx - cx0) / cw * 100:.1f},{(sy - cy0) / ch * 100:.1f},{sw / cw * 100:.1f},{sh / ch * 100:.1f}"
 
 def size(img):
     return Image.open(f"images/{img}.webp").size
