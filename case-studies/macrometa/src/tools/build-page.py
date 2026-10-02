@@ -8,13 +8,11 @@ from PIL import Image
 from PIL import ImageFilter
 import os, shutil
 
-# Image prep from source/. Crops are loose on purpose: the browser frame or the dimmed app behind a modal stays as context.
+# Image prep from source/. Screens are shown whole: the browser frame, or the full dimmed app behind a modal, stays as context.
 # Tight crops only where needed: the survey (respondent emails), the spreadsheet (app chrome), and empty space. Boxes are source pixels.
 CROP = {
     "new-dashboard": (0, 0, 1820, 1400), "old-graphs": (0, 0, 2000, 900),
     "research-survey": (0, 152, 1164, 1806), "research-competitive": (58, 150, 1262, 605),
-    "new-collection-type": (300, 110, 1700, 1250), "new-sample-datasets": (300, 110, 1700, 910),
-    "new-kv-samples": (300, 110, 1700, 1130), "new-kv-form": (300, 110, 1700, 960),
 }
 BLUR = {"new-query-worker": [(60, 955, 320, 1010)]}  # a staff email in the account menu
 USED = ["feedback-permissions", "feedback-docs", "feedback-changes", "old-dashboard", "old-collections", "old-graphs", "old-login", "old-new-graph",
