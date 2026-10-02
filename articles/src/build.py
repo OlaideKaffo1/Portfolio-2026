@@ -24,7 +24,6 @@ for slug, a in ARTICLES.items():
           <h3>{html.escape(o['card'])}</h3>
           <div class="foot"><span>{o['date']}</span><span class="go">Read Article <i aria-hidden="true">→</i></span></div>
         </a>
-        <a class="homecard" href="#" data-home><span>Back to the portfolio<strong>Selected work and writing</strong></span><span class="go">Home →</span></a>
       </div>
     </section>'''
     page = r(root, slug, 'src', 'page.html').replace('__READ__', f'{times[slug][0]} min read').replace('__END__', end)
