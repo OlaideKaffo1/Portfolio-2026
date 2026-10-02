@@ -62,6 +62,34 @@
       <p>The reporting skill governs how findings and data are structured and visualized for external clients. The delivery and client relations teams no longer spend time on layout or on how a figure should be presented, so their attention goes to the substance of what the client needs to know.</p>
       <figure><div class="ph">[?] Before and after: a report page in the old format next to one made with the reporting skill</div></figure>
 
+      <h3 class="sl">Brochures: one brief, three versions</h3>
+      <p>The same skill makes our print brochures. Below is the brochure for one of our masterclasses, Enabling Organizational Change Through Momentum and Buy-In, before and after. <span class="todo">[?] Who made the new versions: you, or the sales team on their own?</span></p>
+      <p>I built the skill to offer variations using our brand's primary colours. From one set of content, Claude produced three versions, each in a different colour pairing, with the layout and structure already in place. The old brochure didn't look like the rest of our brand. The new ones are clean, editorial and professional.</p>
+      <figure class="wide">
+        <div class="covers dg">
+          <div class="grp before"><span class="glab">Before</span><div class="pg" style="--k:0"><img src="images/bro-old-0.webp" width="794" height="1123" loading="lazy" alt="The old masterclass brochure cover: a pale aqua panel with the title in blue, a list of benefits and a photo of the facilitator on stage."></div></div>
+          <div class="grp after"><span class="glab">After · three colourways from one brief</span>
+            <div class="row3">
+              <div class="pg" style="--k:1"><img src="images/bro-aqua-0.webp" width="794" height="1123" loading="lazy" alt="New cover, aqua on purple: a large editorial title, short summary and a portrait of the facilitator."><span class="cw"><i style="background:#46116a"></i><i style="background:#4dcdd6"></i>Aqua on purple</span></div>
+              <div class="pg" style="--k:2"><img src="images/bro-blue-0.webp" width="794" height="1123" loading="lazy" alt="New cover, blue on yellow, same layout."><span class="cw"><i style="background:#ffd541"></i><i style="background:#0024de"></i>Blue on yellow</span></div>
+              <div class="pg" style="--k:3"><img src="images/bro-yellow-0.webp" width="794" height="1123" loading="lazy" alt="New cover, yellow on blue, same layout."><span class="cw"><i style="background:#0024de"></i><i style="background:#ffd541"></i>Yellow on blue</span></div>
+            </div>
+          </div>
+        </div>
+        <figcaption class="caption">The old cover, and the three versions the skill produced from the same content.</figcaption>
+      </figure>
+      <figure class="wide" data-tabs>
+        <div class="tablist" role="tablist" aria-label="Inside the brochure">
+          <button type="button" role="tab" aria-selected="false" tabindex="-1">Before</button>
+          <button type="button" role="tab" aria-selected="true">After</button>
+        </div>
+        <div class="tab-stage">
+          <div class="tab-panel" role="tabpanel" data-caption="Before: the same four pages in the old brochure."><div class="pages"><div class="pg"><img src="images/bro-old-0.webp" width="794" height="1123" loading="lazy" alt="Before: the cover"></div><div class="pg"><img src="images/bro-old-1.webp" width="794" height="1123" loading="lazy" alt="Before: What you'll get"></div><div class="pg"><img src="images/bro-old-2.webp" width="794" height="1123" loading="lazy" alt="Before: the pricing page"></div><div class="pg"><img src="images/bro-old-3.webp" width="794" height="1123" loading="lazy" alt="Before: Who it's for"></div></div></div>
+          <div class="tab-panel on" role="tabpanel" data-caption="After: the cover, what you'll get, pricing and who it's for. Details still to confirm, like cohort dates, are marked to fill in rather than made up."><div class="pages m"><div class="pg"><img src="images/bro-aqua-0.webp" width="794" height="1123" loading="lazy" alt="After: the cover"></div><div class="pg"><img src="images/bro-aqua-1.webp" width="794" height="1123" loading="lazy" alt="After: What you'll get"></div><div class="pg"><img src="images/bro-aqua-2.webp" width="794" height="1123" loading="lazy" alt="After: the pricing page"></div><div class="pg"><img src="images/bro-aqua-3.webp" width="794" height="1123" loading="lazy" alt="After: Who it's for"></div></div></div>
+        </div>
+        <figcaption class="caption" aria-live="polite">After: the cover, what you'll get, pricing and who it's for. Details still to confirm, like cohort dates, are marked to fill in rather than made up.</figcaption>
+      </figure>
+
       <h2 class="sl" id="how-built">How I built it</h2>
       <p>Each skill is a self-contained package, and building them was as much a systems problem as a design one. A few principles run through all of them.</p>
       <p><strong>A single source of truth.</strong> For the product system, I extracted components and tokens directly from Figma using MCP tooling, so the skill stays in step with the design files. <span class="todo">[?] Were the marketing, sales and reports skills built the same way?</span></p>

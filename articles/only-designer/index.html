@@ -271,6 +271,23 @@
   .takeaways li::before { content: counter(t, decimal-leading-zero); font-size: 13px; line-height: 30px; color: var(--muted); font-variant-numeric: tabular-nums; }
   .takeaways strong { font-weight: 500; }
 
+  /* ---------- Brochure: before, and three colourways after ---------- */
+  .covers { display: grid; grid-template-columns: 1fr; gap: 20px; padding: 20px 16px; border-radius: 12px; background: var(--panel); }
+  @container (min-width: 640px) { .covers { grid-template-columns: minmax(0, 1fr) minmax(0, 3fr); gap: 32px; padding: 28px; } .covers .after { border-left: 1px solid #dcdfe2; padding-left: 32px; } }
+  @container (max-width: 639px) { .covers .before .pg { max-width: 50%; } }
+  .covers .glab { display: block; margin-bottom: 12px; font-size: 13px; line-height: 20px; color: var(--muted); }
+  .covers .row3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .pg img { width: 100%; border-radius: 3px; box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 10px 28px rgba(0,0,0,.10); }
+  .covers .before img { filter: saturate(.9); }
+  .cw { display: flex; align-items: center; gap: 4px; margin-top: 10px; font-size: 12px; line-height: 16px; color: var(--body); }
+  .cw i { width: 10px; height: 10px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0,0,0,.08); }
+  .cw i + i { margin-left: -6px; margin-right: 4px; }
+  @container (max-width: 639px) { .cw { font-size: 11px; } }
+  html.motion .covers .pg { opacity: 0; transform: translateY(14px); }
+  html.motion .covers.in .pg { opacity: 1; transform: none; transition: opacity .7s var(--expo), transform .9s var(--expo); transition-delay: calc(var(--k) * 140ms + 100ms); }
+  .pages { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 20px 16px; border-radius: 12px; background: var(--panel); }
+  @container (min-width: 640px) { .pages { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding: 28px; } }
+
 
   /* ---------- Motion: only landmarks move; reading text is never held back ---------- */
   .sl .line { display: block; overflow: clip; padding-bottom: .12em; margin-bottom: -.12em; }
@@ -310,7 +327,7 @@
       <a class="back" href="#" data-home>← Back to home</a>
       <header class="ahead">
         <span class="ahead-bg" aria-hidden="true"></span>
-        <div class="row rv" style="--d:250ms"><span class="tagpill">AI Transformation</span><span>7 min read</span></div>
+        <div class="row rv" style="--d:250ms"><span class="tagpill">AI Transformation</span><span>8 min read</span></div>
         <h1 class="sl" style="--d:320ms">The Only Designer in the Room</h1>
         <p class="dek rv" style="--d:480ms">How I scaled design across sales, marketing and client delivery.</p>
         <div class="row by rv" style="--d:560ms"><span>Olaide · Senior product designer at Strategyzer</span><span>Sep 26, 2026</span></div>
@@ -369,6 +386,34 @@
       <h3 class="sl">Client delivery: reports</h3>
       <p>The reporting skill governs how findings and data are structured and visualized for external clients. The delivery and client relations teams no longer spend time on layout or on how a figure should be presented, so their attention goes to the substance of what the client needs to know.</p>
       <figure><div class="ph">[?] Before and after: a report page in the old format next to one made with the reporting skill</div></figure>
+
+      <h3 class="sl">Brochures: one brief, three versions</h3>
+      <p>The same skill makes our print brochures. Below is the brochure for one of our masterclasses, Enabling Organizational Change Through Momentum and Buy-In, before and after. <span class="todo">[?] Who made the new versions: you, or the sales team on their own?</span></p>
+      <p>I built the skill to offer variations using our brand's primary colours. From one set of content, Claude produced three versions, each in a different colour pairing, with the layout and structure already in place. The old brochure didn't look like the rest of our brand. The new ones are clean, editorial and professional.</p>
+      <figure class="wide">
+        <div class="covers dg">
+          <div class="grp before"><span class="glab">Before</span><div class="pg" style="--k:0"><img src="images/bro-old-0.webp" width="794" height="1123" loading="lazy" alt="The old masterclass brochure cover: a pale aqua panel with the title in blue, a list of benefits and a photo of the facilitator on stage."></div></div>
+          <div class="grp after"><span class="glab">After · three colourways from one brief</span>
+            <div class="row3">
+              <div class="pg" style="--k:1"><img src="images/bro-aqua-0.webp" width="794" height="1123" loading="lazy" alt="New cover, aqua on purple: a large editorial title, short summary and a portrait of the facilitator."><span class="cw"><i style="background:#46116a"></i><i style="background:#4dcdd6"></i>Aqua on purple</span></div>
+              <div class="pg" style="--k:2"><img src="images/bro-blue-0.webp" width="794" height="1123" loading="lazy" alt="New cover, blue on yellow, same layout."><span class="cw"><i style="background:#ffd541"></i><i style="background:#0024de"></i>Blue on yellow</span></div>
+              <div class="pg" style="--k:3"><img src="images/bro-yellow-0.webp" width="794" height="1123" loading="lazy" alt="New cover, yellow on blue, same layout."><span class="cw"><i style="background:#0024de"></i><i style="background:#ffd541"></i>Yellow on blue</span></div>
+            </div>
+          </div>
+        </div>
+        <figcaption class="caption">The old cover, and the three versions the skill produced from the same content.</figcaption>
+      </figure>
+      <figure class="wide" data-tabs>
+        <div class="tablist" role="tablist" aria-label="Inside the brochure">
+          <button type="button" role="tab" aria-selected="false" tabindex="-1">Before</button>
+          <button type="button" role="tab" aria-selected="true">After</button>
+        </div>
+        <div class="tab-stage">
+          <div class="tab-panel" role="tabpanel" data-caption="Before: the same four pages in the old brochure."><div class="pages"><div class="pg"><img src="images/bro-old-0.webp" width="794" height="1123" loading="lazy" alt="Before: the cover"></div><div class="pg"><img src="images/bro-old-1.webp" width="794" height="1123" loading="lazy" alt="Before: What you'll get"></div><div class="pg"><img src="images/bro-old-2.webp" width="794" height="1123" loading="lazy" alt="Before: the pricing page"></div><div class="pg"><img src="images/bro-old-3.webp" width="794" height="1123" loading="lazy" alt="Before: Who it's for"></div></div></div>
+          <div class="tab-panel on" role="tabpanel" data-caption="After: the cover, what you'll get, pricing and who it's for. Details still to confirm, like cohort dates, are marked to fill in rather than made up."><div class="pages m"><div class="pg"><img src="images/bro-aqua-0.webp" width="794" height="1123" loading="lazy" alt="After: the cover"></div><div class="pg"><img src="images/bro-aqua-1.webp" width="794" height="1123" loading="lazy" alt="After: What you'll get"></div><div class="pg"><img src="images/bro-aqua-2.webp" width="794" height="1123" loading="lazy" alt="After: the pricing page"></div><div class="pg"><img src="images/bro-aqua-3.webp" width="794" height="1123" loading="lazy" alt="After: Who it's for"></div></div></div>
+        </div>
+        <figcaption class="caption" aria-live="polite">After: the cover, what you'll get, pricing and who it's for. Details still to confirm, like cohort dates, are marked to fill in rather than made up.</figcaption>
+      </figure>
 
       <h2 class="sl" id="how-built">How I built it</h2>
       <p>Each skill is a self-contained package, and building them was as much a systems problem as a design one. A few principles run through all of them.</p>

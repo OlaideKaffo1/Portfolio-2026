@@ -112,3 +112,20 @@
   .takeaways li { counter-increment: t; display: grid; grid-template-columns: 32px minmax(0, 1fr); padding: 16px 0; border-bottom: 1px solid var(--line); margin: 0 !important; }
   .takeaways li::before { content: counter(t, decimal-leading-zero); font-size: 13px; line-height: 30px; color: var(--muted); font-variant-numeric: tabular-nums; }
   .takeaways strong { font-weight: 500; }
+
+  /* ---------- Brochure: before, and three colourways after ---------- */
+  .covers { display: grid; grid-template-columns: 1fr; gap: 20px; padding: 20px 16px; border-radius: 12px; background: var(--panel); }
+  @container (min-width: 640px) { .covers { grid-template-columns: minmax(0, 1fr) minmax(0, 3fr); gap: 32px; padding: 28px; } .covers .after { border-left: 1px solid #dcdfe2; padding-left: 32px; } }
+  @container (max-width: 639px) { .covers .before .pg { max-width: 50%; } }
+  .covers .glab { display: block; margin-bottom: 12px; font-size: 13px; line-height: 20px; color: var(--muted); }
+  .covers .row3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .pg img { width: 100%; border-radius: 3px; box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 10px 28px rgba(0,0,0,.10); }
+  .covers .before img { filter: saturate(.9); }
+  .cw { display: flex; align-items: center; gap: 4px; margin-top: 10px; font-size: 12px; line-height: 16px; color: var(--body); }
+  .cw i { width: 10px; height: 10px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0,0,0,.08); }
+  .cw i + i { margin-left: -6px; margin-right: 4px; }
+  @container (max-width: 639px) { .cw { font-size: 11px; } }
+  html.motion .covers .pg { opacity: 0; transform: translateY(14px); }
+  html.motion .covers.in .pg { opacity: 1; transform: none; transition: opacity .7s var(--expo), transform .9s var(--expo); transition-delay: calc(var(--k) * 140ms + 100ms); }
+  .pages { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 20px 16px; border-radius: 12px; background: var(--panel); }
+  @container (min-width: 640px) { .pages { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding: 28px; } }
