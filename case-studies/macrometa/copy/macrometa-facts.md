@@ -4,7 +4,7 @@ The source of truth for case study 4. Everything on the page has to trace back t
 
 ## Context
 - **Company:** Macrometa, a cloud development platform. Spelled with an "e", as in the write-up.
-- **When:** 2022 to 2023. Olaide was there about a year, and this project took about 3 months.
+- **When:** Olaide was at Macrometa from January to December 2022. This project took the first three months of 2022.
 - **Role:** Product designer. Worked with the Head of Design (both hired around the same time), the Head of Product and engineers.
 - **Ownership:**
   - **Olaide's own work:** onboarding and activation.
@@ -13,10 +13,10 @@ The source of truth for case study 4. Everything on the page has to trace back t
 
 ## Results (measured with product analytics, after 6 months of use)
 - **Customer retention:** up 54%. This is the headline number.
-- **Support tickets:** down 70% (Olaide's final answer, replacing the write-up's 72%). Customer success confirmed the drop.
+- **Support tickets:** down 55% (Olaide's final answer, replacing 70% and the write-up's 72%). Customer success confirmed the drop.
 - **Onboarding:** 73% faster, measured as sign-up completion in product analytics.
 - **User satisfaction:** up 50%. This replaces the write-up's conflicting 80% and 40%.
-- **Revenue:** $2.3M in annual recurring revenue. Keep it. Olaide links it to better onboarding, which marketing also promoted. Describe it as a result the work contributed to, not one it caused alone.
+- **Revenue:** $2M in revenue that year (Olaide's final answer, replacing the write-up's $2.3M ARR, so as not to overstate it). Olaide links it to better onboarding, which marketing also promoted. Describe it as a result the work contributed to, not one it caused alone.
 - **Templates:** 85% adoption, confirmed. Olaide's reason: it was easy to click a template and add it to whatever you were creating.
 - **Sales leads:** up 55%. This replaces the write-up's 87%.
 
