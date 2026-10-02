@@ -52,7 +52,22 @@
 
       <h3 class="sl">Marketing: web pages</h3>
       <p>The marketing skill contains our full website design system: brand assets, the TWK Everett typeface, semantic tokens, component rules and layout patterns. The team writes the content, hands it to Claude and gets back a page that follows the system from the first draft, with no freelancer brief required.</p>
-      <figure><div class="ph">[?] Before and after: a page from the freelancer process next to a page made with the marketing skill</div></figure>
+      <p>Our Events page shows what that looks like. The first version was built in Webflow by a developer. The second was made by Claude in one go, using the marketing skill, and it's what we used to update the page.</p>
+      <figure class="wide">
+        <div class="clips wide-clips">
+          <div class="clip m"><span class="lab">Before · Webflow developer</span><video poster="images/events-before-poster.webp" width="1600" height="906" muted loop playsinline preload="metadata" aria-label="Screen recording of the earlier Events page: an aqua hero, What's happening at Strategyzer, with an illustration of people and an email sign-up, then an Upcoming Webinar list with a split yellow and aqua event card."><source src="images/events-before.webm" type="video/webm"><source src="images/events-before.mp4" type="video/mp4"></video></div>
+          <div class="clip m" style="--d:180ms"><span class="lab">After · Claude with the marketing skill</span><video poster="images/events-after-poster.webp" width="1600" height="906" muted loop playsinline preload="metadata" aria-label="Screen recording of the Events page made by Claude: a blue hero with a yellow headline, Strategy you can put to work the next morning, a sign-up card, then an Upcoming events and webinars list with split event cards."><source src="images/events-after.webm" type="video/webm"><source src="images/events-after.mp4" type="video/mp4"></video></div>
+        </div>
+        <figcaption class="caption">Each version uses a different pairing of our brand colours. The Claude version still shows its "Events · HTML" tab, just as it came out of Claude.</figcaption>
+      </figure>
+      <p>Look closely at the event listings. The date sits on the left, the card splits into an image half and a colour half, and the label, title, description and outlined button sit in the same places. Claude matched the developer's component because the skill holds the design system's rules, and it followed them exactly.</p>
+      <figure class="wide">
+        <div class="match">
+          <div class="cell m"><span class="lab">Webflow developer</span><img src="images/events-card-before.webp" width="1400" height="636" loading="lazy" alt="Event listing from the Webflow page: Oct 7 on the left, then a card split into a yellow half with three speaker photos and an aqua half with Webinars, The Playbook Behind Irresistible Value Propositions, a short description and a Register now button."></div>
+          <div class="cell m" style="--d:180ms"><span class="lab">Claude with the marketing skill</span><img src="images/events-card-after.webp" width="1400" height="636" loading="lazy" alt="Event listing from the Claude page: Nov 12 on the left, then a card split into a photo half and an aqua half with Virtual masterclass, Mastering Value Propositions, a short description and a Get tickets button."></div>
+        </div>
+        <figcaption class="caption">The same event card, built twice: once by hand in Webflow, once by Claude from the design system.</figcaption>
+      </figure>
 
       <h3 class="sl">Sales: decks</h3>
       <p>The sales skill encodes how a Strategyzer deck should look and flow, from slide layouts and visual hierarchy to how a story builds for a prospect. A rep brings the content, and Claude produces a polished deck in about thirty minutes. Reps now turn around several decks a day.</p>

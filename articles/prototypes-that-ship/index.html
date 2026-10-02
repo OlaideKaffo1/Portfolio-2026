@@ -293,6 +293,15 @@
   .nda svg { margin-top: 4px; }
   .prose .nda p { margin: 0; font-size: 15px; line-height: 24px; color: var(--body); }
 
+  /* ---------- Website: two recordings, then the matching component ---------- */
+  .wide-clips .clip { padding: 48px 12px 12px; }
+  .wide-clips .clip video { max-height: none; width: 100%; }
+  .match { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  @container (min-width: 760px) { .match { grid-template-columns: 1fr 1fr; } }
+  .match .cell { position: relative; padding: 48px 12px 12px; border-radius: 12px; background: var(--panel); }
+  .match .cell img { width: 100%; border-radius: 8px; box-shadow: 0 0 0 1px var(--line); }
+  .match .lab { position: absolute; left: 12px; top: 12px; border-radius: 999px; padding: 4px 10px; background: #fff; font-size: 12px; line-height: 16px; color: var(--ink); box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+
 
   /* ---------- Motion: only landmarks move; reading text is never held back ---------- */
   .sl .line { display: block; overflow: clip; padding-bottom: .12em; margin-bottom: -.12em; }
