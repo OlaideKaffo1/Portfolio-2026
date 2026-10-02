@@ -24,10 +24,22 @@ The chat follows the voice rules in the Ask Olaide spec: short first, one exampl
 | October 2025 to now | Strategyzer | Senior product designer. The only designer, alongside two engineers and a head of product. Strattie AI, the Playbook Recommender, the program admin redesign, and the AI design skills for sales, marketing and client delivery. |
 | January 2023 to September 2025 | Fount | Designed Fount end to end, and a year later Fount AI. |
 | January 2022 to December 2022 | Macrometa | Product designer. Owned onboarding and activation, and contributed significantly to the UI refresh. |
-| July 2021 to December 2021 | MTech | **[?]** What was your role and focus there? |
+| July 2021 to December 2021 | Emtech | Product designer on a fintech MVP, from concept to launch. See below. |
 | January 2020 to July 2021 | Freelance | **[?]** What kind of work and clients, in a line or two? |
 
 January 2020 to now is nearly seven years in product design. **[?]** Should the chat say "nearly seven years", or "six years" as your earlier homepage line did?
+
+## Emtech, in more detail
+
+Emtech is a fintech company working on central bank digital currency: helping businesses move from traditional money to digital currency. **[?]** Confirm this one-line description is accurate.
+
+> I designed Emtech's MVP from concept to launch. It was fast startup work: rapid iterations, close feedback from stakeholders, and a lot of time talking directly with our users.
+>
+> Financial technology is complex and regulated, so I learned to design for clarity and trust while keeping regulatory requirements in view. I also helped the team prioritise features and use its resources well, and helped build a design culture where there wasn't one yet.
+>
+> My design work contributed to Emtech's seed round, which raised about $4 million.
+
+**How the chat should use the $4M:** always as "contributed to a seed round of about $4 million", never as "I raised $4 million". The round belongs to the company, the same way revenue belongs to a product.
 
 ## Education
 
