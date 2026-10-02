@@ -322,7 +322,7 @@ S.append('''
           </div>
           <figcaption class="caption">How we measured: product analytics and customer success, after six months of use.</figcaption>
         </figure>
-        <p>User satisfaction rose 50%, and sales leads rose 55%. Macrometa made $2M in revenue that year, and better onboarding was part of that story: marketing promoted the new flow to bring people in.</p>
+        <p>User satisfaction rose 50%, and sales leads rose 57%. Macrometa made $2M in revenue that year, and better onboarding was part of that story: marketing promoted the new flow to bring people in.</p>
       </section>
 
       <section class="sec" id="how" data-title="How I work">

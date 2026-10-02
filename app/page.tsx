@@ -38,12 +38,12 @@ const PROJECTS: Project[] = [
     href: "#",
   },
   {
-    company: "FOUNT . ENTERPRISE SAAS",
-    title: "From 20% to 82% : Making employees want to answer surveys again",
+    company: "MACROMETA . DEVELOPER TOOLING",
+    title: "No developer left to figure it out alone",
     description:
-      "I led the design of Fount's Sass product from zero to one, turning ignored surveys into a product that cut turnover by 24%.",
-    image: "/images/projects/fount-enterprise.webp",
-    imageAlt: "Fount welcome dashboard with pulse micro surveys and a data-driven heatmap",
+      "I led a new onboarding for Macrometa's developer platform, built on templates, sample data and tutorials. Customer retention rose 54%.",
+    image: "/images/projects/macrometa.webp",
+    imageAlt: "The Macrometa welcome, with three ways to start: create a collection, start with a blueprint, or get in touch",
     href: "#",
   },
 ];

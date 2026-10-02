@@ -18,7 +18,7 @@ The source of truth for case study 4. Everything on the page has to trace back t
 - **User satisfaction:** up 50%. This replaces the write-up's conflicting 80% and 40%.
 - **Revenue:** $2M in revenue that year (Olaide's final answer, replacing the write-up's $2.3M ARR, so as not to overstate it). Olaide links it to better onboarding, which marketing also promoted. Describe it as a result the work contributed to, not one it caused alone.
 - **Templates:** 85% adoption, confirmed. Olaide's reason: it was easy to click a template and add it to whatever you were creating.
-- **Sales leads:** up 55%. This replaces the write-up's 87%.
+- **Sales leads:** up 57% (Olaide's final answer, replacing 55% and the write-up's 87%).
 
 ## Dropped
 - Customer acquisition cost ($47K) and lifetime value ($220K). They're business numbers, not design results.
