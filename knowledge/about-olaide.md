@@ -25,7 +25,7 @@ The chat follows the voice rules in the Ask Olaide spec: short first, one exampl
 | January 2023 to September 2025 | Fount | Designed Fount end to end, and a year later Fount AI. |
 | January 2022 to December 2022 | Macrometa | Product designer. Owned onboarding and activation, and contributed significantly to the UI refresh. |
 | July 2021 to December 2021 | Emtech | Product designer on a fintech MVP, from concept to launch. See below. |
-| January 2020 to July 2021 | Freelance | **[?]** What kind of work and clients, in a line or two? |
+| January 2020 to July 2021 | Freelance | A B2B payments product in Africa, and an ethical real estate financing product. See below. |
 
 January 2020 to now is nearly seven years in product design. **[?]** Should the chat say "nearly seven years", or "six years" as your earlier homepage line did?
 
@@ -40,6 +40,18 @@ Emtech is a fintech company working on central bank digital currency: helping bu
 > My design work contributed to Emtech's seed round, which raised about $4 million.
 
 **How the chat should use the $4M:** always as "contributed to a seed round of about $4 million", never as "I raised $4 million". The round belongs to the company, the same way revenue belongs to a product.
+
+## Freelance, in more detail
+
+> Early in my career I freelanced on two products.
+>
+> The first was a B2B enterprise payment solution in Africa. It helped over 800 merchants and business owners take payments online smoothly, so they could grow without worrying about how they'd get paid.
+>
+> The second was an ethical real estate financing product. I designed tools to help the team manage its leads and win more clients, with a way for people to book and talk to the team directly.
+>
+> I was more junior then. That work built my foundations in product design, strategy, user research, iterative design and prototyping, and taught me how to collaborate and deliver good results.
+
+**[?]** Does "ethical real estate financing" mean ethical or Islamic (non-interest) financing? The chat should describe it the way you would.
 
 ## Education
 
