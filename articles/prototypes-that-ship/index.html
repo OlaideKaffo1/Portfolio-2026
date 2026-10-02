@@ -288,6 +288,11 @@
   .pages { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 20px 16px; border-radius: 12px; background: var(--panel); }
   @container (min-width: 640px) { .pages { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding: 28px; } }
 
+  /* ---------- A quiet note where work can't be shown ---------- */
+  .nda { display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 12px; margin-top: 24px; padding: 16px 18px; border-radius: 10px; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); color: var(--muted); }
+  .nda svg { margin-top: 4px; }
+  .prose .nda p { margin: 0; font-size: 15px; line-height: 24px; color: var(--body); }
+
 
   /* ---------- Motion: only landmarks move; reading text is never held back ---------- */
   .sl .line { display: block; overflow: clip; padding-bottom: .12em; margin-bottom: -.12em; }
