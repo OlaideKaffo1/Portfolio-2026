@@ -8,12 +8,12 @@ from PIL import Image
 from PIL import ImageFilter
 import os, shutil
 
-# Image prep from source/. App screens are trimmed to the app. The four collection pop-ups stay whole, set back in their frame (see diagrams.css).
+# Image prep from source/. App screens are trimmed to the app. The collection pop-ups and function detail stay whole, set back in their frame (see diagrams.css).
 # Tight crops only where needed: the survey (respondent emails), the spreadsheet (app chrome), and empty space. Boxes are source pixels.
 CROP = {
     "new-collection-data": (43, 152, 1957, 1530), "new-managed-keys": (43, 152, 1957, 1530),
     "new-collections-empty": (43, 152, 1957, 1292), "new-dashboard": (40, 138, 1781, 1218),
-    "new-function-detail": (473, 52, 1527, 1368), "old-graphs": (0, 0, 2000, 640),
+    "old-graphs": (0, 0, 2000, 640),
     "research-survey": (0, 152, 1164, 1806), "research-competitive": (58, 150, 1262, 605),
 }
 BLUR = {"new-query-worker": [(60, 955, 320, 1010)]}  # a staff email in the account menu

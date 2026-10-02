@@ -232,5 +232,5 @@
   html.motion .ai-bars .funnel .row:nth-child(6) .fill { transition-delay: 1250ms; }
   html.motion .ai-bars .funnel .row:nth-child(3) .fill { transition-delay: 600ms; }
   html.motion .ai-bars .funnel .row:nth-child(2) .fill { transition-delay: 250ms; }
-  /* Macrometa: the four collection pop-ups sit back in their frame, so the dimmed app around them reads as context */
-  @container (min-width: 700px) { #bp-p2 .xp-media.framed, #bp-p3 .xp-media.framed, #bp-p4 .xp-media.framed, #bp-p5 .xp-media.framed { padding: 56px 11% 68px; } }
+  /* Macrometa: the collection pop-ups and function detail sit back in their frame, so the dimmed app around them reads as context */
+  @container (min-width: 700px) { #bp-p2 .xp-media.framed, #bp-p3 .xp-media.framed, #bp-p4 .xp-media.framed, #bp-p5 .xp-media.framed, #ui-p4 .xp-media.framed { padding: 56px 11% 68px; } }
