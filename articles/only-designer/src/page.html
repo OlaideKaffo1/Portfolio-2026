@@ -1,0 +1,119 @@
+    <div class="wrap">
+      <a class="back" href="#" data-home>← Back to home</a>
+      <header class="ahead">
+        <span class="ahead-bg" aria-hidden="true"></span>
+        <div class="row rv" style="--d:250ms"><span class="tagpill">AI Transformation</span><span>__READ__</span></div>
+        <h1 class="sl" style="--d:320ms">The Only Designer in the Room</h1>
+        <p class="dek rv" style="--d:480ms">How I scaled design across sales, marketing and client delivery.</p>
+        <div class="row by rv" style="--d:560ms"><span>Olaide · Senior product designer at Strategyzer</span><span>Sep 26, 2026</span></div>
+      </header>
+      <figure class="cover trio dg" aria-label="The three skills: the website design system, sales proposals, and brochures and PDFs.">
+        <div class="sheet s1"><img src="images/skill-website-col.webp" width="1000" height="850" alt=""></div>
+        <div class="sheet s2"><img src="images/skill-sales-col.webp" width="1000" height="830" alt=""></div>
+        <div class="sheet s3"><img src="images/skill-reports-col.webp" width="1000" height="830" alt=""></div>
+        <span class="tag t1">Marketing</span><span class="tag t2">Sales</span><span class="tag t3">Client delivery</span>
+      </figure>
+    </div>
+
+    <article class="prose">
+      <p class="lede">A few months ago, a sales deck at Strategyzer took three to four days to get right. Today a rep can go from finished content to a polished, on-brand deck in about thirty minutes.</p>
+      <div class="stat"><span class="from">3–4 days</span><span class="arr" aria-hidden="true">→</span><span class="to">About 30 minutes</span><span class="what">To turn finished content into a sales deck</span></div>
+      <p>That change didn't come from new hires or outside help. It came from a set of Claude skills I built that give our sales, marketing and client delivery teams direct access to our design system, including the decisions a designer would normally make for them.</p>
+      <p>My role at Strategyzer is senior product designer, and my remit is the product. The website, sales decks and client reports sit outside it. This piece covers why I took them on anyway, how I built the system, and what it has done for the business.</p>
+
+      <h2 class="sl" id="nobody-owned">Design work nobody owned</h2>
+      <p>Strategyzer's product team is small: two developers, a head of product and me. I was hired to design the product, and that is where my time is meant to go. Everything else a customer sees, from web pages to sales decks to client reports, had no designer attached to it.</p>
+      <p>Each team had found its own way around that.</p>
+      <p><strong>Marketing</strong> brought in a freelance designer for every new page on the website. Each page came with a brief, rounds of revisions, a cost and a wait.</p>
+      <p><strong>Sales</strong> built decks in PowerPoint without design support. Getting a deck to a standard the team was proud of took three to four days, and in sales that time is expensive. A lead who waits most of a week for a proposal is a lead that cools.</p>
+      <p><strong>Customer delivery and client relations</strong> produced reports for external clients. Consultants whose real value is strategic insight were spending hours on formatting and on deciding how to present data, and any inconsistency went straight to a paying client.</p>
+      <p>None of this was a failure on anyone's part. These teams had the expertise and the content. What they lacked was a design system built for the way they work. I could see the gap clearly, and my background in design and hands-on work with AI put me in a good position to close it.</p>
+
+      <h2 class="sl" id="judgment">Encoding design judgment</h2>
+      <p>A design system usually means tokens, components and a well-kept Figma library. That is valuable for designers and does very little for a sales rep with a proposal due on Friday. A component library doesn't assemble itself into a deck.</p>
+      <p>The harder thing to hand over is judgment: the many small decisions a designer makes almost automatically. Which layout suits this content, when a chart communicates better than a table, how much weight a heading needs, what belongs in a hero and where it sits. If these teams were going to produce design-quality work without a designer, the system had to make those calls for them.</p>
+      <p>Claude skills made that practical. A skill is a packaged set of instructions and assets that Claude loads whenever it does a particular kind of work, which let me capture how our brand behaves as well as how it looks. Guidelines such as "Regular weight everywhere, Bold only for chips" or "full-bleed primary-color heroes with the illustration on the right" became defaults Claude applies every time.</p>
+      <p>I had already proven the approach on our product UI, where I turned our FondUI design system into a self-contained skill extracted directly from Figma. The open question was whether it would hold up for teams who had never opened Figma.</p>
+
+      <h2 class="sl" id="three-skills" data-toc="Three skills">Three skills, built around three outputs</h2>
+      <p>I built a separate skill for each team, designed around the thing that team ships.</p>
+      <figure class="wide">
+        <div class="sys dg">
+          <div class="root"><span class="k">One design system</span><strong>Strategyzer's brand, written down</strong><span class="s">Brand assets, TWK Everett, semantic tokens and explicit rules</span></div>
+          <div class="bus" aria-hidden="true"></div>
+          <ol class="cols">
+            <li style="--k:0"><div class="card"><span class="k">Skill</span><strong>Website design system</strong></div><span class="down" aria-hidden="true"></span><div class="out"><span class="k">Ships</span><strong>Web pages</strong></div><span class="who">Used by Marketing</span></li>
+            <li style="--k:1"><div class="card"><span class="k">Skill</span><strong>Sales proposals</strong></div><span class="down" aria-hidden="true"></span><div class="out"><span class="k">Ships</span><strong>Sales decks</strong></div><span class="who">Used by Sales</span></li>
+            <li style="--k:2"><div class="card"><span class="k">Skill</span><strong>Brochures and PDFs</strong></div><span class="down" aria-hidden="true"></span><div class="out"><span class="k">Ships</span><strong>Client reports</strong></div><span class="who">Used by Client delivery</span></li>
+          </ol>
+        </div>
+        <figcaption class="caption">One system underneath, one skill per team, each built around what that team sends out.</figcaption>
+      </figure>
+
+      <h3 class="sl">Marketing: web pages</h3>
+      <p>The marketing skill contains our full website design system: brand assets, the TWK Everett typeface, semantic tokens, component rules and layout patterns. The team writes the content, hands it to Claude and gets back a page that follows the system from the first draft, with no freelancer brief required.</p>
+      <figure><div class="ph">[?] Before and after: a page from the freelancer process next to a page made with the marketing skill</div></figure>
+
+      <h3 class="sl">Sales: decks</h3>
+      <p>The sales skill encodes how a Strategyzer deck should look and flow, from slide layouts and visual hierarchy to how a story builds for a prospect. A rep brings the content, and Claude produces a polished deck in about thirty minutes. Reps now turn around several decks a day.</p>
+      <figure><div class="ph">[?] Before and after: a PowerPoint deck next to a deck made with the sales skill</div></figure>
+
+      <h3 class="sl">Client delivery: reports</h3>
+      <p>The reporting skill governs how findings and data are structured and visualized for external clients. The delivery and client relations teams no longer spend time on layout or on how a figure should be presented, so their attention goes to the substance of what the client needs to know.</p>
+      <figure><div class="ph">[?] Before and after: a report page in the old format next to one made with the reporting skill</div></figure>
+
+      <h2 class="sl" id="how-built">How I built it</h2>
+      <p>Each skill is a self-contained package, and building them was as much a systems problem as a design one. A few principles run through all of them.</p>
+      <p><strong>A single source of truth.</strong> For the product system, I extracted components and tokens directly from Figma using MCP tooling, so the skill stays in step with the design files. <span class="todo">[?] Were the marketing, sales and reports skills built the same way?</span></p>
+      <p><strong>Semantic tokens.</strong> Color, type, spacing and components are organized in semantic hierarchies and exposed as kebab-case CSS custom properties. Claude selects each value by its role in the layout, which keeps output consistent across every page, deck and report.</p>
+      <p><strong>Embedded brand assets.</strong> Brand assets and our TWK Everett fonts ship inside the skills, so Claude never substitutes a generic default.</p>
+      <p><strong>Explicit rules.</strong> Type weights, hero layouts, navigation order and component usage are written as firm rules. Loose guidance is where AI output starts to drift, so I kept room for interpretation to a minimum.</p>
+      <p><strong>Testing with the teams.</strong> <span class="todo">[?] How you tested outputs with marketing, sales and delivery, and one thing you changed based on their feedback.</span></p>
+      <p><strong>Versioning.</strong> Each skill is maintained centrally and versioned; the marketing system is currently on v2.3. When a rule changes, I update it once and every team picks it up in their next session.</p>
+      <figure class="wide" data-tabs>
+        <div class="tablist" role="tablist" aria-label="Inside each skill">
+          <button type="button" role="tab" aria-selected="true">Marketing</button>
+          <button type="button" role="tab" aria-selected="false" tabindex="-1">Sales</button>
+          <button type="button" role="tab" aria-selected="false" tabindex="-1">Reports</button>
+        </div>
+        <div class="tab-stage">
+          <div class="tab-panel on" role="tabpanel" data-caption="The website skill, on v2.3. It tells Claude to resolve every colour, size and font to a named token, and never to hardcode one."><div class="frame dark m"><img src="images/skill-website-col.webp" width="1000" height="850" loading="lazy" alt="The website design system skill, v2.3. Its description says it governs all marketing and web pages, and its first rules tell Claude to resolve every visual value to a named token and to read the files in a set order."></div></div>
+          <div class="tab-panel" role="tabpanel" data-caption="The sales skill. It builds proposal decks on a locked design system, using a story structure taken from six real proposals. Client names are blurred."><div class="frame dark"><img src="images/skill-sales-col.webp" width="1000" height="830" loading="lazy" alt="The sales proposals skill. It builds client-facing proposal decks on a locked design system, and its first steps tell Claude which files to read and never to invent a value. Client names are blurred."></div></div>
+          <div class="tab-panel" role="tabpanel" data-caption="The brochures and PDFs skill, behind client reports. Documents are built in code, so the grid, type scale and weights are enforced, not hoped for."><div class="frame dark"><img src="images/skill-reports-col.webp" width="1000" height="830" loading="lazy" alt="The brochures and PDFs skill. It covers brochures, one-pagers, programme overviews and client proposals, and explains that documents are built as HTML and CSS and rendered to PDF, so the grid and type scale can be enforced."></div></div>
+        </div>
+        <figcaption class="caption" aria-live="polite">The website skill, on v2.3. It tells Claude to resolve every colour, size and font to a named token, and never to hardcode one.</figcaption>
+      </figure>
+
+      <h2 class="sl" id="impact">The impact</h2>
+      <p>The most visible change is speed. Work that used to wait on a freelancer or a multi-day PowerPoint effort now moves as fast as the content is ready.</p>
+      <figure class="wide">
+        <div class="ba dg" role="table" aria-label="Before and after, by team">
+          <div class="hd" role="row"><span role="columnheader">Team</span><span role="columnheader">Before</span><span></span><span role="columnheader">After</span></div>
+          <div class="r" role="row" style="--k:0"><span class="t" role="rowheader">Sales</span><span class="b" role="cell" data-l="Before">3–4 days per deck, built in PowerPoint</span><span class="a" role="cell" data-l="After">About 30 minutes per deck, and several decks a day</span></div>
+          <div class="r" role="row" style="--k:1"><span class="t" role="rowheader">Marketing</span><span class="b" role="cell" data-l="Before">A freelance designer for each new page</span><span class="a" role="cell" data-l="After">Pages made from content, on-brand from the first draft</span></div>
+          <div class="r" role="row" style="--k:2"><span class="t" role="rowheader">Client delivery</span><span class="b" role="cell" data-l="Before">Hours per report on formatting and data presentation</span><span class="a" role="cell" data-l="After">Layout and visuals handled by the skill</span></div>
+        </div>
+      </figure>
+      <p>Quality improved alongside speed. Decks, pages and reports are more polished, the language is sharper, and the layouts are cleaner and more consistent. A prospect reading a sales deck and a client reading a report now see the same Strategyzer.</p>
+      <p>For sales, the time saved compounds into revenue. Reps send more decks, reach more leads and get proposals in front of prospects while interest is still high, which means a larger pipeline that moves faster. <span class="todo">[?] Numbers: decks per week before and after, pipeline growth, deal cycle time, any revenue figure you can share.</span></p>
+      <blockquote class="todo-q"><p>[?] Quote from a sales team member</p><cite>[?] Name, Role</cite></blockquote>
+      <p>On the delivery side, every report now meets the same standard regardless of who prepared it, and the team's time goes into analysis. <span class="todo">[?] A number: time saved per report, or reports delivered per month.</span></p>
+      <blockquote class="todo-q"><p>[?] Quote from customer delivery or client relations</p><cite>[?] Name, Role</cite></blockquote>
+      <p>The work also changed my role. I'm still a senior product designer and I still own the product. Alongside that, I now act as design lead for the wider company, responsible for how design shows up wherever Strategyzer meets a customer. I took that on by choice, and it has become one of the most rewarding parts of my work.</p>
+
+      <h2 class="sl" id="took-away">What I took away</h2>
+      <ol class="takeaways">
+        <li><span><strong>Internal teams deserve the same design rigor as customers.</strong> Treating marketing, sales and delivery as users, each with their own jobs and constraints, shaped every decision in these skills.</span></li>
+        <li><span><strong>Judgment is harder to hand over than assets.</strong> The library was the easy part. The real work was writing down the decisions I make instinctively.</span></li>
+        <li><span><strong>Constraints build trust.</strong> The stricter the rules, the more consistent the output, and the more readily teams relied on it.</span></li>
+        <li><span><strong>A system needs an owner.</strong> Versioning, feedback and regular updates are what keep the skills useful as the business changes.</span></li>
+        <li><span><strong>Business terms carry the argument.</strong> Hours saved and deals moved made the case for this work far better than "it looks more consistent" ever could.</span></li>
+      </ol>
+
+      <h2 class="sl" id="beyond">Beyond the brief</h2>
+      <p>The most valuable thing I designed this year isn't a screen in our product. It's a system that lets people across Strategyzer produce design-quality work without a designer in the room.</p>
+      <p>It's also a fair picture of how I work. I look for the places where design can move the business, then build what's needed to get there, including when that sits outside my job description.</p>
+      <p>If you're working on a similar problem, or building a team that needs design to reach well beyond the product, I'd love to talk.</p>
+    </article>
+
+__END__
