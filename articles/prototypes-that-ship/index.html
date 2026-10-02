@@ -317,6 +317,7 @@
   .li-link { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: #fff; color: #0a66c2; box-shadow: 0 0 0 1px var(--line); transition: transform .3s var(--expo), box-shadow .2s; }
   .li-link:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px #c5c9cd, 0 6px 16px rgba(10,102,194,.15); }
   .li-link:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .prose .testi .kind { display: block; margin-bottom: 12px; font-size: 12px; line-height: 16px; color: var(--muted); }
 
 
   /* ---------- Motion: only landmarks move; reading text is never held back ---------- */
@@ -442,12 +443,25 @@
       <p>The largest impact has been on the engineering side, and it's the one I underestimated at first.</p>
       <p>Because the prototypes use the same tokens and components as the product, they aren't throwaway work. Our engineers take parts of that code and use it directly in the platform. The Playbook Recommender is the clearest example: I built its front end myself with Claude, and that code went into the product as it was. There was no handover and no rebuild. Our engineer connected it to the data behind it, and it went live. Rather than rebuilding each screen from a design file, the team starts from code that already reflects the layout, spacing and state decisions we've made together.</p>
       <p>That has changed how we work together. Handoff used to be a file and a walkthrough, followed by a round of questions. Now it's often a working version we review side by side. With layout and states already settled, our conversations move sooner to architecture, data and performance, and the design carries through to production more faithfully.</p>
-      <blockquote class="todo-q"><p>[?] Quote from a developer on the team</p><cite>[?] Name, Role</cite></blockquote>
+      <figure class="wide">
+        <blockquote class="testi rv">
+          <span class="kind">From Ashley's feedback, in my words</span>
+          <p class="pull">The biggest change is our velocity, especially on the engineering side.</p>
+          <div class="body">
+            <p>Ashley Underwood, our Head of Product, oversees the team. He describes Claude as working almost like a junior designer: the front end I've already designed arrives built, and engineering connects it to the back end.</p>
+            <p>For a team our size, that changes how we use our people. We can do more without growing, and he sees the impact across the whole organisation, not just in product.</p>
+          </div>
+          <footer class="who">
+            <img src="images/ashley-underwood.webp" width="240" height="240" loading="lazy" alt="Ashley Underwood">
+            <cite><strong>Ashley Underwood</strong><span>Head of Product, Strategyzer</span></cite>
+            <a class="li-link" href="https://www.linkedin.com/in/ashley-underwood-66581040" target="_blank" rel="noopener" aria-label="Ashley Underwood on LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+          </footer>
+        </blockquote>
+      </figure>
 
       <h2 class="sl" id="testing">Testing with something real</h2>
       <p>Research has improved in the same way. In interviews and validation sessions, participants use prototypes that behave like the product. They type, filter, change their answers and run into dead ends, and they respond to the experience itself, including moments a simulated flow can't easily cover. Between sessions I can adjust the prototype, so each conversation tests a stronger version than the last.</p>
       <p>For the Recommender, that meant about 24 sessions with coaches, customer teams and customers. Because people used the real thing, their feedback changed the design directly: I rewrote the questions so they were easier to understand, and so no one worried about picking the wrong answer.</p>
-      <blockquote class="todo-q"><p>[?] Quote from the head of product</p><cite>[?] Name, Role</cite></blockquote>
 
       <h2 class="sl" id="impact">The impact so far</h2>
       <p>Across the product team, the results show up in five places.</p>
