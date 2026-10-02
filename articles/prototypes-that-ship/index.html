@@ -302,6 +302,22 @@
   .match .cell img { width: 100%; border-radius: 8px; box-shadow: 0 0 0 1px var(--line); }
   .match .lab { position: absolute; left: 12px; top: 12px; border-radius: 999px; padding: 4px 10px; background: #fff; font-size: 12px; line-height: 16px; color: var(--ink); box-shadow: 0 1px 4px rgba(0,0,0,.08); }
 
+  /* ---------- Testimonial ---------- */
+  .prose .testi { position: relative; margin: 0; padding: 24px 20px 20px; border: 0; border-radius: 16px; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); }
+  @container (min-width: 640px) { .prose .testi { padding: 48px 56px 36px; } }
+  .prose .testi .pull { position: relative; max-width: 720px; font-size: 22px; line-height: 30px; letter-spacing: -0.02em; color: var(--ink); text-wrap: balance; }
+  @container (min-width: 640px) { .prose .testi .pull { font-size: 30px; line-height: 38px; letter-spacing: -0.025em; } }
+  .prose .testi .body { margin-top: 20px; max-width: 680px; }
+  .prose .testi .body p { font-size: 16px; line-height: 26px; color: var(--body); letter-spacing: -0.01em; }
+  .prose .testi .body p + p { margin-top: 12px; }
+  .prose .testi .who { display: flex; align-items: center; gap: 12px; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--line); }
+  .prose .testi .who img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+  .prose .testi cite { flex: 1; display: flex; flex-direction: column; margin: 0; font-style: normal; font-size: 13px; line-height: 19px; color: var(--muted); }
+  .prose .testi cite strong { font-size: 15px; line-height: 21px; color: var(--ink); }
+  .li-link { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: #fff; color: #0a66c2; box-shadow: 0 0 0 1px var(--line); transition: transform .3s var(--expo), box-shadow .2s; }
+  .li-link:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px #c5c9cd, 0 6px 16px rgba(10,102,194,.15); }
+  .li-link:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
 
   /* ---------- Motion: only landmarks move; reading text is never held back ---------- */
   .sl .line { display: block; overflow: clip; padding-bottom: .12em; margin-bottom: -.12em; }
@@ -454,7 +470,7 @@
       <div class="lab">Read next</div>
       <div class="grid">
         <a class="acard" href="#" data-article="only-designer"><span class="card-bg" aria-hidden="true"></span>
-          <div class="row"><span class="tagpill">AI Transformation</span><span>8 Min Read</span></div>
+          <div class="row"><span class="tagpill">AI Transformation</span><span>9 Min Read</span></div>
           <h3>The Only Designer in the Room: How I Scaled Design Across Sales, Marketing and Client Delivery</h3>
           <div class="foot"><span>September 2026</span><span class="go">Read Article <i aria-hidden="true">→</i></span></div>
         </a>
