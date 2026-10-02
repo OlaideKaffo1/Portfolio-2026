@@ -32,12 +32,11 @@ for name in USED:
     else:
         shutil.copyfile(src, f"images/{name}.webp")
 
-# The survey: the full summary opens on Full size; the page shows the charts. Respondent emails are blurred in both.
-_sv = Image.open("source/research-survey-full.webp").convert("RGB")
-_box = (188, 245, 605, 465)
-_sv.paste(_sv.crop(_box).filter(ImageFilter.GaussianBlur(7)), _box[:2])
-_sv.save("images/research-survey-full.webp", lossless=True)
-_sv.crop((160, 480, 640, 1650)).save("images/research-survey.webp", lossless=True)
+# The survey: Olaide's own crop of the four charts, widened with its lavender background to the usual landscape frame
+_sv = Image.open("source/research-survey-crop.png").convert("RGB").crop((0, 0, 755, 806))  # drop a black edge on the right
+_W = 1170; _pad = (_W - _sv.width) // 2
+_canvas = Image.new("RGB", (_W, _sv.height), (223, 216, 239)); _canvas.paste(_sv, (_pad, 0))
+_canvas.save("images/research-survey.webp", lossless=True)
 
 # Pins were measured against these boxes (source pixels); map them onto whatever crop is used now
 PINBASE = {
@@ -150,11 +149,10 @@ S.append('''
 ''')
 S.append('        <figure class="sheet-fig" data-dz="findings">' + xp("research-survey",
     "Survey results from 12 developers: how they find out about new technology, whether they want onboarding after the first visit, what they’ll share at sign-up, where they want documentation, and examples of onboarding they liked or disliked.",
-    [("Keep guiding after day one.", "58% wanted pointers beyond the first visit, not a one-time tour.", "3.1,19.1,93.8,15.8"),
-     ("Ask for less at sign-up.", "92% would share an email, but only 25% their organisation’s name or size.", "3.1,35.6,93.8,19"),
-     ("Docs in either place.", "Two thirds didn’t mind whether docs lived in the console or on a separate site, so the console links to docs where questions come up.", "3.1,55.3,93.8,17"),
-     ("What good looks like.", "AWS was praised for learning links on its dashboard, Google Cloud criticised for having none, and one person asked for a short video of key capabilities.", "3.1,73.1,93.8,26.4")])
-    + '<figcaption class="caption">My survey of 12 developers. Open it full size for every question and answer. Respondents’ emails are blurred.</figcaption></figure>\n')
+    [("Keep guiding after day one.", "58% wanted pointers beyond the first visit, not a one-time tour.", "31.6,20.5,36.3,27.3"),
+     ("Ask for less at sign-up.", "92% would share an email, but only 25% their organisation’s name or size.", "31.6,48.8,36.3,25.7"),
+     ("Docs in either place.", "Two thirds didn’t mind whether docs lived in the console or on a separate site, so the console links to docs where questions come up.", "31.6,75.8,36.3,24")])
+    + '<figcaption class="caption">My survey of 12 developers.</figcaption></figure>\n')
 S.append('''        <h3 class="sl">Three insights</h3>
         <div class="vx-three vxb rv">
           <div class="card"><div class="vx-k">Insight 1</div><b>No real first experience</b><p>There was no onboarding flow, so a new user’s first visit didn’t lead anywhere productive.</p></div>
@@ -338,7 +336,7 @@ S.append('''
         <p class="closing">The goal behind all of it: no developer should have to figure it out alone.</p>
       </section>
 ''')
-_html = "".join(S).replace('<img src="images/research-survey.webp"', '<img src="images/research-survey.webp" data-full="images/research-survey-full.webp"')
+_html = "".join(S)
 open("src/sections.html", "w").write(_html)
 
 # ---------------- Shell: title, hero, At a glance, next card
