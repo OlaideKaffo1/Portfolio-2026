@@ -357,7 +357,7 @@
       <a class="back" href="#" data-home>← Back to home</a>
       <header class="ahead">
         <span class="ahead-bg" aria-hidden="true"></span>
-        <div class="row rv" style="--d:250ms"><span class="tagpill">AI Transformation</span><span>9 min read</span></div>
+        <div class="row rv" style="--d:250ms"><span class="tagpill">AI Transformation</span><span>10 min read</span></div>
         <h1 class="sl" style="--d:320ms">Prototypes That Ship</h1>
         <p class="dek rv" style="--d:480ms">How I moved Strategyzer's product discovery into code.</p>
         <div class="row by rv" style="--d:560ms"><span>Olaide · Senior product designer at Strategyzer</span><span>Sep 26, 2026</span></div>
@@ -403,17 +403,19 @@
 
       <h2 class="sl" id="teaching" data-toc="Teaching Claude FondUI">Teaching Claude our design system</h2>
       <p>AI tools can already generate interfaces, but not your interface. Ask for a settings page and you get something plausible and generic, with the wrong spacing, the wrong type scale and components your product doesn't have. That's fine for a quick sketch. It won't hold up in real product discovery, and engineering can't build on it.</p>
-      <p>So the foundation had to be FondUI, our product design system. Using Figma's MCP tooling, I extracted its foundations and components from our Figma library and rebuilt them as a self-contained Claude skill, a package of instructions and assets Claude loads whenever it builds UI for Strategyzer. <span class="todo">[?] How the extraction worked, and roughly how long it took.</span></p>
-      <p>The tokens were the straightforward part. Color, typography, spacing, radius and elevation sit in semantic hierarchies, exposed as kebab-case CSS custom properties. <span class="todo">[?] Confirm these match the variables engineering uses in the codebase.</span></p>
+      <p>So the foundation had to be FondUI, our product design system. Using Figma's MCP tooling, I extracted its foundations and components from our Figma library and rebuilt them as a self-contained Claude skill, a package of instructions and assets Claude loads whenever it builds UI for Strategyzer. FondUI already lived in Figma, which made this much easier. With the Figma MCP connected, I had Claude pull the tokens, variables and components straight from the library. Where it fell short, I corrected it, sometimes with SVGs or screenshots. I worked as Claude's design lead: checking that every direction was right, every rule was clear, and every detail was there. It took a couple of days. It was tedious in places, and worth it.</p>
+      <p>The tokens were the straightforward part. Color, typography, spacing, radius and elevation sit in semantic hierarchies, exposed as kebab-case CSS custom properties. They match the variables engineering uses in the codebase. That mattered to me: what Claude designs with is exactly what we ship.</p>
       <p>The rules were where the real design work lay. For every token, the skill says when to use it and when to avoid it. For every component, from buttons and the side navigation to inputs, toggles, radios and checkboxes, it says when to reach for it, when another component fits better, and how it behaves in each state, from hover and focus through to disabled and selected. These are judgment calls I'd normally make on instinct or explain in a design review. Writing them down precisely is what makes Claude's output look like it came from our own Figma file.</p>
       <figure class="wide">
         <div class="frame dark m"><img src="images/fondui-rules.webp" width="1638" height="1334" loading="lazy" alt="The fourteen core rules of the FondUI skill, among them: never invent a value, cite known issues, light mode only, semantic tokens first, always use the spacing scale, text is 13px or smaller in most places, the Primary button is outlined, state changes are instant, and proposed is not confirmed."></div>
-        <figcaption class="caption">The fourteen core rules every FondUI build follows, starting with "Never invent a value." <span class="todo">[?] A component rule next to its Figma library page would show this even better.</span></figcaption>
+        <figcaption class="caption">The fourteen core rules every FondUI build follows, starting with "Never invent a value."</figcaption>
       </figure>
 
       <h2 class="sl" id="now">How I work now</h2>
       <p>Exploration has become cheap, and that has changed how I approach almost every problem. When I have an idea for a flow, I describe it to Claude, it builds a working version with FondUI, and I review it with the same scrutiny I'd give a developer's build: tightening layouts, rewriting copy, checking every state. When a stakeholder asks what happens if a user does something unexpected, I can usually show them the same day.</p>
       <p>The bigger shift is in how many ideas we get to test. Where I used to take one or two directions to high fidelity, I now build several and put them side by side as working flows. The team clicks through each one, sees where it struggles, and we settle on a direction with far more confidence and much less debate.</p>
+      <p>Decisions move faster too. Often I don't start in Figma at all. I describe the problem and what I'm thinking to Claude, and have a working version in minutes. I record a short Loom, the team watches it and responds, and we have feedback the same day. Before, I designed everything, built a prototype, sent it and waited for feedback, round after round. Now we agree on a direction in hours.</p>
+      <p>This only works because I start with a deep understanding of the user and the problem. That is what lets me tell Claude exactly what I need. The speed comes from the system. The judgment still has to come from me.</p>
       <p>Edge cases get the same treatment. A working prototype won't let you skip them: the empty state has to render something, the error has to say something useful, and the user who changes their mind halfway through still has to land somewhere sensible. I meet those moments while I'm designing, when they're cheapest to get right and when I can give them proper attention.</p>
 
       <h3 class="sl">Strattie AI and the Playbook Recommender</h3>
@@ -450,8 +452,8 @@
       <h2 class="sl" id="impact">The impact so far</h2>
       <p>Across the product team, the results show up in five places.</p>
       <dl class="impact dg">
-        <div class="row" style="--k:0"><dt>More ideas tested</dt><dd>Three panel shapes and two overall approaches, a tour and a tool, compared as working flows for the Recommender alone. <span class="todo">[?] How many directions you used to take to high fidelity per feature.</span></dd></div>
-        <div class="row" style="--k:1"><dt>Faster decisions</dt><dd>Direction agreed in <span class="todo">[?]</span>, down from <span class="todo">[?]</span>.</dd></div>
+        <div class="row" style="--k:0"><dt>More ideas tested</dt><dd>Three panel shapes and two overall approaches, a tour and a tool, compared as working flows for the Recommender alone., where before I would take one or two directions to high fidelity.</dd></div>
+        <div class="row" style="--k:1"><dt>Faster decisions</dt><dd>Direction agreed in hours. A working version takes minutes, a short Loom gets the team's feedback the same day, and we no longer wait through rounds of designs and prototypes.</dd></div>
         <div class="row" style="--k:2"><dt>Edge cases caught in design</dt><dd>Changing an answer and finding no match, both resolved before development started.</dd></div>
         <div class="row" style="--k:3"><dt>Code reused in production</dt><dd>The Playbook Recommender's front end went into the platform as built. The project took about six weeks from research to launch, and the team now works at least twice as fast.</dd></div>
         <div class="row" style="--k:4"><dt>Stronger validation</dt><dd>About 24 research sessions run on working prototypes for the Recommender.</dd></div>
