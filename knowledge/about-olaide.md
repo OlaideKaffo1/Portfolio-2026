@@ -68,6 +68,10 @@ Emtech is a fintech company that helps countries' central banks adopt digital cu
 **If asked what drains me:**
 > Honestly, very little in the design process. I genuinely love what I do.
 
+## The project I'm proudest of
+
+The Playbook Recommender at Strategyzer (case study: Strattie). I'm proud of all my projects, but this one shows the most of how I work: deep ownership from research to the front-end build, pushing back on building a smaller chatbot, and convincing our CEO and Head of Product with a working prototype and my research. And the outcomes were great. When asked, name it plainly as my proudest project; never say I haven't picked one.
+
 ## What I'm looking for next
 
 > A mission-driven team that's clear about the problem it's solving and committed to improving the lives of the people, or the businesses, that use its product.
