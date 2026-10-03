@@ -110,9 +110,9 @@ Yes. Here are three products where my design work played a real part.
 | Fount | I designed it end to end. It earned **$3M+** in its first year. |
 |---|---|
 | Macrometa | I redesigned how new users get started. Retention rose **54%**, and it made **$2M** that year. |
-| Strategyzer | Sales decks now take **about thirty minutes** instead of a full day. |
+| Strategyzer | I redesigned how live enterprise programs are updated. Changes went from two days to **about 30 minutes**, supporting **six-figure** enterprise deals. |
 
-**More:** At Strategyzer, I turned our design system into AI tools the sales team uses. With five to seven people each making two or three decks a day, they can send roughly **50 to 100 decks a week**, and our pipeline has grown significantly since. At Macrometa, support tickets also fell **55%**. At Fount, weekly participation averaged **81%**.
+**More:** At Strategyzer, I also turned our design system into AI tools the sales team uses. Decks now take about thirty minutes instead of a full day. With five to seven people each making two or three decks a day, they can send roughly **50 to 100 decks a week**, and our pipeline has grown significantly since. At Macrometa, support tickets also fell **55%**. At Fount, weekly participation averaged **81%**.
 
 ### How do you tackle a complex problem?
 *From my case studies*
