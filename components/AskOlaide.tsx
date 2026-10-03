@@ -3,15 +3,13 @@
 import { useEffect, useState } from "react";
 import { ArrowUpIcon, SparkleIcon } from "./icons";
 
+// The four welcome questions from the chat card, then the open invitation
 const PROMPTS = [
+  "How do you design with code and AI?",
+  "How do you decide what's worth building?",
+  "Has your work moved revenue?",
+  "How do you tackle a complex problem?",
   "Ask Olaide anything…",
-  "What can Olaide do for your team?",
-  "What problem do you have for Olaide to solve?",
-  "How does Olaide go from design to code?",
-  "What has Olaide shipped recently?",
-  "Is Olaide a good fit for your role?",
-  "How does Olaide work with engineers?",
-  "What makes Olaide different?",
 ];
 
 const TYPE_MS = 55; // per character while typing
@@ -21,9 +19,9 @@ const GAP_MS = 400; // pause on the empty input before the next phrase
 
 type Phase = "typing" | "holding" | "deleting";
 
-// Entry point for the AI version of Olaide. The chat itself is built later;
-// for now this is the input with a typewriter placeholder, which starts once
-// the page has finished composing (`started`).
+// Entry point for the AI version of Olaide: the input with a typewriter placeholder, which starts
+// once the page has finished composing (`started`). Sending opens the chat card (public/ask/ask.js)
+// with the question; the card's pill appears once this bar scrolls away.
 export default function AskOlaide({ started = true }: { started?: boolean }) {
   const [value, setValue] = useState("");
   const [focused, setFocused] = useState(false);
@@ -82,7 +80,15 @@ export default function AskOlaide({ started = true }: { started?: boolean }) {
   return (
     <form
       role="search"
-      onSubmit={(e) => e.preventDefault()}
+      data-ask-hero
+      onSubmit={(e) => {
+        e.preventDefault();
+        const question = value.trim();
+        const chat = (window as Window & { AskOlaide?: { ask: (q?: string) => void } }).AskOlaide;
+        if (!chat) return;
+        chat.ask(question || undefined);
+        setValue("");
+      }}
       className="relative flex h-11 w-full max-w-[331px] items-center rounded-lg bg-black pl-3 pr-1 transition-shadow duration-[250ms] focus-within:shadow-[0_0_0_4px_rgba(119,131,142,0.25)]"
     >
       <SparkleIcon className="size-3.5 shrink-0 text-subtle" />

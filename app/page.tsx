@@ -1,3 +1,5 @@
+import type { CSSProperties } from "react";
+import { ArrowDownIcon } from "@/components/icons";
 import ArticleCard, { type Article } from "@/components/ArticleCard";
 import ContactLinks from "@/components/ContactLinks";
 import Hero from "@/components/Hero";
@@ -8,7 +10,7 @@ import Reveal from "@/components/motion/Reveal";
 import SplitLines from "@/components/motion/SplitLines";
 import VideoFrame from "@/components/motion/VideoFrame";
 
-// Project and article pages are built later; links are placeholders for now.
+// Project cards open the case study pages; article cards open the article pages.
 const PROJECTS: Project[] = [
   {
     company: "STRATEGYZER . AI",
@@ -17,7 +19,9 @@ const PROJECTS: Project[] = [
       "How Strategyzer's AI assistant went from a full conversational companion to a three-question Playbook Recommender, and why cutting it was the right call.",
     image: "/images/projects/strategyzer-finder.webp",
     imageAlt: "The Playbook Recommender open on the Projects page, asking what you want to work on",
-    href: "#",
+    href: "case-studies/strattie/index.html",
+    slug: "strattie",
+    hero: "case-studies/strattie/images/finder-hero-v5.webp",
   },
   {
     company: "STRATEGYZER . SAAS",
@@ -26,16 +30,20 @@ const PROJECTS: Project[] = [
       "A redesign of Strategyzer's program admin that gave program designers days back on every delivery and helped the business commit to six-figure enterprise deals.",
     image: "/images/projects/strategyzer-saas.webp",
     imageAlt: "Strategyzer program admin showing a cohort playbook instance with weekly events",
-    href: "#",
+    href: "case-studies/strategyzer-saas/index.html",
+    slug: "strategyzer-saas",
+    hero: "case-studies/strategyzer-saas/images/saas-hero.webp?v=2",
   },
   {
-    company: "FOUNT . AI",
-    title: "From 12 weeks of spreadsheets to 2 weeks of action",
+    company: "FOUNT . ENTERPRISE SAAS",
+    title: "Making speaking up at work worth it",
     description:
-      "It took HR 12 weeks to act on feedback, and by then people had already left. I led the end-to-end design of the AI partner that cut it to 2.",
-    image: "/images/projects/fount-ai.webp",
-    imageAlt: "Fount AI Agent surfacing challenges and solution recommendations for parental leave",
-    href: "#",
+      "Employees kept speaking up, and nothing changed. I designed Fount, and a year later Fount AI, to show HR what to fix first. Fount earned $3M+ in its first year.",
+    image: "/images/projects/fount.webp",
+    imageAlt: "The Fount welcome screen, with pulse micro surveys and a data-driven dashboard",
+    href: "case-studies/fount/index.html",
+    slug: "fount",
+    hero: "case-studies/fount/images/fount-hero.webp",
   },
   {
     company: "MACROMETA . DEVELOPER TOOLING",
@@ -44,7 +52,9 @@ const PROJECTS: Project[] = [
       "I led a new onboarding for Macrometa's developer platform, built on templates, sample data and tutorials. Customer retention rose 54%.",
     image: "/images/projects/macrometa.webp",
     imageAlt: "The Macrometa welcome, with three ways to start: create a collection, start with a blueprint, or get in touch",
-    href: "#",
+    href: "case-studies/macrometa/index.html",
+    slug: "macrometa",
+    hero: "case-studies/macrometa/images/hero.webp",
   },
 ];
 
@@ -52,16 +62,18 @@ const ARTICLES: Article[] = [
   {
     tag: "AI Transformation",
     title: "The Only Designer in the Room: How I Scaled Design Across Sales, Marketing and Client Delivery",
-    readTime: "8 Min Read",
+    readTime: "10 Min Read",
     date: "September 2026",
-    href: "#",
+    href: "articles/only-designer/index.html",
+    slug: "only-designer",
   },
   {
     tag: "AI Transformation",
     title: "Prototypes That Ship: How I Moved Strategyzer's Product Discovery into Code",
-    readTime: "8 Min Read",
+    readTime: "10 Min Read",
     date: "September 2026",
-    href: "#",
+    href: "articles/prototypes-that-ship/index.html",
+    slug: "prototypes-that-ship",
   },
 ];
 
@@ -77,8 +89,16 @@ export default function Home() {
 
         {/* Selected Work */}
         <section className="mt-14 lg:mt-[46px]">
-          <Reveal>
+          <Reveal className="flex items-center gap-1.5">
             <SplitLines as="h2" text="Selected Work" className="text-[14px] leading-6 text-muted" />
+            {/* Points down to the case studies; rises with the heading, then nudges gently */}
+            <span className="split" aria-hidden="true" style={{ "--d": "90ms" } as CSSProperties}>
+              <span className="line">
+                <span className="li">
+                  <ArrowDownIcon className="nudge-down size-3.5 text-muted" />
+                </span>
+              </span>
+            </span>
           </Reveal>
           <div className="mt-3 grid grid-cols-1 gap-x-[30px] gap-y-12 md:grid-cols-2 lg:gap-y-10">
             {PROJECTS.map((project, i) => (

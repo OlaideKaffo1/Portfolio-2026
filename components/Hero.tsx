@@ -11,11 +11,11 @@ export default function Hero() {
     <section className="mt-24 sm:mt-32 lg:mt-[181px]">
       <SplitLines
         as="h1"
-        text="Hi! I’m Olaide, a product designer who engineers"
+        text="Anyone can generate a screen now. I know which one to ship."
         className={`max-w-[446px] text-[24px] leading-[28px] sm:text-[28px] sm:leading-[30px] ${stage >= 2 ? "is-in" : ""}`}
       />
       <SplitLines
-        text="I have spent the past six years delivering value, shipping products that drive revenue and transforming orgs."
+        text="I’m Olaide, a senior product designer. I prototype in code with AI, test with real people, and back the ideas that work for users and the business."
         delay="160ms"
         className={`mt-3 max-w-[454px] text-[16px] leading-6 text-body sm:text-[18px] ${stage >= 2 ? "is-in" : ""}`}
       />

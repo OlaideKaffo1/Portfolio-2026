@@ -38,7 +38,7 @@ export default function Intro() {
     } catch {}
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (seen || reduced || !root) {
+    if (seen || reduced || !root || html.classList.contains("returning")) {
       html.classList.remove("intro-pending");
       startCompose();
       return;

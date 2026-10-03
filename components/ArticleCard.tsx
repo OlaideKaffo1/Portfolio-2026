@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import type { CSSProperties } from "react";
 import { ArrowRightIcon } from "./icons";
 import SplitLines from "./motion/SplitLines";
@@ -12,13 +11,15 @@ export type Article = {
   readTime: string;
   date: string;
   href: string;
+  slug: string;
 };
 
-// The card background sweeps down, then the content rises.
+// The card background sweeps down, then the content rises. Clicking the card grows its grey panel
+// into the article's header (see the page-transition script in app/layout.tsx).
 export default function ArticleCard({ article, column }: { article: Article; column: number }) {
   const ref = useReveal<HTMLAnchorElement>();
   return (
-    <Link ref={ref} href={article.href} className={`article group relative isolate flex min-h-[159px] flex-col p-4 ${column ? "col-right" : ""}`}>
+    <a ref={ref} href={article.href} data-article={article.slug} className={`article group relative isolate flex min-h-[159px] flex-col p-4 ${column ? "col-right" : ""}`}>
       <span className="article-bg" aria-hidden="true" />
       <div className="flex items-center justify-between gap-4">
         <span className="split" style={{ "--d": "calc(var(--c) + 250ms)" } as CSSProperties}>
@@ -44,6 +45,6 @@ export default function ArticleCard({ article, column }: { article: Article; col
           </span>
         </span>
       </div>
-    </Link>
+    </a>
   );
 }
