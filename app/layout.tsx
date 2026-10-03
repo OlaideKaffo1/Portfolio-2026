@@ -14,9 +14,8 @@ const doto = localFont({
   display: "block",
 });
 
-const SITE = process.env.VERCEL_PROJECT_PRODUCTION_URL
-  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-  : "https://portfolio-2026-blush-pi.vercel.app";
+// The live address (olaide.design redirects here), used for link previews
+const SITE = "https://www.olaide.design";
 const TITLE = "Olaide, Senior Product Designer";
 const DESCRIPTION =
   "I prototype in code with AI, test with real people, and back the ideas that work for users and the business.";

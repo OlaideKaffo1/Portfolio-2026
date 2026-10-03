@@ -6,7 +6,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const read = (f) => fs.readFileSync(f, "utf8");
-const SITE = process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "https://portfolio-2026-blush-pi.vercel.app";
+const SITE = "https://www.olaide.design"; // the live address, for link previews
 const esc = (t) => t.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 // Tab icon and link preview (title, description, image) for each page
 // Descriptions match the homepage cards
