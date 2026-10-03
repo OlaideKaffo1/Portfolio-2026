@@ -33,10 +33,13 @@ const meta = (section, slug, html) => {
 const VT_CSS = read("scripts/pages/vt.css");
 const ASK = '<script src="../../ask/ask.js" data-mode="read" defer></script>';
 const ASK_CSS = '<link rel="stylesheet" href="../../ask/ask.css">';
-// Analytics, as on the homepage (see app/layout.tsx): the PostHog key comes from the POSTHOG_KEY env var
-const PH_KEY = /^phc_\w+$/.test(process.env.POSTHOG_KEY ?? "") ? process.env.POSTHOG_KEY : "";
+// Analytics, as on the homepage (see app/layout.tsx): from the POSTHOG_KEY and GA_ID env vars
+const AN = {
+  posthog: /^phc_\w+$/.test(process.env.POSTHOG_KEY ?? "") ? process.env.POSTHOG_KEY : undefined,
+  ga: /^G-[A-Z0-9]+$/.test(process.env.GA_ID ?? "") ? process.env.GA_ID : undefined,
+};
 const ANALYTICS =
-  `<script>window.__ph=${JSON.stringify(PH_KEY ? { key: PH_KEY } : null)};window.olaideTrack=function(e,p){(window.olaideTrack.q=window.olaideTrack.q||[]).push([e,p])};</script>` +
+  `<script>window.__an=${JSON.stringify(AN)};window.olaideTrack=function(e,p){(window.olaideTrack.q=window.olaideTrack.q||[]).push([e,p])};</script>` +
   '<script src="../../analytics/track.js" defer></script>';
 const BASE_CSS = `
 html, body { margin: 0; background: #fff; }
