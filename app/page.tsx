@@ -120,9 +120,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Who am I? (video placeholder until the intro video is recorded) */}
+        {/* Meet Olaide (video placeholder until the intro video is recorded) */}
         <section id="about" className="mt-16 scroll-mt-6 lg:mt-[76px]">
-          <SectionHeading title="Who am I?" subtitle="A summary of all i have done, In two minutes." />
+          <SectionHeading title="Meet Olaide" subtitle="Two minutes, so you can put a face to the work." />
           <VideoFrame />
         </section>
 
