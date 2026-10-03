@@ -5,18 +5,53 @@ import { useMotion } from "./MotionProvider";
 import { lockScroll, unlockScroll } from "./SmoothScroll";
 
 // Departure-board intro. Plays on the first visit in a session, skips on any click
-// or key press, and never plays for reduced motion. At the end the board's OLAIDE
-// shrinks into the nav logo while the screen splits open.
+// or key press, and never plays for reduced motion. It asks the question the hero
+// answers ("I know which one to ship"), then the board's OLAIDE shrinks into the nav
+// logo while the screen splits open. A soft click marks each line; browsers only allow
+// sound after a click, so it stays off until the visitor presses "Sound on".
 
 const SESSION_KEY = "olaide-intro-seen";
-const WORDS = ["RESEARCHING", "STRATEGIZING", "EXPERIMENTING", "DESIGNING", "ENGINEERING", "SHIPPING", "LEADING", "IMPACT.", "OLAIDE"];
-const HOLDS = [650, 470, 470, 470, 470, 470, 470, 600]; // first word holds, middle accelerates
+const WORDS = ["EVERYONE HAS AI.", "EVERYONE HAS SCREENS.", "WHO HAS JUDGMENT?", "OLAIDE"];
+const HOLDS = WORDS.slice(0, -1).map((w) => 520 + w.length * 18); // long enough to read each line
 const NAME_HOLD = 700;
-const SLOTS = 13; // EXPERIMENTING is the longest word
+const SLOTS = 21; // EVERYONE HAS SCREENS. is the longest line
 const ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const EXPO = "cubic-bezier(0.19, 1, 0.22, 1)";
 const LIFT = "cubic-bezier(0.76, 0, 0.24, 1)";
 const REEL = "cubic-bezier(0.3, 0.9, 0.3, 1)";
+
+// The "Softer" click: a short, rounded tap per line, and a two-note confirm when the name lands
+function makeClick() {
+  let ctx: AudioContext | null = null;
+  const tone = (t: number, f: number, end: number, len: number, gain: number) => {
+    const o = ctx!.createOscillator();
+    o.frequency.setValueAtTime(f, t);
+    o.frequency.exponentialRampToValueAtTime(end, t + len);
+    const g = ctx!.createGain();
+    g.gain.setValueAtTime(0, t);
+    g.gain.linearRampToValueAtTime(gain, t + 0.002);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + len);
+    o.connect(g).connect(ctx!.destination);
+    o.start(t);
+    o.stop(t + len + 0.02);
+  };
+  return {
+    on: () => {
+      ctx ??= new AudioContext();
+      void ctx.resume();
+    },
+    off: () => void ctx?.suspend(),
+    play: (delayMs: number, confirm: boolean) => {
+      if (!ctx || ctx.state !== "running") return;
+      const t = ctx.currentTime + delayMs / 1000;
+      if (confirm) {
+        tone(t, 620, 500, 0.05, 0.14);
+        tone(t + 0.08, 930, 780, 0.07, 0.1);
+      } else tone(t, 760, 520, 0.04, 0.14);
+    },
+    close: () => void ctx?.close(),
+  };
+}
 
 function el(tag: string, cls?: string, text?: string) {
   const n = document.createElement(tag);
@@ -72,7 +107,20 @@ export default function Intro() {
     meta.append(el("span", "", "Olaide"), el("span", "", "Portfolio ’26"));
     const touch = window.matchMedia("(pointer: coarse)").matches;
     const skip = el("div", "intro-skip", touch ? "Tap anywhere to skip" : "Click or press any key to skip");
-    root.append(top, bottom, seam, count, meta, skip, board);
+    const click = makeClick();
+    const sound = el("button", "intro-sound", "Sound off") as HTMLButtonElement;
+    sound.type = "button";
+    sound.setAttribute("aria-label", "Sound");
+    sound.tabIndex = -1; // the intro is hidden from screen readers; any key skips it anyway
+    sound.setAttribute("aria-pressed", "false");
+    sound.addEventListener("click", () => {
+      const on = sound.getAttribute("aria-pressed") !== "true";
+      sound.setAttribute("aria-pressed", String(on));
+      sound.textContent = on ? "Sound on" : "Sound off";
+      if (on) click.on();
+      else click.off();
+    });
+    root.append(top, bottom, seam, count, meta, skip, sound, board);
     root.hidden = false;
     html.classList.remove("intro-pending");
     lockScroll();
@@ -96,8 +144,9 @@ export default function Intro() {
       const left = Math.floor(extra / 2);
       return " ".repeat(left) + w + " ".repeat(extra - left);
     };
-    const spin = (word: string) => {
+    const spin = (word: string, confirm: boolean) => {
       const target = pad(word);
+      let land = 0;
       reels.forEach((r, i) => {
         const to = target[i];
         if (to === r.current) return;
@@ -115,13 +164,15 @@ export default function Intro() {
           easing: REEL,
           fill: "forwards",
         });
+        land = Math.max(land, i * 10 + (280 + hops * 14) * 0.7);
       });
+      click.play(land, confirm);
     };
 
     // ---- Timeline ----
     const at = [0];
     HOLDS.forEach((h) => at.push(at[at.length - 1] + h));
-    WORDS.forEach((w, i) => later(() => spin(w), at[i]));
+    WORDS.forEach((w, i) => later(() => spin(w, i === WORDS.length - 1), at[i]));
     const seamAt = at[at.length - 1] + NAME_HOLD;
     const splitAt = seamAt + 200;
 
@@ -134,7 +185,7 @@ export default function Intro() {
     tick();
 
     anim(seam, [{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }], { duration: 340, delay: seamAt, easing: EXPO, fill: "both" });
-    [count, meta, skip].forEach((n) => anim(n, [{ opacity: 1 }, { opacity: 0 }], { duration: 200, delay: splitAt, fill: "forwards" }));
+    [count, meta, skip, sound].forEach((n) => anim(n, [{ opacity: 1 }, { opacity: 0 }], { duration: 200, delay: splitAt, fill: "forwards" }));
     anim(seam, [{ opacity: 0.35 }, { opacity: 0 }], { duration: 200, delay: splitAt, fill: "forwards" });
     const split: KeyframeAnimationOptions = { duration: 1000, delay: splitAt, easing: LIFT, fill: "forwards" };
     anim(top, [{ transform: "translateY(0)" }, { transform: "translateY(-100%)" }], split);
@@ -178,6 +229,7 @@ export default function Intro() {
       if (logoLine) logoLine.style.transform = "";
       unlockScroll();
       removeSkip();
+      setTimeout(click.close, 1000);
     };
 
     later(unlockScroll, splitAt + 600);
@@ -187,8 +239,10 @@ export default function Intro() {
       finish();
     }, splitAt + 1100);
 
-    // Skip straight to the page.
-    const onSkip = () => {
+    // Skip straight to the page (except when pressing the sound button).
+    const onSkip = (e: Event) => {
+      if (e.target instanceof Element && e.target.closest(".intro-sound")) return;
+      if (e instanceof KeyboardEvent && document.activeElement === sound && (e.key === "Enter" || e.key === " ")) return;
       markSeen();
       finish();
       startCompose();
