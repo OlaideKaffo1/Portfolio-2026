@@ -1,13 +1,15 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PlayCircleIcon } from "@/components/icons";
 
-// The intro video placeholder, 16:9 at every size so a normal video fits uncropped. Its frame is tied to scroll: it starts inset with
+// The Meet Olaide video, 16:9 at every size. Nothing loads until it's played; the poster shows first. Its frame is tied to scroll: it starts inset with
 // rounder corners and opens to full width as it reaches the middle of the screen,
 // closing again when scrolling back up.
 export default function VideoFrame() {
-  const ref = useRef<HTMLButtonElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const video = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -31,14 +33,40 @@ export default function VideoFrame() {
     return () => cancelAnimationFrame(raf);
   }, []);
 
+  const play = () => {
+    setPlaying(true);
+    video.current?.play().catch(() => setPlaying(false));
+  };
+
   return (
-    <button
+    <div
       ref={ref}
-      type="button"
-      aria-label="Play intro video (coming soon)"
-      className="video-frame group relative mt-4 flex aspect-video w-full items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-[#2b2b2b] via-[#4a4a4a] to-[#1c1c1c]"
+      className="video-frame group relative mt-4 aspect-video w-full overflow-hidden rounded-lg bg-[#1c1c1c]"
     >
-      <PlayCircleIcon className="size-12 text-white transition-transform duration-500 ease-[var(--expo)] group-hover:scale-110 sm:size-[60px]" />
-    </button>
+      <video
+        ref={video}
+        className="absolute inset-0 size-full object-cover"
+        poster="/video/meet-olaide-poster.webp"
+        preload="none"
+        playsInline
+        controls={playing}
+        onEnded={() => setPlaying(false)}
+        aria-label="Meet Olaide, a short introduction video"
+      >
+        {/* MP4 plays almost everywhere; WebM covers browsers without the MP4 codec */}
+        <source src="/video/meet-olaide.mp4" type="video/mp4" />
+        <source src="/video/meet-olaide.webm" type="video/webm" />
+      </video>
+      {!playing && (
+        <button
+          type="button"
+          onClick={play}
+          aria-label="Play the video"
+          className="absolute inset-0 flex items-center justify-center bg-black/15 transition-colors duration-300 hover:bg-black/25"
+        >
+          <PlayCircleIcon className="size-12 text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.35)] transition-transform duration-500 ease-[var(--expo)] group-hover:scale-110 sm:size-[60px]" />
+        </button>
+      )}
+    </div>
   );
 }
