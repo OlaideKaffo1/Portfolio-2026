@@ -1,7 +1,7 @@
 // Visitor analytics with PostHog and Google Analytics, on every page (homepage, case studies and articles).
-// Both are cookieless: no cookies or stored IDs, so there's no consent banner. PostHog events go through
-// /ingest on this domain (see next.config.ts), so ad blockers that block analytics domains don't drop them.
-// Google Analytics runs in consent mode with storage denied, so it sends cookieless pings.
+// PostHog is cookieless and its events go through /ingest on this domain (see next.config.ts), so ad blockers
+// that block analytics domains don't drop them. Google Analytics runs normally, with its own cookies: in
+// cookieless consent mode it reports nothing for a site this size.
 // The page sets window.__an = { posthog, ga } at build time from the POSTHOG_KEY and GA_ID env vars;
 // each tool runs only when its value is set.
 // Other scripts report events with window.olaideTrack("event_name", { ...props }); calls made before this
@@ -99,8 +99,6 @@
   function ga(id) {
     window.dataLayer = window.dataLayer || [];
     var gtag = (window.gtag = function () { window.dataLayer.push(arguments); });
-    // Consent mode with storage denied: no cookies, Google sends cookieless pings and models the rest
-    gtag("consent", "default", { analytics_storage: "denied", ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied" });
     gtag("js", new Date());
     gtag("config", id);
     load("https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(id));
