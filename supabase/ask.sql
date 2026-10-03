@@ -43,6 +43,7 @@ $$;
 revoke all on function public.ask_usage(text) from public, anon, authenticated;
 grant execute on function public.ask_usage(text) to service_role;
 
--- Keep a year of conversations; older ones are deleted. Needs the pg_cron extension
--- (Database → Extensions → pg_cron). Skip this block if you'd rather delete by hand.
--- select cron.schedule('ask-log-retention', '0 3 * * *', $$delete from public.ask_log where created_at < now() - interval '12 months'$$);
+-- Conversations are kept for one month, then deleted every night at 03:00 UTC.
+-- Needs the pg_cron extension: turn it on under Database → Extensions → pg_cron, then run this.
+create extension if not exists pg_cron;
+select cron.schedule('ask-log-retention', '0 3 * * *', $$delete from public.ask_log where created_at < now() - interval '1 month'$$);
