@@ -121,7 +121,7 @@
   const welcome = () => {
     cb.innerHTML = `<div class="ao-wl ao-rv"><div class="ao-hi">Hi, I'm Olaide! Think of this as a first conversation, whenever suits you.</div><p>Ask about my work, my thinking or my results.</p></div>
       <div class="ao-sugg">${SUGG.map(([l, t]) => `<button class="ao-sg ao-rv" type="button" data-q="${esc(t)}"><span><small>${l}</small>${esc(t)}</span><span class="ao-go" aria-hidden="true">↗</span></button>`).join("")}</div>
-      <p class="ao-privacy ao-rv">Answers come from my case studies and articles. Chats are saved so I can improve them.</p>`;
+      <p class="ao-privacy ao-rv">Everything I share comes from my case studies and articles. I read these chats now and then to keep getting better at answering.</p>`;
     stagger([...cb.querySelectorAll(".ao-rv")], 60);
     requestAnimationFrame(fit);
   };
