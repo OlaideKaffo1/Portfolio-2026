@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { PlayCircleIcon } from "@/components/icons";
 
-// The intro video placeholder. Its frame is tied to scroll: it starts inset with
+// The intro video placeholder, 16:9 at every size so a normal video fits uncropped. Its frame is tied to scroll: it starts inset with
 // rounder corners and opens to full width as it reaches the middle of the screen,
 // closing again when scrolling back up.
 export default function VideoFrame() {
@@ -36,7 +36,7 @@ export default function VideoFrame() {
       ref={ref}
       type="button"
       aria-label="Play intro video (coming soon)"
-      className="video-frame group relative mt-4 flex aspect-video w-full items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-[#2b2b2b] via-[#4a4a4a] to-[#1c1c1c] lg:aspect-[1440/536]"
+      className="video-frame group relative mt-4 flex aspect-video w-full items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-[#2b2b2b] via-[#4a4a4a] to-[#1c1c1c]"
     >
       <PlayCircleIcon className="size-12 text-white transition-transform duration-500 ease-[var(--expo)] group-hover:scale-110 sm:size-[60px]" />
     </button>
