@@ -37,6 +37,7 @@
     macrometa: ["No developer left to figure it out alone", "Case study · Macrometa", "case-studies/macrometa/index.html", "images/projects/macrometa-welcome.webp"],
     "only-designer": ["The Only Designer in the Room", "Article · 10 min read", "articles/only-designer/index.html", "articles/only-designer/images/skill-website-col.webp"],
     "prototypes-that-ship": ["Prototypes That Ship", "Article · 10 min read", "articles/prototypes-that-ship/index.html", "articles/prototypes-that-ship/images/fondui-skill.webp"],
+    resume: ["My resume", "PDF · 2 pages", "resume/Olaide-Arike-Kaffo-Resume.pdf", "favicon.svg"],
   };
   const PROJECT = { strattie: "Strattie", "strategyzer-saas": "Strategyzer", fount: "Fount", macrometa: "Macrometa" };
 
@@ -142,7 +143,7 @@
   // ---------- Drawing an answer (also while it streams) ----------
   const linkCard = (k) => {
     const L = LINKS[k];
-    return `<a class="ao-lk" href="${ROOT}${L[2]}"><img src="${ROOT}${L[3]}" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><span><span class="ao-tt" style="display:block">${esc(L[0])}</span><span class="ao-mt">${esc(L[1])}</span></span><span class="ao-go" aria-hidden="true">↗</span></a>`;
+    return `<a class="ao-lk" href="${ROOT}${L[2]}"${L[2].endsWith(".pdf") ? ' target="_blank" rel="noopener"' : ""}><img src="${ROOT}${L[3]}" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><span><span class="ao-tt" style="display:block">${esc(L[0])}</span><span class="ao-mt">${esc(L[1])}</span></span><span class="ao-go" aria-hidden="true">↗</span></a>`;
   };
   // Builds or updates the answer's blocks in place, so streamed text grows without redrawing
   const draw = (turn, a, done) => {

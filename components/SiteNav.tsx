@@ -8,8 +8,8 @@ import { useReveal } from "./motion/useReveal";
 const LINKS = [
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
-  // Placeholder until the resume link is ready
-  { label: "Resume", href: "#" },
+  // Opens the PDF in a new tab
+  { label: "Resume", href: "/resume/Olaide-Arike-Kaffo-Resume.pdf", newTab: true },
 ];
 
 // Each item sits in its own mask and rises in order: logo, About, Contact, Resume.
@@ -21,7 +21,12 @@ function Items({ logoId }: { logoId?: string }) {
       </Link>
       <nav className="flex items-center gap-5 sm:gap-7">
         {LINKS.map((link, i) => (
-          <a key={link.label} href={link.href} className="line transition-opacity hover:opacity-60">
+          <a
+            key={link.label}
+            href={link.href}
+            {...("newTab" in link && link.newTab ? { target: "_blank", rel: "noopener" } : {})}
+            className="line transition-opacity hover:opacity-60"
+          >
             <span className="li" style={{ "--i": i + 1 } as CSSProperties}>
               {link.label}
             </span>

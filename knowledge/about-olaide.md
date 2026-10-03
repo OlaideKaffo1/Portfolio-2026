@@ -15,7 +15,7 @@ The chat follows the voice rules in the Ask Olaide spec: short first, one exampl
 - **Works:** fully remote, with teams anywhere
 - **Email:** olaidearikekaffo@gmail.com
 - **LinkedIn:** linkedin.com/in/olaide-arike-kaffo-2333b8169
-- **Resume:** not ready yet. Until it is, the chat offers email or LinkedIn instead. *(Add the link here when it's ready.)*
+- **Resume:** available as a PDF on the site (the Resume link in the top navigation). Link card key: `resume`.
 
 ## Career
 

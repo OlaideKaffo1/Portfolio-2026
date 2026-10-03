@@ -14,7 +14,7 @@ const FILES = [
   "links.md",
 ];
 
-export const LINK_KEYS = ["strattie", "strategyzer-saas", "fount", "macrometa", "only-designer", "prototypes-that-ship"] as const;
+export const LINK_KEYS = ["strattie", "strategyzer-saas", "fount", "macrometa", "only-designer", "prototypes-that-ship", "resume"] as const;
 export const PROJECT_KEYS = ["strattie", "strategyzer-saas", "fount", "macrometa"] as const;
 
 // The answer the chat card draws. Field order is the order it streams in.
@@ -51,7 +51,7 @@ Return the answer in the structured format:
 - source: "From my case studies", "From my articles", "From my articles and case studies", or "" for personal, contact or declined answers.
 - paragraphs: one to three short paragraphs. Mark key figures with **double asterisks**.
 - fact_rows: only for questions that span several projects; otherwise empty. project must be one of the case study keys from links.md.
-- links: zero to two keys from links.md, most relevant first. Leave empty for personal, contact or declined answers.
+- links: zero to two keys from links.md, most relevant first. Leave empty for personal, contact or declined answers, except "resume" when the visitor asks for the resume or about new roles.
 - more: the optional "Tell me more" paragraphs (zero to two). Leave empty when there's nothing worth adding.
 
 <knowledge>

@@ -46,8 +46,12 @@ function must(cond, msg) {
   if (!cond) throw new Error(msg);
 }
 
-// Top nav on every page: About and Contact go to the homepage sections (Resume stays a placeholder, as on the homepage)
-const nav = (h) => h.replace('<a href="#">About', '<a href="../../#about">About').replace('<a href="#">Contact', '<a href="../../#contact">Contact');
+// Top nav on every page: About and Contact go to the homepage sections, Resume opens the PDF in a new tab
+const nav = (h) =>
+  h
+    .replace('<a href="#">About', '<a href="../../#about">About')
+    .replace('<a href="#">Contact', '<a href="../../#contact">Contact')
+    .replace('<a href="#">Resume', '<a href="../../resume/Olaide-Arike-Kaffo-Resume.pdf" target="_blank" rel="noopener">Resume');
 
 function write(section, slug, html) {
   const from = path.join(section, slug);

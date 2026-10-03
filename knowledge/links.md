@@ -35,4 +35,4 @@ Everything an answer can link to. Link cards use the title, label and thumbnail 
 |---|---|
 | Email | olaidearikekaffo@gmail.com (opens the visitor's mail app) |
 | LinkedIn | https://www.linkedin.com/in/olaide-arike-kaffo-2333b8169 |
-| Resume | Not ready yet. Offer email or LinkedIn instead. |
+| Resume | `resume/Olaide-Arike-Kaffo-Resume.pdf` (link card key `resume`) |
