@@ -34,7 +34,7 @@
     strattie: ["Solving the first-step problem", "Case study · Strategyzer AI", "case-studies/strattie/index.html", "images/projects/strategyzer-finder.webp"],
     "strategyzer-saas": ["Cutting a two-day workflow to thirty minutes", "Case study · Strategyzer", "case-studies/strategyzer-saas/index.html", "images/projects/strategyzer-saas.webp"],
     fount: ["Making speaking up at work worth it", "Case study · Fount", "case-studies/fount/index.html", "images/projects/fount.webp"],
-    macrometa: ["No developer left to figure it out alone", "Case study · Macrometa", "case-studies/macrometa/index.html", "images/projects/macrometa.webp"],
+    macrometa: ["No developer left to figure it out alone", "Case study · Macrometa", "case-studies/macrometa/index.html", "images/projects/macrometa-welcome.webp"],
     "only-designer": ["The Only Designer in the Room", "Article · 10 min read", "articles/only-designer/index.html", "articles/only-designer/images/skill-website-col.webp"],
     "prototypes-that-ship": ["Prototypes That Ship", "Article · 10 min read", "articles/prototypes-that-ship/index.html", "articles/prototypes-that-ship/images/fondui-skill.webp"],
   };

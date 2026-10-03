@@ -9,7 +9,7 @@ Everything an answer can link to. Link cards use the title, label and thumbnail 
 | strattie | Solving the first-step problem | Case study · Strategyzer AI | `case-studies/strattie/index.html` | `images/projects/strategyzer-finder.webp` |
 | strategyzer-saas | Cutting a two-day workflow to thirty minutes | Case study · Strategyzer | `case-studies/strategyzer-saas/index.html` | `images/projects/strategyzer-saas.webp` |
 | fount | Making speaking up at work worth it | Case study · Fount | `case-studies/fount/index.html` | `images/projects/fount.webp` *(in the homepage draft, added to the site with it)* |
-| macrometa | No developer left to figure it out alone | Case study · Macrometa | `case-studies/macrometa/index.html` | `images/projects/macrometa.webp` |
+| macrometa | No developer left to figure it out alone | Case study · Macrometa | `case-studies/macrometa/index.html` | `images/projects/macrometa-welcome.webp` |
 
 ## Articles
 

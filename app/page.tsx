@@ -50,8 +50,8 @@ const PROJECTS: Project[] = [
     title: "No developer left to figure it out alone",
     description:
       "I led a new onboarding for Macrometa’s developer platform, built on templates, sample data and tutorials. Customer retention rose 54%.",
-    image: "/images/projects/macrometa.webp",
-    imageAlt: "The Macrometa welcome, with three ways to start: create a collection, start with a blueprint, or get in touch",
+    image: "/images/projects/macrometa-welcome.webp",
+    imageAlt: "The Macrometa welcome, with a short intro video and three places to start: a quickstart guide, developer tools and tutorials",
     href: "case-studies/macrometa/index.html",
     slug: "macrometa",
     hero: "case-studies/macrometa/images/hero.webp",
@@ -111,7 +111,7 @@ export default function Home() {
         <section className="mt-16 lg:mt-[76px]">
           <SectionHeading
             title="My recent thoughts"
-            subtitle="Documenting my learnings, process and Impact on recent transformative projects I executed."
+            subtitle="The process behind recent results: sales decks in 30 minutes, design decisions in hours."
           />
           <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-[30px]">
             {ARTICLES.map((article, i) => (
