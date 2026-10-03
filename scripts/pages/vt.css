@@ -18,13 +18,11 @@
   object-fit: cover;
   mix-blend-mode: normal;
 }
-/* Swap to the hero straight away, so only one image travels. The card and the hero crop the picture
-   differently, so fading between them on the way showed two offset copies. */
-::view-transition-old(hero) { animation: vt-fade-quick 120ms linear both; }
+/* The hero sits on top from the start, so it covers the card the moment it's drawn. The card stays
+   underneath until then (Safari often draws the hero a moment late) and clears before the landing. */
+::view-transition-old(hero) { animation: vt-under 900ms linear both; }
 ::view-transition-new(hero) { animation: none; }
-/* If the hero isn't decoded yet, keep the card image for the whole move and let the hero arrive on top */
-html.vt-hold::view-transition-old(hero) { animation: none; opacity: 1; }
-html.vt-hold::view-transition-new(hero) { animation: vt-in 300ms cubic-bezier(0.4, 0, 0.2, 1) 600ms both; }
+@keyframes vt-under { 0%, 75% { opacity: 1; } 100% { opacity: 0; } }
 
 /* Articles: the grey card grows into the article's grey header panel */
 ::view-transition-group(panel) {

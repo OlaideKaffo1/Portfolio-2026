@@ -10,9 +10,8 @@ top();addEventListener("DOMContentLoaded",top);
 addEventListener("pagereveal",function(e){top();var h=document.querySelector(".hero-img");
 if(!e.viewTransition){d.classList.remove("vt-arrive");return}
 if(!forward||!h){e.viewTransition.types.add("back");d.classList.remove("vt-arrive");return}
-var img=h.querySelector("img");if(img&&!(img.complete&&img.naturalWidth))d.classList.add("vt-hold");
 h.style.viewTransitionName="hero";
-e.viewTransition.finished.finally(function(){h.style.viewTransitionName="";d.classList.remove("vt-hold");h.classList.add("in");d.classList.remove("vt-arrive")})});
+e.viewTransition.finished.finally(function(){h.style.viewTransitionName="";h.classList.add("in");d.classList.remove("vt-arrive")})});
 addEventListener("pageshow",function(e){if(e.persisted){top();document.querySelectorAll(".hero-img,.next .thumb").forEach(function(x){x.style.viewTransitionName=""})}});
 var clicked=null;document.addEventListener("click",function(e){clicked=e.target.closest&&e.target.closest("a")},true);
 addEventListener("pageswap",function(e){if(!e.viewTransition)return;var to="";try{to=e.activation.entry.url}catch(x){}

@@ -91,7 +91,9 @@ CASES.forEach((slug, i) => {
     `<style>${VT_CSS}${BASE_CSS}
 /* Arriving from a card: the hero is already in place (the transition carries it), so skip its own wipe */
 html.vt-arrive .hero-img { clip-path: none !important; transition: none !important; }
-html.vt-arrive .hero-img img { transform: none !important; transition: none !important; }</style>` +
+html.vt-arrive .hero-img img { transform: none !important; transition: none !important; }
+/* No grey placeholder while it travels: until the hero is drawn (Safari can be a moment late), the card shows through */
+html.vt-arrive .hero-img { background: transparent !important; }</style>` +
     `<script>document.documentElement.setAttribute("data-slug","${slug}");${caseJs}</script>`;
   console.log(`case-studies/${slug}: ${write("case-studies", slug, head + h)} images`);
 });
