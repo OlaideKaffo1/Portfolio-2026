@@ -60,6 +60,9 @@ function el(tag: string, cls?: string, text?: string) {
   return n;
 }
 
+// Analytics (public/analytics/track.js); queued until that script loads
+const track = (event: string) => (window as { olaideTrack?: (e: string) => void }).olaideTrack?.(event);
+
 export default function Intro() {
   const rootRef = useRef<HTMLDivElement>(null);
   const { startCompose } = useMotion();
@@ -117,8 +120,10 @@ export default function Intro() {
       const on = sound.getAttribute("aria-pressed") !== "true";
       sound.setAttribute("aria-pressed", String(on));
       sound.textContent = on ? "Sound on" : "Sound off";
-      if (on) click.on();
-      else click.off();
+      if (on) {
+        click.on();
+        track("intro_sound_on");
+      } else click.off();
     });
     root.append(top, bottom, seam, count, meta, skip, sound, board);
     root.hidden = false;
@@ -237,6 +242,7 @@ export default function Intro() {
     later(() => {
       markSeen();
       finish();
+      track("intro_completed");
     }, splitAt + 1100);
 
     // Skip straight to the page (except when pressing the sound button).
@@ -246,6 +252,7 @@ export default function Intro() {
       markSeen();
       finish();
       startCompose();
+      track("intro_skipped");
     };
     const removeSkip = () => {
       window.removeEventListener("pointerdown", onSkip);

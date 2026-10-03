@@ -60,6 +60,8 @@
     fresh: '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.2 8a4.8 4.8 0 1 0 1.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M4.4 2.4v2.4h2.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     more: '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   };
+  // Analytics (public/analytics/track.js), when the page has them. The question text stays in the chat log only.
+  const track = (event, props) => window.olaideTrack && window.olaideTrack(event, props);
   const ao = document.createElement("div");
   ao.id = "ask-olaide";
   ao.setAttribute("data-lenis-prevent", ""); // the homepage's smooth scroll would otherwise take the wheel, so the card couldn't scroll
@@ -182,6 +184,7 @@
   const expand = (turn, animate = true) => {
     const t = state.turns[+turn.dataset.i]; const b = turn.querySelector(".ao-tmore");
     if (!t || !b) return;
+    if (animate) track("chat_more_opened");
     const a = parse(t.raw) || {};
     const box = el("div", "ao-ans ao-moretext");
     (a.more || []).forEach((m) => box.appendChild(el("p", null, md(m))));
@@ -226,11 +229,12 @@
   const turnEl = (q, i) => { const t = el("div", "ao-turn"); t.dataset.i = i; t.appendChild(el("div", "ao-ub", esc(q))); return t; };
   const errorText = (msg) => md(msg || `Something went wrong on my side. Please try again, or email me at ${EMAIL}.`);
 
-  const ask = async (text) => {
+  const ask = async (text, via = "typed") => {
     text = String(text || "").trim().slice(0, 500);
     if (!text || busy) return;
     if (/^tell me more\b/i.test(text)) { const last = [...cb.querySelectorAll(".ao-turn")].pop(); if (last && last.querySelector(".ao-tmore")) return expand(last); }
     busy = true; send.disabled = true;
+    track("chat_question", { via, number: state.turns.length + 1 });
     cb.querySelector(".ao-sugg")?.remove(); cb.querySelector(".ao-wl")?.remove(); cb.querySelector(".ao-privacy")?.remove();
     fubar.hidden = true;
     const i = state.turns.length;
@@ -325,6 +329,7 @@
   };
   const open = () => {
     if (isOpen()) return;
+    track("chat_opened", { returning: answers() > 0 });
     ao.classList.add("ao-open"); pill.setAttribute("aria-expanded", "true");
     if (!cb.children.length) rebuild();
     requestAnimationFrame(() => { fit(); const last = [...cb.querySelectorAll(".ao-turn")].pop(); if (last) cb.scrollTop = cb.scrollHeight; });
@@ -392,7 +397,7 @@
   ao.addEventListener("click", (e) => {
     const a = e.target.closest("[data-a]");
     if (a) return a.dataset.a === "min" ? minimise() : endChat();
-    const q = e.target.closest(".ao-sg, .ao-fu"); if (q) return ask(q.dataset.q);
+    const q = e.target.closest(".ao-sg, .ao-fu"); if (q) return ask(q.dataset.q, q.classList.contains("ao-sg") ? "suggestion" : "follow-up");
     const m = e.target.closest(".ao-tmore"); if (m) return expand(m.closest(".ao-turn"));
     if (e.target.closest("[data-undo]")) return undoFresh();
   });
@@ -405,7 +410,7 @@
   addEventListener("resize", fit);
 
   // For the homepage's hero bar: window.AskOlaide.ask("question")
-  const api = { ready: true, open, ask: (q) => { open(); if (q) setTimeout(() => ask(q), 120); } };
+  const api = { ready: true, open, ask: (q) => { open(); if (q) setTimeout(() => ask(q, "page button"), 120); } };
 
   const mount = () => {
     // First paint in the resting state, with no transitions, so nothing animates closed on load

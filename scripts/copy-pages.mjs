@@ -1,11 +1,12 @@
 // Before each build: prepares the finished case studies and articles and copies them into public/,
 // so Vercel serves them next to the homepage. For each page it links the nav and "next" buttons,
 // adds the page transitions from the homepage cards (scripts/pages/), hides the review-only control
-// bar, adds the Ask Olaide button, and copies only the images the page uses.
+// bar, adds the Ask Olaide button and analytics, and copies only the images the page uses.
 import fs from "node:fs";
 import path from "node:path";
 
 const read = (f) => fs.readFileSync(f, "utf8");
+if (fs.existsSync(".env.local")) process.loadEnvFile(".env.local");
 const SITE = "https://www.olaide.design"; // the live address, for link previews
 const esc = (t) => t.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 // Tab icon and link preview (title, description, image) for each page
@@ -22,7 +23,7 @@ const meta = (section, slug, html) => {
   const title = ((html.match(/<title>([^<]*)<\/title>/) || [])[1] || "Olaide").replace(/ · Olaide$/, "");
   const d = esc(DESC[slug]);
   return (
-    '<link rel="icon" href="../../favicon.svg" type="image/svg+xml">' + ASK_CSS +
+    '<link rel="icon" href="../../favicon.svg" type="image/svg+xml">' + ASK_CSS + ANALYTICS +
     `<meta name="description" content="${d}">` +
     `<meta property="og:type" content="article"><meta property="og:url" content="${SITE}/${section}/${slug}/index.html">` +
     `<meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${d}">` +
@@ -32,6 +33,11 @@ const meta = (section, slug, html) => {
 const VT_CSS = read("scripts/pages/vt.css");
 const ASK = '<script src="../../ask/ask.js" data-mode="read" defer></script>';
 const ASK_CSS = '<link rel="stylesheet" href="../../ask/ask.css">';
+// Analytics, as on the homepage (see app/layout.tsx): the PostHog key comes from the POSTHOG_KEY env var
+const PH_KEY = /^phc_\w+$/.test(process.env.POSTHOG_KEY ?? "") ? process.env.POSTHOG_KEY : "";
+const ANALYTICS =
+  `<script>window.__ph=${JSON.stringify(PH_KEY ? { key: PH_KEY } : null)};window.olaideTrack=function(e,p){(window.olaideTrack.q=window.olaideTrack.q||[]).push([e,p])};</script>` +
+  '<script src="../../analytics/track.js" defer></script>';
 const BASE_CSS = `
 html, body { margin: 0; background: #fff; }
 html { scroll-behavior: auto !important; }

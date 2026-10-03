@@ -57,6 +57,12 @@ var m=a&&(a.querySelector(".media")||a.querySelector(".article-bg"));if(!m)retur
 if(r.bottom>0&&r.top<innerHeight){m.style.viewTransitionName=m.classList.contains("media")?"hero":"panel";if(m.classList.contains("article-bg"))[].slice.call(a.children).filter(function(c){return c!==m}).forEach(function(c,i){c.style.viewTransitionName="pt"+i})}});
 })();`;
 
+// Analytics (public/analytics/track.js) read the PostHog project key from the page. It's a public,
+// send-only key, but it lives in the POSTHOG_KEY env var rather than the code. Events sent before the
+// script loads (the intro runs first) wait in olaideTrack.q.
+const phKey = /^phc_\w+$/.test(process.env.POSTHOG_KEY ?? "") ? process.env.POSTHOG_KEY : "";
+const analyticsScript = `window.__ph=${JSON.stringify(phKey ? { key: phKey } : null)};window.olaideTrack=function(e,p){(window.olaideTrack.q=window.olaideTrack.q||[]).push([e,p])};`;
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -64,6 +70,8 @@ export default function RootLayout({
     <html lang="en" className={`${GeistSans.variable} ${doto.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />
+        <script dangerouslySetInnerHTML={{ __html: analyticsScript }} />
+        <script src="/analytics/track.js" defer />
         {/* Ask Olaide, the chat card */}
         <link rel="stylesheet" href="/ask/ask.css" />
         <script src="/ask/ask.js" data-mode="home" defer />
