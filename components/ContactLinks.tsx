@@ -23,7 +23,7 @@ export default function ContactLinks() {
       <span className="line">
         <span className="li" style={{ "--i": 1 } as CSSProperties}>
           <a href={LINKEDIN} target="_blank" rel="noopener noreferrer" className="flex items-center gap-[5px] transition-opacity hover:opacity-60">
-            Connect on Linkedin
+            Connect on LinkedIn
             <ExternalIcon className="size-4" />
           </a>
         </span>

@@ -7,7 +7,7 @@ ARTICLES = {
     'only-designer': dict(title='The Only Designer in the Room', tag='AI Transformation', date='September 2026',
         card='The Only Designer in the Room: How I Scaled Design Across Sales, Marketing and Client Delivery'),
     'prototypes-that-ship': dict(title='Prototypes That Ship', tag='AI Transformation', date='September 2026',
-        card="Prototypes That Ship: How I Moved Strategyzer's Product Discovery into Code"),
+        card="Prototypes That Ship: How I Moved Strategyzer’s Product Discovery into Code"),
 }
 def read_time(page):
     body = re.search(r'<article class="prose">(.*?)</article>', page, re.S).group(1)

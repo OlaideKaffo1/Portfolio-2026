@@ -16,7 +16,7 @@ const PROJECTS: Project[] = [
     company: "STRATEGYZER . AI",
     title: "Solving the first-step problem",
     description:
-      "How Strategyzer's AI assistant went from a full conversational companion to a three-question Playbook Recommender, and why cutting it was the right call.",
+      "How Strategyzer’s AI assistant went from a full conversational companion to a three-question Playbook Recommender, and why shipping the Recommender first was the right call.",
     image: "/images/projects/strategyzer-finder.webp",
     imageAlt: "The Playbook Recommender open on the Projects page, asking what you want to work on",
     href: "case-studies/strattie/index.html",
@@ -27,7 +27,7 @@ const PROJECTS: Project[] = [
     company: "STRATEGYZER . SAAS",
     title: "Cutting a two-day workflow to thirty minutes",
     description:
-      "A redesign of Strategyzer's program admin that gave program designers days back on every delivery and helped the business commit to six-figure enterprise deals.",
+      "A redesign of Strategyzer’s program admin that gave program designers days back on every delivery and helped the business commit to six-figure enterprise deals.",
     image: "/images/projects/strategyzer-saas.webp",
     imageAlt: "Strategyzer program admin showing a cohort playbook instance with weekly events",
     href: "case-studies/strategyzer-saas/index.html",
@@ -49,7 +49,7 @@ const PROJECTS: Project[] = [
     company: "MACROMETA . DEVELOPER TOOLING",
     title: "No developer left to figure it out alone",
     description:
-      "I led a new onboarding for Macrometa's developer platform, built on templates, sample data and tutorials. Customer retention rose 54%.",
+      "I led a new onboarding for Macrometa’s developer platform, built on templates, sample data and tutorials. Customer retention rose 54%.",
     image: "/images/projects/macrometa.webp",
     imageAlt: "The Macrometa welcome, with three ways to start: create a collection, start with a blueprint, or get in touch",
     href: "case-studies/macrometa/index.html",
@@ -69,7 +69,7 @@ const ARTICLES: Article[] = [
   },
   {
     tag: "AI Transformation",
-    title: "Prototypes That Ship: How I Moved Strategyzer's Product Discovery into Code",
+    title: "Prototypes That Ship: How I Moved Strategyzer’s Product Discovery into Code",
     readTime: "10 Min Read",
     date: "September 2026",
     href: "articles/prototypes-that-ship/index.html",

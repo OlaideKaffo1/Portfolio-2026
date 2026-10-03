@@ -6,7 +6,7 @@ import { ArrowUpIcon, SparkleIcon } from "./icons";
 // The four welcome questions from the chat card, then the open invitation
 const PROMPTS = [
   "How do you design with code and AI?",
-  "How do you decide what's worth building?",
+  "How do you decide what’s worth building?",
   "Has your work moved revenue?",
   "How do you tackle a complex problem?",
   "Ask Olaide anything…",

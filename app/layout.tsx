@@ -14,10 +14,21 @@ const doto = localFont({
   display: "block",
 });
 
+const SITE = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : "https://portfolio-2026-blush-pi.vercel.app";
+const TITLE = "Olaide, Senior Product Designer";
+const DESCRIPTION =
+  "I prototype in code with AI, test with real people, and back the ideas that work for users and the business.";
+
 export const metadata: Metadata = {
-  title: "Olaide — Product Designer",
-  description:
-    "Olaide is a senior product designer who engineers. Six years delivering value, shipping products that drive revenue and transforming orgs.",
+  metadataBase: new URL(SITE),
+  title: TITLE,
+  description: DESCRIPTION,
+  icons: { icon: "/favicon.svg" },
+  // The link preview when the site is shared (public/og.png: the hero and the first two projects)
+  openGraph: { type: "website", url: "/", title: TITLE, description: DESCRIPTION, images: [{ url: "/og.png", width: 1200, height: 630, alt: "Olaide's portfolio: the hero and the first two case studies" }] },
+  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION, images: ["/og.png"] },
 };
 
 // Runs before first paint: enables the motion styles (so the page still shows fully

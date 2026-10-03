@@ -17,7 +17,7 @@
 
   const SUGG = [
     ["The craft", "How do you design with code and AI?"],
-    ["Judgment", "How do you decide what's worth building?"],
+    ["Judgment", "How do you decide what’s worth building?"],
     ["Impact", "Has your work moved revenue?"],
     ["Approach", "How do you tackle a complex problem?"],
   ];
@@ -96,8 +96,9 @@
 
   const esc = (t) => String(t).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
   // Bold figures, and the email and LinkedIn become links
+  const curl = (t) => String(t).replace(/(\w)'(\w)/g, "$1’$2").replace(/(^|[\s(])"(?=\S)/g, "$1“").replace(/"/g, "”");
   const md = (t) =>
-    esc(t)
+    esc(curl(t))
       .replace(/\*\*(.+?)\*\*/g, "<b>$1</b>")
       .replace(/\*\*/g, "")
       .replace(new RegExp(EMAIL.replace(/[.@]/g, "\\$&"), "g"), `<a href="mailto:${EMAIL}">${EMAIL}</a>`)
@@ -119,7 +120,7 @@
 
   // ---------- Welcome ----------
   const welcome = () => {
-    cb.innerHTML = `<div class="ao-wl ao-rv"><div class="ao-hi">Hi, I'm Olaide! Think of this as a first conversation, whenever suits you.</div><p>Ask about my work, my thinking or my results.</p></div>
+    cb.innerHTML = `<div class="ao-wl ao-rv"><div class="ao-hi">Hi, I’m Olaide! Think of this as a first conversation, whenever suits you.</div><p>Ask about my work, my thinking or my results.</p></div>
       <div class="ao-sugg">${SUGG.map(([l, t]) => `<button class="ao-sg ao-rv" type="button" data-q="${esc(t)}"><span><small>${l}</small>${esc(t)}</span><span class="ao-go" aria-hidden="true">↗</span></button>`).join("")}</div>
       <p class="ao-privacy ao-rv">Everything I share comes from my case studies and articles. I read these chats now and then to keep getting better at answering.</p>`;
     stagger([...cb.querySelectorAll(".ao-rv")], 60);
@@ -281,8 +282,9 @@
   // Follow-ups pinned above the input: the suggested questions not yet asked
   const bar = () => {
     if (!answers()) { fubar.hidden = true; return; }
-    const asked = new Set(state.turns.map((t) => t.q.toLowerCase()));
-    let list = ALL.filter((t) => !asked.has(t.toLowerCase())); if (!list.length) list = ALL;
+    const norm = (t) => t.toLowerCase().replace(/’/g, "'");
+    const asked = new Set(state.turns.map((t) => norm(t.q)));
+    let list = ALL.filter((t) => !asked.has(norm(t))); if (!list.length) list = ALL;
     fubar.innerHTML = list.map((t) => `<button class="ao-fu" type="button" data-q="${esc(t)}">${esc(t)}</button>`).join("");
     fubar.hidden = false; requestAnimationFrame(() => { fubar.scrollLeft = 0; fit(); });
   };

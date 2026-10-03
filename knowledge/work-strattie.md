@@ -53,7 +53,7 @@ Source for the Ask Olaide chat. Every fact here comes from the approved, publish
 - **My answer:** I wasn't against AI. But if people get stuck choosing a playbook, they'll leave before they ever see an AI feature. Fix that first, and every AI feature we add later reaches people who are already getting value.
 - **Decision:** ship the Recommender first; the assistant comes next.
 
-**The trade-off, made knowingly.** It bought us: only real playbooks recommended, honesty when nothing fits, three taps instead of typing, and less risk. It cost us: the full assistant, help on the canvas (which coaches had asked for), the chat panel and the onboarding tour, all moved to a later release. One job done well beats ten half-done.
+**The trade-off, made knowingly.** It bought us: only real playbooks recommended, honesty when nothing fits, three taps instead of typing, and less risk. It cost us: the full assistant, help on the canvas (which coaches had asked for), the chat panel and the onboarding tour, all moved to a later release. I'd rather ship one job done well than several half-done.
 
 ## Key design decisions
 
@@ -103,7 +103,7 @@ Measured over four months, comparing the months before and after launch. Product
 
 ## What's next
 
-I've recommended building Strattie AI, the assistant I prototyped at the start, to help at every step after the first. It's on the roadmap for the next year, and it can reuse the question map. Shipping one focused thing first didn't shrink the vision. It made the case for it.
+I've recommended building Strattie AI, the assistant I prototyped at the start, to help at every step after the first. It's on the roadmap for the next year, and it can reuse the question map. Shipping one focused thing first kept the bigger vision alive, and gave us the evidence for the next step.
 
 ---
 

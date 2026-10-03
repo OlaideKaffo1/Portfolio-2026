@@ -6,6 +6,29 @@ import fs from "node:fs";
 import path from "node:path";
 
 const read = (f) => fs.readFileSync(f, "utf8");
+const SITE = process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "https://portfolio-2026-blush-pi.vercel.app";
+const esc = (t) => t.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+// Tab icon and link preview (title, description, image) for each page
+// Descriptions match the homepage cards
+const DESC = {
+  strattie: "How Strategyzer’s AI assistant went from a full conversational companion to a three-question Playbook Recommender, and why shipping the Recommender first was the right call.",
+  "strategyzer-saas": "A redesign of Strategyzer’s program admin that gave program designers days back on every delivery and helped the business commit to six-figure enterprise deals.",
+  fount: "Employees kept speaking up, and nothing changed. I designed Fount, and a year later Fount AI, to show HR what to fix first. Fount earned $3M+ in its first year.",
+  macrometa: "I led a new onboarding for Macrometa’s developer platform, built on templates, sample data and tutorials. Customer retention rose 54%.",
+  "only-designer": "How I scaled design across sales, marketing and client delivery at Strategyzer.",
+  "prototypes-that-ship": "How I moved Strategyzer’s product discovery into code.",
+};
+const meta = (section, slug, html) => {
+  const title = ((html.match(/<title>([^<]*)<\/title>/) || [])[1] || "Olaide").replace(/ · Olaide$/, "");
+  const d = esc(DESC[slug]);
+  return (
+    '<link rel="icon" href="../../favicon.svg" type="image/svg+xml">' +
+    `<meta name="description" content="${d}">` +
+    `<meta property="og:type" content="article"><meta property="og:url" content="${SITE}/${section}/${slug}/index.html">` +
+    `<meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${d}">` +
+    `<meta property="og:image" content="${SITE}/og.png"><meta name="twitter:card" content="summary_large_image">`
+  );
+};
 const VT_CSS = read("scripts/pages/vt.css");
 const ASK = '<script src="../../ask/ask.js" data-mode="read" defer></script>';
 const BASE_CSS = `
@@ -53,6 +76,7 @@ CASES.forEach((slug, i) => {
   const head =
     '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
     `<link rel="preload" as="image" href="images/${HERO[slug]}" fetchpriority="high">` +
+    meta("case-studies", slug, h) +
     `<style>${VT_CSS}${BASE_CSS}
 /* Arriving from a card: the hero is already in place (the transition carries it), so skip its own wipe */
 html.vt-arrive .hero-img { clip-path: none !important; transition: none !important; }
@@ -69,6 +93,7 @@ for (const slug of ARTICLES) {
   h = h.replace(/href="#" data-article="([\w-]+)"/g, 'href="../$1/index.html" data-article="$1"');
   const head =
     '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+    meta("articles", slug, h) +
     `<style>${VT_CSS}${BASE_CSS}
 /* Arriving from a card: the grey panel is already in place (the transition carries it), so skip its sweep */
 html.vt-arrive .ahead-bg { transform: none !important; transition: none !important; }</style>` +

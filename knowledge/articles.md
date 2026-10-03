@@ -20,7 +20,7 @@ How I scaled design across sales, marketing and client delivery.
 - **Client delivery** spent hours on formatting and presenting data in client reports.
 - None of this was anyone's failure. The teams had the expertise and the content. What they lacked was a design system built for the way they work.
 
-## The idea: hand over judgment, not just assets
+## The idea: hand over judgment as well as assets
 
 A component library doesn't assemble itself into a deck. The hard part to hand over is a designer's judgment: which layout suits the content, when a chart beats a table, how much weight a heading needs. A Claude skill, a packaged set of instructions and assets Claude loads for a kind of work, let me capture how the brand behaves as well as how it looks. I had already proven the approach with FondUI, our product design system.
 
