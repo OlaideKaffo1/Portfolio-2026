@@ -6,3 +6,7 @@ next-env.d.ts
 .env*.local
 .DS_Store
 .vercel
+
+# Copied in at build time by scripts/copy-pages.mjs
+/public/case-studies/
+/public/articles/

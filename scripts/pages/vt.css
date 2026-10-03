@@ -1,0 +1,59 @@
+/* ---------- Page transitions (home ⇄ case studies) ----------
+   Forward: the clicked card's image grows into the case study's hero while the page around it
+   dissolves and the new page settles in. Back: a calm cross-dissolve to the top of the home page.
+   Browsers without cross-document view transitions simply change page. */
+@view-transition { navigation: auto; }
+
+/* The image: one continuous move, quick to start and long to land */
+::view-transition-group(hero) {
+  animation-duration: 900ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+::view-transition-old(hero),
+::view-transition-new(hero) {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  mix-blend-mode: normal;
+}
+/* Swap the picture early, while it is still card-sized, so the growth shows one image */
+::view-transition-old(hero) { animation: vt-hold 260ms linear both; }
+::view-transition-new(hero) { animation: vt-in 220ms cubic-bezier(0.4, 0, 0.2, 1) both; }
+/* If the hero isn't decoded yet, keep the card image for the whole move and let the hero arrive on top */
+html.vt-hold::view-transition-old(hero) { animation: none; opacity: 1; }
+html.vt-hold::view-transition-new(hero) { animation: vt-in 300ms cubic-bezier(0.4, 0, 0.2, 1) 600ms both; }
+
+/* Articles: the grey card grows into the article's grey header panel */
+::view-transition-group(panel) {
+  animation-duration: 800ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+::view-transition-old(panel),
+::view-transition-new(panel) { width: 100%; height: 100%; object-fit: fill; animation: none; mix-blend-mode: normal; }
+
+/* The card's words fade quickly over the growing panel instead of vanishing on click */
+::view-transition-group(pt0), ::view-transition-group(pt1), ::view-transition-group(pt2) { animation-duration: 200ms; }
+::view-transition-old(pt0), ::view-transition-old(pt1), ::view-transition-old(pt2) { animation: vt-fade-quick 180ms cubic-bezier(0.4, 0, 1, 1) both; }
+@keyframes vt-fade-quick { to { opacity: 0; } }
+
+/* The pages around it: the old one dissolves and eases back, the new one settles in after it */
+::view-transition-old(root) { animation: vt-out 320ms cubic-bezier(0.4, 0, 1, 1) both; }
+::view-transition-new(root) { animation: vt-settle 700ms cubic-bezier(0.16, 1, 0.3, 1) 180ms both; }
+
+/* Back to the home page */
+/* One page clears before the next appears, so the two never overlap */
+html:active-view-transition-type(back)::view-transition-old(root) { animation: vt-drop 240ms cubic-bezier(0.4, 0, 1, 1) both; }
+html:active-view-transition-type(back)::view-transition-new(root) { animation: vt-in 520ms cubic-bezier(0.16, 1, 0.3, 1) 220ms both; }
+
+@keyframes vt-hold { 0%, 80% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes vt-in { from { opacity: 0; } }
+@keyframes vt-out { to { opacity: 0; transform: scale(0.985); } }
+@keyframes vt-settle { from { opacity: 0; transform: translateY(16px); } }
+@keyframes vt-drop { to { opacity: 0; transform: translateY(12px); } }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}
