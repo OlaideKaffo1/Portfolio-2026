@@ -1,0 +1,134 @@
+/* Ask Olaide: the floating chat card and its pill. Everything is scoped under #ask-olaide so it
+   can sit on the homepage, the case studies and the articles without touching their styles. */
+#ask-olaide {
+  --p-bg: #19171b; --p-text: #f4eff3; --p-body: #cfc8cf; --p-muted: #a39ca6; --p-accent: #f0a6c8;
+  --p-hair: rgba(244,239,243,.08); --p-fill: rgba(244,239,243,.05); --p-fill2: rgba(244,239,243,.09);
+  --ao-expo: cubic-bezier(0.19, 1, 0.22, 1); --ao-in: cubic-bezier(0.4, 0, 1, 1);
+  position: fixed; right: 20px; bottom: 20px; z-index: 60; width: 0; height: 0;
+  font-family: var(--font-geist-sans), "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--p-text); font-size: 14px; line-height: 1.5; letter-spacing: normal; text-align: left;
+  -webkit-font-smoothing: antialiased;
+}
+#ask-olaide *, #ask-olaide *::before, #ask-olaide *::after { box-sizing: border-box; }
+#ask-olaide [hidden] { display: none !important; }
+#ask-olaide p { margin: 0; }
+#ask-olaide button { font: inherit; letter-spacing: inherit; margin: 0; }
+
+/* Pill */
+#ask-olaide .ao-pill { position: absolute; right: 0; bottom: 0; display: flex; align-items: center; gap: 9px; height: 44px; padding: 0 16px 0 7px; border: 0; border-radius: 999px; background: var(--p-bg); color: var(--p-text); font-size: 13.5px; letter-spacing: -0.01em; white-space: nowrap; cursor: pointer;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.35), 0 14px 36px -6px rgba(16,10,18,.4); transition: transform .3s var(--ao-expo), opacity .3s var(--ao-expo); }
+#ask-olaide .ao-pill:hover { transform: translateY(-1px); }
+#ask-olaide .ao-pill:focus-visible { outline: 2px solid var(--p-accent); outline-offset: 3px; }
+#ask-olaide .ao-pill .ao-av { width: 30px; height: 30px; }
+#ask-olaide .ao-pill .ao-ct { margin-left: -5px; color: var(--p-muted); }
+#ask-olaide.ao-mini .ao-pill { width: 44px; padding: 0; justify-content: center; }
+#ask-olaide.ao-mini .ao-pill .ao-av { width: 32px; height: 32px; }
+#ask-olaide.ao-open .ao-pill, #ask-olaide.ao-away .ao-pill { opacity: 0; transform: translateY(8px) scale(.96); pointer-events: none; }
+#ask-olaide .ao-dismiss { position: absolute; right: -6px; bottom: 32px; width: 20px; height: 20px; border: 0; border-radius: 50%; padding: 0; display: grid; place-items: center; background: #fff; color: #19171b; box-shadow: 0 2px 8px rgba(16,10,18,.25); cursor: pointer; opacity: 0; transform: scale(.8); pointer-events: none; transition: opacity .15s, transform .2s var(--ao-expo); }
+#ask-olaide:not(.ao-open):not(.ao-away) .ao-pillwrap:hover .ao-dismiss, #ask-olaide .ao-dismiss:focus-visible { opacity: 1; transform: none; pointer-events: auto; }
+@media (hover: none) { #ask-olaide .ao-dismiss { display: none; } }
+#ask-olaide .ao-pillwrap { position: absolute; right: 0; bottom: 0; }
+#ask-olaide .ao-pill-undo { position: absolute; bottom: 6px; white-space: nowrap; height: 32px; padding: 0 14px; border: 0; border-radius: 999px; background: var(--p-text); color: var(--p-bg); font-size: 12.5px; cursor: pointer; box-shadow: 0 8px 24px rgba(16,10,18,.25); opacity: 0; transform: translateX(6px); pointer-events: none; transition: opacity .2s, transform .3s var(--ao-expo); }
+#ask-olaide .ao-pill-undo.ao-on { opacity: 1; transform: none; pointer-events: auto; }
+#ask-olaide.ao-open .ao-pill-undo { opacity: 0; pointer-events: none; }
+
+/* Card */
+#ask-olaide .ao-card { position: absolute; right: 0; bottom: 0; width: 384px; height: 300px; display: flex; flex-direction: column; overflow: hidden; border-radius: 20px; background: var(--p-bg);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 0 0 1px rgba(0,0,0,.45), 0 34px 80px -12px rgba(16,10,18,.5), 0 10px 24px -8px rgba(16,10,18,.32);
+  transform-origin: 100% 100%; transform: translateY(10px) scale(.94); opacity: 0; pointer-events: none; visibility: hidden;
+  transition: transform .24s var(--ao-in), opacity .2s var(--ao-in), visibility 0s linear .24s, height .42s var(--ao-expo); }
+#ask-olaide.ao-open .ao-card { transform: none; opacity: 1; pointer-events: auto; visibility: visible; transition: transform .42s var(--ao-expo), opacity .22s ease-out, visibility 0s, height .42s var(--ao-expo); }
+#ask-olaide .ao-card > * { transition: opacity .2s ease; }
+#ask-olaide:not(.ao-open) .ao-card > * { opacity: 0; }
+#ask-olaide.ao-open .ao-card > * { opacity: 1; transition: opacity .25s ease .08s; }
+@media (max-width: 560px) {
+  #ask-olaide { left: 8px; right: 8px; bottom: 8px; width: auto; }
+  #ask-olaide .ao-card { width: 100%; border-radius: 22px; }
+  #ask-olaide .ao-pillwrap { right: 4px; bottom: 4px; }
+}
+
+#ask-olaide .ao-ch { flex: none; display: flex; align-items: center; gap: 10px; height: 54px; padding: 0 10px 0 16px; border-bottom: 1px solid var(--p-hair); }
+#ask-olaide .ao-av { flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--p-text); color: var(--p-bg); display: grid; place-items: center; font-size: 11.5px; font-weight: 600; letter-spacing: -0.04em; }
+#ask-olaide .ao-nm { font-size: 14px; font-weight: 500; letter-spacing: -0.015em; }
+#ask-olaide .ao-ic { margin-left: auto; display: flex; gap: 2px; }
+#ask-olaide .ao-ic button { width: 30px; height: 30px; padding: 0; border: 0; border-radius: 8px; background: transparent; color: var(--p-muted); display: grid; place-items: center; cursor: pointer; transition: background-color .15s, color .15s; }
+#ask-olaide .ao-ic button:hover { background: var(--p-fill); color: var(--p-text); }
+#ask-olaide .ao-ic button:focus-visible { outline: 2px solid var(--p-accent); outline-offset: -2px; }
+
+#ask-olaide .ao-cb { flex: 1; min-height: 0; overflow-y: auto; padding: 20px 18px 22px; display: flex; flex-direction: column; gap: 16px; scrollbar-width: thin; scrollbar-color: var(--p-fill2) transparent; overscroll-behavior: contain; }
+#ask-olaide .ao-cf { flex: none; margin: 0; padding: 12px; border-top: 1px solid var(--p-hair); }
+#ask-olaide .ao-inp { display: flex; align-items: center; gap: 8px; height: 44px; margin: 0; padding: 0 6px 0 14px; border-radius: 12px; background: var(--p-fill); box-shadow: inset 0 0 0 1px var(--p-fill2); transition: box-shadow .15s; }
+#ask-olaide .ao-inp:focus-within { box-shadow: inset 0 0 0 1px rgba(240,166,200,.55); }
+#ask-olaide .ao-inp input { flex: 1; min-width: 0; height: auto; margin: 0; padding: 0; border: 0; background: transparent; color: var(--p-text); font: inherit; font-size: 13.5px; outline: none; box-shadow: none; }
+#ask-olaide .ao-inp input::placeholder { color: var(--p-muted); opacity: 1; }
+#ask-olaide .ao-inp button { width: 32px; height: 32px; padding: 0; border: 0; border-radius: 9px; background: var(--p-text); color: var(--p-bg); display: grid; place-items: center; cursor: pointer; transition: opacity .15s; }
+#ask-olaide .ao-inp button:disabled { opacity: .35; cursor: default; }
+
+/* Welcome */
+#ask-olaide .ao-wl { display: grid; gap: 6px; }
+#ask-olaide .ao-hi { font-size: 19px; line-height: 25px; letter-spacing: -0.025em; color: var(--p-text); text-wrap: balance; }
+#ask-olaide .ao-wl p { font-size: 13.5px; line-height: 21px; color: var(--p-body); }
+#ask-olaide .ao-sugg { display: grid; gap: 6px; }
+#ask-olaide .ao-sg { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; padding: 10px 12px; border: 0; border-radius: 12px; background: var(--p-fill); box-shadow: inset 0 0 0 1px var(--p-hair); color: var(--p-text); font-size: 13.5px; line-height: 19px; text-align: left; cursor: pointer; transition: background-color .15s; }
+#ask-olaide .ao-sg:hover { background: var(--p-fill2); }
+#ask-olaide .ao-sg:focus-visible { outline: 2px solid var(--p-accent); outline-offset: 1px; }
+#ask-olaide .ao-sg small { display: block; font-size: 11.5px; color: var(--p-muted); margin-bottom: 1px; }
+#ask-olaide .ao-go { color: var(--p-muted); flex: none; }
+#ask-olaide .ao-privacy { font-size: 11.5px; line-height: 17px; color: var(--p-muted); }
+
+/* Conversation */
+#ask-olaide .ao-turn { display: flex; flex-direction: column; gap: 14px; }
+#ask-olaide .ao-ub { align-self: flex-end; max-width: 85%; padding: 9px 13px; border-radius: 14px 14px 5px 14px; background: var(--p-fill2); font-size: 13.5px; line-height: 20px; overflow-wrap: anywhere; }
+#ask-olaide .ao-src { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--p-muted); }
+#ask-olaide .ao-src::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--p-accent); }
+#ask-olaide .ao-wait { font-size: 12.5px; color: transparent; background: linear-gradient(90deg, var(--p-muted) 0%, var(--p-muted) 40%, var(--p-text) 50%, var(--p-muted) 60%, var(--p-muted) 100%) 0 0 / 300% 100%; -webkit-background-clip: text; background-clip: text; animation: ao-shimmer 1.6s linear infinite; }
+@keyframes ao-shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+#ask-olaide .ao-ans p { font-size: 14px; line-height: 22px; color: var(--p-body); text-wrap: pretty; }
+#ask-olaide .ao-ans p + p { margin-top: 10px; }
+#ask-olaide .ao-ans b { color: var(--p-text); font-weight: 500; font-variant-numeric: tabular-nums; }
+#ask-olaide .ao-ans a, #ask-olaide .ao-err a { color: var(--p-text); text-decoration: underline; text-decoration-color: rgba(244,239,243,.3); text-underline-offset: 3px; }
+#ask-olaide .ao-ans a:hover { text-decoration-color: var(--p-text); }
+#ask-olaide .ao-err { font-size: 13.5px; line-height: 21px; color: var(--p-body); }
+#ask-olaide .ao-pr { display: grid; }
+#ask-olaide .ao-pr > div { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 12px; padding: 12px 0; border-top: 1px solid var(--p-hair); }
+#ask-olaide .ao-pr > div:last-child { border-bottom: 1px solid var(--p-hair); }
+#ask-olaide .ao-pr a { align-self: start; display: inline-flex; gap: 4px; font-size: 12.5px; line-height: 21px; color: var(--p-muted); text-decoration: none; transition: color .15s; }
+#ask-olaide .ao-pr a i { font-style: normal; opacity: 0; transform: translate(-2px, 2px); transition: opacity .15s, transform .2s var(--ao-expo); }
+#ask-olaide .ao-pr > div:hover a, #ask-olaide .ao-pr a:focus-visible { color: var(--p-text); }
+#ask-olaide .ao-pr > div:hover a i, #ask-olaide .ao-pr a:focus-visible i { opacity: 1; transform: none; }
+#ask-olaide .ao-pr p { font-size: 13.5px; line-height: 21px; color: var(--p-body); text-wrap: pretty; }
+#ask-olaide .ao-pr b { color: var(--p-text); font-weight: 500; }
+#ask-olaide .ao-lk { display: flex; align-items: center; gap: 12px; padding: 8px 12px 8px 8px; border-radius: 12px; background: var(--p-fill); box-shadow: inset 0 0 0 1px var(--p-hair); color: var(--p-text); text-decoration: none; transition: background-color .15s; }
+#ask-olaide .ao-lk:hover { background: var(--p-fill2); }
+#ask-olaide .ao-lk:focus-visible { outline: 2px solid var(--p-accent); outline-offset: 1px; }
+#ask-olaide .ao-lk img { width: 44px; height: 34px; border-radius: 6px; object-fit: cover; flex: none; background: var(--p-fill2); }
+#ask-olaide .ao-tt { font-size: 13px; line-height: 18px; }
+#ask-olaide .ao-mt { font-size: 11.5px; color: var(--p-muted); }
+#ask-olaide .ao-lk .ao-go { margin-left: auto; font-size: 12px; }
+#ask-olaide .ao-blocks { display: grid; gap: 10px; }
+#ask-olaide .ao-rv { opacity: 0; transform: translateY(6px); }
+#ask-olaide .ao-rv.ao-in { opacity: 1; transform: none; transition: opacity .36s var(--ao-expo), transform .36s var(--ao-expo); }
+#ask-olaide .ao-fu { flex: none; white-space: nowrap; border: 0; padding: 6px 11px; border-radius: 999px; background: transparent; box-shadow: inset 0 0 0 1px var(--p-fill2); color: var(--p-body); font-size: 12.5px; line-height: 17px; cursor: pointer; text-align: left; transition: background-color .15s, color .15s; }
+#ask-olaide .ao-fu:hover { background: var(--p-fill); color: var(--p-text); }
+#ask-olaide .ao-fu:focus-visible { outline: 2px solid var(--p-accent); outline-offset: 1px; }
+#ask-olaide .ao-fubar { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 0 -12px 10px; padding: 0 12px; -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); }
+#ask-olaide .ao-fubar::-webkit-scrollbar { display: none; }
+#ask-olaide .ao-tmore { align-self: flex-start; display: inline-flex; align-items: center; gap: 5px; margin: -4px 0 0; padding: 3px 0; border: 0; background: transparent; color: var(--p-muted); font-size: 13px; cursor: pointer; transition: color .15s; }
+#ask-olaide .ao-tmore svg { transition: transform .3s var(--ao-expo); }
+#ask-olaide .ao-tmore:hover { color: var(--p-text); }
+#ask-olaide .ao-tmore:hover svg { transform: translateY(2px); }
+#ask-olaide .ao-tmore:focus-visible { outline: 2px solid var(--p-accent); outline-offset: 2px; border-radius: 4px; }
+#ask-olaide .ao-fresh { display: inline-flex; align-items: center; gap: 6px; margin: 8px 0 -2px 4px; padding: 2px 0; border: 0; background: transparent; color: var(--p-muted); font-size: 12px; cursor: pointer; transition: color .15s; }
+#ask-olaide .ao-fresh:hover { color: var(--p-text); }
+#ask-olaide .ao-fresh:focus-visible { outline: 2px solid var(--p-accent); outline-offset: 2px; border-radius: 4px; }
+#ask-olaide .ao-undo-in { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: -6px -6px 2px; padding: 7px 7px 7px 12px; border-radius: 12px; background: var(--p-fill); box-shadow: inset 0 0 0 1px var(--p-hair); font-size: 12.5px; color: var(--p-body); transition: opacity .25s; }
+#ask-olaide .ao-undo-in button { border: 0; border-radius: 8px; padding: 4px 10px; background: var(--p-text); color: var(--p-bg); font-size: 12px; cursor: pointer; }
+#ask-olaide .ao-undo-in.ao-out { opacity: 0; }
+#ask-olaide .ao-latest { position: absolute; left: 50%; bottom: 72px; transform: translate(-50%, 6px); opacity: 0; pointer-events: none; padding: 6px 12px; border: 0; border-radius: 999px; background: var(--p-text); color: var(--p-bg); font-size: 12px; cursor: pointer; transition: opacity .2s, transform .3s var(--ao-expo); }
+#ask-olaide .ao-card > .ao-latest:not(.ao-on) { opacity: 0; pointer-events: none; }
+#ask-olaide .ao-latest.ao-on { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+#ask-olaide .ao-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) {
+  #ask-olaide .ao-card, #ask-olaide.ao-open .ao-card, #ask-olaide .ao-pill, #ask-olaide .ao-rv.ao-in, #ask-olaide .ao-latest { transition: opacity .12s linear !important; transform: none !important; }
+  #ask-olaide .ao-wait { animation: none; color: var(--p-muted); }
+}
