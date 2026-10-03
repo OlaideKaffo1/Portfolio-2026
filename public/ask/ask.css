@@ -10,6 +10,7 @@
   -webkit-font-smoothing: antialiased;
 }
 #ask-olaide *, #ask-olaide *::before, #ask-olaide *::after { box-sizing: border-box; }
+#ask-olaide.ao-boot, #ask-olaide.ao-boot * { transition: none !important; }
 #ask-olaide [hidden] { display: none !important; }
 #ask-olaide p { margin: 0; }
 #ask-olaide button { font: inherit; letter-spacing: inherit; margin: 0; }

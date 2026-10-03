@@ -66,6 +66,7 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />
         {/* Ask Olaide, the chat card */}
+        <link rel="stylesheet" href="/ask/ask.css" />
         <script src="/ask/ask.js" data-mode="home" defer />
       </head>
       <body>

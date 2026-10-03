@@ -84,10 +84,22 @@
       </form>
       <div class="ao-sr" role="status" aria-live="polite"></div>
     </div>`;
-  const css = document.createElement("link");
-  css.rel = "stylesheet";
-  css.href = new URL("ask.css", script.src).href;
-  document.head.appendChild(css);
+  // Until the card is ready, questions from the hero bar wait in a queue
+  if (!window.AskOlaide) window.AskOlaide = { q: [], ask(q) { this.q.push(q || ""); }, open() { this.q.push(""); } };
+  // The card is only added to the page once its styles have loaded, so it never shows unstyled
+  const cssHref = new URL("ask.css", script.src).href;
+  let css = [...document.querySelectorAll('link[rel="stylesheet"]')].find((l) => l.href === cssHref);
+  if (!css) {
+    css = document.createElement("link");
+    css.rel = "stylesheet";
+    css.href = cssHref;
+    document.head.appendChild(css);
+  }
+  const styled = new Promise((resolve) => {
+    if (css.sheet) return resolve();
+    css.addEventListener("load", resolve, { once: true });
+    css.addEventListener("error", resolve, { once: true });
+  });
 
   const $ = (s) => ao.querySelector(s);
   const card = $(".ao-card"), cb = $(".ao-cb"), pill = $(".ao-pill"), input = $(".ao-inp input"), send = $(".ao-inp button");
@@ -394,7 +406,10 @@
   const api = { ready: true, open, ask: (q) => { open(); if (q) setTimeout(() => ask(q), 120); } };
 
   const mount = () => {
+    // First paint in the resting state, with no transitions, so nothing animates closed on load
+    ao.classList.add("ao-boot");
     document.body.appendChild(ao);
+    requestAnimationFrame(() => requestAnimationFrame(() => ao.classList.remove("ao-boot")));
     setPill();
     const hero = document.querySelector("[data-ask-hero]");
     heroSeen = MODE === "home" && !!hero;
@@ -405,5 +420,6 @@
     window.AskOlaide = api;
     queued.forEach((q) => api.ask(q));
   };
-  document.body ? mount() : addEventListener("DOMContentLoaded", mount);
+  const ready = new Promise((resolve) => (document.body ? resolve() : addEventListener("DOMContentLoaded", resolve, { once: true })));
+  Promise.all([ready, styled]).then(mount);
 })();

@@ -22,7 +22,7 @@ const meta = (section, slug, html) => {
   const title = ((html.match(/<title>([^<]*)<\/title>/) || [])[1] || "Olaide").replace(/ · Olaide$/, "");
   const d = esc(DESC[slug]);
   return (
-    '<link rel="icon" href="../../favicon.svg" type="image/svg+xml">' +
+    '<link rel="icon" href="../../favicon.svg" type="image/svg+xml">' + ASK_CSS +
     `<meta name="description" content="${d}">` +
     `<meta property="og:type" content="article"><meta property="og:url" content="${SITE}/${section}/${slug}/index.html">` +
     `<meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${d}">` +
@@ -31,6 +31,7 @@ const meta = (section, slug, html) => {
 };
 const VT_CSS = read("scripts/pages/vt.css");
 const ASK = '<script src="../../ask/ask.js" data-mode="read" defer></script>';
+const ASK_CSS = '<link rel="stylesheet" href="../../ask/ask.css">';
 const BASE_CSS = `
 html, body { margin: 0; background: #fff; }
 html { scroll-behavior: auto !important; }
