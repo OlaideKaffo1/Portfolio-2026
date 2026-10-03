@@ -113,7 +113,6 @@ From the roadmap I proposed: an action tracker, a feedback portal and performanc
 ## Rules for the chat
 
 - The **$3M+** is Fount only, in year one. Never add Fount AI to it or call it more.
-- **Never use** these figures, which were dropped because they weren't measured in a way Olaide stands behind: $22M, 840% ROI, 67% turnover, 340%, $2.3M, $1.8M, 312%.
 - The 28% and 65% come from one customer. Always say so.
 - The research was remote, over Zoom. Never say "in person".
 - The status is "shipped", not "live".

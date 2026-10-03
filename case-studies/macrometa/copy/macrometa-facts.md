@@ -13,17 +13,12 @@ The source of truth for case study 4. Everything on the page has to trace back t
 
 ## Results (measured with product analytics, after 6 months of use)
 - **Customer retention:** up 54%. This is the headline number.
-- **Support tickets:** down 55% (Olaide's final answer, replacing 70% and the write-up's 72%). Customer success confirmed the drop.
+- **Support tickets:** down 55%. Customer success confirmed the drop.
 - **Onboarding:** 73% faster, measured as sign-up completion in product analytics.
-- **User satisfaction:** up 50%. This replaces the write-up's conflicting 80% and 40%.
-- **Revenue:** $2M in revenue that year (Olaide's final answer, replacing the write-up's $2.3M ARR, so as not to overstate it). Olaide links it to better onboarding, which marketing also promoted. Describe it as a result the work contributed to, not one it caused alone.
+- **User satisfaction:** up 50%.
+- **Revenue:** $2M in revenue that year. Olaide links it to better onboarding, which marketing also promoted. Describe it as a result the work contributed to, not one it caused alone.
 - **Templates:** 85% adoption, confirmed. Olaide's reason: it was easy to click a template and add it to whatever you were creating.
-- **Sales leads:** up 57% (Olaide's final answer, replacing 55% and the write-up's 87%).
-
-## Dropped
-- Customer acquisition cost ($47K) and lifetime value ($220K). They're business numbers, not design results.
-- "After 12 months of platform use". The correct period is 6 months.
-- The 82% retention figure. 54% is the one to use.
+- **Sales leads:** up 57%.
 
 ## Still to confirm
 
@@ -94,7 +89,5 @@ Real messages from customers to the Macrometa team. The customers aren't named. 
   - Confluent had all twelve.
 
 ## Decisions (Olaide)
-- Drop the "84% preferred the command line, 91% were frustrated" figures.
-- Drop the write-up's three quotes (fintech, e-commerce, gaming). Use the real customer messages instead.
 - There are three key insights, not four.
 - Welcome screen order: A first, then B. What changed: both iterations were about finding the quickest way to the first value moment, and B is where we landed.

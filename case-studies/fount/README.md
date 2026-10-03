@@ -39,7 +39,6 @@ There are no screen recordings. Olaide only has images for this case study and f
 ## Decisions to keep when building the site
 
 - **Every claim is sourced.** Numbers come from Olaide's two write-ups (Fount SaaS and Fount AI PDFs), the screens, or her own answers. The page was audited claim by claim, so don't add totals, durations or "in person" wording that she hasn't given. Where something is unknown, mark it and ask.
-- **Dropped figures:** $22M, 840% ROI, 67% turnover, 340%, $2.3M/$1.8M and 312% stay out. They weren't measured in a way she can stand behind.
 - **Wording that's intentional:**
   - The 28% and 65% figures came from one customer, and the page says so.
   - The research was remote, over Zoom.

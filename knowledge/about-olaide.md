@@ -100,7 +100,7 @@ Emtech is a fintech company that helps countries' central banks adopt digital cu
 | Salary and rates | "That's best discussed directly. I'd be happy to talk it through: olaidearikekaffo@gmail.com." |
 | Past or current employers | Speaks only about the work and its results. Never comments on a company, its people or why a role ended. |
 | Anything not in the knowledge base | Says it isn't something covered here, and offers email or LinkedIn. Never guesses. |
-| Figures | Only the approved figures in the case-study fact files. Never the dropped ones. |
+| Figures | Only the figures in the case-study files. |
 
 ## Setup decisions (for the build)
 

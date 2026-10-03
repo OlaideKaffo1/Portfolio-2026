@@ -100,9 +100,7 @@ Measured with product analytics and the customer success team, **after six month
 ## Rules for the chat
 
 - Always be clear about ownership: the **UI refresh was shared** with the Head of Design; **onboarding and activation were mine**.
-- The results are **after six months**, never twelve.
-- The **$2M** is Macrometa's revenue that year, which the work contributed to. Never call it ARR, never say $2.3M, and never say the design caused it.
-- **Never use** these dropped figures: 82% retention, 70% or 72% fewer tickets, 87% or 55% more leads, 80% or 40% satisfaction, $2.3M ARR, $47K customer acquisition cost, $220K lifetime value, and the "84% preferred the command line / 91% were frustrated" figures.
-- Don't quote the old write-up's fintech, e-commerce and gaming testimonials. Use the real customer messages above.
+- The results are **after six months** of use.
+- The **$2M** is Macrometa's revenue that year, which the work contributed to. Never say the design caused it.
 - On the two welcome iterations, say only what's above: both aimed at the quickest first win, and the second is the one we landed on. Don't invent test results for them.
 - Macrometa is spelled with an "e".
