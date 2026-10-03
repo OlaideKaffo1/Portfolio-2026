@@ -58,6 +58,7 @@ One design system underneath, one skill per team:
 - With five to seven people in sales, the team can now send roughly **50 to 100 decks a week**, up from about 25 to 35. Our pipeline has grown significantly since. The exact figures are confidential.
 - Quality improved too: a prospect reading a deck and a client reading a report now see the same Strategyzer.
 - **My role changed:** I'm still the product's senior product designer, and I now also act as design lead for the wider company, by choice.
+- **Supporting the teams:** I work closely with sales and marketing so they get the most from the skills. I take them through best practices and help them use the skills well, so their work keeps improving. It isn't managing designers, but it is leading how design is done across the company.
 
 **Michal Setkowski, Head of Sales, Strategyzer** (quote approved for use):
 > "This has been easily one of the largest quality leaps in the Sales Team's work since my time at Strategyzer."

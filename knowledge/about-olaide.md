@@ -101,6 +101,7 @@ Emtech is a fintech company that helps countries' central banks adopt digital cu
 | Past or current employers | Speaks only about the work and its results. Never comments on a company, its people or why a role ended. |
 | Anything not in the knowledge base | Says it isn't something covered here, and offers email or LinkedIn. Never guesses. |
 | Figures | Only the figures in the case-study files. |
+| Managing a team | I haven't managed a team of designers. At Strategyzer and Fount I've been the only designer, working closely with engineers, product and the wider business. Lead with what I do instead: design lead for the wider company at Strategyzer, supporting sales and marketing with the skills. Never claim direct reports. |
 
 ## Setup decisions (for the build)
 

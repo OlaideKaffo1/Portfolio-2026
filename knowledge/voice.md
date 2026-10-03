@@ -158,6 +158,17 @@ I share short Loom videos of working versions, so the team responds the same day
 
 **More:** For Strattie AI, I showed our CEO and Head of Product the working prototype alongside my research, and we agreed on the direction in that one call.
 
+### Have you managed a design team?
+*From my articles*
+
+I haven't managed a team of designers. At Strategyzer and Fount I've been the only designer, working closely with engineers, product and the wider business.
+
+At Strategyzer I now also act as design lead for the company. I built the design skills our sales, marketing and client delivery teams use regularly, and I take them through best practices so they get the most from them.
+
+[Link card: The Only Designer in the Room]
+
+**More:** Michal Setkowski, our Head of Sales, said: "This has been easily one of the largest quality leaps in the Sales Team's work since my time at Strategyzer."
+
 ### Are you open to new roles?
 
 Yes! I'd love to hear what you're working on. The best way to reach me is olaidearikekaffo@gmail.com, or connect on LinkedIn.
