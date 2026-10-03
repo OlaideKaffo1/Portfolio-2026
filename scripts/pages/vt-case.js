@@ -1,6 +1,6 @@
 (function(){var d=document.documentElement,w=window;
 function fromUrl(){try{var a=w.navigation&&navigation.activation&&navigation.activation.from;if(a&&a.url)return a.url}catch(e){}return document.referrer||""}
-function navType(){try{return navigation.activation.navigationType}catch(e){return""}}
+function navType(){try{return navigation.activation.navigationType}catch(e){}try{return performance.getEntriesByType("navigation")[0].type==="back_forward"?"traverse":""}catch(e){return""}}
 try{sessionStorage.setItem("olaide-intro-seen","1")}catch(e){}
 if("scrollRestoration"in history)history.scrollRestoration="manual";
 function top(){if(scrollX||scrollY)scrollTo(0,0)}

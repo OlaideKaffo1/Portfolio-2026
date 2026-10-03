@@ -26,10 +26,11 @@ const client = new Anthropic({ baseURL: process.env.ANTHROPIC_API_URL ?? "https:
 const reply = (status: number, message: string) => Response.json({ message }, { status });
 
 export async function POST(req: Request) {
-  // Only pages on this site may call the chat
+  // Only pages on this site may call the chat: the listed addresses, or whichever address served this
+  // request (so the chat also works on the Vercel address that earlier links point to)
   const origin = req.headers.get("origin");
   const allowed = (process.env.ASK_ALLOWED_ORIGINS ?? "").split(",").map((s) => s.trim()).filter(Boolean);
-  if (origin && allowed.length && !allowed.includes(origin)) return reply(403, "Not allowed.");
+  if (origin && allowed.length && !allowed.includes(origin) && origin !== new URL(req.url).origin) return reply(403, "Not allowed.");
 
   const parsed = Body.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return reply(400, "That question couldn't be read. Please try again.");

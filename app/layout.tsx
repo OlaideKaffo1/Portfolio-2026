@@ -30,16 +30,18 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION, images: ["/og.png"] },
 };
 
-// Runs before first paint: enables the motion styles (so the page still shows fully
-// without JavaScript) and covers the page in black if the intro is about to play,
+// Runs before first paint. On iPhone and iPad it stops Safari zooming the page into the chat and
+// "ask" boxes (their text is under 16px); visitors can still pinch-zoom there. It keeps watching while the
+// page loads, because Next re-adds its own viewport tag when it sees ours changed. It enables the motion
+// styles (so the page still shows fully without JavaScript) and covers the page in black if the intro is about to play,
 // so there's no flash of content before it starts. It also runs the page transitions to and from
 // the case studies and articles: a clicked card's image grows into the case study's hero, an article
 // card's grey panel grows into the article's header, and coming back
 // lands on the top of the page, already composed. Safari doesn't say where a navigation is going, so the
 // clicked link stands in for it.
-const bootScript = `(function(){var d=document.documentElement;d.classList.add("js");try{if(sessionStorage.getItem("olaide-intro-seen")!=="1"&&!matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("intro-pending")}catch(e){}})();(function(){var d=document.documentElement,w=window;
+const bootScript = `(function(){var n=navigator;if(!/iP(hone|od|ad)/.test(n.platform)&&!(n.platform==="MacIntel"&&n.maxTouchPoints>1))return;function f(){document.querySelectorAll('meta[name="viewport"]').forEach(function(m){if(!/maximum-scale/.test(m.content))m.content+=",maximum-scale=1"})}f();var o=new MutationObserver(f);o.observe(document.documentElement,{childList:true,subtree:true});addEventListener("load",function(){setTimeout(function(){o.disconnect()},3000)})})();(function(){var d=document.documentElement;d.classList.add("js");try{if(sessionStorage.getItem("olaide-intro-seen")!=="1"&&!matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("intro-pending")}catch(e){}})();(function(){var d=document.documentElement,w=window;
 function fromUrl(){try{var a=w.navigation&&navigation.activation&&navigation.activation.from;if(a&&a.url)return a.url}catch(e){}return document.referrer||""}
-function navType(){try{return navigation.activation.navigationType}catch(e){return""}}
+function navType(){try{return navigation.activation.navigationType}catch(e){}try{return performance.getEntriesByType("navigation")[0].type==="back_forward"?"traverse":""}catch(e){return""}}
 var fu=fromUrl(),returning=fu.indexOf("/case-studies/")>-1||fu.indexOf("/articles/")>-1;
 if("scrollRestoration"in history)history.scrollRestoration="manual";
 if(returning){d.classList.add("returning");d.classList.remove("intro-pending");try{sessionStorage.setItem("olaide-intro-seen","1")}catch(e){}}

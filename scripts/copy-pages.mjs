@@ -41,6 +41,9 @@ const AN = {
 const ANALYTICS =
   `<script>window.__an=${JSON.stringify(AN)};window.olaideTrack=function(e,p){(window.olaideTrack.q=window.olaideTrack.q||[]).push([e,p])};</script>` +
   '<script src="../../analytics/track.js" defer></script>';
+// iPhone and iPad: stop Safari zooming the page into the chat box (its text is under 16px). Visitors can
+// still pinch-zoom there; on Android maximum-scale would block that, so it's left alone.
+const NO_INPUT_ZOOM = `<script>(function(){var n=navigator;if(!/iP(hone|od|ad)/.test(n.platform)&&!(n.platform==="MacIntel"&&n.maxTouchPoints>1))return;function f(){document.querySelectorAll('meta[name="viewport"]').forEach(function(m){if(!/maximum-scale/.test(m.content))m.content+=",maximum-scale=1"})}f();var o=new MutationObserver(f);o.observe(document.documentElement,{childList:true,subtree:true});addEventListener("load",function(){setTimeout(function(){o.disconnect()},3000)})})();</script>`;
 const BASE_CSS = `
 html, body { margin: 0; background: #fff; }
 html { scroll-behavior: auto !important; }
@@ -88,7 +91,7 @@ CASES.forEach((slug, i) => {
   h = h.replace(/(<figure class="hero-img[^>]*><img )/, '$1fetchpriority="high" loading="eager" decoding="sync" ');
   must((h.match(/href="\.\.\/\.\.\/"/g) || []).length >= 2 && h.includes(`../${next}/index.html`), `case-studies/${slug}: links not found`);
   const head =
-    '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+    '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' + NO_INPUT_ZOOM +
     `<link rel="preload" as="image" href="images/${HERO[slug]}" fetchpriority="high">` +
     meta("case-studies", slug, h) +
     `<style>${VT_CSS}${BASE_CSS}
@@ -108,7 +111,7 @@ for (const slug of ARTICLES) {
   h = h.replaceAll('href="#" data-home', 'href="../../" data-home');
   h = h.replace(/href="#" data-article="([\w-]+)"/g, 'href="../$1/index.html" data-article="$1"');
   const head =
-    '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+    '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' + NO_INPUT_ZOOM +
     meta("articles", slug, h) +
     `<style>${VT_CSS}${BASE_CSS}
 /* Arriving from a card: the grey panel is already in place (the transition carries it), so skip its sweep */
