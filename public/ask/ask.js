@@ -62,6 +62,7 @@
   };
   const ao = document.createElement("div");
   ao.id = "ask-olaide";
+  ao.setAttribute("data-lenis-prevent", ""); // the homepage's smooth scroll would otherwise take the wheel, so the card couldn't scroll
   ao.className = "ao-away" + (MODE === "read" ? " ao-mini" : "");
   ao.innerHTML = `
     <button class="ao-pill-undo" type="button">Undo</button>
