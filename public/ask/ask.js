@@ -376,7 +376,7 @@
 
   // ---------- When the pill shows ----------
   // Home: after the hero's ask bar scrolls away. Everywhere: hidden near the footer, while scrolling
-  // down on a phone, and after the hover ✕ (for this page view).
+  // down on a phone (back once scrolling stops), and after the hover ✕ (for this page view).
   let heroSeen = false, footerSeen = false, scrollingDown = false, dismissed = false;
   const phone = matchMedia("(max-width: 560px)");
   const update = () => {
@@ -385,10 +385,13 @@
     pill.tabIndex = away ? -1 : 0;
   };
   const watch = (target, fn) => { if (!target) return; new IntersectionObserver(([e]) => { fn(e.isIntersecting); update(); }).observe(target); };
-  let lastY = scrollY;
+  // On a phone it steps aside while you scroll down and comes back as soon as you stop
+  let lastY = scrollY, settleT;
   addEventListener("scroll", () => {
     const y = scrollY, d = y - lastY;
     if (Math.abs(d) > 8) { scrollingDown = d > 0 && y > 80; lastY = y; update(); }
+    clearTimeout(settleT);
+    settleT = setTimeout(() => { if (scrollingDown) { scrollingDown = false; update(); } }, 450);
   }, { passive: true });
   $(".ao-dismiss").addEventListener("click", () => { dismissed = true; update(); });
 
