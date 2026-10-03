@@ -45,7 +45,8 @@ async function sb(pathname: string, body: unknown) {
     method: "POST",
     headers: {
       apikey: SB_KEY!,
-      Authorization: `Bearer ${SB_KEY}`,
+      // Older service_role keys are JWTs and also go in Authorization; newer sb_secret_ keys go in apikey only
+      ...(SB_KEY!.startsWith("eyJ") ? { Authorization: `Bearer ${SB_KEY}` } : {}),
       "Content-Type": "application/json",
       Prefer: "return=minimal",
     },
