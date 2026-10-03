@@ -35,7 +35,8 @@ export const metadata: Metadata = {
 // so there's no flash of content before it starts. It also runs the page transitions to and from
 // the case studies and articles: a clicked card's image grows into the case study's hero, an article
 // card's grey panel grows into the article's header, and coming back
-// lands on the top of the page, already composed.
+// lands on the top of the page, already composed. Safari doesn't say where a navigation is going, so the
+// clicked link stands in for it.
 const bootScript = `(function(){var d=document.documentElement;d.classList.add("js");try{if(sessionStorage.getItem("olaide-intro-seen")!=="1"&&!matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("intro-pending")}catch(e){}})();(function(){var d=document.documentElement,w=window;
 function fromUrl(){try{var a=w.navigation&&navigation.activation&&navigation.activation.from;if(a&&a.url)return a.url}catch(e){}return document.referrer||""}
 function navType(){try{return navigation.activation.navigationType}catch(e){return""}}
@@ -51,8 +52,9 @@ var l=document.createElement("link");l.rel="prefetch";l.href=a.getAttribute("hre
 addEventListener("load",function(){setTimeout(function(){document.querySelectorAll("a[data-slug],a[data-article]").forEach(warm)},1500)});
 document.addEventListener("pointerover",function(e){warm(e.target.closest&&e.target.closest("a[data-slug],a[data-article]"))},{passive:true});
 document.addEventListener("touchstart",function(e){warm(e.target.closest&&e.target.closest("a[data-slug],a[data-article]"))},{passive:true});
+var clicked=null;document.addEventListener("click",function(e){clicked=e.target.closest&&e.target.closest("a")},true);
 addEventListener("pageswap",function(e){if(!e.viewTransition)return;var to="";try{to=e.activation.entry.url}catch(x){}
-var a=[].slice.call(document.querySelectorAll("a[data-slug],a[data-article]")).filter(function(x){return to&&to.indexOf(x.getAttribute("href"))>-1})[0];
+var a=[].slice.call(document.querySelectorAll("a[data-slug],a[data-article]")).filter(function(x){return to?to.indexOf(x.getAttribute("href"))>-1:x===clicked})[0];
 var m=a&&(a.querySelector(".media")||a.querySelector(".article-bg"));if(!m)return;var r=m.getBoundingClientRect();
 if(r.bottom>0&&r.top<innerHeight){m.style.viewTransitionName=m.classList.contains("media")?"hero":"panel";if(m.classList.contains("article-bg"))[].slice.call(a.children).filter(function(c){return c!==m}).forEach(function(c,i){c.style.viewTransitionName="pt"+i})}});
 })();`;
