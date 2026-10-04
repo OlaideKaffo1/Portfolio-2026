@@ -33,9 +33,10 @@ const meta = (section, slug, html) => {
 const VT_CSS = read("scripts/pages/vt.css");
 const ASK = '<script src="../../ask/ask.js" data-mode="read" defer></script>';
 const ASK_CSS = '<link rel="stylesheet" href="../../ask/ask.css">';
-// Analytics, as on the homepage (see app/layout.tsx): from the POSTHOG_KEY and GA_ID env vars
+// Analytics, as on the homepage (see app/layout.tsx): Umami's public site ID, and GA_ID from the env
+const UMAMI_ID = process.env.UMAMI_ID ?? "1f19ebc3-c0e7-48bd-b9ab-e14b9d7cd601";
 const AN = {
-  posthog: /^phc_\w+$/.test(process.env.POSTHOG_KEY ?? "") ? process.env.POSTHOG_KEY : undefined,
+  umami: /^[0-9a-f-]{36}$/.test(UMAMI_ID) ? UMAMI_ID : undefined,
   ga: /^G-[A-Z0-9]+$/.test(process.env.GA_ID ?? "") ? process.env.GA_ID : undefined,
 };
 const ANALYTICS =

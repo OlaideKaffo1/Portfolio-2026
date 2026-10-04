@@ -61,11 +61,12 @@ var m=a&&(a.querySelector(".media")||a.querySelector(".article-bg"));if(!m)retur
 if(r.bottom>0&&r.top<innerHeight){m.style.viewTransitionName=m.classList.contains("media")?"hero":"panel";if(m.classList.contains("article-bg"))[].slice.call(a.children).filter(function(c){return c!==m}).forEach(function(c,i){c.style.viewTransitionName="pt"+i})}});
 })();`;
 
-// Analytics (public/analytics/track.js) read the PostHog project key and the Google Analytics ID from the
-// page. Both are public, send-only IDs, but they live in the POSTHOG_KEY and GA_ID env vars rather than the
-// code. Events sent before the script loads (the intro runs first) wait in olaideTrack.q.
+// Analytics (public/analytics/track.js) read the Umami website ID and the Google Analytics ID from the page.
+// Both are public, send-only IDs: Umami's is its site ID (UMAMI_ID can override it), Google's comes from the
+// GA_ID env var. Events sent before the script loads (the intro runs first) wait in olaideTrack.q.
+const UMAMI_ID = process.env.UMAMI_ID ?? "1f19ebc3-c0e7-48bd-b9ab-e14b9d7cd601";
 const analytics = {
-  posthog: /^phc_\w+$/.test(process.env.POSTHOG_KEY ?? "") ? process.env.POSTHOG_KEY : undefined,
+  umami: /^[0-9a-f-]{36}$/.test(UMAMI_ID) ? UMAMI_ID : undefined,
   ga: /^G-[A-Z0-9]+$/.test(process.env.GA_ID ?? "") ? process.env.GA_ID : undefined,
 };
 const analyticsScript = `window.__an=${JSON.stringify(analytics)};window.olaideTrack=function(e,p){(window.olaideTrack.q=window.olaideTrack.q||[]).push([e,p])};`;

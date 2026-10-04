@@ -1,9 +1,8 @@
-// Visitor analytics with PostHog and Google Analytics, on every page (homepage, case studies and articles).
-// PostHog is cookieless and its events go through /ingest on this domain (see next.config.ts), so ad blockers
-// that block analytics domains don't drop them. Google Analytics runs normally, with its own cookies: in
-// cookieless consent mode it reports nothing for a site this size.
-// The page sets window.__an = { posthog, ga } at build time from the POSTHOG_KEY and GA_ID env vars;
-// each tool runs only when its value is set.
+// Visitor analytics with Umami and Google Analytics, on every page (homepage, case studies and articles).
+// Umami is cookieless. Google Analytics runs normally, with its own cookies: in cookieless consent mode it
+// reports nothing for a site this size.
+// The page sets window.__an = { umami, ga } at build time (see app/layout.tsx); each tool runs only when
+// its value is set.
 // Other scripts report events with window.olaideTrack("event_name", { ...props }); calls made before this
 // script loads are queued on olaideTrack.q and sent once it starts.
 // Visiting any page with ?me=1 stops tracking in that browser (your own visits); ?me=0 turns it back on.
@@ -16,12 +15,11 @@
     if (localStorage.getItem("olaide-me") === "1") cfg = {};
   } catch (e) {}
   var senders = [];
-  if (cfg.posthog) senders.push(posthog(cfg.posthog));
+  if (cfg.umami) senders.push(umami(cfg.umami));
   if (cfg.ga) senders.push(ga(cfg.ga));
   if (!senders.length) { window.olaideTrack = function () {}; return; }
 
-  // now: send straight away rather than with the next batch, for clicks that leave the page
-  var send = function (event, props, now) { senders.forEach(function (f) { f(event, props || {}, now); }); };
+  var send = function (event, props) { senders.forEach(function (f) { f(event, props || {}); }); };
   var track = (window.olaideTrack = function (event, props) { send(event, props); });
   queued.forEach(function (c) { track(c[0], c[1]); });
 
@@ -29,7 +27,6 @@
   document.addEventListener("click", function (e) {
     var a = e.target.closest && e.target.closest("a[href]");
     if (!a) return;
-    var track = function (event, props) { send(event, props, true); };
     var href = a.getAttribute("href");
     var where = a.closest("#ask-olaide") ? "chat" : "page";
     if (a.closest("#ask-olaide .ao-lk")) track("chat_link_clicked", { to: href });
@@ -64,6 +61,17 @@
     if (chosen(e.target)) track("video_completed", { video: name(e.target) });
   }, true);
 
+  // How far down each page people read: 25, 50, 75 and 100%, once each per page view
+  var depths = [25, 50, 75, 100], reached = {};
+  addEventListener("scroll", function () {
+    var max = document.documentElement.scrollHeight - innerHeight;
+    if (max <= 0) return;
+    var pct = (scrollY / max) * 100;
+    depths.forEach(function (d) {
+      if (pct >= d - 1 && !reached[d]) { reached[d] = 1; track("scroll_depth", { percent: d }); }
+    });
+  }, { passive: true });
+
   function load(src) {
     var s = document.createElement("script");
     s.async = true;
@@ -72,28 +80,19 @@
     return s;
   }
 
-  function posthog(key) {
-  // PostHog's loader: a stub that queues calls until /ingest/static/array.js loads and replays them
-    var ph = (window.posthog = []);
-    ph._i = [];
-    ph.__SV = 1;
-    ["capture", "register"].forEach(function (m) {
-      ph[m] = function () { ph.push([m].concat([].slice.call(arguments))); };
+  function umami(id) {
+    // Umami's script counts page views itself; named events wait here until it has loaded
+    var waiting = [];
+    var s = load("https://cloud.umami.is/script.js");
+    s.setAttribute("data-website-id", id);
+    s.addEventListener("load", function () {
+      waiting.forEach(function (e) { window.umami.track(e[0], e[1]); });
+      waiting = [];
     });
-    ph.init = function (k, opts, n) { ph._i.push([k, opts, n]); };
-    load("/ingest/static/array.js").crossOrigin = "anonymous";
-    ph.init(key, {
-      api_host: "/ingest",
-      defaults: "2026-01-30",
-      cookieless_mode: "always",
-      person_profiles: "identified_only",
-      capture_pageleave: true, // the page-leave event carries how far down the page the visitor scrolled
-      disable_session_recording: true,
-      disable_surveys: true,
-      advanced_disable_flags: true,
-    });
-    // window.posthog, not ph: once loaded, PostHog replaces the stub with the real thing
-    return function (event, props, now) { window.posthog.capture(event, props, now ? { send_instantly: true } : undefined); };
+    return function (event, props) {
+      if (window.umami && window.umami.track) window.umami.track(event, props);
+      else waiting.push([event, props]);
+    };
   }
 
   function ga(id) {
