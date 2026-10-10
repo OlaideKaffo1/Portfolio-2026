@@ -131,6 +131,7 @@
     .toc.on { opacity: 1; translate: 0 0; pointer-events: auto; }
   }
   .toc .lab { font-size: 13px; line-height: 20px; color: var(--muted); }
+  .toc .toc-back { margin: 0 0 20px; padding: 0; }
   .toc ol { position: relative; list-style: none; margin: 12px 0 0; padding: 0; border-left: 1px solid var(--line); }
   .toc a { display: block; padding: 6px 0 6px 14px; font-size: 13px; line-height: 18px; color: var(--muted); transition: color .2s; }
   .toc a:hover, .toc a.on { color: var(--ink); }
@@ -347,7 +348,7 @@
 <div class="viewport"><div class="page">
   <header class="topnav"><a href="#" data-home>Olaide</a><nav><a href="#">About</a><a href="#">Contact</a><a href="#">Resume</a></nav></header>
 
-  <nav class="toc" id="toc" aria-label="In this article"><div class="lab">In this article</div><ol id="toc-list"></ol></nav>
+  <nav class="toc" id="toc" aria-label="In this article"><a class="back toc-back" href="#" data-home>← Back to home</a><div class="lab">In this article</div><ol id="toc-list"></ol></nav>
 
   <main>
     <div class="wrap">
@@ -529,7 +530,7 @@
     const a = tocList.querySelector("a.on");
     if (a) { marker.style.top = a.offsetTop + "px"; marker.style.height = a.offsetHeight + "px"; } else marker.style.height = "0";
     const r = prose.getBoundingClientRect();
-    toc.classList.toggle("on", r.top < innerHeight * 0.5 && r.bottom > innerHeight * 0.4);
+    toc.classList.toggle("on", r.top < innerHeight * 0.5); // stays on to the end, so Back to home is always in reach
     const ctrl = document.getElementById("ctrl"); if (ctrl) ctrl.classList.toggle("away", innerHeight + scrollY > document.documentElement.scrollHeight - 140);
   }
   addEventListener("scroll", onScroll, { passive: true });
