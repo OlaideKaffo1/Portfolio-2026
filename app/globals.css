@@ -490,7 +490,7 @@ html:active-view-transition-type(back)::view-transition-new(root) { animation: v
 
 /* Coming back from a case study: the page is shown already composed, at the top */
 html.returning .split .li,
-html.returning .project .media img,
+html.returning .project:not(.is-in) .media img,
 html.returning .article .article-bg,
 html.returning .rule {
   transform: none !important;
