@@ -374,18 +374,33 @@ html.intro-pending body::after {
   transform: scaleX(0);
   transform-origin: left center;
 }
+/* Loading progress: a 1px line just above the footer, and the percentage above its right end */
+.intro-progress {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 52px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.18);
+}
+.intro-progress span {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  transform: scaleX(0);
+  transform-origin: left center;
+}
 .intro-count {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 72px;
-  text-align: center;
+  right: 24px;
+  bottom: 62px;
   font:
-    900 13px/1 var(--font-doto),
+    900 12px/1 var(--font-doto),
     ui-monospace,
     monospace;
-  letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  color: rgba(255, 255, 255, 0.7);
 }
 .intro-meta {
   position: absolute;

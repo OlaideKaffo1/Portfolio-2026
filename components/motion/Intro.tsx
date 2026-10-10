@@ -105,7 +105,11 @@ export default function Intro() {
     const bottom = el("div", "intro-half intro-bottom");
     const board = el("div", "intro-board");
     const seam = el("div", "intro-seam");
-    const count = el("div", "intro-count", "000");
+    // Progress: a thin line just above the footer fills as the words play, with the percentage above its end
+    const count = el("div", "intro-count", "0%");
+    const progress = el("div", "intro-progress");
+    const progressFill = el("span");
+    progress.appendChild(progressFill);
     const meta = el("div", "intro-meta");
     meta.append(el("span", "", "Olaide"), el("span", "", "Portfolio ’26"));
     const touch = window.matchMedia("(pointer: coarse)").matches;
@@ -125,7 +129,7 @@ export default function Intro() {
         track("intro_sound_on");
       } else click.off();
     });
-    root.append(top, bottom, seam, count, meta, skip, sound, board);
+    root.append(top, bottom, seam, progress, count, meta, skip, sound, board);
     root.hidden = false;
     html.classList.remove("intro-pending");
     lockScroll();
@@ -184,13 +188,15 @@ export default function Intro() {
     const t0 = performance.now();
     const tick = () => {
       const p = Math.min(1, (performance.now() - t0) / (seamAt - 50));
-      count.textContent = String(Math.round((1 - Math.pow(1 - p, 1.3)) * 100)).padStart(3, "0");
+      const eased = 1 - Math.pow(1 - p, 1.3);
+      count.textContent = `${Math.round(eased * 100)}%`;
+      progressFill.style.transform = `scaleX(${eased})`;
       if (p < 1) later(tick, 30);
     };
     tick();
 
     anim(seam, [{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }], { duration: 340, delay: seamAt, easing: EXPO, fill: "both" });
-    [count, meta, skip, sound].forEach((n) => anim(n, [{ opacity: 1 }, { opacity: 0 }], { duration: 200, delay: splitAt, fill: "forwards" }));
+    [count, progress, meta, skip, sound].forEach((n) => anim(n, [{ opacity: 1 }, { opacity: 0 }], { duration: 200, delay: splitAt, fill: "forwards" }));
     anim(seam, [{ opacity: 0.35 }, { opacity: 0 }], { duration: 200, delay: splitAt, fill: "forwards" });
     const split: KeyframeAnimationOptions = { duration: 1000, delay: splitAt, easing: LIFT, fill: "forwards" };
     anim(top, [{ transform: "translateY(0)" }, { transform: "translateY(-100%)" }], split);
