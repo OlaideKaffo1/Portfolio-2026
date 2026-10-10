@@ -48,7 +48,7 @@ if(returning){d.classList.add("returning");d.classList.remove("intro-pending");t
 function top(){if(scrollX||scrollY)scrollTo(0,0)}
 top();addEventListener("DOMContentLoaded",top);
 addEventListener("pagereveal",function(e){top();if(e.viewTransition&&returning)e.viewTransition.types.add("back")});
-addEventListener("pageshow",function(e){if(e.persisted){d.classList.add("returning");top()}document.querySelectorAll("a[data-slug] .media,a[data-article] > *").forEach(function(m){m.style.viewTransitionName=""})});
+addEventListener("pageshow",function(e){if(e.persisted){d.classList.add("returning");top()}document.querySelectorAll("a[data-slug] .media,a[data-article] > *").forEach(function(m){m.style.viewTransitionName=""});document.querySelectorAll(".view-pill").forEach(function(p){p.style.visibility=""})});
 var done={};function warm(a){var u=a&&a.getAttribute("href");if(!u||done[u])return;done[u]=1;var h=a.getAttribute("data-hero");if(h){var i=new Image();i.decoding="async";i.src=h}
 var l=document.createElement("link");l.rel="prefetch";l.href=a.getAttribute("href");document.head.appendChild(l)}
 addEventListener("load",function(){setTimeout(function(){document.querySelectorAll("a[data-slug],a[data-article]").forEach(warm)},1500)});
@@ -57,7 +57,7 @@ document.addEventListener("touchstart",function(e){warm(e.target.closest&&e.targ
 var clicked=null;document.addEventListener("click",function(e){clicked=e.target.closest&&e.target.closest("a")},true);
 addEventListener("pageswap",function(e){if(!e.viewTransition)return;var to="";try{to=e.activation.entry.url}catch(x){}
 var a=[].slice.call(document.querySelectorAll("a[data-slug],a[data-article]")).filter(function(x){return to?to.indexOf(x.getAttribute("href"))>-1:x===clicked})[0];
-var m=a&&(a.querySelector(".media")||a.querySelector(".article-bg"));if(!m)return;var r=m.getBoundingClientRect();
+var m=a&&(a.querySelector(".media")||a.querySelector(".article-bg"));if(!m)return;var vp=a.querySelector(".view-pill");if(vp)vp.style.visibility="hidden";var r=m.getBoundingClientRect();
 if(r.bottom>0&&r.top<innerHeight){m.style.viewTransitionName=m.classList.contains("media")?"hero":"panel";if(m.classList.contains("article-bg"))[].slice.call(a.children).filter(function(c){return c!==m}).forEach(function(c,i){c.style.viewTransitionName="pt"+i})}});
 })();`;
 

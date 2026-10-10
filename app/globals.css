@@ -140,6 +140,46 @@ html.js .project.is-in .media img {
     transition: transform 900ms var(--expo);
   }
 }
+/* "View case study" pill: rises into the image's bottom-left corner on hover or keyboard focus.
+   Same dark pill as the Ask Olaide button. Hidden on click (see app/layout.tsx), so it doesn't
+   grow with the image into the case study. */
+.project .view-pill {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: #19171b;
+  color: #f4eff3;
+  font-size: 13.5px;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 250ms ease-out, transform 600ms var(--expo);
+}
+@media (hover: hover) {
+  .project:hover .view-pill {
+    opacity: 1;
+    transform: none;
+  }
+}
+.project:focus-visible .view-pill {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .project .view-pill {
+    transform: none;
+    transition: opacity 150ms linear;
+  }
+}
+
 /* Project title underline draws in on hover */
 .project .title-line {
   display: inline-block;
