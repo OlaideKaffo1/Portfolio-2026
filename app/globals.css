@@ -197,12 +197,13 @@ html.js .project.is-in .title-line {
 }
 
 /* Article cards: "Read Article" fills in as a dark pill on hover or keyboard focus, matching the
-   project cards' "View case study" pill. The negative margin keeps the layout unchanged. */
+   project cards' "View case study" pill. Negative margins keep the row height unchanged, and the
+   pill stays 12px clear of the card's right edge and 10px clear of the bottom. */
 .article .read-pill {
   display: inline-flex;
   align-items: center;
-  margin: -8px -12px;
-  padding: 8px 12px;
+  margin: -6px -4px -6px -12px;
+  padding: 6px 12px;
   border-radius: 999px;
   transition: background-color 250ms ease-out, color 250ms ease-out;
 }
