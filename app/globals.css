@@ -196,6 +196,27 @@ html.js .project.is-in .title-line {
   }
 }
 
+/* Article cards: "Read Article" fills in as a dark pill on hover or keyboard focus, matching the
+   project cards' "View case study" pill. The negative margin keeps the layout unchanged. */
+.article .read-pill {
+  display: inline-flex;
+  align-items: center;
+  margin: -8px -12px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  transition: background-color 250ms ease-out, color 250ms ease-out;
+}
+@media (hover: hover) {
+  .article:hover .read-pill {
+    background: #19171b;
+    color: #f4eff3;
+  }
+}
+.article:focus-visible .read-pill {
+  background: #19171b;
+  color: #f4eff3;
+}
+
 /* Article cards: grey background sweeps down, then the content rises */
 .article-bg {
   position: absolute;
