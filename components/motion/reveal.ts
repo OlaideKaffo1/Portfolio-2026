@@ -1,6 +1,6 @@
 // One scroll watcher for every reveal on the page. Units register as they mount,
-// but nothing is watched until the page is "armed" (after the intro hands over),
-// so content under the intro never plays early. Each unit plays once.
+// but nothing is watched until the page is "armed" (once the hero has started composing),
+// so nothing further down plays early. Each unit plays once.
 
 const pending = new Set<Element>();
 const watched = new Set<Element>();

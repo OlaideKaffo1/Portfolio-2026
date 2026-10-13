@@ -1,18 +1,8 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
-import localFont from "next/font/local";
-import Intro from "@/components/motion/Intro";
 import MotionProvider from "@/components/motion/MotionProvider";
 import SmoothScroll from "@/components/motion/SmoothScroll";
 import "./globals.css";
-
-// Dot-matrix face for the departure-board intro
-const doto = localFont({
-  src: "../node_modules/@fontsource/doto/files/doto-latin-900-normal.woff2",
-  weight: "900",
-  variable: "--font-doto",
-  display: "block",
-});
 
 // The live address (olaide.design redirects here), used for link previews
 const SITE = "https://www.olaide.design";
@@ -33,18 +23,17 @@ export const metadata: Metadata = {
 // Runs before first paint. On iPhone and iPad it stops Safari zooming the page into the chat and
 // "ask" boxes (their text is under 16px); visitors can still pinch-zoom there. It keeps watching while the
 // page loads, because Next re-adds its own viewport tag when it sees ours changed. It enables the motion
-// styles (so the page still shows fully without JavaScript) and covers the page in black if the intro is about to play,
-// so there's no flash of content before it starts. It also runs the page transitions to and from
+// styles (so the page still shows fully without JavaScript). It also runs the page transitions to and from
 // the case studies and articles: a clicked card's image grows into the case study's hero, an article
 // card's grey panel grows into the article's header, and coming back
 // lands on the top of the page, already composed. Safari doesn't say where a navigation is going, so the
 // clicked link stands in for it.
-const bootScript = `(function(){var n=navigator;if(!/iP(hone|od|ad)/.test(n.platform)&&!(n.platform==="MacIntel"&&n.maxTouchPoints>1))return;function f(){document.querySelectorAll('meta[name="viewport"]').forEach(function(m){if(!/maximum-scale/.test(m.content))m.content+=",maximum-scale=1"})}f();var o=new MutationObserver(f);o.observe(document.documentElement,{childList:true,subtree:true});addEventListener("load",function(){setTimeout(function(){o.disconnect()},3000)})})();(function(){var d=document.documentElement;d.classList.add("js");try{if(sessionStorage.getItem("olaide-intro-seen")!=="1"&&!matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("intro-pending")}catch(e){}})();(function(){var d=document.documentElement,w=window;
+const bootScript = `(function(){var n=navigator;if(!/iP(hone|od|ad)/.test(n.platform)&&!(n.platform==="MacIntel"&&n.maxTouchPoints>1))return;function f(){document.querySelectorAll('meta[name="viewport"]').forEach(function(m){if(!/maximum-scale/.test(m.content))m.content+=",maximum-scale=1"})}f();var o=new MutationObserver(f);o.observe(document.documentElement,{childList:true,subtree:true});addEventListener("load",function(){setTimeout(function(){o.disconnect()},3000)})})();document.documentElement.classList.add("js");(function(){var d=document.documentElement,w=window;
 function fromUrl(){try{var a=w.navigation&&navigation.activation&&navigation.activation.from;if(a&&a.url)return a.url}catch(e){}return document.referrer||""}
 function navType(){try{return navigation.activation.navigationType}catch(e){}try{return performance.getEntriesByType("navigation")[0].type==="back_forward"?"traverse":""}catch(e){return""}}
 var fu=fromUrl(),returning=fu.indexOf("/case-studies/")>-1||fu.indexOf("/articles/")>-1;
 if("scrollRestoration"in history)history.scrollRestoration="manual";
-if(returning){d.classList.add("returning");d.classList.remove("intro-pending");try{sessionStorage.setItem("olaide-intro-seen","1")}catch(e){}}
+if(returning)d.classList.add("returning");
 function top(){if(scrollX||scrollY)scrollTo(0,0)}
 top();addEventListener("DOMContentLoaded",top);
 addEventListener("pagereveal",function(e){top();if(e.viewTransition&&returning)e.viewTransition.types.add("back")});
@@ -63,7 +52,7 @@ if(r.bottom>0&&r.top<innerHeight){m.style.viewTransitionName=m.classList.contain
 
 // Analytics (public/analytics/track.js) read the Umami website ID and the Google Analytics ID from the page.
 // Both are public, send-only IDs: Umami's is its site ID (UMAMI_ID can override it), Google's comes from the
-// GA_ID env var. Events sent before the script loads (the intro runs first) wait in olaideTrack.q.
+// GA_ID env var. Events sent before the script loads wait in olaideTrack.q.
 const UMAMI_ID = process.env.UMAMI_ID ?? "1f19ebc3-c0e7-48bd-b9ab-e14b9d7cd601";
 const analytics = {
   umami: /^[0-9a-f-]{36}$/.test(UMAMI_ID) ? UMAMI_ID : undefined,
@@ -75,7 +64,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${doto.variable}`} suppressHydrationWarning>
+    <html lang="en" className={GeistSans.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />
         <script dangerouslySetInnerHTML={{ __html: analyticsScript }} />
@@ -87,7 +76,6 @@ export default function RootLayout({
       <body>
         <MotionProvider>
           <SmoothScroll />
-          <Intro />
           {children}
         </MotionProvider>
       </body>

@@ -3,7 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { armReveals } from "./reveal";
 
-// Stages of the page composition that follows the intro (or page load):
+// Stages of the page composition that plays on page load:
 // 1 nav → 2 hero text → 3 Ask bar opens → 4 typewriter starts.
 // Scroll reveals are armed between 3 and 4.
 const TIMELINE = { nav: 0, hero: 120, ask: 620, arm: 700, typing: 1400 };
@@ -43,7 +43,11 @@ export default function MotionProvider({ children }: { children: React.ReactNode
     at(TIMELINE.typing, () => setStage(4));
   }, []);
 
-  useEffect(() => () => timers.current.forEach(clearTimeout), []);
+  // Start as soon as the page has mounted
+  useEffect(() => {
+    startCompose();
+    return () => timers.current.forEach(clearTimeout);
+  }, [startCompose]);
 
   return <MotionContext.Provider value={{ stage, startCompose }}>{children}</MotionContext.Provider>;
 }
