@@ -8,7 +8,7 @@ import "./globals.css";
 const SITE = "https://www.olaide.design";
 const TITLE = "Olaide, Senior Product Designer";
 const DESCRIPTION =
-  "I prototype in code with AI, test with real people, and back the ideas that work for users and the business.";
+  "I prototype in code with AI, test with real people, and ship the ideas that work for users and grow the business.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
