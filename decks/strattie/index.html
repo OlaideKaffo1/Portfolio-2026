@@ -5,18 +5,19 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
 <style>
 /* Layout: dark keynote. A fixed 1920x1080 stage scaled to the window, near-black ground,
-   white Geist type, screenshots lit against black, one electric blue for change.
+   white Geist type, screenshots lit against black, one electric blue for the new way.
+   One message and one hero element per slide; the detail lives in the speaker notes.
    Phones get a stacked reading view; #presenter gives a notes view that follows along. */
 :root {
   --bg: #0b0b0d;
   --frame: #050506;
   --ink: #f2f1ee;
-  --body: #aeadb5;
-  --muted: #85848d;
+  --body: #b3b2ba;
+  --muted: #8a8992;
+  --cap: #a3a2aa;
   --faint: #7d7c86;
   --line: #2a2a31;
   --cell: #202026;
-  --panel: #141418;
   --blue: #3d5afe;
   --blue-text: #8f9eff;
 
@@ -31,8 +32,8 @@
 }
 
 html, body { height: 100%; }
-h1, h2, h3, p, figure, table, ul { margin: 0; }
-ul { padding: 0; list-style: none; }
+h1, h2, h3, p, figure, table, ul, ol { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
 body {
   margin: 0;
   background: var(--frame);
@@ -50,14 +51,14 @@ body {
   transform-origin: 0 0;
   background: var(--bg);
   overflow: hidden;
-  font-size: 28px;
+  font-size: 24px;
   line-height: 1.4;
 }
 
 /* ---------- Slides ---------- */
 .slide {
   position: absolute; inset: 0;
-  padding: 96px 120px 128px;
+  padding: 156px 112px 120px;
   display: flex; flex-direction: column;
   visibility: hidden; opacity: 0;
   transition: opacity 450ms ease, visibility 0s linear 450ms;
@@ -65,45 +66,57 @@ body {
 .slide.is-active { visibility: visible; opacity: 1; transition: opacity 450ms ease 150ms, visibility 0s; }
 .notes { display: none; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.hd { display: flex; flex-direction: column; gap: 22px; margin-bottom: 52px; }
-.body { flex: 1; min-height: 0; }
+.hd { display: flex; flex-direction: column; gap: 16px; margin-bottom: 52px; }
 .ink { color: var(--ink) !important; }
+.split { display: grid; grid-template-columns: var(--cols, 1fr 1fr); gap: var(--gap, 96px); align-items: var(--align, start); flex: 1; min-height: 0; }
+.split > * { min-width: 0; }
 
-/* Type scale (canvas px): 200 / 132 / 84 / 64 / 44 / 34 / 28 / 24 / 20 */
-.t-xl { font-size: 200px; line-height: .86; letter-spacing: -0.055em; font-weight: 500; font-variant-numeric: tabular-nums; }
-.t-display { font-size: 132px; line-height: .96; letter-spacing: -0.045em; font-weight: 500; text-wrap: balance; }
-.t-num { font-size: 104px; line-height: .9; letter-spacing: -0.05em; font-weight: 500; font-variant-numeric: tabular-nums; }
-.t-h1 { font-size: 56px; line-height: 1.08; letter-spacing: -0.035em; font-weight: 500; text-wrap: balance; }
-.t-h2 { font-size: 64px; line-height: 1.04; letter-spacing: -0.035em; font-weight: 500; text-wrap: balance; }
-.t-h3 { font-size: 40px; line-height: 1.1; letter-spacing: -0.025em; font-weight: 500; text-wrap: balance; }
-.t-lead { font-size: 34px; line-height: 1.36; letter-spacing: -0.012em; color: var(--body); text-wrap: pretty; }
-.t-body { font-size: 28px; line-height: 1.42; color: var(--body); text-wrap: pretty; }
-.t-small { font-size: 24px; line-height: 1.42; color: var(--body); text-wrap: pretty; }
-.t-cap { font-size: 22px; line-height: 1.4; color: var(--muted); text-wrap: pretty; }
-.t-label { font-family: var(--f-mono); font-size: 20px; line-height: 1.3; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+/* Type scale (canvas px). Hero sizes: 220 / 112 / 96 / 72. Text sizes: 52 / 32 / 28 / 24 / 20 / 18 / 16. */
+.t-xl { font-size: 220px; line-height: .84; letter-spacing: -0.055em; font-weight: 500; font-variant-numeric: tabular-nums; }
+.t-display { font-size: 112px; line-height: .96; letter-spacing: -0.045em; font-weight: 500; }
+.t-num { font-size: 96px; line-height: .9; letter-spacing: -0.05em; font-weight: 500; font-variant-numeric: tabular-nums; }
+.t-stmt { font-size: 72px; line-height: 1.04; letter-spacing: -0.04em; font-weight: 500; text-wrap: balance; }
+.t-h { font-size: 52px; line-height: 1.08; letter-spacing: -0.032em; font-weight: 500; text-wrap: balance; }
+.t-h3 { font-size: 32px; line-height: 1.15; letter-spacing: -0.02em; font-weight: 500; text-wrap: balance; }
+.t-lead { font-size: 28px; line-height: 1.38; letter-spacing: -0.01em; color: var(--body); text-wrap: pretty; }
+.t-body { font-size: 24px; line-height: 1.42; color: var(--body); text-wrap: pretty; }
+.t-small { font-size: 20px; line-height: 1.42; color: var(--body); text-wrap: pretty; }
+.t-cap { font-size: 18px; line-height: 1.4; color: var(--cap); text-wrap: pretty; }
+.t-label { font-family: var(--f-mono); font-size: 16px; line-height: 1.3; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
 .t-label.on { color: var(--ink); }
-.k { font-family: var(--f-mono); font-size: 20px; color: var(--blue-text); letter-spacing: .04em; font-weight: 500; }
+.k { font-family: var(--f-mono); font-size: 16px; color: var(--blue-text); letter-spacing: .04em; font-weight: 500; }
+.mark::before { content: ""; display: inline-block; width: 9px; height: 9px; background: var(--blue); margin-right: 12px; transform: translateY(-2px); }
+
+/* Chapter marker: where we are in the story */
+.chap { position: absolute; left: 112px; top: 72px; display: flex; gap: 28px; font-family: var(--f-mono); font-size: 16px; letter-spacing: .09em; text-transform: uppercase; color: #55545e; font-weight: 500; }
+.chap span { display: inline-flex; align-items: center; gap: 10px; }
+.chap span::before { content: ""; width: 9px; height: 9px; border: 1.5px solid #55545e; box-sizing: border-box; }
+.chap .on { color: var(--ink); }
+.chap .on::before { background: var(--blue); border-color: var(--blue); }
+.chap .done { color: #6e6d77; }
 
 .foot {
-  position: absolute; left: 120px; right: 120px; bottom: 52px;
+  position: absolute; left: 112px; right: 112px; bottom: 48px;
   display: flex; justify-content: space-between; align-items: baseline; gap: 40px;
-  font-family: var(--f-mono); font-size: 20px; letter-spacing: .04em; color: var(--muted);
+  font-family: var(--f-mono); font-size: 16px; letter-spacing: .04em; color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
 .foot span:last-child { white-space: nowrap; }
 
 /* Media frames: screenshots lit against black */
-.fig { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.fig { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
 .media { position: relative; width: 100%; max-width: 100%; overflow: hidden; border-radius: 14px; outline: 1px solid var(--line); background: #f5f5f5; }
 .media img, .media video { display: block; width: 100%; height: 100%; object-fit: cover; }
 .media.top img, .media.top video { object-position: center top; }
 
-/* Blue square marker */
-.mark::before { content: ""; display: inline-block; width: 10px; height: 10px; background: var(--blue); margin-right: 14px; transform: translateY(-3px); }
+/* Bordered list rows */
+.rows { display: flex; flex-direction: column; }
+.rows > li, .rows > div { padding: 18px 0; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 6px; }
+.callout { border-top: 2px solid var(--blue); padding-top: 18px; display: flex; flex-direction: column; gap: 10px; }
 
 /* ---------- Motion ---------- */
 .js [data-a] {
-  opacity: 0; transform: translateY(32px);
+  opacity: 0; transform: translateY(28px);
   transition: opacity var(--t-text) var(--expo), transform var(--t-text) var(--expo);
   transition-delay: calc(var(--base, 300ms) + var(--i, 0) * var(--stagger));
 }
@@ -119,152 +132,105 @@ body {
 .js .in [data-draw] { transform: none; }
 
 /* ---------- 1 · Title ---------- */
-.s-title .eyebrow { position: absolute; left: 120px; top: 88px; }
-.s-title .copy { position: absolute; left: 120px; top: 196px; width: 820px; display: flex; flex-direction: column; gap: 48px; }
-.s-title .copy .t-lead { max-width: 700px; }
-.s-title .hero { position: absolute; left: 1010px; top: 150px; width: 1010px; height: 650px; border-radius: 18px 0 0 18px; overflow: hidden; outline: 1px solid var(--line); background: #fff; }
+.s-title { padding: 0; }
+.s-title .eyebrow { position: absolute; left: 112px; top: 72px; }
+.s-title .copy { position: absolute; left: 112px; top: 176px; width: 820px; display: flex; flex-direction: column; gap: 36px; }
+.s-title .copy .t-lead { max-width: 680px; }
+.result { display: flex; flex-direction: column; gap: 10px; padding-top: 26px; border-top: 1px solid var(--line); max-width: 680px; }
+.result .fig-num { font-size: 64px; line-height: 1; letter-spacing: -0.04em; font-weight: 500; font-variant-numeric: tabular-nums; }
+.result .fig-num i { font-style: normal; color: var(--blue-text); margin: 0 14px; }
+.result .fig-num .from { color: var(--muted); }
+.s-title .hero { position: absolute; left: 1000px; top: 150px; width: 1020px; height: 660px; border-radius: 18px 0 0 18px; overflow: hidden; outline: 1px solid var(--line); background: #fff; }
 .s-title .hero img { width: 100%; height: 100%; object-fit: cover; object-position: left top; display: block; }
-.s-title .facts { position: absolute; left: 120px; right: 120px; bottom: 80px; display: grid; grid-template-columns: 1.1fr 1.3fr 1fr .7fr; gap: 48px; padding-top: 26px; border-top: 1px solid var(--line); }
+.s-title .facts { position: absolute; left: 112px; right: 112px; bottom: 64px; display: grid; grid-template-columns: 1.1fr 1.3fr 1fr .7fr; gap: 48px; padding-top: 22px; border-top: 1px solid var(--line); }
 .fact { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-.fact .v { font-size: 24px; line-height: 1.35; color: var(--ink); }
+.fact .v { font-size: 20px; line-height: 1.35; color: var(--ink); }
 
 /* ---------- 2 · Problem ---------- */
-.s-problem .body { display: grid; grid-template-columns: 640px 1fr; gap: 80px; }
-.s-problem .left { display: flex; flex-direction: column; gap: 26px; min-width: 0; }
-.s-problem .left .t-lead { margin-top: 4px; }
-.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 14px; }
-.pair > div { display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--line); padding-top: 16px; min-width: 0; }
-.pair > div.alt { border-top-color: var(--blue); }
+.contrast { margin-top: 48px; display: flex; flex-direction: column; }
+.contrast > div { display: grid; grid-template-columns: 170px 1fr; gap: 24px; padding: 18px 0; border-top: 1px solid var(--line); align-items: baseline; }
+.contrast > div.alt { border-top: 2px solid var(--blue); padding-top: 17px; }
 
 /* ---------- 3 · Research ---------- */
-.groups { display: grid; grid-template-columns: 1fr 1fr 1.15fr; gap: 56px; }
-.group { display: flex; flex-direction: column; gap: 14px; border-top: 1px solid var(--line); padding-top: 22px; min-width: 0; }
-.group.alt { border-top: 2px solid var(--blue); padding-top: 21px; }
-.group li { font-size: 24px; line-height: 1.5; color: var(--ink); }
-.statement { margin-top: auto; display: flex; flex-direction: column; gap: 20px; max-width: 1420px; }
-
-/* ---------- 4 · First bet ---------- */
-.s-bet .body { display: grid; grid-template-columns: 600px 1fr; gap: 80px; align-items: start; }
-.s-bet .left { display: flex; flex-direction: column; gap: 36px; }
-.items { display: flex; flex-direction: column; gap: 22px; }
-.items li { display: flex; flex-direction: column; gap: 4px; border-top: 1px solid var(--line); padding-top: 16px; }
-.items li b { font-size: 28px; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; }
+.s-research { justify-content: center; }
+.s-research .strip4 { margin-top: 120px; }
+.strip4 { margin-top: auto; display: grid; grid-template-columns: .9fr 1fr 1.1fr 1.15fr; gap: 48px; }
+.strip4 > div { display: flex; flex-direction: column; gap: 10px; border-top: 1px solid var(--line); padding-top: 20px; min-width: 0; }
+.strip4 > div.alt { border-top: 2px solid var(--blue); padding-top: 19px; }
+.strip4 li { font-size: 20px; line-height: 1.6; color: var(--ink); }
 
 /* ---------- 5 · Lessons ---------- */
-.lessons { margin-top: auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 64px; }
-.lesson { display: flex; flex-direction: column; gap: 22px; border-top: 1px solid var(--ink); padding-top: 24px; min-width: 0; }
-.lesson .t-h3 { font-size: 46px; }
+.lessons .rows > div { gap: 8px; padding: 22px 0; }
 
 /* ---------- 6 · Reframe ---------- */
-.s-reframe { display: grid; grid-template-columns: 700px 1fr; grid-template-rows: auto auto 1fr; column-gap: 110px; }
-.s-reframe .t-label.head { grid-column: 1 / -1; margin-bottom: 44px; }
-.s-reframe .argue { display: flex; flex-direction: column; gap: 40px; }
-.s-reframe .argue .t-lead { font-size: 30px; }
-.claim { font-size: 72px; line-height: 1.04; letter-spacing: -0.04em; font-weight: 500; text-wrap: balance; }
-.claim span { display: block; color: var(--muted); margin-bottom: 10px; }
-.cmp { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 24px; line-height: 1.32; align-self: start; }
-.cmp th { text-align: left; font-family: var(--f-mono); font-size: 19px; letter-spacing: .07em; text-transform: uppercase; font-weight: 500; color: var(--muted); padding: 0 24px 18px 0; vertical-align: bottom; }
+.claim span { display: block; color: var(--muted); margin-bottom: 8px; }
+.cmp { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 22px; line-height: 1.32; }
+.cmp th { text-align: left; font-family: var(--f-mono); font-size: 16px; letter-spacing: .08em; text-transform: uppercase; font-weight: 500; color: var(--muted); padding: 0 20px 16px 0; vertical-align: bottom; }
 .cmp th.rec { color: var(--ink); }
-.cmp td { padding: 16px 24px 16px 0; border-top: 1px solid var(--line); vertical-align: top; }
-.cmp td:first-child { color: var(--muted); width: 37%; }
-.cmp td.chat { color: var(--faint); width: 31%; }
+.cmp td { padding: 16px 20px 16px 0; border-top: 1px solid var(--line); vertical-align: top; }
+.cmp td:first-child { color: var(--muted); width: 38%; }
+.cmp td.chat { color: var(--faint); width: 30%; }
 .cmp td.rec { color: var(--ink); }
-.js .cmp tr[data-a] { transform: translateY(18px); }
+.js .cmp tr[data-a] { transform: translateY(16px); }
 .js .in .cmp tr[data-a] { transform: none; }
-.swap { grid-column: 1 / -1; align-self: end; position: relative; margin-top: 40px; padding-top: 36px; display: grid; grid-template-columns: 640px 120px 1fr; align-items: start; }
-.swap .bar { position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--blue); }
-.swap .label { grid-column: 1 / -1; margin-bottom: 20px; }
-.q { font-size: 44px; line-height: 1.12; letter-spacing: -0.025em; font-weight: 500; text-wrap: balance; }
-.q.old { color: var(--faint); }
-.q.old s { text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 58% / 100% 2px no-repeat; }
-.js .q.old s { background-size: 0% 2px; transition: background-size 900ms var(--expo) 1500ms; }
-.js .in .q.old s { background-size: 100% 2px; }
-.swap .arrow { font-family: var(--f-mono); font-size: 40px; color: var(--blue-text); padding-top: 2px; }
-.swap .answer { grid-column: 3; margin-top: 16px; max-width: 820px; }
 
-/* ---------- 7 · Making the case ---------- */
-.s-case .body { display: grid; grid-template-columns: 720px 1fr; gap: 100px; align-items: start; }
-.s-case .left { display: flex; flex-direction: column; gap: 44px; }
-.pushback { display: flex; flex-direction: column; gap: 14px; border-top: 1px solid var(--line); padding-top: 20px; }
-.answer-block { display: flex; flex-direction: column; gap: 14px; border-top: 1px solid var(--ink); padding-top: 20px; }
-.answer-block p:not(.t-label) { font-size: 34px; line-height: 1.36; color: var(--body); letter-spacing: -0.012em; }
-.answer-block b { font-weight: 500; color: var(--ink); }
-.decision { position: relative; margin-top: auto; padding-top: 30px; display: flex; align-items: baseline; gap: 48px; }
+/* ---------- 7 · New question ---------- */
+.q-old { font-size: 40px; line-height: 1.12; letter-spacing: -0.025em; font-weight: 500; color: var(--faint); }
+.q-old s { text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 58% / 100% 2px no-repeat; }
+.js .q-old s { background-size: 0% 2px; transition: background-size 900ms var(--expo) 900ms; }
+.js .in .q-old s { background-size: 100% 2px; }
+.swap { display: flex; flex-direction: column; gap: 18px; max-width: 1380px; }
+.case3 { margin-top: auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px; }
+.case3 > div { display: flex; flex-direction: column; gap: 10px; border-top: 1px solid var(--line); padding-top: 18px; }
+.decision { position: relative; margin-top: 36px; padding-top: 24px; display: flex; align-items: baseline; gap: 40px; }
 .decision .bar { position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--blue); }
 
 /* ---------- 8 · Trade-off ---------- */
-.ledger { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
-.ledger ul { display: flex; flex-direction: column; }
-.ledger li { display: flex; flex-direction: column; gap: 4px; padding: 18px 0; border-top: 1px solid var(--line); }
-.ledger li b { font-size: 30px; font-weight: 500; letter-spacing: -0.015em; color: var(--ink); }
-.ledger .cost li b { color: var(--body); }
-.ledger .t-label { margin-bottom: 18px; }
-.closing-note { margin-top: auto; }
+.ledger .rows > li { flex-direction: row; align-items: baseline; gap: 0; }
+.ledger .cost .t-h3 { color: var(--muted); }
+.ledger .t-label { margin-bottom: 16px; display: block; }
+.closing-note { margin-top: 72px; }
 
 /* ---------- 9 · Form ---------- */
-.s-form .body { display: grid; grid-template-columns: 600px 480px 480px; gap: 60px; align-items: start; }
-.decisions { display: flex; flex-direction: column; gap: 22px; }
-.decisions > div { display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--line); padding-top: 18px; }
-.decisions b { font-size: 30px; font-weight: 500; letter-spacing: -0.015em; color: var(--ink); }
-.shapes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 12px; }
-.shape { display: flex; flex-direction: column; gap: 10px; }
-.shape .pg { position: relative; aspect-ratio: 16 / 10; border: 1.5px solid #4a4a54; border-radius: 6px; }
-.shape .pn { position: absolute; background: #4a4a54; border-radius: 3px; }
+.shapes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 18px; }
+.shape { display: flex; flex-direction: column; gap: 12px; }
+.shape .pg { position: relative; aspect-ratio: 16 / 10; border: 1.5px solid #4a4a54; border-radius: 8px; }
+.shape .pn { position: absolute; background: #4a4a54; border-radius: 4px; }
 .shape.win .pg { border-color: var(--ink); }
 .shape.win .pn { background: var(--blue); }
-.shape span { font-family: var(--f-mono); font-size: 16px; line-height: 1.3; color: var(--muted); letter-spacing: .02em; }
-.shape.win span { color: var(--ink); }
+.shape b { font-size: 22px; font-weight: 500; color: var(--body); letter-spacing: -0.01em; }
+.shape.win b { color: var(--ink); }
+.form-notes { margin-top: 44px; }
 
 /* ---------- 10 · Logic ---------- */
-.map { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; align-items: end; gap: 28px; padding-bottom: 36px; border-bottom: 1px solid var(--line); }
-.map .m { display: flex; flex-direction: column; gap: 10px; }
-.map .arr { font-family: var(--f-mono); font-size: 36px; color: var(--blue-text); padding-bottom: 46px; }
-.s-logic .lower { display: grid; grid-template-columns: 620px 1fr; gap: 80px; margin-top: 40px; align-items: start; }
-.s-logic .lower .txt { display: flex; flex-direction: column; gap: 30px; }
-.s-logic .lower .txt > div { display: flex; flex-direction: column; gap: 8px; }
-.s-logic .lower .txt b { font-size: 30px; font-weight: 500; color: var(--ink); letter-spacing: -0.015em; }
+.map { display: grid; grid-template-columns: auto auto auto auto auto auto auto; justify-content: space-between; align-items: end; padding-bottom: 40px; border-bottom: 1px solid var(--line); margin-bottom: 40px; }
+.map .m { display: flex; flex-direction: column; gap: 12px; }
+.map .t-xl { font-size: 180px; }
+.map .arr { font-family: var(--f-mono); font-size: 40px; color: var(--blue-text); padding-bottom: 70px; }
 
 /* ---------- 11 · Trust ---------- */
-.clips { display: grid; grid-template-columns: repeat(4, 1fr); gap: 60px; }
-.s-trust .clip .media { aspect-ratio: 375 / 440 !important; }
-.clip { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
-.clip .cap { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid var(--line); padding-top: 16px; }
-.clip.alt .cap { border-top: 2px solid var(--blue); padding-top: 15px; }
-.clip .cap b { font-size: 28px; font-weight: 500; letter-spacing: -0.015em; color: var(--ink); line-height: 1.2; }
+.details { display: flex; flex-direction: column; gap: 22px; margin-top: 8px; }
+.detail { display: grid; grid-template-columns: 112px 1fr; gap: 24px; align-items: center; border-top: 1px solid var(--line); padding-top: 22px; }
+.detail .media { border-radius: 8px; }
+.detail b { font-size: 24px; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; display: block; margin-bottom: 4px; }
 
 /* ---------- 12 · Started ---------- */
-.strip { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); margin-bottom: 44px; }
-.strip .track { position: absolute; left: 0; right: 0; top: 7px; height: 2px; background: var(--line); }
-.strip .track i { position: absolute; inset: 0; background: var(--blue); transform-origin: 0 50%; }
-.js .strip .track i { transform: scaleX(0); transition: transform 1800ms var(--expo) 700ms; }
-.js .in .strip .track i { transform: none; }
-.strip .st { position: relative; display: flex; flex-direction: column; gap: 16px; }
-.strip .st::before { content: ""; width: 16px; height: 16px; border-radius: 50%; background: var(--bg); border: 2px solid var(--muted); box-sizing: border-box; }
-.strip .st.end::before { background: var(--blue); border-color: var(--blue); }
-.strip .st.end { align-items: flex-end; text-align: right; }
-.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+.vstrip { position: relative; display: flex; flex-direction: column; gap: 30px; margin-top: 56px; padding-left: 38px; }
+.vstrip .track { position: absolute; left: 7px; top: 10px; bottom: 10px; width: 2px; background: var(--line); }
+.vstrip .track i { position: absolute; inset: 0; background: var(--blue); transform-origin: 50% 0; }
+.js .vstrip .track i { transform: scaleY(0); transition: transform 1600ms var(--expo) 900ms; }
+.js .in .vstrip .track i { transform: none; }
+.vstrip li { position: relative; }
+.vstrip li::before { content: ""; position: absolute; left: -38px; top: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg); border: 2px solid var(--muted); box-sizing: border-box; }
+.vstrip li.end::before { background: var(--blue); border-color: var(--blue); }
 
 /* ---------- 13 · Built ---------- */
-.s-built .body { display: grid; grid-template-columns: 940px 1fr; gap: 80px; align-items: start; }
-.s-built .right { display: flex; flex-direction: column; gap: 30px; }
-.s-built .stat { display: flex; align-items: baseline; gap: 14px; }
-.s-built .stat .pre { font-size: 30px; color: var(--muted); }
-.who { display: flex; flex-direction: column; }
-.who > div { display: grid; grid-template-columns: 170px 1fr; gap: 20px; padding: 16px 0; border-top: 1px solid var(--line); }
-.timeline { position: absolute; left: 120px; right: 120px; bottom: 112px; display: grid; grid-template-columns: 260px 300px 260px 520px 340px; }
-.timeline > div { display: flex; flex-direction: column; gap: 12px; padding-right: 12px; }
-.timeline i { display: block; height: 8px; background: #3a3a43; margin-right: 4px; }
-.timeline .c i { background: var(--blue); }
-.timeline span { font-family: var(--f-mono); font-size: 17px; letter-spacing: .02em; color: var(--muted); white-space: nowrap; }
-.timeline .c span { color: var(--ink); }
+.stat { display: flex; align-items: baseline; gap: 12px; }
+.stat .pre { font-size: 28px; color: var(--muted); }
+.who > div { display: grid; grid-template-columns: 150px 1fr; gap: 16px; padding: 16px 0; border-top: 1px solid var(--line); }
 
 /* ---------- 14 · Results ---------- */
-.s-results .head { display: grid; grid-template-columns: 1fr 500px; gap: 80px; align-items: start; }
-.s-results .head .t-label { margin-bottom: 22px; }
-.s-results .head .t-body { margin-top: 18px; }
-.quote-slot { border: 1.5px dashed #3c3c45; border-radius: 16px; padding: 24px 28px; display: flex; flex-direction: column; gap: 10px; }
-.quote-slot .ph { font-size: 26px; line-height: 1.3; color: var(--muted); }
-.metrics { margin-top: auto; padding-top: 48px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 56px; }
+.metrics { margin-top: auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 56px; }
 .metric { display: flex; flex-direction: column; min-width: 0; border-top: 1px solid var(--ink); padding-top: 20px; }
 .metric .t-label { color: var(--ink); margin-bottom: 26px; }
 .cells { display: grid; grid-template-columns: repeat(10, 22px); gap: 4px; width: max-content; }
@@ -274,24 +240,19 @@ body {
 .cell:not(.on)::after { display: none; }
 .js .cell::after { transform: scale(0); transition: transform 520ms var(--expo); transition-delay: var(--d, 0ms); }
 .js .in .cell.on::after { transform: none; }
-.num { margin-top: 30px; display: flex; align-items: baseline; gap: 14px; }
-.num .pre { font-size: 30px; color: var(--muted); letter-spacing: -0.01em; }
-.was { font-family: var(--f-mono); font-size: 20px; color: var(--muted); margin-top: 14px; letter-spacing: .02em; font-variant-numeric: tabular-nums; }
+.num { margin-top: 30px; display: flex; align-items: baseline; gap: 12px; }
+.num .pre { font-size: 26px; color: var(--muted); }
+.was { font-family: var(--f-mono); font-size: 16px; color: var(--muted); margin-top: 14px; letter-spacing: .04em; font-variant-numeric: tabular-nums; }
 .was b { font-weight: 500; color: var(--ink); }
-.metric .t-small { margin-top: 12px; }
+.metric .t-small { margin-top: 10px; }
 
-/* ---------- 15 · Beyond ---------- */
-.cards2 { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
-.card { display: flex; flex-direction: column; gap: 16px; border-top: 1px solid var(--ink); padding-top: 22px; min-width: 0; }
-.chips { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
-.chips .r { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
-.chips .r > span:first-child { font-family: var(--f-mono); font-size: 16px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); width: 130px; }
-.chip { font-family: var(--f-mono); font-size: 16px; padding: 5px 10px; border-radius: 999px; border: 1px solid #3a3a43; color: var(--muted); white-space: nowrap; }
-.chip.on { border-color: var(--ink); color: var(--ink); }
-.chip.live { border-color: var(--blue); background: var(--blue); color: #fff; }
-.chips .sep { color: #55545e; font-size: 16px; }
-.next { margin-top: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; padding-top: 30px; border-top: 1px solid var(--line); }
-.next .l { display: flex; flex-direction: column; gap: 14px; }
+/* ---------- 15 · Next ---------- */
+.journey { display: grid; grid-template-columns: 1.25fr 3fr; gap: 6px; margin-top: 40px; max-width: 1380px; }
+.journey > div { display: flex; flex-direction: column; gap: 14px; }
+.journey i { display: block; height: 10px; border-radius: 2px; }
+.journey .now i { background: var(--blue); }
+.journey .later i { background: repeating-linear-gradient(90deg, #3a3a43 0 18px, transparent 18px 26px); }
+.closing { margin-top: auto; max-width: 1500px; }
 
 /* ---------- HUD ---------- */
 .hud {
@@ -353,80 +314,71 @@ body {
 .flow .progress, .flow .hud, .flow .drawer { display: none; }
 .flow .slide {
   position: relative; inset: auto; visibility: visible; opacity: 1; transition: none;
-  padding: 56px max(20px, env(safe-area-inset-right, 0px)) 56px max(20px, env(safe-area-inset-left, 0px));
+  padding: 40px max(20px, env(safe-area-inset-right, 0px)) 48px max(20px, env(safe-area-inset-left, 0px));
   border-bottom: 1px solid var(--line);
   display: flex !important; flex-direction: column; gap: 22px;
 }
-.flow .hd { margin: 0; gap: 12px; }
-.flow .body, .flow .s-problem .body, .flow .s-bet .body, .flow .s-case .body, .flow .s-form .body, .flow .s-built .body, .flow .s-logic .lower,
-.flow .groups, .flow .lessons, .flow .ledger, .flow .duo, .flow .cards2, .flow .next, .flow .decision {
-  display: flex; flex-direction: column; gap: 22px; margin-top: 0;
-}
-.flow .clips, .flow .pair { grid-template-columns: 1fr 1fr; gap: 18px; }
-.flow .shapes { gap: 10px; }
-.flow .t-xl { font-size: 72px; }
-.flow .t-display { font-size: 46px; }
+.flow .chap { position: static; flex-wrap: wrap; gap: 6px 14px; font-size: 10px; }
+.flow .chap span::before { width: 7px; height: 7px; }
+.flow .hd { margin: 0; gap: 10px; }
+.flow .split, .flow .strip4, .flow .case3, .flow .metrics, .flow .decision { display: flex; flex-direction: column; gap: 22px; margin-top: 0; }
+.flow .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 18px; }
+.flow .t-xl { font-size: 76px; }
+.flow .map .t-xl { font-size: 44px; }
+.flow .t-display { font-size: 44px; }
 .flow .t-num { font-size: 44px; }
-.flow .t-h1, .flow .claim { font-size: 28px; }
-.flow .t-h2 { font-size: 30px; }
-.flow .t-h3, .flow .lesson .t-h3 { font-size: 21px; }
-.flow .t-lead, .flow .s-reframe .argue .t-lead, .flow .answer-block p:not(.t-label) { font-size: 18px; }
-.flow .t-body { font-size: 16px; }
-.flow .t-small, .flow .group li { font-size: 15px; }
-.flow .t-cap { font-size: 13px; }
-.flow .t-label, .flow .k { font-size: 11px; }
-.flow .items li b, .flow .ledger li b, .flow .decisions b, .flow .s-logic .lower .txt b, .flow .clip .cap b { font-size: 17px; }
+.flow .t-stmt { font-size: 28px; }
+.flow .t-h { font-size: 26px; }
+.flow .t-h3, .flow .q-old { font-size: 19px; }
+.flow .t-lead { font-size: 17px; }
+.flow .t-body, .flow .detail b, .flow .shape b { font-size: 15px; }
+.flow .t-small, .flow .strip4 li { font-size: 14px; }
+.flow .t-cap { font-size: 12px; }
+.flow .t-label, .flow .k, .flow .was { font-size: 10px; }
 .flow .mark::before { width: 7px; height: 7px; margin-right: 8px; transform: translateY(-1px); }
-.flow .foot { position: static; font-size: 11px; gap: 16px; margin-top: 8px; }
+.flow .foot { position: static; font-size: 10px; gap: 16px; margin-top: 4px; }
 .flow .media { border-radius: 10px; }
 .flow .s-title .eyebrow, .flow .s-title .copy, .flow .s-title .facts { position: static; width: auto; }
 .flow .s-title .copy { gap: 18px; }
 .flow .s-title .hero { position: static; width: 100%; height: auto; border-radius: 12px; }
 .flow .s-title .hero img { height: auto; }
+.flow .result .fig-num { font-size: 30px; }
+.flow .result .fig-num i { margin: 0 8px; }
 .flow .s-title .facts { grid-template-columns: 1fr 1fr; gap: 16px 20px; padding-top: 18px; }
-.flow .fact .v { font-size: 14px; }
-.flow .s-reframe .t-label.head { margin: 0; }
-.flow .s-reframe .argue { gap: 16px; }
-.flow .claim span { margin-bottom: 4px; }
-.flow .cmp { font-size: 14px; }
-.flow .cmp th { font-size: 10px; padding: 0 10px 10px 0; }
-.flow .cmp td { padding: 12px 10px 12px 0; }
-.flow .swap { grid-template-columns: 1fr; padding-top: 24px; margin-top: 8px; }
-.flow .swap .arrow { font-size: 20px; transform: rotate(90deg); width: max-content; margin: 8px 0; }
-.flow .q { font-size: 22px; }
-.flow .swap .answer { grid-column: 1; }
-.flow .map { grid-template-columns: 1fr 1fr; gap: 18px; padding-bottom: 20px; }
+.flow .fact .v { font-size: 13px; }
+.flow .contrast { margin-top: 16px; }
+.flow .contrast > div { grid-template-columns: 96px 1fr; gap: 12px; padding: 12px 0; }
+.flow .cmp { font-size: 13px; }
+.flow .cmp th { font-size: 9px; padding: 0 8px 8px 0; }
+.flow .cmp td { padding: 10px 8px 10px 0; }
+.flow .decision { gap: 6px; margin-top: 8px; }
+.flow .ledger .rows > li { padding: 12px 0; }
+.flow .shapes { gap: 10px; }
+.flow .form-notes { margin-top: 8px; }
+.flow .map { grid-template-columns: 1fr 1fr; gap: 18px; padding-bottom: 20px; margin-bottom: 0; }
 .flow .map .arr { display: none; }
-.flow .strip { margin-bottom: 8px; }
-.flow .strip .st { gap: 8px; }
-.flow .strip .st::before { width: 12px; height: 12px; }
-.flow .strip .track { top: 5px; }
-.flow .strip span { font-size: 9px; letter-spacing: .02em; }
+.flow .detail { grid-template-columns: 64px 1fr; gap: 12px; padding-top: 12px; }
+.flow .vstrip { margin-top: 16px; gap: 14px; padding-left: 28px; }
+.flow .vstrip li::before { left: -28px; width: 12px; height: 12px; }
+.flow .vstrip .track { left: 5px; }
 .flow .who > div { grid-template-columns: 96px 1fr; gap: 12px; padding: 10px 0; }
-.flow .timeline { position: static; grid-template-columns: 1fr; gap: 10px; }
-.flow .timeline span { white-space: normal; font-size: 11px; }
-.flow .timeline i { height: 4px; }
-.flow .s-results .head { grid-template-columns: 1fr; gap: 20px; }
-.flow .quote-slot { padding: 14px 16px; border-radius: 12px; }
-.flow .quote-slot .ph { font-size: 15px; }
-.flow .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 18px; padding-top: 0; }
+.flow .stat .pre, .flow .num .pre { font-size: 14px; }
 .flow .metric .t-label { margin-bottom: 12px; }
 .flow .cells { grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 2px; width: 100%; }
 .flow .cell { width: auto; height: auto; aspect-ratio: 1; }
 .flow .num { margin-top: 14px; gap: 8px; }
-.flow .num .pre, .flow .s-built .stat .pre { font-size: 14px; }
-.flow .was { font-size: 11px; }
-.flow .chips .r > span:first-child { width: 100%; font-size: 10px; }
-.flow .chip { font-size: 11px; padding: 4px 8px; }
-.flow .shape span { font-size: 10px; }
+.flow .journey { margin-top: 8px; }
 
-/* ---------- Print / PDF ---------- */
-@page { size: 1920px 1080px; margin: 0; }
+/* ---------- Print / PDF (lean deck, and the reading version with notes) ---------- */
 .print body, .print .viewport { overflow: visible; position: static; height: auto; background: var(--bg); }
 .print .stage { position: static; transform: none !important; height: auto; overflow: visible; }
 .print .progress, .print .hud, .print .drawer, .print .ppanel { display: none !important; }
 .print .slide { box-sizing: border-box; position: relative; width: 1920px; height: 1080px; visibility: visible; opacity: 1; break-after: page; overflow: hidden; background: var(--bg); }
 .print *, .print *::before, .print *::after { transition: none !important; animation: none !important; }
+.rpage { width: 1920px; height: 1560px; break-after: page; overflow: hidden; background: var(--bg); }
+.rpage .slide { break-after: auto; }
+.rnotes { box-sizing: border-box; height: 480px; padding: 44px 112px 0; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 16px; }
+.rnotes p { font-size: 25px; line-height: 1.55; color: var(--body); max-width: 1640px; }
 </style>
 
 <div class="viewport" id="viewport">
@@ -441,398 +393,316 @@ body {
           <span class="line" style="--i:1"><span>first-step</span></span>
           <span class="line" style="--i:2"><span>problem</span></span>
         </h1>
-        <p class="t-lead" data-a style="--i:4">We set out to build an AI assistant. I made the case to ship a three-question Playbook Recommender first, and it moved every number that mattered.</p>
+        <p class="t-lead" data-a style="--i:4">We set out to build an AI assistant. I made the case to ship a three-question Playbook Recommender first.</p>
+        <div class="result" data-a style="--i:6">
+          <span class="fig-num"><span class="from">57%</span><i>→</i>85%</span>
+          <span class="t-small">of new customers now start a project and a playbook</span>
+        </div>
       </div>
       <figure class="hero" data-reveal style="--base:350ms">
         <img src="media/finder-hero-clean.webp" alt="The Playbook Recommender open in the corner of the Strategyzer projects page, asking what you're working on.">
       </figure>
       <div class="facts">
-        <div class="fact" data-a style="--i:6"><span class="t-label">Role</span><span class="v">Senior product designer, and the only designer</span></div>
-        <div class="fact" data-a style="--i:7"><span class="t-label">Team</span><span class="v">Head of Product, one engineer, coaching and customer teams</span></div>
-        <div class="fact" data-a style="--i:8"><span class="t-label">Timeline</span><span class="v">About 6 weeks, spring 2026</span></div>
-        <div class="fact" data-a style="--i:9"><span class="t-label">Status</span><span class="v">Live</span></div>
+        <div class="fact" data-a style="--i:8"><span class="t-label">Role</span><span class="v">Senior product designer, and the only designer</span></div>
+        <div class="fact" data-a style="--i:9"><span class="t-label">Team</span><span class="v">Head of Product, one engineer, coaching and customer teams</span></div>
+        <div class="fact" data-a style="--i:10"><span class="t-label">Timeline</span><span class="v">About 6 weeks, spring 2026</span></div>
+        <div class="fact" data-a style="--i:11"><span class="t-label">Status</span><span class="v">Live</span></div>
       </div>
-      <aside class="notes">I was the only designer on this. I led it end to end, from research and strategy to design and the front-end build. I worked with our Head of Product and one engineer, with input from our coaching and customer teams. It took about six weeks in spring 2026, and it's live. The short version is that we set out to build an AI assistant, and I made the case to ship a three-question Playbook Recommender first.</aside>
+      <aside class="notes">I was the only designer on this, and I led it end to end, from research and strategy to design and the front-end build. I worked with our Head of Product and one engineer, with input from our coaching and customer teams. It took about six weeks in spring 2026, and it's live. The short version is that we set out to build an AI assistant, and I made the case to ship a three-question Playbook Recommender first. New customers starting a project and a playbook went from 57% to 85%.</aside>
     </section>
 
     <!-- 2 · The problem -->
-    <section class="slide s-problem" data-num="2" aria-label="The problem">
-      <div class="hd">
-        <p class="t-label" data-a style="--i:0">The problem</p>
-        <h2 class="t-h2" data-a style="--i:1">New customers got stuck on their first choice.</h2>
-      </div>
-      <div class="body">
-        <div class="left">
-          <span class="t-xl n" data-from="0" data-to="43" data-delay="700" data-dur="1100" data-a style="--i:2">43%</span>
-          <p class="t-lead ink" data-a style="--i:3">of new customers never started a project.</p>
-          <p class="t-small" data-a style="--i:4">They came with a real business problem, found a library of playbooks, and couldn't tell which one was right for them. Each playbook takes hours, so picking the wrong one wastes that time. People hesitated, guessed or gave up.</p>
-          <div class="pair">
-            <div data-a style="--i:5"><p class="t-label">Enterprise</p><p class="t-small ink">Guided by a coach, who asks two or three questions and says start here.</p></div>
-            <div class="alt" data-a style="--i:6"><p class="t-label on">Self-serve</p><p class="t-small ink">Left alone with the full library, just when they know the least.</p></div>
+    <section class="slide" data-num="2" data-ch="Problem" aria-label="The problem">
+      <div class="hd"><h2 class="t-h" data-a style="--i:0">New customers got stuck on their first choice.</h2></div>
+      <div class="split" style="--cols: 760px 1fr">
+        <div>
+          <span class="t-xl n" data-from="0" data-to="43" data-delay="600" data-dur="1100" data-a style="--i:1">43%</span>
+          <p class="t-lead ink" data-a style="--i:2; margin-top:20px">of new customers never started a project.</p>
+          <div class="contrast">
+            <div data-a style="--i:4"><span class="t-label">Enterprise</span><span class="t-body ink">A coach asks two or three questions, then says start here.</span></div>
+            <div class="alt" data-a style="--i:5"><span class="t-label on">Self-serve</span><span class="t-body ink">The full library, chosen alone, just when they know the least.</span></div>
           </div>
         </div>
-        <figure class="fig" data-reveal>
+        <figure class="fig" data-reveal style="--base:600ms">
           <div class="media" style="aspect-ratio: 2000 / 1300"><img src="media/library-v2.webp" alt="The Playbook Library: a welcome banner, long descriptions, then every playbook in a grid."></div>
-          <figcaption class="t-cap"><span class="ink">A wall of options.</span> Long descriptions, then the whole library, and nothing to say which one fits their problem.</figcaption>
+          <figcaption class="t-cap">What a self-serve customer saw first. Long descriptions, then the whole library.</figcaption>
         </figure>
       </div>
-      <aside class="notes">About 43% of new customers never started a project. They came with a real business problem, found the playbook library, and couldn't tell which one was right for them. Each playbook takes hours, like running customer interviews or testing a price, so picking the wrong one wastes that time. People hesitated, guessed or gave up. For Strategyzer this was the costliest place to lose people. If nobody starts a playbook, nobody gets value, and every number from sign-up to renewal depends on that first step. Enterprise customers had a coach who asked two or three questions and said start here. Self-serve customers got the whole library and had to choose alone.</aside>
+      <aside class="notes">About 43% of new customers never started a project. They came with a real business problem, found a library of playbooks, and couldn't tell which one was right for them. Each playbook takes hours, like running customer interviews or testing a price, so picking the wrong one wastes that time. People hesitated, guessed or gave up. For Strategyzer this was the costliest place to lose people. If nobody starts a playbook, nobody gets value, and every number from sign-up to renewal depends on that first step. How people found their first playbook depended on the kind of customer they were. Enterprise customers had a coach who asked two or three questions and said start here. Self-serve customers got the whole library and chose alone, just when they knew the least.</aside>
     </section>
 
     <!-- 3 · Research -->
-    <section class="slide s-research" data-num="3" aria-label="Research">
-      <div class="hd">
-        <p class="t-label" data-a style="--i:0">Research</p>
-        <h2 class="t-h2" data-a style="--i:1">Eight customer interviews, plus our customer success and coaching teams.</h2>
+    <section class="slide s-research" data-num="3" data-ch="Problem" aria-label="Research">
+      <div class="hd" style="max-width:1460px">
+        <h2 class="t-stmt" data-a style="--i:0">Even our own coaches found choosing a playbook hard.</h2>
+        <p class="t-lead" data-a style="--i:1">It was the most common complaint in every conversation. So the problem was in the product.</p>
       </div>
-      <div class="groups">
-        <div class="group" data-a style="--i:2">
-          <p class="t-label">Group one</p>
-          <h3 class="t-h3">Solo founders</h3>
-          <p class="t-small">Testing an idea before pitching investors. New to Strategyzer's terms.</p>
-        </div>
-        <div class="group" data-a style="--i:3">
-          <p class="t-label">Group two</p>
-          <h3 class="t-h3">Heads of strategy and innovation</h3>
-          <p class="t-small">Testing an idea before presenting to senior leaders, often with half the work already done.</p>
-        </div>
-        <div class="group alt" data-a style="--i:4">
-          <p class="t-label on">Both groups</p>
-          <h3 class="t-h3">Very different people, the same problem</h3>
-          <ul>
-            <li class="mark">Too many ideas</li>
-            <li class="mark">No clear first step</li>
-            <li class="mark">An important meeting coming up</li>
-          </ul>
+      <div class="strip4">
+        <div data-a style="--i:3"><span class="t-num n" data-from="0" data-to="8" data-suffix="" data-delay="700" data-dur="500">8</span><p class="t-small ink">customer interviews, plus our customer success and coaching teams</p></div>
+        <div data-a style="--i:4"><span class="t-label">Group one</span><h3 class="t-h3">Solo founders</h3><p class="t-small">Testing an idea before pitching investors</p></div>
+        <div data-a style="--i:5"><span class="t-label">Group two</span><h3 class="t-h3">Heads of strategy and innovation</h3><p class="t-small">Testing an idea before presenting to senior leaders</p></div>
+        <div class="alt" data-a style="--i:6"><span class="t-label on">The same problem</span>
+          <ul><li class="mark">Too many ideas</li><li class="mark">No clear first step</li><li class="mark">An important meeting coming up</li></ul>
         </div>
       </div>
-      <div class="statement">
-        <p class="t-h1" data-a style="--i:6">In every conversation, the most common complaint was choosing a playbook. Even our own coaches said it.</p>
-        <p class="t-body" data-a style="--i:7">If our coaches found it hard, the problem was in the product. Returning customers faced the same choice every time they started something new.</p>
-      </div>
-      <aside class="notes">I interviewed eight customers, plus our customer success and coaching teams. They fell into two groups. Solo founders testing an idea before pitching investors, who were new to Strategyzer's terms. And heads of strategy and innovation testing an idea before presenting to senior leaders, often with half the work done. Very different people with the same problem. Too many ideas, no clear first step, and an important meeting coming up. In every conversation the most common complaint was choosing a playbook, and even our own coaches said it. That told me the problem was in the product, and it hit returning customers too, every time they started something new.</aside>
+      <aside class="notes">I interviewed eight customers, plus our customer success and coaching teams. They fell into two groups. Solo founders were testing an idea before pitching investors, and were new to Strategyzer's terms. Heads of strategy and innovation were testing an idea before presenting to senior leaders, often with half the work already done. Very different people with the same problem. Too many ideas, no clear first step, and an important meeting coming up. In every conversation, the most common complaint was choosing a playbook, and even our own coaches said it. If our coaches found it hard, the problem was in the product. Returning customers faced the same choice every time they started something new.</aside>
     </section>
 
     <!-- 4 · The first bet -->
-    <section class="slide s-bet" data-num="4" aria-label="The first bet">
-      <div class="hd">
-        <p class="t-label" data-a style="--i:0">The first bet</p>
-        <h2 class="t-h2" data-a style="--i:1">Customers were asking for AI, so we started there.</h2>
-      </div>
-      <div class="body">
-        <div class="left">
-          <p class="t-body" data-a style="--i:2">Strattie AI was an assistant across the whole platform, like having a Strategyzer coach beside you at every step. I designed it and built a working prototype with Claude, using FondUI, our design system.</p>
-          <ul class="items">
-            <li data-a style="--i:3"><b>A coach you could chat with</b><span class="t-small">On every page and aware of your project. It helped people shape ideas, brainstorm and challenge their thinking.</span></li>
-            <li data-a style="--i:4"><b>Help on the canvas</b><span class="t-small">Summarising work, pointing to evidence, checking ideas, drafting sticky notes.</span></li>
-            <li data-a style="--i:5"><b>Recommending playbooks</b><span class="t-small">One of its many jobs.</span></li>
+    <section class="slide" data-num="4" data-ch="Decision" aria-label="The first bet">
+      <div class="hd"><h2 class="t-h" data-a style="--i:0">Customers were asking for AI, so we started there.</h2></div>
+      <div class="split" style="--cols: 560px 1fr; --gap: 80px">
+        <div>
+          <p class="t-label on" data-a style="--i:1">Strattie AI</p>
+          <p class="t-body" data-a style="--i:2; margin-top:14px">An assistant across the whole platform, like a Strategyzer coach beside you. I designed it and built a working prototype with Claude.</p>
+          <ul class="rows" data-a style="--i:3; margin-top:36px">
+            <li class="t-body ink">A coach you could chat with</li>
+            <li class="t-body ink">Help on the canvas</li>
+            <li class="t-body ink">Playbook recommendations, one job of many</li>
           </ul>
         </div>
         <figure class="fig" data-reveal>
           <div class="media" style="aspect-ratio: 2000 / 1304"><video class="vid" muted loop playsinline preload="none" poster="media/strattie-flow-v6-poster.webp" aria-label="The Strattie AI prototype taking someone from not knowing their customers to a finished workspace."><source src="media/strattie-flow-v6.mp4" type="video/mp4"><source src="media/strattie-flow-v6.webm" type="video/webm"></video></div>
-          <figcaption class="t-cap"><span class="ink">The full assistant, start to finish.</span> From a playbook recommendation to interview questions, a customer profile and a finished workspace. Fully prototyped, and not in the first release.</figcaption>
+          <figcaption class="t-cap">The full assistant, fully prototyped. Not in the first release.</figcaption>
         </figure>
       </div>
-      <aside class="notes">Customers were asking for AI, so we started there. The first idea was ambitious. Strattie AI was an assistant across the whole platform, like a Strategyzer coach beside you at every step. I designed it and built a working prototype with Claude on FondUI, our design system. It could chat as a coach on every page, help on the canvas by summarising work, pointing to evidence and checking ideas, and recommend playbooks as one of many jobs. The video goes from "I'm not sure who my customers are" to a finished workspace. It's fully prototyped, but it wasn't in the first release.</aside>
+      <aside class="notes">Customers were asking for AI, so we started there. The first idea was ambitious. Strattie AI was an assistant across the whole platform, like having a Strategyzer coach beside you at every step. I designed it and built a working prototype with Claude, using FondUI, our design system. It could chat as a coach on every page, help on the canvas by summarising work, pointing to evidence, checking ideas and drafting sticky notes, and recommend playbooks as one of its many jobs. The video goes from "I'm not sure who my customers are" to a finished workspace. It's fully prototyped, but it wasn't in the first release.</aside>
     </section>
 
     <!-- 5 · Lessons -->
-    <section class="slide s-lessons" data-num="5" aria-label="What the prototype taught us">
-      <div class="hd">
-        <p class="t-label" data-a style="--i:0">What the prototype taught us</p>
-        <h2 class="t-h2" data-a style="--i:1">Building it for real showed three things a static design would have hidden.</h2>
+    <section class="slide lessons" data-num="5" data-ch="Decision" aria-label="What the prototype taught us">
+      <div class="hd"><h2 class="t-h" data-a style="--i:0">Chat was the wrong tool for "where do I start?"</h2></div>
+      <div class="split" style="--cols: 1fr 760px; --align: center">
+        <div class="rows">
+          <div data-a style="--i:2"><span class="k">01</span><h3 class="t-h3">The value was in the questions.</h3><p class="t-small">A good coach asks two or three first. The open chat often answered before asking.</p></div>
+          <div data-a style="--i:3"><span class="k">02</span><h3 class="t-h3">Doing it well was a much bigger job.</h3><p class="t-small">More than our small team could take on at the time.</p></div>
+          <div data-a style="--i:4"><span class="k">03</span><h3 class="t-h3">People couldn't put their problem into words.</h3><p class="t-small">A chat box asks them to do exactly that.</p></div>
+        </div>
+        <figure class="fig" data-reveal style="--base:550ms">
+          <div class="media" style="aspect-ratio: 1160 / 908"><img src="media/strattie-chat-crop.webp" alt="The Strattie prototype recommending Customer Profile Interviews after a single message."></div>
+          <figcaption class="t-cap">The prototype. One message in, and it already recommends a playbook.</figcaption>
+        </figure>
       </div>
-      <div class="lessons">
-        <div class="lesson" data-a style="--i:3">
-          <span class="k">01</span>
-          <h3 class="t-h3">The value was in the questions.</h3>
-          <p class="t-body">A good coach asks two or three questions before recommending anything. In an open chat, the assistant often answered before it had asked them.</p>
-        </div>
-        <div class="lesson" data-a style="--i:4">
-          <span class="k">02</span>
-          <h3 class="t-h3">Doing it well was a much bigger job than it looked.</h3>
-          <p class="t-body">Vague requests, a changing library and knowing when to say "I don't know" were more than our small team could take on at the time.</p>
-        </div>
-        <div class="lesson" data-a style="--i:5">
-          <span class="k">03</span>
-          <h3 class="t-h3">Chat is the wrong tool for "where do I start?"</h3>
-          <p class="t-body">People came to us because they couldn't put their problem into words. A chat box asks them to do exactly that.</p>
-        </div>
-      </div>
-      <aside class="notes">Building it for real taught us three things a static design would have hidden. First, the value was in the questions. A good coach asks two or three questions before recommending anything, and in an open chat the assistant often answered before asking them. Second, doing it well was a much bigger job than it looked. Vague requests, a changing library and knowing when to say "I don't know" were more than our small team could take on at the time. Third, chat is the wrong tool for "where do I start?". People came to us because they couldn't put their problem into words, and a chat box asks them to do exactly that.</aside>
+      <aside class="notes">Building it for real taught us three things a static design would have hidden. First, the value was in the questions. A good coach asks two or three questions before recommending anything. In an open chat, the assistant often answered before it had asked them, and you can see it here, where one message is enough for it to recommend a playbook. Second, doing it well was a much bigger job than it looked. Vague requests, a changing library and knowing when to say "I don't know" were more than our small team could take on at the time. Third, chat is the wrong tool for "where do I start?". People came to us because they couldn't put their problem into words, and a chat box asks them to do exactly that.</aside>
     </section>
 
     <!-- 6 · The reframe -->
-    <section class="slide s-reframe" data-num="6" aria-label="The reframe">
-      <p class="t-label head" data-a style="--i:0">The reframe</p>
-      <div class="argue">
-        <p class="t-lead" data-a style="--i:1">Engineering couldn't build the full assistant in the time frame we needed. The team's first instinct, a fair one, was to build a smaller version of it.</p>
-        <p class="claim" data-a style="--i:2"><span>I pushed back.</span>A smaller chatbot is just a worse chatbot.</p>
-      </div>
-      <table class="cmp" aria-label="Smaller chatbot compared with the guided Recommender">
-        <thead>
-          <tr data-a style="--i:3"><th scope="col"><span class="sr">Question</span></th><th scope="col">Smaller chatbot</th><th scope="col" class="rec">Guided Recommender</th></tr>
-        </thead>
-        <tbody>
-          <tr data-a style="--i:4"><td>Designing the conversation</td><td class="chat">Still needed in full</td><td class="rec mark">A few fixed questions</td></tr>
-          <tr data-a style="--i:5"><td>Recommending playbooks that don't exist</td><td class="chat">Still possible</td><td class="rec mark">Not possible</td></tr>
-          <tr data-a style="--i:6"><td>Describing the problem</td><td class="chat">People have to type it</td><td class="rec mark">People pick from options</td></tr>
-          <tr data-a style="--i:7"><td>Shows whether guidance helps</td><td class="chat">Not clearly</td><td class="rec mark">Yes</td></tr>
-        </tbody>
-      </table>
-      <div class="swap">
-        <span class="bar" data-draw></span>
-        <p class="t-label label" data-a style="--i:8">So I changed the question</p>
-        <p class="q old" data-a style="--i:9"><s>What's the smallest assistant we can build?</s></p>
-        <span class="arrow" data-a style="--i:10" aria-hidden="true">→</span>
-        <div>
-          <p class="q new" data-a style="--i:12">What's the one job that matters most right now?</p>
-          <p class="t-body answer" data-a style="--i:14">One job came first every time. Finding the right playbook is where every new project starts, and where people kept getting stuck.</p>
+    <section class="slide" data-num="6" data-ch="Decision" aria-label="The pushback">
+      <div class="split" style="--cols: 700px 1fr; --align: center">
+        <div style="display:flex;flex-direction:column;gap:36px">
+          <p class="t-body" data-a style="--i:0">Engineering couldn't build the full assistant in time. The team's first instinct, a fair one, was a smaller version of it.</p>
+          <p class="t-stmt claim" data-a style="--i:1"><span>I pushed back.</span>A smaller chatbot is just a worse chatbot.</p>
         </div>
+        <table class="cmp" aria-label="Smaller chatbot compared with the guided Recommender">
+          <thead>
+            <tr data-a style="--i:3"><th scope="col"><span class="sr">Question</span></th><th scope="col">Smaller chatbot</th><th scope="col" class="rec">Guided Recommender</th></tr>
+          </thead>
+          <tbody>
+            <tr data-a style="--i:4"><td>Designing the conversation</td><td class="chat">Still needed in full</td><td class="rec mark">A few fixed questions</td></tr>
+            <tr data-a style="--i:5"><td>Recommending playbooks that don't exist</td><td class="chat">Still possible</td><td class="rec mark">Not possible</td></tr>
+            <tr data-a style="--i:6"><td>Describing the problem</td><td class="chat">People have to type it</td><td class="rec mark">People pick from options</td></tr>
+            <tr data-a style="--i:7"><td>Shows whether guidance helps</td><td class="chat">Not clearly</td><td class="rec mark">Yes</td></tr>
+          </tbody>
+        </table>
       </div>
-      <aside class="notes">Engineering couldn't build the full assistant in the time we needed. The team's first instinct was a smaller chatbot, and that was a fair instinct. I pushed back, because a smaller chatbot is just a worse chatbot. We'd still have to design the whole conversation, it could still recommend playbooks that don't exist, people would still have to type a problem they couldn't put into words, and it wouldn't clearly tell us whether guidance helps. So I changed the question from "what's the smallest assistant we can build?" to "what's the one job that matters most right now?". The answer every time was finding the right playbook.</aside>
+      <aside class="notes">Engineering couldn't build the full assistant in the time we needed. The team's first instinct was a smaller chatbot, and that was a fair instinct. I pushed back, because a smaller chatbot is just a worse chatbot. We'd still have to design the whole conversation. It could still recommend playbooks that don't exist. People would still have to type a problem they couldn't put into words. And it wouldn't clearly tell us whether guidance helps. A few fixed questions solve all four.</aside>
     </section>
 
-    <!-- 7 · Making the case -->
-    <section class="slide s-case" data-num="7" aria-label="Making the case">
-      <div class="hd">
-        <p class="t-label" data-a style="--i:0">Making the case</p>
-        <h2 class="t-h2" data-a style="--i:1">I took the prototype and my research to our CEO and Head of Product.</h2>
+    <!-- 7 · The new question and the decision -->
+    <section class="slide" data-num="7" data-ch="Decision" aria-label="The new question and the decision">
+      <div class="swap">
+        <p class="t-label" data-a style="--i:0">So I changed the question</p>
+        <p class="q-old" data-a style="--i:1"><s>What's the smallest assistant we can build?</s></p>
+        <h2 class="t-stmt" data-a style="--i:3">What's the one job that matters most right now?</h2>
+        <p class="t-lead ink" data-a style="--i:4">Every time, the answer was finding the right playbook.</p>
       </div>
-      <div class="body">
-        <div class="left">
-          <p class="t-body" data-a style="--i:2">Our Head of Product was keen on the assistant. On a call, I showed them the working prototype and my research. Every group we spoke to needed the same thing, help choosing where to start.</p>
-          <div class="pushback" data-a style="--i:3">
-            <p class="t-label">The pushback</p>
-            <p class="t-lead">Customers were asking for AI, and a set of guided questions could look like we were falling behind.</p>
-          </div>
-        </div>
-        <div class="answer-block" data-a style="--i:5">
-          <p class="t-label on">My answer</p>
-          <p>I wasn't against AI. The platform will need it. But choosing a playbook comes first. <b>If people get stuck there, they'll leave before they ever see an AI feature.</b> Fix that first, and every AI feature we add later reaches people who are already getting value.</p>
-        </div>
+      <div class="case3">
+        <div data-a style="--i:6"><span class="t-label">Made the case to</span><p class="t-small ink">Our CEO and Head of Product, with the working prototype and my research.</p></div>
+        <div data-a style="--i:7"><span class="t-label">The pushback</span><p class="t-small">Customers wanted AI. Guided questions could look like falling behind.</p></div>
+        <div data-a style="--i:8"><span class="t-label on">My answer</span><p class="t-small ink">If people get stuck choosing, they'll leave before they ever see an AI feature.</p></div>
       </div>
       <div class="decision">
-        <span class="bar" data-draw style="--base:1100ms"></span>
-        <p class="t-label on" data-a style="--i:8">Decision</p>
-        <p class="t-h1" data-a style="--i:9">Ship the Recommender first. The assistant comes next.</p>
+        <span class="bar" data-draw style="--base:1300ms"></span>
+        <span class="t-label on" data-a style="--i:10">Decision</span>
+        <p class="t-h3" data-a style="--i:11">Ship the Recommender first. The assistant comes next.</p>
       </div>
-      <aside class="notes">I needed to convince our CEO and our Head of Product, who was keen on the assistant. On a call, I showed them the working prototype and my research. Every group we spoke to had the same need, help choosing where to start. The pushback was that customers were asking for AI, and guided questions could look like we were falling behind. My answer was that I wasn't against AI, and the platform will need it, but choosing a playbook comes first. If people get stuck there, they'll leave before they ever see an AI feature. Fix that first, and every AI feature we add later reaches people who are already getting value. The decision was to ship the Recommender first, with the assistant next.</aside>
+      <aside class="notes">So I changed the question. Of everything the assistant could do, one job came first every time, and that was finding the right playbook. It's where every new project starts, and where people kept getting stuck. I needed to convince our CEO and our Head of Product, who was keen on the assistant. On a call, I showed them the working prototype and my research. Every group we spoke to had the same need, help choosing where to start. The pushback was that customers were asking for AI, and guided questions could look like we were falling behind. My answer was that I wasn't against AI, and the platform will need it, but choosing a playbook comes first. If people get stuck there, they'll leave before they ever see an AI feature. Fix that first, and every AI feature we add later reaches people who are already getting value. The decision was to ship the Recommender first, with the assistant next.</aside>
     </section>
 
     <!-- 8 · The trade-off -->
-    <section class="slide s-trade" data-num="8" aria-label="The trade-off">
-      <div class="hd">
-        <p class="t-label" data-a style="--i:0">The trade-off</p>
-        <h2 class="t-h2" data-a style="--i:1">It was a trade-off, and I made it knowingly.</h2>
-      </div>
-      <div class="ledger">
-        <div data-a style="--i:2">
-          <p class="t-label on mark">What it bought us</p>
-          <ul>
-            <li><b>Only real playbooks</b><span class="t-small">It can only recommend playbooks that exist.</span></li>
-            <li><b>Honest when nothing fits</b><span class="t-small">It says so instead of guessing.</span></li>
-            <li><b>Faster than typing</b><span class="t-small">Three taps instead of explaining a problem you can't yet put into words.</span></li>
-            <li><b>Less risk</b><span class="t-small">It proved guidance helps before we invested in the full assistant.</span></li>
+    <section class="slide ledger" data-num="8" data-ch="Decision" aria-label="The trade-off">
+      <div class="hd"><h2 class="t-h" data-a style="--i:0">A trade-off, made knowingly.</h2></div>
+      <div class="split" style="--cols: 1fr 1fr; flex: 0">
+        <div data-a style="--i:1">
+          <span class="t-label on mark">What it bought us</span>
+          <ul class="rows">
+            <li><span class="t-h3">Only real playbooks</span></li>
+            <li><span class="t-h3">Honest when nothing fits</span></li>
+            <li><span class="t-h3">Three taps instead of typing</span></li>
+            <li><span class="t-h3">Proof that guidance helps, first</span></li>
           </ul>
         </div>
-        <div class="cost" data-a style="--i:4">
-          <p class="t-label">What it cost · moved to a later release</p>
-          <ul>
-            <li><b>The full assistant</b></li>
-            <li><b>Help on the canvas</b><span class="t-small">which our coaches had asked for</span></li>
-            <li><b>The chat panel</b></li>
-            <li><b>The onboarding tour</b></li>
+        <div class="cost" data-a style="--i:3">
+          <span class="t-label">What it cost · moved to a later release</span>
+          <ul class="rows">
+            <li><span class="t-h3">The full assistant</span></li>
+            <li><span class="t-h3">Help on the canvas</span></li>
+            <li><span class="t-h3">The chat panel</span></li>
+            <li><span class="t-h3">The onboarding tour</span></li>
           </ul>
         </div>
       </div>
-      <p class="t-lead ink closing-note" data-a style="--i:6">That was hard to let go of. I'd rather ship one job done well than several half-done.</p>
-      <aside class="notes">It was a trade-off, and I made it knowingly. It bought us four things. It can only recommend playbooks that exist. It's honest when nothing fits. It takes three taps instead of explaining a problem you can't yet put into words. And it lowered the risk, because it proved guidance helps before we invested in the full assistant. It cost us the full assistant, help on the canvas that our coaches had asked for, the chat panel and the onboarding tour, all moved to a later release. That was hard to let go of, but I'd rather ship one job done well than several half-done.</aside>
+      <p class="t-lead ink closing-note" data-a style="--i:5">I'd rather ship one job done well than several half-done.</p>
+      <aside class="notes">It was a trade-off, and I made it knowingly. It bought us four things. It can only recommend playbooks that exist. It's honest when nothing fits, and says so instead of guessing. It takes three taps instead of explaining a problem you can't yet put into words. And it proved guidance helps before we invested in the full assistant. It cost us the full assistant, help on the canvas, which our coaches had asked for, the chat panel and the onboarding tour, all moved to a later release. That was hard to let go of. I'd rather ship one job done well than several half-done.</aside>
     </section>
 
     <!-- 9 · The form -->
-    <section class="slide s-form" data-num="9" aria-label="Designing the form">
-      <div class="hd">
-        <p class="t-label" data-a style="--i:0">Designing the Recommender · the form</p>
-        <h2 class="t-h2" data-a style="--i:1">A small panel people come back to.</h2>
-      </div>
-      <div class="body">
-        <div class="decisions">
-          <div data-a style="--i:2"><span class="k">1</span><b>A small panel in the corner</b><p class="t-small">I tried three shapes. A pop-up covered the library, and a tall side panel looked like a chat that wasn't there. The corner panel kept the page usable.</p></div>
-          <div data-a style="--i:3"><span class="k">2</span><b>Answers shrink as you go</b><p class="t-small">Borrowed from Asana's AI menu. Each answer shrinks to a short message, so the panel stays short.</p></div>
-          <div data-a style="--i:4"><span class="k">3</span><b>Built to return to</b><p class="t-small">I dropped the tour-style version I explored first. People come back to this whenever they're stuck.</p></div>
+    <section class="slide" data-num="9" data-ch="Design" aria-label="The panel">
+      <div class="hd"><h2 class="t-h" data-a style="--i:0">A small panel in the corner, built to come back to.</h2></div>
+      <div class="split" style="--cols: 1fr 500px">
+        <div>
+          <p class="t-label" data-a style="--i:1">Three shapes, tried as working flows</p>
+          <div class="shapes" data-a style="--i:2" aria-label="The three panel shapes tried">
+            <div class="shape"><div class="pg"><i class="pn" style="left:28%;top:22%;width:44%;height:56%"></i></div><b>Pop-up in the middle</b><span class="t-small">Covered the library</span></div>
+            <div class="shape"><div class="pg"><i class="pn" style="right:6%;top:8%;width:26%;height:84%"></i></div><b>Tall side panel</b><span class="t-small">Looked like a chat that wasn't there</span></div>
+            <div class="shape win"><div class="pg"><i class="pn" style="right:6%;bottom:8%;width:28%;height:46%"></i></div><b>Small corner panel</b><span class="t-small ink">Kept the page usable</span></div>
+          </div>
+          <ul class="rows form-notes" data-a style="--i:4">
+            <li class="t-body ink">Answers shrink as you go, so the panel stays short.</li>
+            <li class="t-body ink">No tour. People return whenever they're stuck.</li>
+          </ul>
         </div>
         <figure class="fig" data-reveal style="--base:500ms">
           <div class="media" style="aspect-ratio: 980 / 1282"><video class="vid" muted loop playsinline preload="none" poster="media/finder-flow-v2-poster.webp" aria-label="Three questions to a recommendation in the shipped panel."><source src="media/finder-flow-v2.mp4" type="video/mp4"><source src="media/finder-flow-v2.webm" type="video/webm"></video></div>
-          <figcaption class="t-cap"><span class="ink">Shipped.</span> Three questions to a recommendation, recorded in the working prototype.</figcaption>
+          <figcaption class="t-cap">Shipped. Three questions to a recommendation.</figcaption>
         </figure>
-        <div class="fig" data-a style="--i:6">
-          <div class="media" style="aspect-ratio: 1294 / 1054"><img src="media/onboarding-explored.webp" alt="The tour-style version explored first, with a progress bar and a big welcome panel."></div>
-          <p class="t-cap"><span class="ink">Explored first.</span> The tour-style version, with its progress bar and big welcome screen.</p>
-          <div class="shapes" aria-label="The three panel shapes tried">
-            <div class="shape"><div class="pg"><i class="pn" style="left:28%;top:22%;width:44%;height:56%"></i></div><span>Pop-up in the middle</span></div>
-            <div class="shape"><div class="pg"><i class="pn" style="right:6%;top:8%;width:26%;height:84%"></i></div><span>Tall side panel</span></div>
-            <div class="shape win"><div class="pg"><i class="pn" style="right:6%;bottom:8%;width:28%;height:46%"></i></div><span>Small corner panel</span></div>
-          </div>
-        </div>
       </div>
-      <aside class="notes">Three decisions about the form. First, a small panel in the corner. I tried three shapes as working flows. A pop-up in the middle covered the library people were choosing from, and a tall side panel looked like a chat that wasn't there. The corner panel was easy to find and kept the page usable. Second, answers shrink as you go, borrowed from Asana's AI menu, so the panel stays short and easy to read. Third, I dropped the tour-style version I first built, with its progress bar and big welcome screen, because people return to this whenever they're stuck. It's a tool, used again and again.</aside>
+      <aside class="notes">I tried three shapes as working flows. A pop-up in the middle of the screen covered the library people were choosing from. A tall side panel looked like a chat that wasn't there. A small panel in the corner won, because it was easy to find and the page stayed usable behind it. Answers shrink as you go, a pattern borrowed from Asana's AI menu. Once you pick an answer, it shrinks to a short message and the next question appears below, so the panel stays short and easy to read. I also dropped the tour-style version I explored first, with its progress bar and big welcome screen. This is a tool people return to whenever they're stuck, so it shouldn't feel like a one-time tour.</aside>
     </section>
 
     <!-- 10 · The logic -->
-    <section class="slide s-logic" data-num="10" aria-label="The logic">
-      <div class="hd">
-        <p class="t-label" data-a style="--i:0">Designing the Recommender · the logic</p>
-        <h2 class="t-h2" data-a style="--i:1">The questions come from research, mapped by hand.</h2>
-      </div>
+    <section class="slide" data-num="10" data-ch="Design" aria-label="The question map">
+      <div class="hd"><h2 class="t-h" data-a style="--i:0">A question map, built by hand from customer research.</h2></div>
       <div class="map">
-        <div class="m" data-a style="--i:2"><span class="t-num n" data-from="0" data-to="5" data-suffix="" data-delay="600" data-dur="500">5</span><span class="t-label">Problem areas</span></div>
-        <span class="arr" data-a style="--i:3" aria-hidden="true">→</span>
-        <div class="m" data-a style="--i:4"><span class="t-num n" data-from="0" data-to="17" data-suffix="" data-delay="750" data-dur="700">17</span><span class="t-label">Goals</span></div>
-        <span class="arr" data-a style="--i:5" aria-hidden="true">→</span>
-        <div class="m" data-a style="--i:6"><span class="t-num n" data-from="0" data-to="45" data-suffix="" data-delay="900" data-dur="900">45</span><span class="t-label">Paths</span></div>
-        <span class="arr" data-a style="--i:7" aria-hidden="true">→</span>
-        <div class="m" data-a style="--i:8"><span class="t-num n" data-from="0" data-to="19" data-suffix="" data-delay="1050" data-dur="700">19</span><span class="t-label on">Playbooks</span></div>
+        <div class="m" data-a style="--i:1"><span class="t-xl n" data-from="0" data-to="5" data-suffix="" data-delay="600" data-dur="500">5</span><span class="t-label">Problem areas</span></div>
+        <span class="arr" data-a style="--i:2" aria-hidden="true">→</span>
+        <div class="m" data-a style="--i:3"><span class="t-xl n" data-from="0" data-to="17" data-suffix="" data-delay="750" data-dur="700">17</span><span class="t-label">Goals</span></div>
+        <span class="arr" data-a style="--i:4" aria-hidden="true">→</span>
+        <div class="m" data-a style="--i:5"><span class="t-xl n" data-from="0" data-to="45" data-suffix="" data-delay="900" data-dur="900">45</span><span class="t-label">Paths</span></div>
+        <span class="arr" data-a style="--i:6" aria-hidden="true">→</span>
+        <div class="m" data-a style="--i:7"><span class="t-xl n" data-from="0" data-to="19" data-suffix="" data-delay="1050" data-dur="700">19</span><span class="t-label on">Playbooks</span></div>
       </div>
-      <div class="lower">
-        <div class="txt">
-          <div data-a style="--i:9"><span class="k">4</span><b>Written down, so we can trust it and fix it</b><p class="t-small">I built the map in two days from how customers described their situations. It isn't generated by AI, so when a path is wrong we can see it and correct it.</p></div>
-          <div data-a style="--i:10"><span class="k">5</span><b>Questions anyone can answer</b><p class="t-small">Question one asks what you're working on in everyday words, for founders new to Strategyzer. Question three only appears when it changes the answer, so people with work done can skip ahead.</p></div>
+      <div class="split" style="--cols: 1fr 1fr">
+        <ul class="rows" data-a style="--i:8">
+          <li class="t-body ink">Written down, so we can trust it and fix it when it's wrong.</li>
+          <li class="t-body ink">Question three only appears when it changes the answer.</li>
+        </ul>
+        <div class="callout" data-a style="--i:10">
+          <span class="t-label on">It also found a gap</span>
+          <p class="t-body ink">No playbook helped people test whether customers want their offer. The playbook team started on one straight away.</p>
         </div>
-        <figure class="fig" data-reveal style="--base:700ms">
-          <div class="media top" style="aspect-ratio: 2000 / 944"><img src="media/tree-sheet-v2.webp" alt="The working spreadsheet: every question, its answers and the playbook each path leads to."></div>
-          <figcaption class="t-cap"><span class="ink">The working file.</span> Every path mapped by hand.</figcaption>
-        </figure>
       </div>
-      <aside class="notes">Behind the questions is a map I built in two days from how customers described their situations. It has 5 problem areas, 17 goals and 45 paths, leading to 19 playbooks. Because it's written down and not generated by AI, we can trust it and fix it when it's wrong. The questions are ones anyone can answer. Question one asks what you're working on in everyday words, so founders new to Strategyzer can answer it. Question three, "where are you now?", only appears when it changes the answer, so people with work already done can skip ahead.</aside>
+      <aside class="notes">Behind the questions is a map I built in two days from how customers described their situations. It has 5 problem areas, 17 goals and 45 paths, leading to 19 playbooks. Every path is mapped by hand in a working file, with each question, its answers and the playbook it leads to. Because it's written down and not generated by AI, we can trust it and fix it when it's wrong. The questions use everyday words, so founders new to Strategyzer can answer them. Question three, "where are you now?", only appears when it changes the answer, so people with work already done can skip ahead. Mapping every need also showed a gap. Nothing helped people test whether customers want their offer, which many customers came to us needing. The Recommender says so instead of guessing, and the team that writes playbooks started on one straight away.</aside>
     </section>
 
-    <!-- 11 · Details that build trust -->
-    <section class="slide s-trust" data-num="11" aria-label="Details that build trust">
-      <div class="hd">
-        <p class="t-label" data-a style="--i:0">Designing the Recommender · decision 6</p>
-        <h2 class="t-h2" data-a style="--i:1">Four small details that build trust.</h2>
-      </div>
-      <div class="clips">
-        <div class="clip" data-a style="--i:2">
-          <div class="media top" style="aspect-ratio: 360 / 470"><video class="vid" muted loop playsinline preload="none" poster="media/panel-fixed-poster.webp" aria-label="The shipped panel keeps one height as answers change."><source src="media/panel-fixed.mp4" type="video/mp4"><source src="media/panel-fixed.webm" type="video/webm"></video></div>
-          <div class="cap"><b>The panel stays the same size</b><span class="t-small">It keeps one height, and the content scrolls inside. Early versions jumped with every answer.</span></div>
-        </div>
-        <div class="clip" data-a style="--i:3">
-          <div class="media top" style="aspect-ratio: 360 / 470"><video class="vid" muted loop playsinline preload="none" poster="media/edit-answer-poster.webp" aria-label="Hovering an earlier answer and clicking Edit."><source src="media/edit-answer.mp4" type="video/mp4"><source src="media/edit-answer.webm" type="video/webm"></video></div>
-          <div class="cap"><b>Change an answer without starting over</b><span class="t-small">Click any earlier answer to edit it.</span></div>
-        </div>
-        <div class="clip" data-a style="--i:4">
-          <div class="media top" style="aspect-ratio: 360 / 470"><video class="vid" muted loop playsinline preload="none" poster="media/own-words-poster.webp" aria-label="Choosing Something else and typing a situation in your own words."><source src="media/own-words.mp4" type="video/mp4"><source src="media/own-words.webm" type="video/webm"></video></div>
-          <div class="cap"><b>AI for everything else</b><span class="t-small">Pick "Something else" and type your situation. AI finds the closest playbooks from the same map, so it only suggests real ones.</span></div>
-        </div>
-        <div class="clip alt" data-a style="--i:5">
-          <div class="media top" style="aspect-ratio: 360 / 470"><video class="vid" muted loop playsinline preload="none" poster="media/no-match-poster.webp" aria-label="The message people see when no playbook fits."><source src="media/no-match.mp4" type="video/mp4"><source src="media/no-match.webm" type="video/webm"></video></div>
-          <div class="cap"><b>Honest when nothing fits</b><span class="t-small">It says so and shows the closest options side by side. The hardest call in the project.</span></div>
+    <!-- 11 · Trust -->
+    <section class="slide" data-num="11" data-ch="Design" aria-label="When nothing fits">
+      <div class="split" style="--cols: 600px 1fr; --gap: 96px">
+        <figure class="fig" data-reveal style="--base:400ms">
+          <div class="media top" style="aspect-ratio: 986 / 1288; max-height: 790px"><video class="vid" muted loop playsinline preload="none" poster="media/no-match-poster.webp" aria-label="The message people see when no playbook fits."><source src="media/no-match.mp4" type="video/mp4"><source src="media/no-match.webm" type="video/webm"></video></div>
+        </figure>
+        <div>
+          <div class="hd" style="margin-bottom:40px">
+            <h2 class="t-h" data-a style="--i:0">When nothing fits, it says so.</h2>
+            <p class="t-lead" data-a style="--i:1">It shows the closest options instead of guessing. The hardest call in the project.</p>
+          </div>
+          <p class="t-label" data-a style="--i:3">Three more details that build trust</p>
+          <div class="details">
+            <div class="detail" data-a style="--i:4"><div class="media top" style="aspect-ratio: 1020 / 1100"><img src="media/panel-fixed-poster.webp" alt=""></div><div><b>The panel stays the same size</b><span class="t-small">No jumping as answers change.</span></div></div>
+            <div class="detail" data-a style="--i:5"><div class="media top" style="aspect-ratio: 1020 / 1100"><img src="media/edit-answer-poster.webp" alt=""></div><div><b>Change an answer without starting over</b><span class="t-small">Click any earlier answer to edit it.</span></div></div>
+            <div class="detail" data-a style="--i:6"><div class="media top" style="aspect-ratio: 1020 / 1100"><img src="media/own-words-poster.webp" alt=""></div><div><b>"Something else" in your own words</b><span class="t-small">AI finds the closest real playbooks.</span></div></div>
+          </div>
         </div>
       </div>
-      <aside class="notes">Small details decided whether people trusted it. The panel stays the same size. Early versions grew and shrank with every answer, which felt jumpy, so now it keeps one height and the content scrolls inside. You can change an answer without starting over. If none of the options fit, people pick "Something else" and type their situation, and AI finds the closest playbooks from the same map, so it only suggests real ones and explains its pick in plain language. And when there's no good match, it says so and shows the closest options side by side instead of pretending one is right. That was the hardest call in the project. There's also no fake thinking. Questions appear instantly, with a short pause only before the recommendation.</aside>
+      <aside class="notes">The hardest call in the project was what to do when nothing fits. When there's no good match, the Recommender says so and shows the closest options side by side, instead of pretending one is right. Three smaller details build trust too. The panel keeps one height, because early versions grew and shrank with every answer and felt jumpy. You can click any earlier answer to edit it without starting over. And if none of the options fit, people pick "Something else" and type their situation. AI reads it and finds the closest playbooks from the same map, so it only suggests real ones, and it explains its pick in plain language. There's no fake thinking either. Questions appear instantly, with a short pause only before the recommendation.</aside>
     </section>
 
     <!-- 12 · From stuck to started -->
-    <section class="slide s-started" data-num="12" aria-label="From stuck to started">
-      <div class="hd">
-        <p class="t-label" data-a style="--i:0">From recommendation to work</p>
-        <h2 class="t-h2" data-a style="--i:1">From stuck to started in about fifteen seconds.</h2>
-      </div>
-      <div class="strip" data-a style="--i:2" aria-label="Stuck, question 1, question 2, question 3, started">
-        <span class="track"><i></i></span>
-        <div class="st"><span class="t-label">Stuck</span></div>
-        <div class="st"><span class="t-label">Question 1</span></div>
-        <div class="st"><span class="t-label">Question 2</span></div>
-        <div class="st"><span class="t-label">Question 3</span></div>
-        <div class="st end"><span class="t-label on">Started</span></div>
-      </div>
-      <div class="duo">
-        <figure class="fig" data-reveal style="--base:600ms">
-          <div class="media" style="aspect-ratio: 2000 / 1186"><video class="vid" muted loop playsinline preload="none" poster="media/lib-filter-poster.webp" aria-label="The Playbook Library filtering to the recommended playbooks."><source src="media/lib-filter.mp4" type="video/mp4"><source src="media/lib-filter.webm" type="video/webm"></video></div>
-          <figcaption class="t-cap"><span class="ink">In the library,</span> the results filter what's shown to the recommended playbooks.</figcaption>
-        </figure>
-        <figure class="fig" data-reveal style="--base:800ms">
+    <section class="slide" data-num="12" data-ch="Design" aria-label="From stuck to started">
+      <div class="split" style="--cols: 560px 1fr; --align: center">
+        <div>
+          <p class="t-label" data-a style="--i:0">From stuck to started</p>
+          <div class="stat" data-a style="--i:1; margin-top:18px"><span class="pre">about</span><span class="t-xl n" data-from="0" data-to="15" data-suffix="" data-delay="600" data-dur="900">15</span></div>
+          <p class="t-lead ink" data-a style="--i:2; margin-top:10px">seconds</p>
+          <ol class="vstrip" data-a style="--i:3">
+            <span class="track"><i></i></span>
+            <li class="t-label">Stuck</li>
+            <li class="t-label">Question 1</li>
+            <li class="t-label">Question 2</li>
+            <li class="t-label">Question 3</li>
+            <li class="t-label on end">Started</li>
+          </ol>
+        </div>
+        <figure class="fig" data-reveal style="--base:550ms">
           <div class="media" style="aspect-ratio: 2000 / 1186"><video class="vid" muted loop playsinline preload="none" poster="media/add-run-poster.webp" aria-label="Clicking Add to this project, and the playbook appears in the project."><source src="media/add-run.mp4" type="video/mp4"><source src="media/add-run.webm" type="video/webm"></video></div>
-          <figcaption class="t-cap"><span class="ink">Inside a project,</span> one click on Add to this project adds the playbook and starts it.</figcaption>
+          <figcaption class="t-cap">One click on Add to this project, and the playbook starts.</figcaption>
         </figure>
       </div>
-      <aside class="notes">A recommendation is only useful if people act on it. In the library, the results filter what's shown to the recommended playbooks. Inside a project, one click on "Add to this project" adds the playbook and starts it. From stuck to started takes about fifteen seconds, and that's the whole point of the project.</aside>
+      <aside class="notes">A recommendation is only useful if people act on it. Inside a project, one click on "Add to this project" adds the playbook and starts it. In the library, the results filter what's shown to the recommended playbooks. From stuck to started takes about fifteen seconds, and that's the whole point of the project.</aside>
     </section>
 
     <!-- 13 · Tested and built in code -->
-    <section class="slide s-built" data-num="13" data-foot="About six weeks in total. Blue marks what I built in code with Claude." aria-label="Tested and built in code">
-      <div class="hd">
-        <p class="t-label" data-a style="--i:0">Tested and built in code</p>
-        <h2 class="t-h2" data-a style="--i:1">Tested on the real thing, shipped as it was.</h2>
-      </div>
-      <div class="body">
+    <section class="slide" data-num="13" data-ch="Design" aria-label="Tested and built in code">
+      <div class="hd"><h2 class="t-h" data-a style="--i:0">Tested on the real product, shipped as it was.</h2></div>
+      <div class="split" style="--cols: 1000px 1fr; --gap: 80px">
         <figure class="fig" data-reveal style="--base:450ms">
           <div class="media" style="aspect-ratio: 2000 / 1252; background:#111"><video class="vid" muted loop playsinline preload="none" poster="media/in-claude-poster.webp" aria-label="Olaide's conversation with Claude beside the working front end."><source src="media/in-claude.mp4" type="video/mp4"><source src="media/in-claude.webm" type="video/webm"></video></div>
-          <figcaption class="t-cap"><span class="ink">My conversation with Claude</span> on the left, the working front end on the right.</figcaption>
+          <figcaption class="t-cap">My conversation with Claude on the left, the working front end on the right.</figcaption>
         </figure>
-        <div class="right">
-          <div data-a style="--i:3">
+        <div style="display:flex;flex-direction:column;gap:34px">
+          <div data-a style="--i:2">
             <div class="stat"><span class="pre">about</span><span class="t-num n" data-from="0" data-to="24" data-suffix="" data-delay="800" data-dur="900">24</span></div>
-            <p class="t-small ink">test sessions with coaches, customer teams and customers, about 8 each</p>
+            <p class="t-small ink" style="margin-top:8px">test sessions with coaches, customer teams and customers</p>
           </div>
-          <div data-a style="--i:4">
-            <p class="t-label">Biggest change</p>
-            <p class="t-small">I rewrote the questions so they were easier to understand, and so no one worried about picking the wrong answer.</p>
+          <div class="who rows" data-a style="--i:3">
+            <div><span class="t-label on">Me</span><span class="t-small">The front end, built in code with Claude</span></div>
+            <div><span class="t-label">Our engineer</span><span class="t-small">Data, tracking and the platform connection</span></div>
           </div>
-          <div class="who" data-a style="--i:5">
-            <div><span class="t-label on">Me</span><span class="t-small">The front end, designed and built in code with Claude on FondUI. It's the code customers use today.</span></div>
-            <div><span class="t-label">Our engineer</span><span class="t-small">Everything behind it. Data, tracking and connecting it to the rest of the platform.</span></div>
-          </div>
+          <div class="callout" data-a style="--i:5"><p class="t-h3">The team now works at least twice as fast.</p></div>
         </div>
       </div>
-      <div class="timeline" data-a style="--i:7">
-        <div><i></i><span>Research · 1–2 weeks</span></div>
-        <div class="c"><i></i><span>Assistant prototype · days</span></div>
-        <div><i></i><span>Question map · 2 days</span></div>
-        <div class="c"><i></i><span>Recommender built, tested, refined · 3 weeks</span></div>
-        <div><i></i><span>Launch · about 1½ weeks</span></div>
-      </div>
-      <aside class="notes">Because I built it in code, people used the real thing instead of reacting to pictures of it. About 24 sessions with coaches, customer teams and customers, about eight each. The biggest change was rewriting the questions so they were easier to understand, and so no one worried about picking the wrong answer. I designed this in code, not Figma. I built the front end myself with Claude on FondUI, and that code went straight into the product. Our engineer built everything behind it, which means data, tracking and connecting it to the rest of the platform. Automated tests clicked through every step and caught things that looked right but didn't work. About six weeks in total.</aside>
+      <aside class="notes">Because I built it in code, people used the real thing instead of reacting to pictures of it. We ran about 24 sessions with coaches, customer teams and customers, about eight each. The biggest change was rewriting the questions so they were easier to understand, and so no one worried about picking the wrong answer. I designed this in code, not Figma. I built the front end myself with Claude on FondUI, and that code went straight into the product with no handover and no rebuild. Our engineer built everything behind it, which means data, tracking and connecting it to the rest of the platform. Automated tests clicked through every step and caught things that looked right but didn't work. Research took one to two weeks, the assistant prototype a few days, the question map two days, the Recommender three weeks to build, test and refine, and launch about a week and a half. About six weeks in total. The team now works at least twice as fast.</aside>
     </section>
 
     <!-- 14 · Results -->
-    <section class="slide s-results" data-num="14" data-foot="How we measured: product data for getting started and coming back, customer surveys and feedback for satisfaction" aria-label="Results">
-      <div class="head">
-        <div>
-          <p class="t-label" data-a style="--i:0">Results</p>
-          <h2 class="t-h2" data-a style="--i:1">Fixing the first step moved every number that mattered.</h2>
-          <p class="t-body" data-a style="--i:2">Four months of data, comparing the months before and after launch.</p>
-        </div>
-        <div class="quote-slot" data-a style="--i:3">
-          <span class="t-label">Quote to come</span>
-          <span class="ph">A customer or stakeholder on the Recommender, in their exact words.</span>
-        </div>
+    <section class="slide" data-num="14" data-ch="Impact" data-foot="How we measured: product data for getting started and coming back, customer surveys and feedback for satisfaction" aria-label="Results">
+      <div class="hd">
+        <h2 class="t-h" data-a style="--i:0">Fixing the first step moved every number that mattered.</h2>
+        <p class="t-body" data-a style="--i:1">Four months of data, before and after launch.</p>
       </div>
       <div class="metrics">
-        <div class="metric" data-a style="--i:4">
+        <div class="metric" data-a style="--i:3">
           <span class="t-label">Getting started</span>
           <div class="cells" data-before="57" data-after="85" aria-hidden="true"></div>
           <div class="num"><span class="t-num n" data-from="57" data-to="85">85%</span></div>
           <p class="was">was <b>57%</b></p>
           <p class="t-small">of new customers start a project and a playbook</p>
         </div>
-        <div class="metric" data-a style="--i:5">
+        <div class="metric" data-a style="--i:4">
           <span class="t-label">Satisfaction</span>
           <div class="cells" data-before="68" data-after="95" aria-hidden="true"></div>
           <div class="num"><span class="t-num n" data-from="68" data-to="95">95%</span></div>
           <p class="was">was <b>68%</b></p>
-          <p class="t-small">from customer surveys and our customer success team</p>
+          <p class="t-small">from surveys and our customer success team</p>
         </div>
-        <div class="metric" data-a style="--i:6">
+        <div class="metric" data-a style="--i:5">
           <span class="t-label">Coming back · 4×</span>
           <div class="cells" data-before="10" data-after="40" aria-hidden="true"></div>
           <div class="num"><span class="t-num n" data-from="10" data-to="40">40%</span></div>
           <p class="was">was <b>about 10%</b></p>
-          <p class="t-small">return within 30 days of signing up. Most come back weekly.</p>
+          <p class="t-small">return within 30 days, most of them weekly</p>
         </div>
-        <div class="metric" data-a style="--i:7">
+        <div class="metric" data-a style="--i:6">
           <span class="t-label">Cancelled, then returned</span>
           <div class="cells" data-before="0" data-after="18" aria-hidden="true"></div>
           <div class="num"><span class="pre">about</span><span class="t-num n" data-from="0" data-to="18">18%</span></div>
@@ -843,35 +713,18 @@ body {
       <aside class="notes">We measured over four months, comparing the months before and after launch. Product data for getting started and coming back, customer surveys and the customer success team for satisfaction. New customers starting a project and a playbook went from 57% to 85%. Satisfaction went from 68% to 95%. People returning within 30 days went from about 10% to 40%, four times as many, and most come back weekly. That's the one that says the most about the design. With the right playbook from the start, people had a reason to return. And about 18% of customers who had cancelled came back to try the Recommender within two weeks of the release email. These results belong to the product and the team.</aside>
     </section>
 
-    <!-- 15 · Beyond the numbers, what's next -->
-    <section class="slide s-beyond" data-num="15" data-foot="olaide.design" aria-label="Beyond the numbers and what's next">
-      <div class="hd" style="margin-bottom:40px">
-        <p class="t-label" data-a style="--i:0">Beyond the numbers</p>
+    <!-- 15 · What's next -->
+    <section class="slide" data-num="15" data-ch="Impact" data-foot="olaide.design" aria-label="What's next">
+      <div class="hd" style="max-width:1200px">
+        <h2 class="t-h" data-a style="--i:0">Next, the full assistant.</h2>
+        <p class="t-lead" data-a style="--i:1">I've recommended building Strattie AI to help at every step after the first. It's on the roadmap for next year, and it can reuse the question map.</p>
       </div>
-      <div class="cards2">
-        <div class="card" data-a style="--i:1">
-          <p class="t-label">How we work</p>
-          <h3 class="t-h3">From design to live in days.</h3>
-          <p class="t-small">What I built with Claude went live as it was. Our engineer connected it to the data behind it instead of rebuilding it from designs. The team now works at least twice as fast.</p>
-          <div class="chips" aria-label="A usual handover compared with this project">
-            <div class="r"><span>Usual</span><span class="chip">Mockups</span><span class="sep">→</span><span class="chip">Spec</span><span class="sep">→</span><span class="chip">UI rebuild</span><span class="sep">→</span><span class="chip">Design QA</span><span class="sep">→</span><span class="chip">Fixes</span><span class="sep">→</span><span class="chip">Live</span></div>
-            <div class="r"><span>This project</span><span class="chip on">Built in code</span><span class="sep">→</span><span class="chip on">Back end</span><span class="sep">→</span><span class="chip live">Live</span></div>
-          </div>
-        </div>
-        <div class="card" data-a style="--i:2">
-          <p class="t-label">Product strategy</p>
-          <h3 class="t-h3">The research found a missing playbook.</h3>
-          <p class="t-small">Mapping every customer need to a playbook showed a gap. Nothing helped people test whether customers want their offer, something many customers came to us needing. The Recommender says so instead of guessing, and the team that writes playbooks started on one straight away.</p>
-        </div>
+      <div class="journey" data-a style="--i:2" aria-label="The Recommender covers the first step; Strattie AI would cover the rest">
+        <div class="now"><i></i><span class="t-label on">First step · Recommender, live</span></div>
+        <div class="later"><i></i><span class="t-label">Every step after · Strattie AI, on the roadmap</span></div>
       </div>
-      <div class="next">
-        <div class="l" data-a style="--i:4">
-          <p class="t-label on mark">What's next</p>
-          <p class="t-small">I've recommended building Strattie AI, the assistant I prototyped at the start, to help at every step after the first. It's on the roadmap for the next year, and it can reuse the question map.</p>
-        </div>
-        <p class="t-h1" data-a style="--i:6">Shipping one focused thing first didn't shrink the vision. It made the case for it.</p>
-      </div>
-      <aside class="notes">Two things beyond the numbers. First, how we work. What I built with Claude went live as it was, and our engineer connected it to the data instead of rebuilding it from designs. No handover documents and no back-and-forth to match the design. The team now works at least twice as fast. Second, product strategy. Mapping every need to a playbook showed a gap. Nothing helped people test whether customers want their offer. The Recommender says so instead of guessing, and the team that writes playbooks started on one straight away. What's next. I've recommended building Strattie AI, the assistant I prototyped at the start, to help at every step after the first. It's on the roadmap for the next year and can reuse the question map. It isn't live yet. Shipping one focused thing first didn't shrink the vision. It made the case for it.</aside>
+      <p class="t-stmt closing" data-a style="--i:4">Shipping one focused thing first didn't shrink the vision. It made the case for it.</p>
+      <aside class="notes">The Recommender fixes the first step. Next, I've recommended building Strattie AI, the assistant I prototyped at the start, to help at every step after that. It's on the roadmap for the next year, and it isn't live yet. It has a head start, with proof that guidance works, a question map it can reuse, real examples of how customers describe their problems, and a working prototype. Shipping one focused thing first didn't shrink the vision. It made the case for it.</aside>
     </section>
 
     <div class="progress" id="progress"></div>
@@ -912,14 +765,26 @@ body {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var cur = -1, flow = false;
   var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+  var CHAPTERS = ['Problem', 'Decision', 'Design', 'Impact'];
 
-  /* Footers: every slide after the title gets one, with its own left text if it sets data-foot. */
+  /* Chapter marker and footer on every slide after the title. */
   slides.forEach(function (s, i) {
-    if (i === 0 || s.querySelector('.foot')) return;
+    if (i === 0) return;
+    var ch = s.dataset.ch;
+    if (ch) {
+      var at = CHAPTERS.indexOf(ch), nav = document.createElement('nav');
+      nav.className = 'chap'; nav.setAttribute('aria-label', 'Chapter');
+      CHAPTERS.forEach(function (c, j) {
+        var sp = document.createElement('span'); sp.textContent = c;
+        if (j === at) sp.className = 'on'; else if (j < at) sp.className = 'done';
+        nav.appendChild(sp);
+      });
+      s.insertBefore(nav, s.firstChild);
+    }
     var f = document.createElement('div'); f.className = 'foot';
     f.innerHTML = '<span></span><span>' + pad(i + 1) + ' / ' + TOTAL + '</span>';
     f.firstChild.textContent = s.dataset.foot || 'Solving the first-step problem';
-    var notes = s.querySelector('.notes'); s.insertBefore(f, notes);
+    s.insertBefore(f, s.querySelector('.notes'));
   });
 
   /* Pixel grids: before cells in white, gained cells in blue, filled in order. */
@@ -1098,12 +963,13 @@ body {
   function wake() { hud.classList.remove('idle'); clearTimeout(idleT); idleT = setTimeout(function () { if (!flow) hud.classList.add('idle'); }, 2600); }
   document.addEventListener('mousemove', wake);
 
-  /* PDF: every slide at its final state; videos replaced by their posters. */
-  window.deckPrint = function () {
+  /* PDF: every slide at its final state, videos replaced by their posters.
+     deckPrint('reading') also prints each slide's notes underneath it. */
+  window.deckPrint = function (mode) {
     root.classList.add('print');
     root.classList.remove('flow', 'presenter');
     flow = true;
-    slides.forEach(function (s) {
+    slides.forEach(function (s, i) {
       s.classList.add('in', 'is-active');
       s.querySelectorAll('.n[data-to]').forEach(function (el) {
         clearTimeout(el._t);
@@ -1113,6 +979,14 @@ body {
         var img = document.createElement('img'); img.src = v.getAttribute('poster'); img.alt = v.getAttribute('aria-label') || '';
         v.replaceWith(img);
       });
+      if (mode === 'reading') {
+        var page = document.createElement('div'); page.className = 'rpage';
+        s.parentNode.insertBefore(page, s); page.appendChild(s);
+        var nb = document.createElement('div'); nb.className = 'rnotes';
+        var lab = document.createElement('p'); lab.className = 't-label'; lab.textContent = pad(i + 1) + ' · ' + (s.dataset.ch ? s.dataset.ch + ' · ' : '') + s.getAttribute('aria-label');
+        var tx = document.createElement('p'); var note = s.querySelector('.notes'); tx.textContent = note ? note.textContent : '';
+        nb.appendChild(lab); nb.appendChild(tx); page.appendChild(nb);
+      }
     });
   };
 
