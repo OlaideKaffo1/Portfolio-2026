@@ -9,7 +9,7 @@ Source of truth for wording and figures: `case-studies/strattie/copy/strattie-co
 - Slot: 20 to 30 minutes, about 1.5 to 2 minutes per slide
 - Delivery: presented live from a browser link, then sent as a PDF, so each slide has to read on its own
 - Format: 16:9 fixed frame, screen-share friendly (large type, no tiny detail), speaker notes in presenter view only, left out of the PDF
-- Look: editorial and modern, with motion between slides. Waiting on reference decks or sites from Olaide.
+- Look: dark keynote (near-black, white Geist type, Geist Mono labels, one electric blue for change). No gradients, no serif.
 
 ## Decisions so far
 
