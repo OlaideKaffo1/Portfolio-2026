@@ -1,0 +1,236 @@
+<title>Strattie deck directions</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Funnel+Display:wght@300..800&family=Funnel+Sans:wght@300..800&family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Sans:wght@400..700&display=swap">
+<style>
+/* Layout: a font switcher, then three directions, each shown as two real slides (title, results)
+   rendered on the 1920x1080 canvas and scaled down. One deliberate light page. */
+:root {
+  --page: #ecebe8; --ink: #111113; --muted: #67676e; --line: #d4d2cd; --chip: #ffffff;
+  --f-display: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --f-text: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --f-mono: "Geist Mono", ui-monospace, Menlo, monospace;
+  --d-weight: 500; --d-track: -0.045em;
+  color-scheme: light;
+}
+body { margin: 0; background: var(--page); color: var(--ink); font-family: var(--f-text); -webkit-font-smoothing: antialiased; }
+h1, h2, h3, p { margin: 0; }
+.wrap { max-width: 1240px; margin: 0 auto; padding-block: 40px 80px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: flex; flex-direction: column; gap: 48px; }
+.intro { display: flex; flex-direction: column; gap: 10px; max-width: 760px; }
+.intro h1 { font-size: 30px; letter-spacing: -0.02em; font-weight: 600; }
+.intro p { color: var(--muted); font-size: 16px; line-height: 1.55; }
+.lbl { font-family: var(--f-mono); font-size: 11px; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); }
+
+.fonts { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--page); padding-block: 12px; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 10px; }
+.fontrow { display: flex; flex-wrap: wrap; gap: 8px; }
+.fontrow label { cursor: pointer; }
+.fontrow input { position: absolute; opacity: 0; pointer-events: none; }
+.fontrow span { display: flex; flex-direction: column; gap: 2px; padding: 10px 14px; border-radius: 10px; background: var(--chip); border: 1px solid var(--line); min-width: 150px; }
+.fontrow span b { font-size: 20px; font-weight: 500; letter-spacing: -0.02em; }
+.fontrow span i { font-style: normal; font-size: 12px; color: var(--muted); }
+.fontrow input:checked + span { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.fontrow input:focus-visible + span { outline: 2px solid #1f3bff; outline-offset: 2px; }
+
+.dir { display: flex; flex-direction: column; gap: 16px; }
+.dir header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; }
+.dir h2 { font-size: 24px; font-weight: 600; letter-spacing: -0.02em; }
+.dir header p { color: var(--muted); font-size: 15px; line-height: 1.5; flex: 1 1 420px; min-width: 0; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.frame { position: relative; width: 100%; aspect-ratio: 16 / 9; max-width: 100%; overflow: hidden; border-radius: 8px; box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 10px 30px -18px rgba(0,0,0,.35); }
+.canvas { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; font-family: var(--f-text); }
+@media (max-width: 720px) { .pair { grid-template-columns: 1fr; } }
+
+/* ---------- Shared slide pieces (canvas px) ---------- */
+.canvas * { box-sizing: border-box; }
+.disp { font-family: var(--f-display); font-weight: var(--d-weight); letter-spacing: var(--d-track); line-height: .96; }
+.mono { font-family: var(--f-mono); font-size: 20px; letter-spacing: .08em; text-transform: uppercase; font-weight: 500; }
+.shot { display: block; width: 100%; height: 100%; object-fit: cover; object-position: left top; }
+.cells { display: grid; grid-template-columns: repeat(10, 22px); gap: 4px; }
+.cells i { width: 22px; height: 22px; border-radius: 2px; display: block; }
+
+/* ---------- 1 · Swiss grid ---------- */
+.sw { background: #f7f7f5; color: #0b0b0c; }
+.sw .meta { position: absolute; left: 96px; right: 96px; top: 72px; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 2px solid #0b0b0c; }
+.sw .meta div { padding: 16px 24px 0 0; display: flex; flex-direction: column; gap: 8px; font-size: 24px; line-height: 1.3; }
+.sw .meta .mono { color: #6a6a70; font-size: 18px; }
+.sw .ttl { position: absolute; left: 96px; bottom: 88px; width: 900px; font-size: 136px; }
+.sw .lead { position: absolute; left: 96px; top: 300px; width: 640px; font-size: 32px; line-height: 1.38; color: #3c3c42; }
+.sw .img { position: absolute; left: 1010px; top: 260px; width: 814px; height: 732px; border: 1px solid #d6d6d2; background: #fff; overflow: hidden; }
+.sw .tag { position: absolute; left: 1010px; top: 222px; color: #1f3bff; font-size: 18px; }
+.sw.res .h { position: absolute; left: 96px; top: 150px; width: 1100px; font-size: 76px; line-height: 1.02; }
+.sw.res .cols { position: absolute; left: 96px; right: 96px; top: 420px; bottom: 96px; display: grid; grid-template-columns: repeat(4, 1fr); }
+.sw.res .col { border-left: 1px solid #d6d6d2; padding: 0 32px; display: flex; flex-direction: column; gap: 20px; }
+.sw.res .col:first-child { border-left: 0; padding-left: 0; }
+.sw.res .n { font-size: 128px; }
+.sw.res .was { font-family: var(--f-mono); font-size: 20px; color: #6a6a70; }
+.sw.res .d { font-size: 24px; line-height: 1.38; color: #3c3c42; }
+.sw .on { background: #0b0b0c; } .sw .gain { background: #1f3bff; } .sw .off { background: #e4e4e0; }
+
+/* ---------- 2 · Colour blocks ---------- */
+.cb { background: #efeeea; color: #141416; }
+.cb .ttl { position: absolute; left: 96px; top: 150px; width: 860px; font-size: 128px; }
+.cb .lead { position: absolute; left: 96px; top: 600px; width: 700px; font-size: 32px; line-height: 1.38; color: #3d3d43; }
+.cb .block { position: absolute; left: 1000px; top: 0; right: 0; bottom: 0; background: #b9a3ec; }
+.cb .img { position: absolute; left: 1080px; top: 170px; width: 920px; height: 640px; border-radius: 18px 0 0 18px; overflow: hidden; }
+.cb .facts { position: absolute; left: 96px; bottom: 80px; width: 840px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.cb .facts div { background: #fff; border-radius: 14px; padding: 18px 22px; display: flex; flex-direction: column; gap: 6px; font-size: 22px; line-height: 1.3; }
+.cb .facts .mono { font-size: 16px; color: #6a6a70; }
+.cb.res .h { position: absolute; left: 96px; top: 96px; width: 1300px; font-size: 76px; line-height: 1.02; }
+.cb.res .cards { position: absolute; left: 96px; right: 96px; top: 320px; bottom: 96px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.cb.res .card { border-radius: 20px; padding: 32px; display: flex; flex-direction: column; gap: 18px; }
+.cb.res .card .mono { font-size: 18px; }
+.cb.res .n { font-size: 116px; }
+.cb.res .d { font-size: 23px; line-height: 1.36; }
+.cb.res .was { font-family: var(--f-mono); font-size: 19px; opacity: .75; }
+.cb .k1 { background: #7fb293; } .cb .k2 { background: #b9a3ec; } .cb .k3 { background: #f2b87e; } .cb .k4 { background: #a9c7ef; }
+.cb .on { background: rgba(10,10,14,.82); } .cb .gain { background: #ffffff; } .cb .off { background: rgba(255,255,255,.28); }
+
+/* ---------- 3 · Dark keynote ---------- */
+.dk { background: #0b0b0d; color: #f2f1ee; }
+.dk .eyebrow { position: absolute; left: 96px; top: 80px; color: #8b8a92; font-size: 20px; }
+.dk .ttl { position: absolute; left: 96px; top: 190px; width: 900px; font-size: 132px; }
+.dk .lead { position: absolute; left: 96px; top: 640px; width: 720px; font-size: 32px; line-height: 1.38; color: #a9a8b0; }
+.dk .img { position: absolute; left: 1000px; top: 150px; width: 1000px; height: 690px; border-radius: 18px 0 0 18px; overflow: hidden; outline: 1px solid #26262c; }
+.dk .row { position: absolute; left: 96px; right: 96px; bottom: 72px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; border-top: 1px solid #2a2a31; padding-top: 22px; font-size: 22px; line-height: 1.3; }
+.dk .row div { display: flex; flex-direction: column; gap: 6px; }
+.dk .row .mono { color: #8b8a92; font-size: 16px; }
+.dk.res .h { position: absolute; left: 96px; top: 150px; width: 1200px; font-size: 76px; line-height: 1.02; }
+.dk.res .cols { position: absolute; left: 96px; right: 96px; top: 420px; bottom: 96px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 48px; }
+.dk.res .col { display: flex; flex-direction: column; gap: 20px; border-top: 1px solid #f2f1ee; padding-top: 22px; }
+.dk.res .n { font-size: 128px; }
+.dk.res .was { font-family: var(--f-mono); font-size: 20px; color: #8b8a92; }
+.dk.res .d { font-size: 24px; line-height: 1.38; color: #a9a8b0; }
+.dk .on { background: #f2f1ee; } .dk .gain { background: #3d5afe; } .dk .off { background: #24242a; }
+
+.note { font-size: 13px; color: var(--muted); }
+</style>
+
+<div class="wrap">
+  <div class="intro">
+    <p class="lbl">Strattie deck · visual directions</p>
+    <h1>Pick a direction and a typeface</h1>
+    <p>Three directions with no gradients and no serif, shown on the real title and results slides. Change the typeface below and all six slides update. Reply with the direction and font you want, or what to take from each.</p>
+  </div>
+
+  <div class="fonts" role="radiogroup" aria-label="Typeface">
+    <span class="lbl">Typeface</span>
+    <div class="fontrow">
+      <label><input type="radio" name="font" id="f-geist" value="geist" checked><span><b style="font-family:Geist">Geist</b><i>Your site's font. Neutral, technical.</i></span></label>
+      <label><input type="radio" name="font" id="f-funnel" value="funnel"><span><b style="font-family:'Funnel Display'">Funnel Display</b><i>Slightly condensed headlines.</i></span></label>
+      <label><input type="radio" name="font" id="f-bricolage" value="bricolage"><span><b style="font-family:'Bricolage Grotesque'">Bricolage</b><i>More character, still a sans.</i></span></label>
+      <label><input type="radio" name="font" id="f-instrument" value="instrument"><span><b style="font-family:'Instrument Sans'">Instrument Sans</b><i>Clean, contemporary, narrow.</i></span></label>
+    </div>
+  </div>
+
+  <!-- 1 · Swiss grid -->
+  <section class="dir">
+    <header><h2>1 · Swiss grid</h2><p>White paper, black type, hairline rules and a visible grid. Strategyzer's blue only marks what changed. Calm and very senior; the screenshots carry the colour.</p></header>
+    <div class="pair">
+      <div class="frame"><div class="canvas sw">
+        <div class="meta">
+          <div><span class="mono">Role</span>Senior product designer, the only designer</div>
+          <div><span class="mono">Team</span>Head of Product, one engineer</div>
+          <div><span class="mono">Timeline</span>About 6 weeks, spring 2026</div>
+          <div><span class="mono">Status</span>Live</div>
+        </div>
+        <p class="lead">We set out to build an AI assistant. I made the case to ship a three-question Playbook Recommender first, and it moved every number that mattered.</p>
+        <span class="mono tag">Strategyzer · Playbook Recommender</span>
+        <div class="img"><img class="shot" src="media/finder-hero-clean.webp" alt=""></div>
+        <h3 class="disp ttl">Solving the first-step problem</h3>
+      </div></div>
+      <div class="frame"><div class="canvas sw res">
+        <span class="mono" style="position:absolute;left:96px;top:96px;color:#6a6a70">Results</span>
+        <h3 class="disp h">Fixing the first step moved every number that mattered.</h3>
+        <div class="cols" data-grids>
+          <div class="col"><span class="mono">Getting started</span><div class="cells" data-b="57" data-a="85"></div><span class="disp n">85%</span><span class="was">was 57%</span><p class="d">of new customers start a project and a playbook</p></div>
+          <div class="col"><span class="mono">Satisfaction</span><div class="cells" data-b="68" data-a="95"></div><span class="disp n">95%</span><span class="was">was 68%</span><p class="d">from surveys and our customer success team</p></div>
+          <div class="col"><span class="mono">Coming back · 4×</span><div class="cells" data-b="10" data-a="40"></div><span class="disp n">40%</span><span class="was">was about 10%</span><p class="d">return within 30 days. Most weekly.</p></div>
+          <div class="col"><span class="mono">Cancelled, returned</span><div class="cells" data-b="0" data-a="18"></div><span class="disp n">18%</span><span class="was">about, in two weeks</span><p class="d">of cancelled customers came back to try it</p></div>
+        </div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- 2 · Colour blocks -->
+  <section class="dir">
+    <header><h2>2 · Colour blocks</h2><p>Flat, muted colour panels and white cards, like the stat-card and AIVISION references. Warmer and more playful, with each result in its own colour.</p></header>
+    <div class="pair">
+      <div class="frame"><div class="canvas cb">
+        <div class="block"></div>
+        <div class="img"><img class="shot" src="media/finder-hero-clean.webp" alt=""></div>
+        <span class="mono" style="position:absolute;left:96px;top:80px;color:#6a6a70">Strategyzer · Case study</span>
+        <h3 class="disp ttl">Solving the first-step problem</h3>
+        <p class="lead">We set out to build an AI assistant. I made the case to ship a three-question Playbook Recommender first.</p>
+        <div class="facts">
+          <div><span class="mono">Role</span>Senior product designer, the only designer</div>
+          <div><span class="mono">Timeline</span>About 6 weeks, spring 2026</div>
+        </div>
+      </div></div>
+      <div class="frame"><div class="canvas cb res">
+        <h3 class="disp h">Fixing the first step moved every number that mattered.</h3>
+        <div class="cards" data-grids>
+          <div class="card k1"><span class="mono">Getting started</span><div class="cells" data-b="57" data-a="85"></div><span class="disp n">85%</span><span class="was">was 57%</span><p class="d">of new customers start a project and a playbook</p></div>
+          <div class="card k2"><span class="mono">Satisfaction</span><div class="cells" data-b="68" data-a="95"></div><span class="disp n">95%</span><span class="was">was 68%</span><p class="d">from surveys and customer success</p></div>
+          <div class="card k3"><span class="mono">Coming back · 4×</span><div class="cells" data-b="10" data-a="40"></div><span class="disp n">40%</span><span class="was">was about 10%</span><p class="d">return within 30 days</p></div>
+          <div class="card k4"><span class="mono">Cancelled, returned</span><div class="cells" data-b="0" data-a="18"></div><span class="disp n">18%</span><span class="was">about, in two weeks</span><p class="d">came back to try it</p></div>
+        </div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- 3 · Dark keynote -->
+  <section class="dir">
+    <header><h2>3 · Dark keynote</h2><p>Near-black slides with white type, the screenshots lit against black, and one electric-blue accent for change. Like a product launch keynote; strongest on a big screen.</p></header>
+    <div class="pair">
+      <div class="frame"><div class="canvas dk">
+        <span class="mono eyebrow">Olaide Arike Kaffo · Strategyzer case study</span>
+        <h3 class="disp ttl">Solving the first-step problem</h3>
+        <p class="lead">We set out to build an AI assistant. I made the case to ship a three-question Playbook Recommender first.</p>
+        <div class="img"><img class="shot" src="media/finder-hero-clean.webp" alt=""></div>
+        <div class="row">
+          <div><span class="mono">Role</span>Senior product designer</div>
+          <div><span class="mono">Team</span>Head of Product, one engineer</div>
+          <div><span class="mono">Timeline</span>About 6 weeks, 2026</div>
+          <div><span class="mono">Status</span>Live</div>
+        </div>
+      </div></div>
+      <div class="frame"><div class="canvas dk res">
+        <span class="mono" style="position:absolute;left:96px;top:96px;color:#8b8a92">Results</span>
+        <h3 class="disp h">Fixing the first step moved every number that mattered.</h3>
+        <div class="cols" data-grids>
+          <div class="col"><span class="mono">Getting started</span><div class="cells" data-b="57" data-a="85"></div><span class="disp n">85%</span><span class="was">was 57%</span><p class="d">of new customers start a project and a playbook</p></div>
+          <div class="col"><span class="mono">Satisfaction</span><div class="cells" data-b="68" data-a="95"></div><span class="disp n">95%</span><span class="was">was 68%</span><p class="d">from surveys and customer success</p></div>
+          <div class="col"><span class="mono">Coming back · 4×</span><div class="cells" data-b="10" data-a="40"></div><span class="disp n">40%</span><span class="was">was about 10%</span><p class="d">return within 30 days. Most weekly.</p></div>
+          <div class="col"><span class="mono">Cancelled, returned</span><div class="cells" data-b="0" data-a="18"></div><span class="disp n">18%</span><span class="was">about, in two weeks</span><p class="d">came back to try it</p></div>
+        </div>
+      </div></div>
+    </div>
+  </section>
+
+  <p class="note">These are still frames for choosing a look. Motion, the other slides and the videos come after you pick. Figures are from the approved copy; wording on the cards is shortened to fit the small previews.</p>
+</div>
+
+<script>
+(function () {
+  var fonts = {
+    geist: ['"Geist", ui-sans-serif, system-ui, sans-serif', '"Geist", ui-sans-serif, system-ui, sans-serif', 500, '-0.045em'],
+    funnel: ['"Funnel Display", ui-sans-serif, system-ui, sans-serif', '"Funnel Sans", ui-sans-serif, system-ui, sans-serif', 500, '-0.035em'],
+    bricolage: ['"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif', '"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif', 600, '-0.04em'],
+    instrument: ['"Instrument Sans", ui-sans-serif, system-ui, sans-serif', '"Instrument Sans", ui-sans-serif, system-ui, sans-serif', 500, '-0.04em']
+  };
+  var r = document.documentElement.style;
+  function setFont(k) { var f = fonts[k]; r.setProperty('--f-display', f[0]); r.setProperty('--f-text', f[1]); r.setProperty('--d-weight', f[2]); r.setProperty('--d-track', f[3]); }
+  document.querySelectorAll('input[name="font"]').forEach(function (i) { i.addEventListener('change', function () { setFont(i.value); }); });
+  var checked = document.querySelector('input[name="font"]:checked'); if (checked) setFont(checked.value);
+
+  document.querySelectorAll('.cells').forEach(function (g) {
+    var b = +g.dataset.b, a = +g.dataset.a, h = '';
+    for (var i = 0; i < 100; i++) h += '<i class="' + (i < b ? 'on' : i < a ? 'gain' : 'off') + '"></i>';
+    g.innerHTML = h; g.setAttribute('aria-hidden', 'true');
+  });
+
+  function fit() { document.querySelectorAll('.frame').forEach(function (f) { f.firstElementChild.style.transform = 'scale(' + f.clientWidth / 1920 + ')'; }); }
+  window.addEventListener('resize', fit); fit();
+})();
+</script>
