@@ -133,6 +133,17 @@
   .duo .cell img { max-height: 440px; width: auto; border-radius: 8px; box-shadow: 0 8px 30px rgba(0,0,0,.08); }
   .duo .cell.explored img { opacity: .9; }
 
+  /* ---------- Back to home, kept in reach: a slim bar slides in at the top once the page's own link has scrolled away.
+     Wide screens don't need it, because the contents column beside the article carries the same link. ---------- */
+  .pin { position: fixed; top: 0; left: 0; right: 0; z-index: 40; padding: env(safe-area-inset-top, 0px) max(16px, env(safe-area-inset-right, 0px)) 0 max(16px, env(safe-area-inset-left, 0px)); background: rgba(255,255,255,.94); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); translate: 0 -100%; visibility: hidden; transition: translate .45s var(--expo), visibility 0s .45s; }
+  .pin.on { translate: 0 0; visibility: visible; transition: translate .45s var(--expo); }
+  .pin .in { max-width: var(--media); margin-inline: auto; }
+  .pin .back { display: flex; align-items: center; height: 44px; margin: 0; }
+  @container (min-width: 640px) { .pin { padding-inline: max(24px, env(safe-area-inset-left, 0px)) max(24px, env(safe-area-inset-right, 0px)); } }
+  @container (min-width: 1024px) { .pin { padding-inline: 36px; } }
+  @container (min-width: 1360px) { .pin { display: none; } }
+  @media (prefers-reduced-motion: reduce) { .pin, .pin.on { transition: none; } }
+
   /* ---------- Table of contents: the case-study index, fixed beside the column on wide screens ---------- */
   .toc { display: none; }
   @container (min-width: 1360px) {
@@ -195,6 +206,8 @@ __DIAGRAMS__
 <div class="viewport"><div class="page">
   <header class="topnav"><a href="#" data-home>Olaide</a><nav><a href="#">About</a><a href="#">Contact</a><a href="#">Resume</a></nav></header>
 
+  <div class="pin" id="pin"><div class="in"><a class="back" href="#" data-home>← Back to home</a></div></div>
+
   <nav class="toc" id="toc" aria-label="In this article"><a class="back toc-back" href="#" data-home>← Back to home</a><div class="lab">In this article</div><ol id="toc-list"></ol></nav>
 
   <main>
@@ -243,6 +256,10 @@ __PAGE__
     const ctrl = document.getElementById("ctrl"); if (ctrl) ctrl.classList.toggle("away", innerHeight + scrollY > document.documentElement.scrollHeight - 140);
   }
   addEventListener("scroll", onScroll, { passive: true });
+
+  // ---------- Back to home bar: shown once the page's own link is above the screen ----------
+  const pin = document.getElementById("pin"), homeLink = document.querySelector(".wrap > .back");
+  if (pin && homeLink) new IntersectionObserver(([e]) => pin.classList.toggle("on", !e.isIntersecting && e.boundingClientRect.top < 0)).observe(homeLink);
 
   // ---------- Sideways scroll bar for the cropped screenshots (phones) ----------
   document.querySelectorAll(".frame.dark").forEach((f) => {
