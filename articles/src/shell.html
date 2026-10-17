@@ -107,8 +107,16 @@
   .tablist button:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
   .tab-stage { position: relative; transition: height .55s var(--expo); }
   .tab-panel { transition: opacity .35s ease; }
-  /* On phones the skill text would be too small to read, so the screenshot keeps a readable size and scrolls sideways */
-  @container (max-width: 639px) { .frame.dark { overflow-x: auto; scrollbar-width: thin; } .frame.dark img { width: 620px; max-width: none; } }
+  /* On phones the skill text would be too small to read, so the screenshot keeps a readable size and scrolls sideways.
+     Phones hide scrollbars until you scroll, so a bar of our own sits under it, held at the bottom of the screen while the screenshot is in view. */
+  @container (max-width: 639px) { .frame.dark { overflow-x: auto; scrollbar-width: none; } .frame.dark::-webkit-scrollbar { display: none; } .frame.dark img { width: 620px; max-width: none; } }
+  .hscroll { display: none; }
+  @container (max-width: 639px) {
+    .hscroll { display: block; position: sticky; z-index: 2; bottom: calc(6px + env(safe-area-inset-bottom, 0px)); height: 4px; margin: 12px 2px 0; border-radius: 2px; background: #e3e5e7; cursor: pointer; touch-action: none; }
+    .hscroll[hidden] { display: none; }
+    .hscroll::before { content: ""; position: absolute; inset: -12px 0; }
+    .hscroll i { position: absolute; top: 0; left: 0; height: 100%; border-radius: 2px; background: #8d939a; }
+  }
   .tab-panel:not(.on) { position: absolute; inset: 0 0 auto; opacity: 0; visibility: hidden; pointer-events: none; }
 
   /* Video pair */
@@ -235,6 +243,22 @@ __PAGE__
     const ctrl = document.getElementById("ctrl"); if (ctrl) ctrl.classList.toggle("away", innerHeight + scrollY > document.documentElement.scrollHeight - 140);
   }
   addEventListener("scroll", onScroll, { passive: true });
+
+  // ---------- Sideways scroll bar for the cropped screenshots (phones) ----------
+  document.querySelectorAll(".frame.dark").forEach((f) => {
+    const bar = document.createElement("div"), thumb = document.createElement("i");
+    bar.className = "hscroll"; bar.setAttribute("aria-hidden", "true"); bar.appendChild(thumb); f.after(bar);
+    const draw = () => {
+      const w = f.clientWidth, sw = f.scrollWidth; bar.hidden = sw <= w + 1; if (bar.hidden) return;
+      const tw = (w / sw) * 100; thumb.style.width = tw + "%"; thumb.style.left = (f.scrollLeft / (sw - w)) * (100 - tw) + "%";
+    };
+    const go = (e) => { const r = bar.getBoundingClientRect(); f.scrollLeft = ((e.clientX - r.left) / r.width) * f.scrollWidth - f.clientWidth / 2; };
+    bar.addEventListener("pointerdown", (e) => { bar.setPointerCapture(e.pointerId); go(e); bar.onpointermove = go; });
+    bar.addEventListener("pointerup", () => { bar.onpointermove = null; });
+    f.addEventListener("scroll", draw, { passive: true }); addEventListener("resize", draw);
+    const im = f.querySelector("img"); if (im) im.addEventListener("load", draw);
+    draw();
+  });
 
   // ---------- Tabs ----------
   const tabsets = [...document.querySelectorAll("[data-tabs]")];
