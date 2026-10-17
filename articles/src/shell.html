@@ -39,7 +39,7 @@
   .wrap { max-width: var(--media); margin-inline: auto; }
   .back { display: inline-block; margin: 4px 0 14px; font-size: 13px; line-height: 20px; color: var(--muted); transition: color .2s; }
   .back:hover { color: var(--ink); }
-  .ahead { position: relative; isolation: isolate; display: flex; flex-direction: column; min-height: 360px; padding: 16px; }
+  .ahead { position: relative; isolation: isolate; display: flex; flex-direction: column; padding: 16px; }
   @container (min-width: 640px) { .ahead { min-height: 420px; padding: 20px 24px; } }
   @container (min-width: 1024px) { .ahead { min-height: 480px; padding: 24px 32px; } }
   .ahead-bg { position: absolute; inset: 0; z-index: -1; border-radius: 8px; background: var(--card); transform-origin: top center; }
@@ -77,6 +77,7 @@
   .prose a.inl:hover { text-decoration-color: var(--ink); }
   .prose > figure, .prose > blockquote { margin-top: 40px; margin-bottom: 8px; }
   .prose > figure + p, .prose > blockquote + p, .prose > figure + h3 { margin-top: 40px; }
+  .prose > .stat, .prose > .impact, .prose > .stat + p { margin-top: 32px; }
   .prose > figure + h2, .prose > blockquote + h2 { margin-top: 72px; }
   .prose blockquote { padding: 2px 0 2px 20px; border-left: 2px solid var(--ink); }
   .prose blockquote p { font-size: 21px; line-height: 31px; color: var(--ink); letter-spacing: -0.015em; }
@@ -131,6 +132,7 @@
     .toc.on { opacity: 1; translate: 0 0; pointer-events: auto; }
   }
   .toc .lab { font-size: 13px; line-height: 20px; color: var(--muted); }
+  .toc .toc-back { margin: 0 0 20px; padding: 0; }
   .toc ol { position: relative; list-style: none; margin: 12px 0 0; padding: 0; border-left: 1px solid var(--line); }
   .toc a { display: block; padding: 6px 0 6px 14px; font-size: 13px; line-height: 18px; color: var(--muted); transition: color .2s; }
   .toc a:hover, .toc a.on { color: var(--ink); }
@@ -147,7 +149,7 @@
   @media (hover: hover) { .acard:hover .card-bg { background: #f1f2f3; } }
   .acard .row { display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 13px; line-height: 20px; color: var(--muted); }
   .acard h3 { margin: 16px 0 0; max-width: 381px; font-size: 16px; line-height: 1.2; font-weight: 400; }
-  .acard .foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-top: auto; padding-top: 24px; font-size: 13px; line-height: 20px; color: var(--muted); }
+  .acard .foot { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-top: auto; padding-top: 24px; font-size: 13px; line-height: 20px; color: var(--muted); }
   .acard .go { display: flex; align-items: center; gap: 4px; font-size: 14px; line-height: 16px; color: var(--ink); }
   .acard .go i { font-style: normal; transition: transform .3s var(--expo); }
   .acard:hover .go i { transform: translateX(3px); }
@@ -185,7 +187,7 @@ __DIAGRAMS__
 <div class="viewport"><div class="page">
   <header class="topnav"><a href="#" data-home>Olaide</a><nav><a href="#">About</a><a href="#">Contact</a><a href="#">Resume</a></nav></header>
 
-  <nav class="toc" id="toc" aria-label="In this article"><div class="lab">In this article</div><ol id="toc-list"></ol></nav>
+  <nav class="toc" id="toc" aria-label="In this article"><a class="back toc-back" href="#" data-home>← Back to home</a><div class="lab">In this article</div><ol id="toc-list"></ol></nav>
 
   <main>
 __PAGE__
@@ -229,7 +231,7 @@ __PAGE__
     const a = tocList.querySelector("a.on");
     if (a) { marker.style.top = a.offsetTop + "px"; marker.style.height = a.offsetHeight + "px"; } else marker.style.height = "0";
     const r = prose.getBoundingClientRect();
-    toc.classList.toggle("on", r.top < innerHeight * 0.5 && r.bottom > innerHeight * 0.4);
+    toc.classList.toggle("on", r.top < innerHeight * 0.5); // stays on to the end, so Back to home is always in reach
     const ctrl = document.getElementById("ctrl"); if (ctrl) ctrl.classList.toggle("away", innerHeight + scrollY > document.documentElement.scrollHeight - 140);
   }
   addEventListener("scroll", onScroll, { passive: true });
