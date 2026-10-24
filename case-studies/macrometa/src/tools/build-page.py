@@ -373,7 +373,7 @@ glance = '''      <section class="sec ov" aria-label="At a glance">
         </ol>
       </section>'''
 t = re.sub(r'      <section class="sec ov" aria-label="At a glance">.*?</section>', lambda m: glance, t, count=1, flags=re.S)
-nxt = '      <a class="next" href="#"><div class="thumb"><img src="images/next-strattie.webp" width="2000" height="1365" alt=""></div><div><span class="company">Next project · Strattie</span><h2>Solving the first-step problem</h2><span class="go">Read case study →</span></div></a>'
+nxt = '      <a class="next" href="#"><div class="thumb"><img src="images/next-strattie-v2.webp" width="2000" height="1705" alt=""></div><div><span class="company">Next project · Strattie</span><h2>Solving the first-step problem</h2><span class="go">Read case study →</span></div></a>'
 t = re.sub(r'      <a class="next" href="#">.*?</a>', lambda m: nxt, t, count=1, flags=re.S)
 open("src/shell.html", "w").write(t)
 print("ok")

@@ -442,6 +442,6 @@ From the roadmap I proposed, based on ongoing feedback and usage data:
 - Integrations with performance management and learning platforms.
 - Enterprise single sign-on for complex security requirements.
 The goal behind all of it: nobody should ever wonder whether speaking up was worth it.
-*Image: next-macrometa.webp*
+*Image: next-macrometa-v2.webp*
 
 ## No developer left to figure it out alone
