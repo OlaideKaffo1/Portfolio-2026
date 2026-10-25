@@ -7,7 +7,7 @@ Source of truth after the copy rewrite review (doc rev 56). Supersedes the copy 
 - **Intro.** We set out to build an AI assistant. I made the case to ship a three-question Playbook Recommender first, and it moved every number that mattered.
 - **Role.** Senior product designer, and the only designer. I led the work end to end: research, strategy, design and the front-end build.
 - **Team.** Me, our Head of Product and one engineer, with input from our coaching and customer teams.
-- **Timeline.** About 6 weeks, spring 2026
+- **Timeline.** 6 weeks, research to launch, spring 2026
 - **Hint under the hero.** Click any image to see it full size. Under some images, turn on “Show the design decisions” to see why it looks the way it does.
 
 ## At a glance

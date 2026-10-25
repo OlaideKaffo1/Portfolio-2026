@@ -17,7 +17,7 @@ Source for the Ask Olaide chat. Every fact here comes from the approved, publish
 | Company | Strategyzer |
 | My role | Senior product designer, and the only designer. I led the work end to end: research, strategy, design and the front-end build. |
 | Team | Me, our Head of Product and one engineer, with input from our coaching and customer teams |
-| Timeline | About 6 weeks, spring 2026 |
+| Timeline | 6 weeks, research to launch, spring 2026 |
 | Status | Live |
 
 ## The problem
@@ -75,7 +75,7 @@ Source for the Ask Olaide chat. Every fact here comes from the approved, publish
 
 - I designed it in code, not Figma. I built the front end myself with Claude, and that code went straight into the product. No handover and no rebuild.
 - Our engineer built everything behind it: data, tracking, and connecting it to the rest of the platform.
-- Timeline: research 1–2 weeks, assistant prototype in days, question map 2 days, Recommender built, tested and refined in 3 weeks, launch about 1½ weeks. About six weeks in total.
+- Timeline: research 1–2 weeks, assistant prototype in days, question map 2 days, Recommender built, tested and refined in 3 weeks, launch about 1½ weeks. Six weeks in total.
 - Automated tests clicked through every step and caught things that looked right but didn't work.
 
 ## Results

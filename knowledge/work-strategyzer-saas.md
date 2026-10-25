@@ -17,7 +17,7 @@ Source for the Ask Olaide chat. Every fact here comes from the approved, publish
 | Company | Strategyzer |
 | My role | Senior product designer, and the only designer. I led the work end to end, from discovery to delivery. |
 | Team | Me and one engineer, with our Head of Product advising |
-| Timeline | About 3 months. My first project at Strategyzer. |
+| Timeline | 10 weeks, discovery to launch. My first project at Strategyzer. Discovery took 2 to 3 weeks; synthesis, the audit and deciding what to build took the third week; design explorations and feedback rounds with the team took 1 to 2 weeks; then it was built and deployed. |
 | Status | Live |
 
 ## The problem
@@ -52,7 +52,7 @@ Four principles followed:
 
 ## Choosing what not to build
 
-With one engineer and three months, I ranked every opportunity by three questions: how often does it happen, would a failure be visible to clients, and can we build it well in the time we have? Changing live programs came out on top on all three. The e-learning system, exercise tracking, a reusable exercise library and reorganising playbooks were left for later. Making the trade-offs visible kept the release focused, and nobody felt their problem had been ignored.
+With one engineer and ten weeks, I ranked every opportunity by three questions: how often does it happen, would a failure be visible to clients, and can we build it well in the time we have? Changing live programs came out on top on all three. The e-learning system, exercise tracking, a reusable exercise library and reorganising playbooks were left for later. Making the trade-offs visible kept the release focused, and nobody felt their problem had been ignored.
 
 ## What shipped: four features
 

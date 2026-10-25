@@ -122,7 +122,7 @@ LinkedIn: linkedin.com/in/ashley-underwood-66581040
 ## Testing and impact
 
 - About **24** research sessions on working prototypes for the Recommender. People used the real thing, so their feedback changed the design directly.
-- The Recommender project took about six weeks from research to launch, and the team now works **at least twice as fast**.
+- The Recommender project took six weeks from research to launch, and the team now works **at least twice as fast**.
 
 ## What it doesn't replace
 

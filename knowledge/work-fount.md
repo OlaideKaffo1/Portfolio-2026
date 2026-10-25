@@ -17,7 +17,7 @@ Source for the Ask Olaide chat. Every fact here comes from the approved, publish
 | Company | Fount (January 2023 to September 2025) |
 | My role | Senior product designer, and the only designer. I led both products end to end. |
 | Team | Head of Product, the product team and engineers, across both products |
-| Timeline | 5 months for Fount, then 3 months for Fount AI, which came about a year after Fount launched |
+| Timeline | Fount: 2 months to the first launch. Fount AI: 6 weeks to the first launch. Fount AI came about a year after Fount launched. |
 | Status | Shipped |
 
 ## The problem

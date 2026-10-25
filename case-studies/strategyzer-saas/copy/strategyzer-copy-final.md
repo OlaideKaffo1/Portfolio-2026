@@ -4,7 +4,7 @@
 One change to a live enterprise program could take two days, and only two people knew how to make it. I redesigned how Strategyzer’s program templates and live cohort deliveries stay in sync, and a full round of changes now takes about thirty minutes.
 Role — Senior product designer — The only designer. I led the work end to end, from discovery to delivery.
 Team — Me and one engineer — With our Head of Product advising
-Timeline — About 3 months — My first project at Strategyzer
+Timeline — 10 weeks — Discovery to launch. My first project at Strategyzer
 Status — Live
 Click any image to see it full size.
 

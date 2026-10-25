@@ -10,7 +10,7 @@ Senior product designer The only designer. I led both products end to end.
 Team
 Head of Product, product team and engineers Across both products
 Timeline
-5 months, then 3 months Fount AI came about a year after Fount launched
+Fount: 2 months, Fount AI: 6 weeks. To the first launch of each. Fount AI came about a year after Fount launched
 Status
 Shipped
 *Image: fount-hero.webp*

@@ -17,7 +17,7 @@ Source for the Ask Olaide chat. Every fact here comes from the approved, publish
 | Company | Macrometa (I was there January to December 2022) |
 | My role | Product designer. The UI refresh was shared with our Head of Design, and I contributed significantly. Onboarding and activation were led by me. |
 | Team | Head of Design, Head of Product and engineers |
-| Timeline | 3 months, the first three months of 2022 |
+| Timeline | 3 months to the first launch, January to March 2022 |
 | Status | Shipped |
 
 ## The problem
