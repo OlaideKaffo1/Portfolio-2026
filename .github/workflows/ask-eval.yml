@@ -1,0 +1,33 @@
+# Runs the Ask Olaide test questions against the live chat's prompt and knowledge (scripts/ask-eval).
+# Started by hand from the Actions tab; uses the repository secret ANTHROPIC_API_KEY.
+name: Ask Olaide tests
+on:
+  workflow_dispatch:
+    inputs:
+      label:
+        description: Name for this run, e.g. baseline
+        required: true
+        default: baseline
+permissions:
+  contents: read
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: node --experimental-strip-types --no-warnings scripts/ask-eval/run.ts "$LABEL"
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          LABEL: ${{ inputs.label }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ask-eval-${{ inputs.label }}
+          path: scripts/ask-eval/results/
+          if-no-files-found: ignore
