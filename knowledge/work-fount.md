@@ -54,7 +54,8 @@ Four principles: quick to give, see what matters most, know why not just what, a
 
 1. **Pulse surveys in minutes.** Short surveys from templates, sent to the right people for a set time, quick to answer on any device. Before: one long annual survey with results months later.
 2. **The whole journey at a glance.** An overview with the journey's score, key drivers ranked by impact, a heatmap comparing groups, and every score next to its benchmark and sample size. Before: feedback copied into spreadsheets and themes guessed.
-3. **Inside one moment.** Each moment breaks down into the people and things that shaped it, what people felt, and the comments behind the numbers. Before: a slide that said "further investigation needed".
+3. **A look designed for employees first.** I gave an enterprise product a bold, colourful visual style, and tested alternative versions with users. *(From Olaide's resume.)*
+4. **Inside one moment.** Each moment breaks down into the people and things that shaped it, what people felt, and the comments behind the numbers. Before: a slide that said "further investigation needed".
 
 ## A year later: why Fount AI
 
@@ -103,6 +104,7 @@ These were shared results, reported by customers while we ran sprints alongside 
 - I add AI where the data shows a need, not because AI is in fashion.
 - I keep people accountable for decisions: the AI shows its evidence and asks before it acts.
 - I listen across every level: two rounds of remote research, one per product.
+- I set the team's Figma standards for fully specified components. *(From Olaide's resume.)*
 
 ## What's next
 

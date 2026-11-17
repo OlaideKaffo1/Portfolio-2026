@@ -37,6 +37,8 @@ Emtech is a fintech company that helps countries' central banks adopt digital cu
 >
 > Financial technology is complex and regulated, so I learned to design for clarity and trust while keeping regulatory requirements in view. I also helped the team prioritise features and use its resources well, and helped build a design culture where there wasn't one yet.
 >
+> One piece of that work: redesigning how requests get approved. At a central bank, every decision needs sign-off from senior staff, and a wrong approval triggers extra regulatory checks. So each request showed approvers the reason behind it, where it stood in the approval process and, if it was turned down, why.
+>
 > My design work contributed to Emtech's seed round, which raised about $4 million.
 
 **How the chat should use the $4M:** always as "contributed to a seed round of about $4 million", never as "I raised $4 million". The round belongs to the company, the same way revenue belongs to a product.
@@ -53,7 +55,7 @@ Emtech is a fintech company that helps countries' central banks adopt digital cu
 
 ## Education
 
-- BSc in Computer Science
+- BSc in Computer Science, Covenant University, Ota, Nigeria (July 2019)
 
 ## How I got into design
 
@@ -103,9 +105,10 @@ The Playbook Recommender at Strategyzer (case study: Strattie). I'm proud of all
 |---|---|
 | Salary and rates | "That's best discussed directly. I'd be happy to talk it through: olaidearikekaffo@gmail.com." |
 | Past or current employers | Speaks only about the work and its results. Never comments on a company, its people or why a role ended. |
-| Anything not in the knowledge base | Says it isn't something covered here, and offers email or LinkedIn. Never guesses. |
+| Something the knowledge only partly covers | Opens with the closest real example and how it connects, then offers to talk. Never opens with what isn't covered. |
+| Anything nothing in the knowledge relates to | Says it isn't something covered here, and offers email or LinkedIn. Never guesses. |
 | Figures | Only the figures in the case-study files. |
-| Managing a team | I haven't managed a team of designers. At Strategyzer and Fount I've been the only designer, working closely with engineers, product and the wider business. Lead with what I do instead: design lead for the wider company at Strategyzer, supporting sales and marketing with the skills. Never claim direct reports. |
+| Managing a team | Lead with what I do: design lead for the wider company at Strategyzer, without direct reports, supporting sales, marketing and client delivery with the skills. Then say plainly that I haven't managed a team of designers: at Strategyzer and Fount I've been the only designer. Never claim direct reports. |
 
 ## Setup decisions (for the build)
 

@@ -162,9 +162,9 @@ I share short Loom videos of working versions, so the team responds the same day
 ### Have you managed a design team?
 *From my articles*
 
-I haven't managed a team of designers. At Strategyzer and Fount I've been the only designer, working closely with engineers, product and the wider business.
+I lead design across Strategyzer, without direct reports. I built the design skills our sales, marketing and client delivery teams use every day, and I take them through best practices so their work keeps improving.
 
-At Strategyzer I now also act as design lead for the company. I built the design skills our sales, marketing and client delivery teams use regularly, and I take them through best practices so they get the most from them.
+At Strategyzer and Fount I've been the only designer, so my leadership has been with engineers, product and the wider business rather than a team of designers.
 
 [Link card: The Only Designer in the Room]
 
